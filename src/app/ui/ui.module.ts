@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from './card/card.component';
 import { CardContainerComponent } from './card-container/card-container.component';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -10,9 +11,10 @@ import { CardContainerComponent } from './card-container/card-container.componen
     CardComponent,
     CardContainerComponent
   ],
-  imports: [
-    CommonModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule
+    ],
   exports: [
     CardComponent,
     CardContainerComponent
