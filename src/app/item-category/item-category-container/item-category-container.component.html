@@ -1,0 +1,6 @@
+<hellena-card-container [cardContainer]="itemCategoryContainer"  >
+  <app-card *ngFor="let item of cards$ | async"
+            [card]="item"
+  >
+  </app-card>
+</hellena-card-container>
