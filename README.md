@@ -29,3 +29,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## TODO
 * docker best practice and docker ignore
 * angular.json (offical doc) see best practices and implement options
+
+## publish to Heroku
+
+Steps
+* heroku login
+* heroku container:login
+* heroku container:push web
+* heroku container:release web
+* heroku open
+
+Heroku specific [here](https://dev.to/levelupkoodarit/deploying-containerized-nginx-to-heroku-how-hard-can-it-be-3g14)
