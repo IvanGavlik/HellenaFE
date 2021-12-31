@@ -1,6 +1,6 @@
 <div class="col-12">
   <!-- autocomplete -->
- <input style="width: 100%"
+ <input class="element" style="width: 100%; margin-top: 1rem"
         placeholder="-meni- Pretraivanje proizvoda   -some action-"
  />
 </div>
@@ -8,27 +8,29 @@
 
 
 <!-- must be scrollable to left (responsive and lots of data)   -->
-<div class="row">
+<div class="row" style="white-space: nowrap; margin-top: 1rem">
 
-  <div class="col">
+  <!-- display flex
+      white-space: nowrap;
+  -->
+
+  <div class="col"
+       style="overflow: hidden; overflow-x: auto;"
+    >
     <!-- icon dropdown autocomplete multiselect when is selected: border-primary -->
-    <button class="border-primary bg-transparent"  style="width: 100%; height: 2rem; border-radius: 15%"> n  </button>
-  </div>
+    <button class="element right" > Lokacija: Zagreb  </button>
 
-  <div class="col">
-    <!-- icon dropdown autocomplete multiselect -->
-    <button class="border-primary bg-transparent"  style="width: 100%; height: 2rem; border-radius: 15%" > n </button>
-  </div>
+    <button class="element right" > Trgovina: Sve </button>
 
-  <div class="col">
     <!-- icon input number -->
-    <input class="border-primary bg-transparent"  style="width: 100%; height: 2rem; border-radius: 15%"  placeholder="price min" />
+    <input class="element right" placeholder="price min" />
+
+    <!-- icon input number -->
+    <input class="element" placeholder="price max" />
+
+
   </div>
 
-  <div class="col">
-    <!-- icon input number -->
-    <input class="border-primary bg-transparent"  style="width: 100%; height: 2rem; border-radius: 15%"  placeholder="price max" />
-  </div>
 </div>
 <!-- TODO sort -->
 
