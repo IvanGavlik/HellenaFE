@@ -1,0 +1,16 @@
+.demo-table {
+    width: 100%;
+}
+
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+}
+
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+    font-weight: bold;
+}
+
+.demo-row-is-clicked {
+    font-weight: bold;
+}

@@ -1,66 +1,58 @@
+<form class="example-form mat-elevation-z8" style="margin-top: 1rem; white-space: nowrap; padding: 1rem; " >
+  <div class="row">
+    <div class="col-12">
+    <!-- autocomplete -->
 
-<div class="col-12">
-  <!-- autocomplete -->
- <input class="element" style="width: 100%; margin-top: 1rem; box-shadow: 0.1rem 0.1rem"
-        placeholder="Pretraivanje proizvoda"
- />
-</div>
+      <mat-form-field class="example-full-width" style="display: block; text-align: center"  >
+        <mat-label>Favorite food</mat-label>
+        <input matInput placeholder="Ex. Pizza" value="Sushi">
+      </mat-form-field>
+    </div>
+ </div>
 
+    <!-- TODO  style="display: none" -->
+  <div class="row" >
 
-
-<!-- must be scrollable to left (responsive and lots of data)   -->
-<div class="row" style="white-space: nowrap; margin-top: 1rem">
-
-  <!-- display flex
-      white-space: nowrap;
-  -->
-
-  <div class="col" style="overflow: hidden; overflow-x: auto;">
-
-    <!-- icon dropdown autocomplete multiselect when is selected: border-primary -->
-    <button class="element right" > Lokacija: Zagreb  </button>
-
-    <button class="element right" > Trgovina: Sve </button>
-
+  <div class="col">
     <!-- icon input number -->
-    <input class="element right" placeholder="price min" />
-
-    <!-- icon input number -->
-    <input class="element" placeholder="price max" />
-
+      <mat-form-field class="example-full-width" style="display: block; text-align: center">
+        <mat-label>Favorite food</mat-label>
+        <input type="number" matInput placeholder="Ex. Pizza" value="Sushi">
+      </mat-form-field>
 
   </div>
 
+  <div class="col">
+    <!-- icon input number -->
+      <mat-form-field class="example-full-width" style="display: block; text-align: center">
+        <mat-label>Favorite food</mat-label>
+        <input  type="number" matInput placeholder="Ex. Pizza" value="Sushi">
+      </mat-form-field>
+  </div>
+
+  <div class="col" >
+    <!-- Lokacija -->
+    <app-select-multiple></app-select-multiple>
+  </div>
+
+  <div class="col" >
+    <!-- Lokacija -->
+    <app-select-multiple ></app-select-multiple>
+  </div>
+
+  <div class="col" >
+    <!-- Lokacija -->
+    <app-select-multiple ></app-select-multiple>
+  </div>
+
 </div>
-<!-- TODO sort -->
+</form>
 
-<!-- save search -->
+<div class="row" style="margin-bottom: 1rem; margin-top: 1rem; " >
+  <!-- TODO save search -->
+  <!-- sortiranje u tablici -->
+  <div class="col-12" >
+    <app-search-table></app-search-table>
+  </div>
+</div>
 
-<!-- sortiranje u tablici -->
-<!-- izbor grid ili lista u tablici -->
-<table class="table border-primary" style="margin-top: 1rem; z-index: -1">
-<tbody>
-
-  <tr class="border-primary" >
-    <th scope="row" > <!-- add actions add to shopping list, save for latter (icons) -->1 </th>
-    <td> Konzum </td>
-    <td> Kruh </td>
-    <td> 12.45 </td>
-  </tr>
-
-  <tr class="border-primary">
-    <th scope="row" > 2 </th>
-    <td> Lidl </td>
-    <td> Kruh </td>
-    <td> 12.45 </td>
-  </tr>
-
-  <tr class="border-primary">
-    <th scope="row" > 3 </th>
-    <td> Plodine </td>
-    <td> Kruh </td>
-    <td> 12.45 </td>
-  </tr>
-
-</tbody>
-</table>

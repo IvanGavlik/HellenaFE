@@ -1,8 +1,10 @@
-<div class="container-md g-0">
+<div class="container-fluid g-0">
   <!-- Navigation-->
   <app-navbar [title]="title" ></app-navbar>
   <!-- Section-->
-  <router-outlet></router-outlet>
+  <div class="container-md g-1">
+    <router-outlet></router-outlet>
+  </div>
   <!-- Footer-->
   <app-footer></app-footer>
 </div>

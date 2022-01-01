@@ -26,6 +26,11 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+## Notes
+
+* Responsive ccs classes must go into src/styles.css (use mobile fist look)
+* Bootstrap md size is breakpoint between mobile and web look
+
 ## TODO
 * docker best practice and docker ignore
 * angular.json (offical doc) see best practices and implement options
@@ -39,4 +44,8 @@ Steps
 * heroku container:release web
 * heroku open
 
-Heroku specific [here](https://dev.to/levelupkoodarit/deploying-containerized-nginx-to-heroku-how-hard-can-it-be-3g14)
+### Problem
+
+* On Linux Cannot connect to the Docker daemon. Solution: sudo service docker start. More info [here](https://phoenixnap.com/kb/cannot-connect-to-the-docker-daemon-error)
+
+* Heroku specific [here](https://dev.to/levelupkoodarit/deploying-containerized-nginx-to-heroku-how-hard-can-it-be-3g14)
