@@ -22,11 +22,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 
 @Component({
-  selector: 'app-search-table',
-  templateUrl: './search-table.component.html',
-  styleUrls: ['./search-table.component.css']
+  selector: 'hellena-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.css']
 })
-export class SearchTableComponent implements OnInit {
+export class TableComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
@@ -35,7 +35,5 @@ export class SearchTableComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }

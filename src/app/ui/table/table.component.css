@@ -14,3 +14,7 @@
 .demo-row-is-clicked {
     font-weight: bold;
 }
+
+.full-width {
+    width: 100%;
+}

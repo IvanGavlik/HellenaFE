@@ -7,12 +7,11 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-select-multiple',
+  selector: 'hellena-select-multiple',
   templateUrl: './select-multiple.component.html',
   styleUrls: ['./select-multiple.component.css']
 })
 export class SelectMultipleComponent implements OnInit {
-
   separatorKeysCodes: number[] = [ENTER, COMMA];
   fruitCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
@@ -22,7 +21,6 @@ export class SelectMultipleComponent implements OnInit {
   toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement> = {} as ElementRef;
-
 
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -70,6 +68,5 @@ export class SelectMultipleComponent implements OnInit {
 
     return this.allFruits.filter(fruit => fruit.toLowerCase().includes(filterValue));
   }
-
 
 }
