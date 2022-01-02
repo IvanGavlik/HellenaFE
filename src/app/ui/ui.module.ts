@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatChipsModule} from '@angular/material/chips';
 import { TableComponent } from './table/table.component';
+import { InputFieldComponent } from './input-field/input-field.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { TableComponent } from './table/table.component';
     CardComponent,
     CardContainerComponent,
     SelectMultipleComponent,
-    TableComponent
+    TableComponent,
+    InputFieldComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { TableComponent } from './table/table.component';
     CardContainerComponent,
     SelectMultipleComponent,
     TableComponent,
+    InputFieldComponent,
   ]
 })
 export class UiModule { }

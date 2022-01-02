@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Table } from '../../ui/table/table';
+import {InputField} from '../../ui/input-field/input-field';
 
 export interface PeriodicElement {
   name: string;
@@ -33,6 +34,20 @@ export class SearchComponent implements OnInit {
     columnNames: ['position', 'name', 'weight', 'symbol'],
     data: ELEMENT_DATA,
   } as Table;
+
+  nameInput: InputField = {
+    initValue: 'Sushi',
+    label: 'Pretraži',
+    placeholder: 'Kruh',
+    type: 'text'
+  } as InputField;
+
+  numberInput: InputField = {
+    initValue: 0,
+    label: 'Pretraži',
+    placeholder: 'Kruh',
+    type: 'number'
+  } as InputField;
 
   constructor() { }
 
