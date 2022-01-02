@@ -35,20 +35,6 @@ export class SearchComponent implements OnInit {
     data: ELEMENT_DATA,
   } as Table;
 
-  nameInput: InputField = {
-    initValue: 'Sushi',
-    label: 'Pretraži',
-    placeholder: 'Kruh',
-    type: 'text'
-  } as InputField;
-
-  numberInput: InputField = {
-    initValue: 0,
-    label: 'Pretraži',
-    placeholder: 'Kruh',
-    type: 'number'
-  } as InputField;
-
   constructor() { }
 
   ngOnInit(): void {}
