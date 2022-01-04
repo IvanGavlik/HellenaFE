@@ -11,7 +11,7 @@ RUN npm install
 
 COPY . /app
 
-RUN npm run build --configuration --prod
+RUN npm run build --configuration=production
 
 # Stage 2
 

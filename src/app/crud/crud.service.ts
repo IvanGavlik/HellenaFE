@@ -1,26 +1,22 @@
-import {Crud} from "./crud";
-import {Observable, of} from "rxjs";
-import {Entity} from "./entity";
-import {CrudConfiguration} from "./crud-configuration";
-import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {Crud} from './crud';
+import {Observable, of} from 'rxjs';
+import {Entity} from './entity';
+import {CrudConfiguration} from './crud-configuration';
+import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 export abstract class CrudService implements Crud {
 
-  constructor(private crudConfiguration: CrudConfiguration, private http: HttpClient) {}
+  constructor(protected crudConfiguration: CrudConfiguration, protected http: HttpClient) {}
 
-  count(): Observable<Number> {
-    return of<Number>();
+  count(): Observable<number> {
+    return of<number>();
   }
 
   delete(entity: Entity): void {}
-
-  deleteAll(entity: Entity[]): void;
   deleteAll(): void;
   deleteAll(entity?: Entity[]): void {}
-
   deleteAllById(id: string[]): void {}
-
   deleteById(id: string): void {}
 
   existById(id: string): Observable<true> {
@@ -32,13 +28,11 @@ export abstract class CrudService implements Crud {
     const endpoint = environment.host + this.crudConfiguration.findAllEndpoint;
     return this.http.get<Entity[]>(endpoint, {
       responseType: 'json'
-    })
+    });
   }
-
   findAllById(id: string[]): Observable<Entity[]> {
     return of();
   }
-
   findById(id: string): Observable<Entity> {
     return of();
   }
@@ -46,7 +40,6 @@ export abstract class CrudService implements Crud {
   save(entity: Entity): Observable<Entity> {
     return of();
   }
-
   saveAll(entityList: Entity[]): Observable<Entity[]> {
     return of();
   }
