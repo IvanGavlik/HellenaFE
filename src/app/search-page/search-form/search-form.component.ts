@@ -8,9 +8,6 @@ import {Page, Search, Sort} from '../../search/search';
   selector: 'hellena-search-form',
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.css'],
-  providers: [
-    { provide: 'searchItemConfiguration', useClass: SearchItemConfiguration }
-  ]
 })
 export class SearchFormComponent implements OnInit {
 
@@ -29,27 +26,9 @@ export class SearchFormComponent implements OnInit {
   } as InputField;
 
 
-  constructor(private searchItem: SearchItemService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-
-    const search = {
-      name: 'Kruh',
-      page: {
-        index: 0,
-        size: 12,
-        sort: [
-            {
-              name: 'name',
-              dir: 'asc'
-            } as Sort
-        ]
-      } as Page
-    } as SearchItem;
-
-    this.searchItem.search(search)
-        .subscribe(el => console.log(el));
-  }
+  ngOnInit(): void {}
 
 }
 
