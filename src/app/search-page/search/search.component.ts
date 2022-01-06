@@ -19,7 +19,7 @@ import {Entity} from '../../crud/entity';
 export class SearchComponent implements OnInit {
 
   table = {
-    columnNames: ['icon', 'name', 'originalPrice', 'actionPrice'],
+    columnNames: ['icon', 'name', 'actions'],
     data: [],
   } as Table;
 

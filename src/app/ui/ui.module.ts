@@ -14,7 +14,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatChipsModule} from '@angular/material/chips';
 import { TableComponent } from './table/table.component';
 import { InputFieldComponent } from './input-field/input-field.component';
-
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { InputFieldComponent } from './input-field/input-field.component';
     MatIconModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonModule
   ],
   exports: [
     CardComponent,
