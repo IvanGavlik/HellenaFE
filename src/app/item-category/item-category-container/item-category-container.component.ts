@@ -31,7 +31,7 @@ export class ItemCategoryContainerComponent implements OnInit {
       .pipe(
         map(x => x.slice(0, 5)),
         map(entities => entities.map( el => this.toCard(el as ItemCategory))),
-      )
+      );
   }
 
   toCard(item: ItemCategory): Card {

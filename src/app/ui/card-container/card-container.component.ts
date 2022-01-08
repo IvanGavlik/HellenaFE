@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CardContainer} from "./card-container";
+import {CardContainer} from './card-container';
+import {Router} from '@angular/router';
+import {SearchItem} from '../../search-page/search-item';
 
 @Component({
   selector: 'hellena-card-container',
@@ -11,8 +13,12 @@ export class CardContainerComponent implements OnInit {
   @Input()
   cardContainer: CardContainer = {} as CardContainer;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {}
 
+  navigateToSearch(): void {
+    // TODO najpovoljnije danas
+    this.router.navigateByUrl('/search', { state: { name: 'Kr' } as SearchItem });
+  }
 }

@@ -18,20 +18,19 @@ import {SearchItem} from '../search-item';
 })
 export class SearchComponent implements OnInit {
 
-  /*
-  https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
-   */
   table = {
     columnNames: ['icon', 'name', 'actions'],
     data: [],
   } as Table;
 
-  constructor(private searchItem: SearchItemService) { }
+  constructor(private searchItem: SearchItemService) {}
 
   ngOnInit(): void {
+    // get navigation data resource: https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
+    const initSearch = history.state;
 
     const search = {
-      name: 'od',
+      name:  this.haveData(initSearch.name) ? initSearch.name : 'Kruh',
       page: {
         index: 0,
         size: 12,
@@ -44,6 +43,14 @@ export class SearchComponent implements OnInit {
       } as Page
     } as SearchItem;
 
+    this.doSearch(search);
+  }
+
+  handleSearch($event: SearchItem): void {
+    this.doSearch($event);
+  }
+
+  doSearch(search: SearchItem): void {
     this.searchItem.search(search)
         .pipe(
             map(response => response.map(el => this.toTableItem(el as ItemSearch)))
@@ -62,8 +69,15 @@ export class SearchComponent implements OnInit {
       store: el.storeName,
     } as TableItem;
   }
+
+  haveData(input: any): boolean {
+    return input !== undefined && input != null;
+  }
+
 }
 
+// TODO ItemSearch extends Entity vs ItemSearch extends Search
+// jedno je rezultat drugo je input
 interface ItemSearch extends Entity {
   name: string;
   storeName: string;
