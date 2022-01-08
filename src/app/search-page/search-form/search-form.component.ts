@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {InputField} from '../../ui/input-field/input-field';
-import {SearchItemConfiguration} from '../search-item-configuration';
-import {SearchItemService} from '../search-item.service';
-import {Page, Search, Sort} from '../../search/search';
+import {SearchItem} from '../search-item';
+
 
 @Component({
   selector: 'hellena-search-form',
@@ -10,6 +9,13 @@ import {Page, Search, Sort} from '../../search/search';
   styleUrls: ['./search-form.component.css'],
 })
 export class SearchFormComponent implements OnInit {
+
+  @Input()
+  search: SearchItem = {} as SearchItem;
+
+  @Output()
+  searchEvent = new EventEmitter<SearchItem>();
+
 
   nameInput: InputField = {
     initValue: 'Sushi',
@@ -30,14 +36,4 @@ export class SearchFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-}
-
-
-export interface SearchItem extends Search {
-  name?: string;
-  categoryId?: number;
-  cityId?: number;
-  priceMIn?: number;
-  priceMax?: number;
-  page: Page;
 }

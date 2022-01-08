@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  host: 'http://localhost:8080',
+//  host: 'http://localhost:8080',
+  host: 'https://mysterious-dusk-84277.herokuapp.com',
   version1: '/v1'
 };
 

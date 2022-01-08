@@ -3,9 +3,9 @@ import {Table, TableItem} from '../../ui/table/table';
 import {SearchItemConfiguration} from '../search-item-configuration';
 import {SearchItemService} from '../search-item.service';
 import {Page, Sort} from '../../search/search';
-import {SearchItem} from '../search-form/search-form.component';
 import {map} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
+import {SearchItem} from '../search-item';
 
 
 @Component({
@@ -18,6 +18,9 @@ import {Entity} from '../../crud/entity';
 })
 export class SearchComponent implements OnInit {
 
+  /*
+  https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
+   */
   table = {
     columnNames: ['icon', 'name', 'actions'],
     data: [],
