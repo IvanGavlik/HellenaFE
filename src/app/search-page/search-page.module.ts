@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '../ui/ui.module';
 import { SearchFormComponent } from './search-form/search-form.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { SearchFormComponent } from './search-form/search-form.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    UiModule
+    UiModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     SearchComponent

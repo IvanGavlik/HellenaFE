@@ -1,6 +1,8 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {InputField} from '../../ui/input-field/input-field';
 import {SearchItem} from '../search-item';
+import {FormControl, FormGroup} from '@angular/forms';
+import {debounce, debounceTime} from 'rxjs';
 
 
 @Component({
@@ -16,13 +18,13 @@ export class SearchFormComponent implements OnInit {
   @Output()
   searchEvent = new EventEmitter<SearchItem>();
 
+  searchForm = new FormGroup(
+      {
+        name: new FormControl(''),
+      }
+  );
 
-  nameInput: InputField = {
-    initValue: 'Sushi',
-    label: 'Pretraži',
-    placeholder: 'Kruh',
-    type: 'text'
-  } as InputField;
+
 
   numberInput: InputField = {
     initValue: 0,
@@ -34,6 +36,12 @@ export class SearchFormComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.searchForm.valueChanges
+        .pipe(debounceTime(1000))
+        .subscribe(value => {
+          console.log('change: ', value);
+        });
+  }
 
 }

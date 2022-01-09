@@ -1,37 +1,42 @@
-<form class="example-form mat-elevation-z8" style="margin-top: 1rem; white-space: nowrap; padding: 1rem; " >
+<form class="example-form mat-elevation-z8" style="margin-top: 1rem; white-space: nowrap; padding: 1rem;"
+    [formGroup]="searchForm"
+>
     <div class="row">
         <div class="col-12">
-            <hellena-input-field [input]="nameInput" > </hellena-input-field>
+            <mat-form-field class="full-width" style="display: block; text-align: center"  >
+                <mat-label>Pretraži</mat-label>
+                <input matInput type="text" placeholder="npr. Kruh"
+                       formControlName="name"
+                >
+            </mat-form-field>
         </div>
     </div>
 
-    <!-- TODO  style="display: none" -->
+    <!-- TODO  style="display: none"
     <div class="row" >
 
         <div class="col">
-            <!-- icon input number -->
-            <hellena-input-field [input]="numberInput" > </hellena-input-field>
+            <hellena-input-field [input]="numberInput"
+            > </hellena-input-field>
         </div>
 
         <div class="col">
-            <!-- icon input number -->
-            <hellena-input-field [input]="numberInput" > </hellena-input-field>
+            <hellena-input-field [input]="numberInput"
+            > </hellena-input-field>
         </div>
 
         <div class="col" >
-            <!-- Lokacija -->
             <hellena-select-multiple></hellena-select-multiple>
         </div>
 
         <div class="col" >
-            <!-- Lokacija -->
             <hellena-select-multiple></hellena-select-multiple>
         </div>
 
         <div class="col" >
-            <!-- Lokacija -->
             <hellena-select-multiple></hellena-select-multiple>
         </div>
 
     </div>
+    -->
 </form>
