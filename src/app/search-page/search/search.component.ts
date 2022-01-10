@@ -76,8 +76,16 @@ export class SearchComponent implements OnInit {
 
 }
 
-// TODO ItemSearch extends Entity vs ItemSearch extends Search
-// jedno je rezultat drugo je input
+// TODO searchItem: SearchItem;
+/*
+  In response return serachItem to populate form
+  and arry of result items
+
+  interface Response {
+    searchItemQuery;
+    items[];
+  }
+ */
 interface ItemSearch extends Entity {
   name: string;
   storeName: string;

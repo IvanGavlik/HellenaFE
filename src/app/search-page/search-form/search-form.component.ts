@@ -1,5 +1,4 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {InputField} from '../../ui/input-field/input-field';
 import {SearchItem} from '../search-item';
 import {FormControl, FormGroup} from '@angular/forms';
 import {debounce, debounceTime} from 'rxjs';
@@ -21,18 +20,12 @@ export class SearchFormComponent implements OnInit {
   searchForm = new FormGroup(
       {
         name: new FormControl(''),
+        priceMIn: new FormControl(0),
+        priceMax: new FormControl(0),
       }
   );
 
-
-
-  numberInput: InputField = {
-    initValue: 0,
-    label: 'Pretraži',
-    placeholder: 'Kruh',
-    type: 'number'
-  } as InputField;
-
+  displayFullSearchForm = false;
 
   constructor() { }
 
@@ -41,7 +34,14 @@ export class SearchFormComponent implements OnInit {
         .pipe(debounceTime(1000))
         .subscribe(value => {
           console.log('change: ', value);
+          this.handleSearchFormValueChange(value);
         });
+  }
+
+  handleSearchFormValueChange(value: any): void {
+    if (value.name) {
+      this.displayFullSearchForm = true;
+    }
   }
 
 }

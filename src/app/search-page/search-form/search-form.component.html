@@ -12,31 +12,38 @@
         </div>
     </div>
 
-    <!-- TODO  style="display: none"
-    <div class="row" >
+    <!-- TODO  style="display: none" -->
+    <div class="row" *ngIf="displayFullSearchForm" >
+        <div class="col">
+            <mat-form-field class="full-width" style="display: block; text-align: center"  >
+                <mat-label>Cijena od</mat-label>
+                <input matInput type="number" placeholder="0.00"
+                       formControlName="priceMIn"
+                >
+            </mat-form-field>
+        </div>
 
         <div class="col">
-            <hellena-input-field [input]="numberInput"
-            > </hellena-input-field>
+            <mat-form-field class="full-width" style="display: block; text-align: center"  >
+                <mat-label>Cijena do</mat-label>
+                <input matInput type="number" placeholder="0.00"
+                       formControlName="priceMax"
+                >
+            </mat-form-field>
         </div>
+        <!--
+                <div class="col" >
+                    <hellena-select-multiple></hellena-select-multiple>
+                </div>
 
-        <div class="col">
-            <hellena-input-field [input]="numberInput"
-            > </hellena-input-field>
-        </div>
+                <div class="col" >
+                    <hellena-select-multiple></hellena-select-multiple>
+                </div>
 
-        <div class="col" >
-            <hellena-select-multiple></hellena-select-multiple>
-        </div>
-
-        <div class="col" >
-            <hellena-select-multiple></hellena-select-multiple>
-        </div>
-
-        <div class="col" >
-            <hellena-select-multiple></hellena-select-multiple>
-        </div>
-
+                <div class="col" >
+                    <hellena-select-multiple></hellena-select-multiple>
+                </div>
+        -->
     </div>
-    -->
+
 </form>
