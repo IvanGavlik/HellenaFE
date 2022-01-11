@@ -31,19 +31,48 @@
                 >
             </mat-form-field>
         </div>
+
+        <div class="col">
+            <mat-form-field style="display: block;" >
+                <mat-label>Lokacija</mat-label>
+                <mat-chip-list #locationChipperList>
+                    <mat-chip
+                            *ngFor="let fruit of location.locations"
+                            (removed)="remove(fruit)">
+                        {{fruit}}
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip>
+                    <input
+                            placeholder="npr. Zagreb"
+                            #locationChipper
+                            formControlName="locationControl"
+                            [matAutocomplete]="auto"
+                            [matChipInputFor]="locationChipperList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let fruit of location.filteredLocations | async" [value]="fruit">
+                        {{fruit}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
         <!--
-                <div class="col" >
-                    <hellena-select-multiple></hellena-select-multiple>
-                </div>
+                        <div class="col" >
+                            <hellena-select-multiple></hellena-select-multiple>
+                        </div>
 
-                <div class="col" >
-                    <hellena-select-multiple></hellena-select-multiple>
-                </div>
+                                        <div class="col" >
+                                            <hellena-select-multiple></hellena-select-multiple>
+                                        </div>
 
-                <div class="col" >
-                    <hellena-select-multiple></hellena-select-multiple>
-                </div>
-        -->
+                                        <div class="col" >
+                                            <hellena-select-multiple></hellena-select-multiple>
+                                        </div>
+                                -->
     </div>
 
 </form>

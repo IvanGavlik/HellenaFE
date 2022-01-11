@@ -7,6 +7,11 @@ import { UiModule } from '../ui/ui.module';
 import { SearchFormComponent } from './search-form/search-form.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -20,7 +25,12 @@ import {MatInputModule} from '@angular/material/input';
     ReactiveFormsModule,
     UiModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatButtonModule
   ],
   exports: [
     SearchComponent
