@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import {SearchItem} from '../search-item';
 import {FormControl, FormGroup} from '@angular/forms';
-import {debounce, debounceTime, Observable} from 'rxjs';
+import {debounceTime, Observable} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
@@ -24,24 +24,38 @@ export class SearchFormComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   displayFullSearchForm = true;
 
-
-  locationControl = new FormControl();
-
   searchForm = new FormGroup(
-      {
+    {
         name: new FormControl(''),
         priceMIn: new FormControl(0),
         priceMax: new FormControl(0),
-          locationControl: this.locationControl,
-      }
-  );
+        locationControl: new FormControl(''),
+        categoryControl: new FormControl(''),
+        storeControl: new FormControl('')
+    });
 
+  // location
   @ViewChild('locationChipper') locationChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-
   location: SelectMultiple<string> = new SelectMultiple<string>(['Lemon'],
       ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'],
       new Observable<string[]>(),
-      this.locationControl);
+      this.searchForm.get('locationControl') as FormControl);
+
+  // category
+  @ViewChild('categoryChipper') categoryChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
+  category: SelectMultiple<string> = new SelectMultiple<string>(['Piće'],
+      ['Meso', 'Lemon', 'Lime', 'Orange', 'Strawberry'],
+      new Observable<string[]>(),
+      this.searchForm.get('categoryControl') as FormControl);
+
+  // store
+  storeControl = new FormControl('');
+  @ViewChild('storeChipper') storeChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
+  store: SelectMultiple<string> = new SelectMultiple<string>(['Lidl'],
+        ['Konzum', 'Lemon', 'Lime', 'Orange', 'Strawberry'],
+        new Observable<string[]>(),
+        this.searchForm.get('storeControl') as FormControl);
+
 
   constructor() {}
 
@@ -60,59 +74,99 @@ export class SearchFormComponent implements OnInit {
     }
   }
 
-  add(event: MatChipInputEvent): void {
+  addLocation(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
     this.location.add(value);
     event.chipInput?.clear();
   }
 
-  remove(fruit: string): void {
+  removeLocation(fruit: string): void {
     this.location.remove(fruit);
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
+  selectedLocation(event: MatAutocompleteSelectedEvent): void {
     this.location.selected(event.option.value, this.locationChipper);
+  }
+
+
+  addCategory(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+    this.category.add(value);
+    event.chipInput?.clear();
+  }
+
+  removeCategory(fruit: string): void {
+      this.category.remove(fruit);
+  }
+
+  selectedCategory(event: MatAutocompleteSelectedEvent): void {
+      this.category.selected(event.option.value, this.categoryChipper);
+  }
+
+  addStore(event: MatChipInputEvent): void {
+      const value = (event.value || '').trim();
+      this.store.add(value);
+      event.chipInput?.clear();
+  }
+
+  removeStore(fruit: string): void {
+      this.store.remove(fruit);
+  }
+
+  selectedStore(event: MatAutocompleteSelectedEvent): void {
+      this.store.selected(event.option.value, this.storeChipper);
   }
 
 }
 
+// TODO ENTER A and stop typing -> change will be triger and value will be A
+// maybe some type of validator
+// TODO remove duplicates do not send apple, apple on BE
 export class SelectMultiple<ELEMENT extends string> {
-    constructor(public locations: ELEMENT[],
-                public allFruits: ELEMENT[],
-                public filteredLocations: Observable<ELEMENT[]>,
-                public fruitCtrl: FormControl) {
+    constructor(public items: ELEMENT[],
+                public allItems: ELEMENT[],
+                public filteredItems: Observable<ELEMENT[]>,
+                public formControl: FormControl) {
 
-        this.filteredLocations = fruitCtrl.valueChanges.pipe(
+        this.filteredItems = formControl.valueChanges.pipe(
             startWith(null),
-            map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
+            map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allItems.slice())),
         );
+
+        this.formControl.setValue(this.items.join(','));
+    }
+
+    add(element: ELEMENT): void {
+        // Add our fruit
+        console.log('add ', element);
+        if (element && this.allItems.find(el => el === element)) {
+            this.items.push(element);
+            this.formControl.setValue(this.items.join(','));
+        }
+    }
+
+    remove(element: ELEMENT): void {
+        console.log('remove ', element);
+        const index = this.items.indexOf(element);
+        if (index >= 0) {
+            this.items.splice(index, 1);
+            this.formControl.setValue(this.items.join(','));
+        }
+    }
+
+    selected(element: ELEMENT, input: ElementRef<HTMLInputElement>): void {
+        console.log('selected ', element);
+        if (element && this.allItems.find(el => el === element)) {
+            this.items.push(element);
+            input.nativeElement.value = '';
+            this.formControl.setValue(this.items.join(','));
+        }
     }
 
     private _filter(value: string): ELEMENT[] {
         const filterValue = value.toLowerCase();
 
-        return this.allFruits.filter(fruit => fruit.toString().toLowerCase().includes(filterValue));
-    }
-
-    add(element: ELEMENT): void {
-        // Add our fruit
-        if (element) {
-            this.locations.push(element);
-        }
-        this.fruitCtrl.setValue(null);
-    }
-
-    remove(element: ELEMENT): void {
-        const index = this.locations.indexOf(element);
-
-        if (index >= 0) {
-            this.locations.splice(index, 1);
-        }
-    }
-
-    selected(element: ELEMENT, input: ElementRef<HTMLInputElement>): void {
-        this.locations.push(element);
-        input.nativeElement.value = '';
-        this.fruitCtrl.setValue(null);
+        return this.allItems
+            .filter(el => el.toString().toLowerCase().includes(filterValue));
     }
 }

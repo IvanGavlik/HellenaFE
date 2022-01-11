@@ -34,12 +34,41 @@
 
         <div class="col">
             <mat-form-field style="display: block;" >
+                <mat-label>Kategorija</mat-label>
+                <mat-chip-list #categoryChipperList>
+                    <mat-chip
+                            *ngFor="let el of category.items"
+                            (removed)="removeCategory(el)">
+                        {{el}}
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip>
+                    <input
+                            placeholder="npr. Piće"
+                            #categoryChipper
+                            formControlName="categoryControl"
+                            [matAutocomplete]="autoCategory"
+                            [matChipInputFor]="categoryChipperList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            (matChipInputTokenEnd)="addCategory($event)">
+                </mat-chip-list>
+                <mat-autocomplete #autoCategory="matAutocomplete" (optionSelected)="selectedCategory($event)">
+                    <mat-option *ngFor="let el of category.filteredItems | async" [value]="el">
+                        {{el}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
+
+        <div class="col">
+            <mat-form-field style="display: block;" >
                 <mat-label>Lokacija</mat-label>
                 <mat-chip-list #locationChipperList>
                     <mat-chip
-                            *ngFor="let fruit of location.locations"
-                            (removed)="remove(fruit)">
-                        {{fruit}}
+                            *ngFor="let el of location.items"
+                            (removed)="removeLocation(el)">
+                        {{el}}
                         <button matChipRemove>
                             <mat-icon>cancel</mat-icon>
                         </button>
@@ -48,31 +77,48 @@
                             placeholder="npr. Zagreb"
                             #locationChipper
                             formControlName="locationControl"
-                            [matAutocomplete]="auto"
+                            [matAutocomplete]="autoLocation"
                             [matChipInputFor]="locationChipperList"
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                            (matChipInputTokenEnd)="add($event)">
+                            (matChipInputTokenEnd)="addLocation($event)">
                 </mat-chip-list>
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                    <mat-option *ngFor="let fruit of location.filteredLocations | async" [value]="fruit">
-                        {{fruit}}
+                <mat-autocomplete #autoLocation="matAutocomplete" (optionSelected)="selectedLocation($event)">
+                    <mat-option *ngFor="let el of location.filteredItems | async" [value]="el">
+                        {{el}}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
         </div>
-        <!--
-                        <div class="col" >
-                            <hellena-select-multiple></hellena-select-multiple>
-                        </div>
 
-                                        <div class="col" >
-                                            <hellena-select-multiple></hellena-select-multiple>
-                                        </div>
+        <div class="col">
+            <mat-form-field style="display: block;" >
+                <mat-label>Trgovina</mat-label>
+                <mat-chip-list #storeChipperList>
+                    <mat-chip
+                            *ngFor="let el of store.items"
+                            (removed)="removeStore(el)">
+                        {{el}}
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip>
+                    <input
+                            placeholder="npr. Lidl"
+                            #storeChipper
+                            formControlName="storeControl"
+                            [matAutocomplete]="autoStore"
+                            [matChipInputFor]="storeChipperList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            (matChipInputTokenEnd)="addStore($event)">
+                </mat-chip-list>
+                <mat-autocomplete #autoStore="matAutocomplete" (optionSelected)="selectedStore($event)">
+                    <mat-option *ngFor="let el of store.filteredItems | async" [value]="el">
+                        {{el}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </div>
 
-                                        <div class="col" >
-                                            <hellena-select-multiple></hellena-select-multiple>
-                                        </div>
-                                -->
     </div>
 
 </form>
