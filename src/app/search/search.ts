@@ -10,6 +10,6 @@ export interface Page {
 
 export interface Sort {
     name: string;
-    dir: string;
+    direction: string;
 }
 

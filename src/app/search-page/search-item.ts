@@ -4,8 +4,8 @@ export interface SearchItem extends Search {
     name?: string;
     priceMIn?: number;
     priceMax?: number;
-    categoryId: number[];
-    cityId: number[];
-    storeId: number[];
+    categoryIds: number[];
+    cityIds: number[];
+    storeIds: number[];
     page: Page;
 }

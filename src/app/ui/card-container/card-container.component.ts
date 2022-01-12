@@ -19,6 +19,7 @@ export class CardContainerComponent implements OnInit {
 
   navigateToSearch(): void {
     // TODO najpovoljnije danas
-    this.router.navigateByUrl('/search', { state: { name: 'Kr' } as SearchItem });
+//    this.router.navigateByUrl('/search', { state: { name: 'Kr' } as SearchItem });
+    this.router.navigateByUrl('/search');
   }
 }

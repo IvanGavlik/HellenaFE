@@ -30,14 +30,17 @@ export class SearchComponent implements OnInit {
     const initSearch = history.state;
 
     const search = {
-      name:  this.haveData(initSearch.name) ? initSearch.name : 'Kruh',
+      name: initSearch.name,
+      categoryIds: [],
+      cityIds: [],
+      storeIds: [],
       page: {
         index: 0,
         size: 12,
         sort: [
           {
             name: 'name',
-            dir: 'asc'
+            direction: 'ASC'
           } as Sort
         ]
       } as Page
@@ -56,7 +59,7 @@ export class SearchComponent implements OnInit {
             map(response => response.map(el => this.toTableItem(el as ItemSearch)))
         )
         .subscribe(
-            items => this.table.data = items
+            items => { this.table.data = items; console.log('response ' + items); }
         );
   }
 
