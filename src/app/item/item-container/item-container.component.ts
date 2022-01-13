@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ItemService} from "../item.service";
-import {ItemConfiguration} from "../item-configuration";
+import {ItemService} from '../item.service';
+import {ItemConfiguration} from '../item-configuration';
 
 @Component({
   selector: 'app-item-container',

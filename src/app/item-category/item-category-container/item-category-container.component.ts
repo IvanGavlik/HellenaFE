@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ItemCategoryConfiguration} from "../item-category-configuration";
-import {ItemCategoryService} from "../item-category.service";
-import {Card} from "../../ui/card/card";
-import {map, take} from "rxjs/operators";
-import {Entity} from "../../crud/entity";
-import {Observable, of, Subscription} from "rxjs";
-import {CardContainer} from "../../ui/card-container/card-container";
+import {Component, OnInit} from '@angular/core';
+import {ItemCategoryConfiguration} from '../item-category-configuration';
+import {ItemCategoryService} from '../item-category.service';
+import {Card} from '../../ui/card/card';
+import {map, take} from 'rxjs/operators';
+import {Entity} from '../../crud/entity';
+import {Observable, of} from 'rxjs';
+import {CardContainer} from '../../ui/card-container/card-container';
 
 @Component({
   selector: 'app-item-category-container',
@@ -43,7 +43,7 @@ export class ItemCategoryContainerComponent implements OnInit {
 }
 
 class ItemCategory extends Entity {
-  id: string = '';
-  name: string = '';
-  description: string = '';
+  id = '';
+  name = '';
+  description = '';
 }
