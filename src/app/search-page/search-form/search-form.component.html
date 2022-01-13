@@ -39,7 +39,7 @@
                     <mat-chip
                             *ngFor="let el of category.items"
                             (removed)="removeCategory(el)">
-                        {{el}}
+                        {{el.value}}
                         <button matChipRemove>
                             <mat-icon>cancel</mat-icon>
                         </button>
@@ -55,7 +55,7 @@
                 </mat-chip-list>
                 <mat-autocomplete #autoCategory="matAutocomplete" (optionSelected)="selectedCategory($event)">
                     <mat-option *ngFor="let el of category.filteredItems | async" [value]="el">
-                        {{el}}
+                        {{el.value}}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>

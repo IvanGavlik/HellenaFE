@@ -6,6 +6,8 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {map, startWith} from 'rxjs/operators';
+import {SearchItemService} from '../search-item.service';
+import {Entity} from '../../crud/entity';
 
 
 @Component({
@@ -43,9 +45,9 @@ export class SearchFormComponent implements OnInit {
 
   // category
   @ViewChild('categoryChipper') categoryChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-  category: SelectMultiple<string> = new SelectMultiple<string>(['Piće'],
-      ['Meso', 'Lemon', 'Lime', 'Orange', 'Strawberry'],
-      new Observable<string[]>(),
+  category: SelectMultiple<Pair<string, string>> = new SelectMultiple<Pair<string, string>>([],
+      [],
+      new Observable<Pair<string, string>[]>(),
       this.searchForm.get('categoryControl') as FormControl);
 
   // store
@@ -57,7 +59,7 @@ export class SearchFormComponent implements OnInit {
         this.searchForm.get('storeControl') as FormControl);
 
 
-  constructor() {}
+  constructor(private service: SearchItemService) {}
 
   ngOnInit(): void {
     this.searchForm.valueChanges
@@ -66,6 +68,11 @@ export class SearchFormComponent implements OnInit {
           console.log('change: ', value);
           this.handleSearchFormValueChange(value);
         });
+
+    const initData = new InitDataHelper(this.service);
+    initData.allCategory.subscribe(categories => {
+        this.category.allItems = categories;
+    });
   }
 
   handleSearchFormValueChange(value: any): void {
@@ -90,12 +97,16 @@ export class SearchFormComponent implements OnInit {
 
 
   addCategory(event: MatChipInputEvent): void {
+    console.log('add C ', event.value);
     const value = (event.value || '').trim();
-    this.category.add(value);
+    const find = this.category.allItems.find(el => el.value === value);
+    if (find) {
+        this.category.add(find);
+    }
     event.chipInput?.clear();
   }
 
-  removeCategory(fruit: string): void {
+  removeCategory(fruit: Pair<string, string>): void {
       this.category.remove(fruit);
   }
 
@@ -119,10 +130,14 @@ export class SearchFormComponent implements OnInit {
 
 }
 
+class Pair<KEY, VALUE> {
+    constructor(public key: KEY, public value: VALUE) {}
+}
+
 // TODO ENTER A and stop typing -> change will be triger and value will be A
 // maybe some type of validator
 // TODO remove duplicates do not send apple, apple on BE
-export class SelectMultiple<ELEMENT extends string> {
+export class SelectMultiple<ELEMENT extends string | Pair<any, any>> {
     constructor(public items: ELEMENT[],
                 public allItems: ELEMENT[],
                 public filteredItems: Observable<ELEMENT[]>,
@@ -163,10 +178,54 @@ export class SelectMultiple<ELEMENT extends string> {
         }
     }
 
-    private _filter(value: string): ELEMENT[] {
-        const filterValue = value.toLowerCase();
-
+    private _filter(value: string | Pair<any, any> ): ELEMENT[] {
+        console.log('filter ' + value);
         return this.allItems
-            .filter(el => el.toString().toLowerCase().includes(filterValue));
+                .filter(el => this._elementValue(el).includes(this._elementValue(value))
+                );
+
+     }
+
+     private _elementValue(element: string | Pair<any, any>): string {
+        if (typeof element === 'string') {
+            console.log('_elementValue string ', element);
+            return (element as string).toLowerCase();
+        } else {
+            console.log('_elementValue Pair', element);
+            return (element as Pair<any, any>).value.toString().toLowerCase();
+
+        }
+     }
+
+}
+
+
+export class InitDataHelper {
+    // tslint:disable-next-line:variable-name
+    private _allCategory: Observable<Pair<string, string>[]> = new Observable<Pair<string, string>[]>();
+
+    constructor(private service: SearchItemService) {
+        this._allCategory = this.service.findAllCategory()
+            .pipe(
+                map(entities => entities.map( el => this.toCard(el as ItemCategory))),
+            );
+    }
+
+    get allCategory(): Observable<Pair<string, string>[]> {
+        return this._allCategory;
+    }
+
+    private toCard(el1: ItemCategory): Pair<string, string> {
+        return {
+            key: el1.id,
+            value: el1.name,
+        };
     }
 }
+
+class ItemCategory extends Entity {
+    id = '';
+    name = '';
+    description = '';
+}
+

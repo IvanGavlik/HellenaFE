@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {CrudService} from "../crud/crud.service";
-import {ItemCategoryConfiguration} from "./item-category-configuration";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
+import {ItemCategoryConfiguration} from './item-category-configuration';
+import {CrudService} from '../crud/crud.service';
 
 @Injectable({
   providedIn: 'root'
