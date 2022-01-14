@@ -42,22 +42,20 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   category: SelectMultiple<Pair<string, string>> = new SelectMultiple<Pair<string, string>>([], [],
       new Observable<Pair<string, string>[]>(),
       this.searchForm.get('categoryControl') as FormControl);
-/*
+
   // location
   @ViewChild('locationChipper') locationChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-  location: SelectMultiple<string> = new SelectMultiple<string>(['Lemon'],
-      ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'],
-      new Observable<string[]>(),
+  location: SelectMultiple<Pair<string, string>> = new SelectMultiple<Pair<string, string>>([],[],
+      new Observable<Pair<string, string>[]>(),
       this.searchForm.get('locationControl') as FormControl);
 
   // store
   storeControl = new FormControl('');
   @ViewChild('storeChipper') storeChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-  store: SelectMultiple<string> = new SelectMultiple<string>(['Lidl'],
-        ['Konzum', 'Lemon', 'Lime', 'Orange', 'Strawberry'],
-        new Observable<string[]>(),
-        this.searchForm.get('storeControl') as FormControl);
-*/
+  store: SelectMultiple<Pair<string, string>> = new SelectMultiple<Pair<string, string>>([],[],
+            new Observable<Pair<string, string>[]>(),
+            this.searchForm.get('storeControl') as FormControl);
+
   subs: Subscription[] = [];
 
   constructor(private service: SearchItemService) {}
@@ -73,7 +71,13 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     const subCategory = initData.allCategory.subscribe(categories => {
         this.category.allItems = categories;
     });
-    this.subs.push(subCategory);
+    const subLocation = initData.allLocation.subscribe(categories => {
+        this.location.allItems = categories;
+    });
+    const subStore = initData.allStore.subscribe(categories => {
+        this.store.allItems = categories;
+    });
+    this.subs.push(subCategory, subLocation, subStore);
   }
 
   ngOnDestroy(): void {
@@ -89,9 +93,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         name: value.name,
         priceMIn: value.priceMIn,
         priceMax: value.priceMax,
-        categoryIds: (value?.categoryControl as Pair<any, any>[]).map(el => el.key),
-        cityIds: [],
-        storeIds: [],
+        categoryIds: (value?.categoryControl as Pair<any, any>[]).map(el => el.id),
+        cityIds: (value?.locationControl as Pair<any, any>[]).map(el => el.id),
+        storeIds: (value?.storeControl as Pair<any, any>[]).map(el => el.id),
         page : {
             sort: [],
             size: 10,
@@ -99,8 +103,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         } as Page
     } as SearchItem );
   }
+
   addCategory(event: MatChipInputEvent): void {
-      console.log('add C ', event.value);
       const value = (event.value || '').trim();
       const find = this.category.allItems.find(el => el.value === value);
       if (find) {
@@ -109,22 +113,25 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       event.chipInput?.clear();
   }
 
-  removeCategory(fruit: Pair<string, string>): void {
-      this.category.remove(fruit);
+  removeCategory(el: Pair<string, string>): void {
+      this.category.remove(el);
   }
 
   selectedCategory(event: MatAutocompleteSelectedEvent): void {
       this.category.selected(event.option.value, this.categoryChipper);
   }
-/*
+
   addLocation(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-    this.location.add(value);
-    event.chipInput?.clear();
+      const value = (event.value || '').trim();
+      const find = this.location.allItems.find(el => el.value === value);
+      if (find) {
+          this.location.add(find);
+      }
+      event.chipInput?.clear();
   }
 
-  removeLocation(fruit: string): void {
-    this.location.remove(fruit);
+  removeLocation(el: Pair<string, string>): void {
+    this.location.remove(el);
   }
 
   selectedLocation(event: MatAutocompleteSelectedEvent): void {
@@ -133,22 +140,25 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
   addStore(event: MatChipInputEvent): void {
       const value = (event.value || '').trim();
-      this.store.add(value);
+      const find = this.store.allItems.find(el => el.value === value);
+      if (find) {
+          this.location.add(find);
+      }
       event.chipInput?.clear();
   }
 
-  removeStore(fruit: string): void {
-      this.store.remove(fruit);
+  removeStore(el: Pair<string, string>): void {
+      this.store.remove(el);
   }
 
   selectedStore(event: MatAutocompleteSelectedEvent): void {
       this.store.selected(event.option.value, this.storeChipper);
   }
-*/
+
 }
 
 class Pair<KEY, VALUE> {
-    constructor(public key: KEY, public value: VALUE) {}
+    constructor(public id: KEY, public value: VALUE) {}
 }
 
 // TODO ENTER A and stop typing -> change will be triger and value will be A
@@ -210,11 +220,23 @@ export class SelectMultiple<ELEMENT extends Pair<any, any>> {
 export class InitDataHelper {
     // tslint:disable-next-line:variable-name
     private _allCategory: Observable<Pair<string, string>[]> = new Observable<Pair<string, string>[]>();
+    // tslint:disable-next-line:variable-name
+    private _allLocation: Observable<Pair<string, string>[]> = new Observable<Pair<string, string>[]>();
+    // tslint:disable-next-line:variable-name
+    private _allStore: Observable<Pair<string, string>[]> = new Observable<Pair<string, string>[]>();
 
     constructor(private service: SearchItemService) {
         this._allCategory = this.service.findAllCategory()
             .pipe(
-                map(entities => entities.map( el => this.toCard(el as ItemCategory))),
+                map(entities => entities.map( el => this.toPair(el as EntityPair))),
+            );
+        this._allLocation = this.service.findAllCity()
+            .pipe(
+                map(entities => entities.map( el => this.toPair(el as EntityPair))),
+            );
+        this._allStore = this.service.findAllStore()
+            .pipe(
+                map(entities => entities.map( el => this.toPair(el as EntityPair))),
             );
     }
 
@@ -222,17 +244,24 @@ export class InitDataHelper {
         return this._allCategory;
     }
 
-    private toCard(el1: ItemCategory): Pair<string, string> {
+    get allLocation(): Observable<Pair<string, string>[]> {
+        return this._allLocation;
+    }
+
+    get allStore(): Observable<Pair<string, string>[]> {
+        return this._allStore;
+    }
+
+    private toPair(el1: EntityPair): Pair<string, string> {
         return {
-            key: el1.id,
+            id: el1.id,
             value: el1.name,
         };
     }
 }
 
-class ItemCategory extends Entity {
+class EntityPair extends Entity {
     id = '';
     name = '';
-    description = '';
 }
 
