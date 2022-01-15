@@ -34,6 +34,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## TODO
 * docker best practice and docker ignore
 * angular.json (offical doc) see best practices and implement options
+* docker image is not working on local machine problem nginx configuration root url access like search for angular
 
 ## publish to Heroku
 

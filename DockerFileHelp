@@ -1,0 +1,97 @@
+# Stage 1
+FROM node:14.18.2 as build-step
+
+RUN mkdir -p /app
+
+WORKDIR /app
+
+COPY package.json /app
+COPY package-lock.json /app
+
+RUN npm install
+
+COPY . /app
+
+RUN npm run build --prod
+
+# Stage 2
+
+FROM nginx
+
+COPY --from=build-step /app/dist/hellena /usr/share/nginx/html
+
+# heroku specific
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+
+/*
+sudo service docker start
+
+docker container run [name]
+
+docker container inspect [name]
+
+docker container ls --all , which shows all containers in any status:
+
+docker container logs [name] displays logs
+
+docker container top [name] list the processes running in the container
+
+docker container run --interactive --tty [name] connect with container and set terminal session
+
+docker container run --detach --publish 8088:80 [name]
+    -> detach start it in background
+    -> publish 8080 port from the container to the computer
+
+docker container starts shows live view of CPU, memory, network ...
+
+docker container run --env TARGET=google.com diamol/ch03-web-ping
+    set env variable TARGET
+*/
+
+/*
+docker file example
+
+FROM diamol/node
+
+ENV TARGET="blog.sixeyed.com"
+ENV METHOD="HEAD"
+ENV INTERVAL="3000"
+
+WORKDIR /web-ping
+COPY app.js .
+
+CMD ["node", "/web-ping/app.js"]
+
+FROM - start image from
+ENV - env variables
+WORKDIR - create and set current working dir
+COPY - from local to docker image
+CMD - command to run when docker starts a container from the image
+
+*/
+
+/*
+multistage docker flle
+FROM diamol/base AS build-stage
+RUN echo 'Building...' > /build.txt
+
+FROM diamol/base AS test-stage
+COPY --from=build-stage /build.txt /build.txt
+RUN echo 'Testing...' >> /build.txt
+
+FROM diamol/base
+COPY --from=test-stage /build.txt /build.txt
+CMD cat /build.txt
+
+RUN instruction executes a command inside a container during the build, output is save to image
+*/
+
+/*
+resources:
+https://www.indellient.com/blog/how-to-dockerize-an-angular-application-with-nginx/
+https://betterprogramming.pub/how-to-create-an-angular-dockerfile-75c059e7f8e8
+https://mherman.org/blog/dockerizing-an-angular-app/
+https://dev.to/wkrzywiec/build-and-run-angular-application-in-a-docker-container-19pm
+*/

@@ -1,25 +1,16 @@
-# Stage 1
-FROM node:14.18.2 as build-step
-
-RUN mkdir -p /app
+# Stage 1 build
+FROM node:12.20.0 as build-step
 
 WORKDIR /app
 
-COPY package.json /app
-
+COPY ["package.json", "./"]
 RUN npm install
 
-COPY . /app
+COPY . .
+RUN npm run build
 
-RUN npm run build --prod
-
-# Stage 2
-
-FROM nginx
-
+# Stage 2 run
+FROM nginx:latest
 COPY --from=build-step /app/dist/hellena /usr/share/nginx/html
-
-# heroku specific
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+COPY /nginx.conf  /etc/nginx/conf.d/default.conf
+EXPOSE 80
