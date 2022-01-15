@@ -11,3 +11,8 @@
     text-align: center;
     white-space: nowrap;
 }
+
+#header {
+    background-repeat: no-repeat;
+    background-size: cover;
+}

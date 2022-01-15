@@ -71,11 +71,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     const subCategory = initData.allCategory.subscribe(categories => {
         this.category.allItems = categories;
     });
-    const subLocation = initData.allLocation.subscribe(categories => {
-        this.location.allItems = categories;
+    const subLocation = initData.allLocation.subscribe(locations => {
+        this.location.allItems = locations;
     });
-    const subStore = initData.allStore.subscribe(categories => {
-        this.store.allItems = categories;
+    const subStore = initData.allStore.subscribe(stores => {
+        this.store.allItems = stores;
     });
     this.subs.push(subCategory, subLocation, subStore);
   }

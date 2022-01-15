@@ -69,7 +69,7 @@
                     <mat-chip
                             *ngFor="let el of location.items"
                             (removed)="removeLocation(el)">
-                        {{el}}
+                        {{el.value}}
                         <button matChipRemove>
                             <mat-icon>cancel</mat-icon>
                         </button>
@@ -85,7 +85,7 @@
                 </mat-chip-list>
                 <mat-autocomplete #autoLocation="matAutocomplete" (optionSelected)="selectedLocation($event)">
                     <mat-option *ngFor="let el of location.filteredItems | async" [value]="el">
-                        {{el}}
+                        {{el.value}}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
@@ -98,7 +98,7 @@
                     <mat-chip
                             *ngFor="let el of store.items"
                             (removed)="removeStore(el)">
-                        {{el}}
+                        {{el.value}}
                         <button matChipRemove>
                             <mat-icon>cancel</mat-icon>
                         </button>
@@ -114,7 +114,7 @@
                 </mat-chip-list>
                 <mat-autocomplete #autoStore="matAutocomplete" (optionSelected)="selectedStore($event)">
                     <mat-option *ngFor="let el of store.filteredItems | async" [value]="el">
-                        {{el}}
+                        {{el.value}}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
