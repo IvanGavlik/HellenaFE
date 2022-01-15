@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, OnDestroy} from '@angular/core';
-import {SearchItem} from '../search-item';
+import {defaultPage, SearchItem} from '../search-item';
 import {FormControl, FormGroup} from '@angular/forms';
 import {debounceTime, Observable, Subscription} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -8,7 +8,6 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {map, startWith} from 'rxjs/operators';
 import {SearchItemService} from '../search-item.service';
 import {Entity} from '../../crud/entity';
-import {Page} from '../../search/search';
 
 
 @Component({
@@ -18,8 +17,15 @@ import {Page} from '../../search/search';
 })
 export class SearchFormComponent implements OnInit, OnDestroy {
 
-  @Input()
-  search: SearchItem = {} as SearchItem;
+    // tslint:disable-next-line:variable-name
+  private _search: SearchItem = {} as SearchItem;
+  get search(): SearchItem {
+      return this._search;
+  }
+  @Input() set search(searchItem: SearchItem) {
+      this._search = searchItem;
+      this.searchForm.controls['name'].setValue(searchItem?.name);
+  }
 
   @Output()
   searchEvent = new EventEmitter<SearchItem>();
@@ -33,8 +39,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         priceMIn: new FormControl(0),
         priceMax: new FormControl(0),
         categoryControl: new FormControl([]),
-        locationControl: new FormControl(''),
-        storeControl: new FormControl('')
+        locationControl: new FormControl([]),
+        storeControl: new FormControl([])
     });
 
     // category
@@ -85,6 +91,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   }
 
   handleSearchFormValueChange(value: any): void {
+    console.log('value ', value);
     if (value.name) {
       this.displayFullSearchForm = true;
     }
@@ -96,11 +103,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         categoryIds: (value?.categoryControl as Pair<any, any>[]).map(el => el.id),
         cityIds: (value?.locationControl as Pair<any, any>[]).map(el => el.id),
         storeIds: (value?.storeControl as Pair<any, any>[]).map(el => el.id),
-        page : {
-            sort: [],
-            size: 10,
-            index: 0,
-        } as Page
+        page : defaultPage()
     } as SearchItem );
   }
 

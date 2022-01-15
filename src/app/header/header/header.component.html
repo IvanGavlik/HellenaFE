@@ -1,8 +1,19 @@
-<header class="py-5 bg-primary" >
+<header class="py-5 bg-secondary" >
   <div class="container px-4 px-lg-5 my-5">
     <div class="text-center" >
       <h1 class="display-4 fw-bolder" style="text-shadow: 2px 2px 2px #ababab" ><span style="color:#FFF7F8;" > Pronađi </span> <span STYLE="color: #ffecf7" > prozvode na</span> <span style="color:#d8edfe " >   akciji </span></h1>
-      <input class="element" style="margin-top: 0.5em; width: 100%; box-shadow: 0.1rem 0.1rem;" type="text" id="search" name="search">
+
+        <form [formGroup]="searchForm" >
+
+        <div class="input-group" style="margin-top: 0.5em; width: 100%; box-shadow: 0.1rem 0.1rem;  color: #5f6368;">
+<!--        <input class="element"  type="text" id="search" name="search"> -->
+          <input type="text"  formControlName="name" class="form-control" placeholder="npr. Kruh" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <button class="btn btn-outline-secondary" style="color: white" type="button"
+
+                  (click)="navigateToSearch()" >Kreni</button>
+          </div>
+
+        </form>
     </div>
   </div>
 </header>
