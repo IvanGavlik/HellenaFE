@@ -23,6 +23,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       return this._search;
   }
   @Input() set search(searchItem: SearchItem) {
+      console.log('search set ', searchItem);
       this._search = searchItem;
       this.searchForm.controls['name'].setValue(searchItem?.name);
   }

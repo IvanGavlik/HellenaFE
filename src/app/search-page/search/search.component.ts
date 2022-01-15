@@ -36,8 +36,14 @@ export class SearchComponent implements OnInit {
     // get navigation data resource: https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
     const initSearch = history.state;
 
-    if (initSearch && initSearch instanceof SearchItem) { // chek if is SearchItem
-      this.search = (initSearch as SearchItem);
+    if (initSearch) { // chek if is SearchItem
+      this.search = {
+        name: initSearch?.name,
+        categoryIds: [],
+        storeIds: [],
+        cityIds: [],
+        page: defaultPage(),
+      } as SearchItem;
     }
     this.doSearch(this.search);
   }

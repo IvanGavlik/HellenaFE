@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   navigateToSearch(): void {
     this.router.navigateByUrl('/search', {
       state: {
-        name: 'Kruh',
+        name:  this.searchForm.controls['name'].value,
         categoryIds: [],
         storeIds: [],
         cityIds: [],
