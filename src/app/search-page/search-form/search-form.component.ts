@@ -23,7 +23,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       return this._search;
   }
   @Input() set search(searchItem: SearchItem) {
-      console.log('search set ', searchItem);
       this._search = searchItem;
       this.searchForm.controls['name'].setValue(searchItem?.name);
   }
@@ -77,6 +76,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     const initData = new InitDataHelper(this.service);
     const subCategory = initData.allCategory.subscribe(categories => {
         this.category.allItems = categories;
+        if (this.search.categoryIds && this.search.categoryIds.length > 0) {
+            this.category.items = categories.filter(el => this.search?.categoryIds.find(id => el.id === id) );
+        }
+
     });
     const subLocation = initData.allLocation.subscribe(locations => {
         this.location.allItems = locations;
