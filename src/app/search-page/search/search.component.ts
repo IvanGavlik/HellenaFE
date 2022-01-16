@@ -23,7 +23,6 @@ export class SearchComponent implements OnInit {
   } as Table;
 
   search: SearchItem = {
-    name: '',
     cityIds: [],
     categoryIds: [],
     storeIds: [],
@@ -39,9 +38,10 @@ export class SearchComponent implements OnInit {
     if (initSearch) {
       this.search = {
         name: initSearch?.name,
-        categoryIds: [],
-        storeIds: [],
-        cityIds: [],
+        categoryIds: initSearch?.categoryIds ? initSearch?.categoryIds : [],
+        storeIds: initSearch?.storeIds ? initSearch?.storeIds : [],
+        cityIds: initSearch?.cityIds ? initSearch?.cityIds : [],
+        feature: initSearch?.feature,
         page: defaultPage(),
       } as SearchItem;
     }

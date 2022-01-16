@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Card} from "./card";
 
 @Component({
@@ -10,9 +10,14 @@ export class CardComponent implements OnInit {
 
   @Input() card?: Card;
 
+  @Output() footerAction: EventEmitter<Card> = new EventEmitter<Card>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  footerClick(): void {
+    this.footerAction.emit(this.card);
+  }
 }

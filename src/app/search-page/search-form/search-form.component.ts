@@ -46,21 +46,21 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     // category
   @ViewChild('categoryChipper') categoryChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-  category: SelectMultiple<Pair<string, string>> = new SelectMultiple<Pair<string, string>>([], [],
-      new Observable<Pair<string, string>[]>(),
+  category: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([], [],
+      new Observable<Pair<number, string>[]>(),
       this.searchForm.get('categoryControl') as FormControl);
 
   // location
   @ViewChild('locationChipper') locationChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-  location: SelectMultiple<Pair<string, string>> = new SelectMultiple<Pair<string, string>>([],[],
-      new Observable<Pair<string, string>[]>(),
+  location: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([],[],
+      new Observable<Pair<number, string>[]>(),
       this.searchForm.get('locationControl') as FormControl);
 
   // store
   storeControl = new FormControl('');
   @ViewChild('storeChipper') storeChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-  store: SelectMultiple<Pair<string, string>> = new SelectMultiple<Pair<string, string>>([],[],
-            new Observable<Pair<string, string>[]>(),
+  store: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([],[],
+            new Observable<Pair<number, string>[]>(),
             this.searchForm.get('storeControl') as FormControl);
 
   subs: Subscription[] = [];
@@ -117,7 +117,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       event.chipInput?.clear();
   }
 
-  removeCategory(el: Pair<string, string>): void {
+  removeCategory(el: Pair<number, string>): void {
       this.category.remove(el);
   }
 
@@ -134,7 +134,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       event.chipInput?.clear();
   }
 
-  removeLocation(el: Pair<string, string>): void {
+  removeLocation(el: Pair<number, string>): void {
     this.location.remove(el);
   }
 
@@ -151,7 +151,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       event.chipInput?.clear();
   }
 
-  removeStore(el: Pair<string, string>): void {
+  removeStore(el: Pair<number, string>): void {
       this.store.remove(el);
   }
 
@@ -223,11 +223,11 @@ export class SelectMultiple<ELEMENT extends Pair<any, any>> {
 
 export class InitDataHelper {
     // tslint:disable-next-line:variable-name
-    private _allCategory: Observable<Pair<string, string>[]> = new Observable<Pair<string, string>[]>();
+    private _allCategory: Observable<Pair<number, string>[]> = new Observable<Pair<number, string>[]>();
     // tslint:disable-next-line:variable-name
-    private _allLocation: Observable<Pair<string, string>[]> = new Observable<Pair<string, string>[]>();
+    private _allLocation: Observable<Pair<number, string>[]> = new Observable<Pair<number, string>[]>();
     // tslint:disable-next-line:variable-name
-    private _allStore: Observable<Pair<string, string>[]> = new Observable<Pair<string, string>[]>();
+    private _allStore: Observable<Pair<number, string>[]> = new Observable<Pair<number, string>[]>();
 
     constructor(private service: SearchItemService) {
         this._allCategory = this.service.findAllCategory()
@@ -244,19 +244,19 @@ export class InitDataHelper {
             );
     }
 
-    get allCategory(): Observable<Pair<string, string>[]> {
+    get allCategory(): Observable<Pair<number, string>[]> {
         return this._allCategory;
     }
 
-    get allLocation(): Observable<Pair<string, string>[]> {
+    get allLocation(): Observable<Pair<number, string>[]> {
         return this._allLocation;
     }
 
-    get allStore(): Observable<Pair<string, string>[]> {
+    get allStore(): Observable<Pair<number, string>[]> {
         return this._allStore;
     }
 
-    private toPair(el1: EntityPair): Pair<string, string> {
+    private toPair(el1: EntityPair): Pair<number, string> {
         return {
             id: el1.id,
             value: el1.name,
@@ -265,7 +265,7 @@ export class InitDataHelper {
 }
 
 class EntityPair extends Entity {
-    id = '';
+    id = -1;
     name = '';
 }
 

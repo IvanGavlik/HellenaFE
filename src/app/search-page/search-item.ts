@@ -7,6 +7,7 @@ export interface SearchItem extends Search {
     categoryIds: number[];
     cityIds: number[];
     storeIds: number[];
+    feature?: ItemFeature;
     page: Page;
 }
 
@@ -17,4 +18,12 @@ export function defaultPage(): Page {
             index: 0,
     } as Page;
     return page;
+}
+
+export enum ItemFeature {
+    CHEAPEST_TODAY,
+    CHEAPEST_FIRST,
+    CHEAPEST_LAST,
+    GREATER_SAVINGS_FIRST,
+    GREATER_SAVINGS_LAST,
 }

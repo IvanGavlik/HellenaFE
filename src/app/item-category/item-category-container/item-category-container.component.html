@@ -1,6 +1,9 @@
-<hellena-card-container [cardContainer]="itemCategoryContainer"  >
+<hellena-card-container [cardContainer]="itemCategoryContainer"
+  (footerAction)="handleFooterActionContainer($event)"
+>
   <app-card *ngFor="let item of cards$ | async"
             [card]="item"
+            (footerAction)="handleFooterActionCard($event)"
   >
   </app-card>
-</hellena-card-container>
+</hellena-card-container >
