@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ItemCategoryConfiguration} from '../item-category-configuration';
 import {ItemCategoryService} from '../item-category.service';
 import {Card} from '../../ui/card/card';
-import {map, take} from 'rxjs/operators';
+import {map,} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
 import {Observable, of} from 'rxjs';
 import {CardContainer} from '../../ui/card-container/card-container';
@@ -40,6 +40,7 @@ export class ItemCategoryContainerComponent implements OnInit {
     return {
       id: item.id,
       title: item.name,
+      footer: 'Pogledaj'
     } as Card;
   }
 

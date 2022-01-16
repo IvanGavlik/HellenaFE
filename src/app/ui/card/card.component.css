@@ -4,3 +4,8 @@
   margin: 0!important;
   padding: 0!important;
 }
+
+#underlie:hover {
+  text-decoration: underline;
+  font-style: italic;
+}
