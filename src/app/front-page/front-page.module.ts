@@ -5,6 +5,7 @@ import {ItemModule} from "../item/item.module";
 import {ItemCategoryModule} from "../item-category/item-category.module";
 import {UiModule} from "../ui/ui.module";
 import {HeaderModule} from "../header/header.module";
+import {DailyDealModule} from '../daily-deal/daily-deal.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {HeaderModule} from "../header/header.module";
         ItemCategoryModule,
         UiModule,
         HeaderModule,
+        DailyDealModule,
 
     ],
   exports: [

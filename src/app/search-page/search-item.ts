@@ -11,10 +11,10 @@ export interface SearchItem extends Search {
     page: Page;
 }
 
-export function defaultPage(): Page {
+export function defaultPage(size?: number): Page {
     const page = {
         sort: [],
-            size: 10,
+            size: size !== null ? size : 12,
             index: 0,
     } as Page;
     return page;

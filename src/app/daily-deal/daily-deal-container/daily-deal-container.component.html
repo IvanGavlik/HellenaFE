@@ -1,0 +1,9 @@
+<hellena-card-container [cardContainer]="dailyDealContainer"
+                        (footerAction)="handleFooterActionContainer($event)"
+>
+    <app-card *ngFor="let item of cards$ | async"
+              [card]="item"
+              (footerAction)="handleFooterActionCard($event)"
+    >
+    </app-card>
+</hellena-card-container >
