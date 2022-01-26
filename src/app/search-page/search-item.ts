@@ -14,7 +14,7 @@ export interface SearchItem extends Search {
 export function defaultPage(size?: number): Page {
     const page = {
         sort: [],
-            size: size !== null ? size : 12,
+            size: size !== null && size !== undefined ? size : 12,
             index: 0,
     } as Page;
     return page;

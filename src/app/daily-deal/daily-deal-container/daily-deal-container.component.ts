@@ -57,15 +57,19 @@ export class DailyDealContainerComponent implements OnInit {
   }
 
   handleFooterActionContainer($event: CardContainer): void {
-    this.navigateToSearchPage();
+    this.router.navigateByUrl('/search', { state: {
+        cityIds: [],
+        storeIds: [],
+        categoryIds: [],
+        feature: ItemFeature.CHEAPEST_TODAY,
+        page: defaultPage()
+      } as SearchItem });
   }
 
   handleFooterActionCard($event: Card): void {
-    this.navigateToSearchPage();
-  }
-
-  private navigateToSearchPage(): void {
-    this.router.navigateByUrl('/search', { state: { cityIds: [],
+    this.router.navigateByUrl('/search', { state: {
+        name : $event.title,
+        cityIds: [],
         storeIds: [],
         categoryIds: [],
         feature: ItemFeature.CHEAPEST_TODAY,
