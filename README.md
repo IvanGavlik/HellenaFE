@@ -50,3 +50,9 @@ Steps
 * On Linux Cannot connect to the Docker daemon. Solution: sudo service docker start. More info [here](https://phoenixnap.com/kb/cannot-connect-to-the-docker-daemon-error)
 
 * Heroku specific [here](https://dev.to/levelupkoodarit/deploying-containerized-nginx-to-heroku-how-hard-can-it-be-3g14)
+
+## TODO
+
+* https://allfront.io/blog/deploying-your-angular-app-to-the-the-google-play-store
+
+* look https://www.picodi.com/

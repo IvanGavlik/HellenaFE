@@ -10,3 +10,21 @@
     text-align: center;
     white-space: nowrap;
 }
+
+.bg-image {
+    background-image:  url('/assets/image/top.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media only screen and (max-width: 576px){
+    .bg-image{
+        background-image: url("/assets/image/top-mobile.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
