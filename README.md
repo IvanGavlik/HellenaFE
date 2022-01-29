@@ -55,4 +55,4 @@ Steps
 
 * https://allfront.io/blog/deploying-your-angular-app-to-the-the-google-play-store
 
-* look https://www.picodi.com/
+* look https://www.picodi.com/ and https://www.picodi.com/ae/
