@@ -19,7 +19,7 @@ import {Entity} from '../../crud/entity';
 })
 export class DailyDealContainerComponent implements OnInit {
 
-  cards$: Observable<Card[]> = of();
+  cards$: Observable<DayilDealCard[]> = of();
 
   dailyDealContainer: CardContainer =  {
     title: 'Najpovoljnije danas',
@@ -40,13 +40,14 @@ export class DailyDealContainerComponent implements OnInit {
         );
   }
 
-  toCard(item: ItemSearchEntity): Card {
+  toCard(item: ItemSearchEntity): DayilDealCard {
     return {
       id: item.id,
       title: item.name,
-      desc: `${item.actionPrice}, kn`,
+      oldPrice: `${item.orginalPrice} kn`,
+      desc: `${item.actionPrice} kn`,
       footer: 'Pogledaj'
-    } as Card;
+    } as DayilDealCard;
   }
 
   getPrice(item: ItemSearchEntity): number {
@@ -83,4 +84,8 @@ interface ItemSearchEntity extends Entity {
   storeName: string;
   orginalPrice: number;
   actionPrice: number;
+}
+
+interface DayilDealCard extends Card {
+    oldPrice: string;
 }

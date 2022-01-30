@@ -5,5 +5,12 @@
               [card]="item"
               (footerAction)="handleFooterActionCard($event)"
     >
+        <div style="text-align: right;" >
+            <span style="font-size: medium; color: grey;  text-decoration: line-through; margin-right: 0.5rem;" >
+                {{ item.oldPrice }} </span>
+            <span style="font-size: large; margin-right: 0.5rem;" >
+                {{ item.desc }}
+            </span>
+        </div>
     </app-card>
 </hellena-card-container >
