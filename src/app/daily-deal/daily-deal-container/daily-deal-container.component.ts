@@ -36,7 +36,7 @@ export class DailyDealContainerComponent implements OnInit {
       page: defaultPage(5)
     } as SearchItem)
         .pipe(
-            map(entities => entities.map( el => this.toCard(el as ItemSearchEntity))),
+            map(entities => entities.page.map( el => this.toCard(el as ItemSearchEntity))),
         );
   }
 

@@ -24,7 +24,6 @@ export class SpinnerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.spinner.showProgress.subscribe(show => {
-      console.log('show progress ', show);
       this.showMatProgress = show;
     });
   }

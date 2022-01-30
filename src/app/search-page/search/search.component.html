@@ -10,7 +10,7 @@
      <div>
          <hellena-spinner class="center" [spinner]="spinner" > </hellena-spinner>
      </div>
-      <hellena-table [table]="table" ></hellena-table>
+      <hellena-table [table]="table" (loadPage)="handleLoadPage($event)" ></hellena-table>
   </div>
 </div>
 </div>

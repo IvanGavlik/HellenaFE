@@ -1,6 +1,7 @@
 export interface Table {
     columnNames: string[];
     data: TableItem[];
+    totalCount: number;
 }
 
 export interface TableItem {

@@ -6,6 +6,7 @@ import {map, tap} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
 import {defaultPage, SearchItem} from '../search-item';
 import {SpinnerConfig} from '../../ui/spinner/spinner-config';
+import {LoadPage} from '../../ui/table/table.component';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class SearchComponent implements OnInit {
   table = {
     columnNames: ['icon', 'name', 'actions'],
     data: [],
+    totalCount: 100,
   } as Table;
 
   search: SearchItem = {
@@ -64,14 +66,16 @@ export class SearchComponent implements OnInit {
     this.searchItemService.search(search)
         .pipe(
             tap(response => this.spinner.showProgress.emit(true)),
-            map(response => response.map(el => this.toTableItem(el as ItemSearchEntity)))
+            tap(response => this.table.totalCount = response.size), // here set total count
+            map(response => response.page.map(el => this.toTableItem(el as ItemSearchEntity)))
         )
         .subscribe(
             items => {
-              this.table.data = items; console.log('response ' + items);
+              this.table.data = items; // here set data
               this.spinner.showProgress.emit(false);
             }
         );
+    // TODO SHOULD TOTOAL COUNT AND DATA BE SET AT SAME PLACE
   }
 
   toTableItem(el: ItemSearchEntity): TableItem {
@@ -88,6 +92,11 @@ export class SearchComponent implements OnInit {
     return input !== undefined && input != null;
   }
 
+  handleLoadPage($event: LoadPage): void {
+    this.search.page.index = $event.index;
+    this.search.page.size = $event.size;
+    this.doSearch(this.search);
+  }
 }
 
 interface ItemSearchEntity extends Entity {

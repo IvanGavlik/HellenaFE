@@ -2,7 +2,7 @@ import {CrudService} from '../crud/crud.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SearchConfiguration} from './search-configuration';
 import {Observable, of} from 'rxjs';
-import {Entity} from '../crud/entity';
+import {Entity, Paginator} from '../crud/entity';
 import {Search} from './search';
 import {environment} from '../../environments/environment';
 
@@ -12,7 +12,7 @@ export abstract class SearchService extends CrudService {
         super(searchConfiguration, http);
     }
 
-    search(search: Search): Observable<Entity[]> {
+    search(search: Search): Observable<Paginator<Entity>> {
         const endpoint = environment.host + this.searchConfiguration.searchEndpoint;
 
         const h1 = new HttpHeaders({
@@ -22,6 +22,6 @@ export abstract class SearchService extends CrudService {
             'Access-Control-Allow-Headers' : 'Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control',
         });
 
-        return this.http.post<Entity[]>(endpoint, search, {headers: h1, responseType: 'json', });
+        return this.http.post<Paginator<Entity>>(endpoint, search, {headers: h1, responseType: 'json', });
     }
 }
