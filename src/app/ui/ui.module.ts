@@ -15,6 +15,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import { TableComponent } from './table/table.component';
 import { InputFieldComponent } from './input-field/input-field.component';
 import {MatButtonModule} from '@angular/material/button';
+import { SpinnerComponent } from './spinner/spinner.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import {MatButtonModule} from '@angular/material/button';
     CardContainerComponent,
     SelectMultipleComponent,
     TableComponent,
-    InputFieldComponent
+    InputFieldComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +39,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatSelectModule,
     MatAutocompleteModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     CardComponent,
@@ -44,6 +48,7 @@ import {MatButtonModule} from '@angular/material/button';
     SelectMultipleComponent,
     TableComponent,
     InputFieldComponent,
+    SpinnerComponent,
   ]
 })
 export class UiModule { }

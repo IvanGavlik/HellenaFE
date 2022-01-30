@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import {Table, TableItem} from '../../ui/table/table';
 import {SearchItemConfiguration} from '../search-item-configuration';
 import {SearchItemService} from '../search-item.service';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
 import {defaultPage, SearchItem} from '../search-item';
+import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 
 
 @Component({
@@ -28,6 +29,13 @@ export class SearchComponent implements OnInit {
     storeIds: [],
     page: defaultPage()
   } as SearchItem;
+
+  spinner: SpinnerConfig = {
+    color : 'primary',
+    mode : 'indeterminate',
+    value: 50,
+    showProgress: new EventEmitter<boolean>()
+  } as SpinnerConfig;
 
   constructor(private searchItemService: SearchItemService) {}
 
@@ -55,10 +63,14 @@ export class SearchComponent implements OnInit {
   doSearch(search: SearchItem): void {
     this.searchItemService.search(search)
         .pipe(
+            tap(response => this.spinner.showProgress.emit(true)),
             map(response => response.map(el => this.toTableItem(el as ItemSearchEntity)))
         )
         .subscribe(
-            items => { this.table.data = items; console.log('response ' + items); }
+            items => {
+              this.table.data = items; console.log('response ' + items);
+              this.spinner.showProgress.emit(false);
+            }
         );
   }
 
