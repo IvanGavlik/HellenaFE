@@ -19,7 +19,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FrontPageModule,
     AboutUsPageModule,
-    SearchPageModule
+    SearchPageModule,
   ],
   exports: [RouterModule]
 })
