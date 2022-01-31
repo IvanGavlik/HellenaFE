@@ -63,8 +63,10 @@ export class SearchComponent implements OnInit {
   }
 
   doSearch(search: SearchItem): void {
+    this.spinner.showProgress.emit(true);
     this.searchItemService.search(search)
         .pipe(
+            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['icon', 'name', 'actions'] } as Table;  }),
             tap(response => this.spinner.showProgress.emit(true)),
             tap(response => this.table.totalCount = response.size), // here set total count
             map(response => response.page.map(el => this.toTableItem(el as ItemSearchEntity)))

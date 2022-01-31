@@ -21,9 +21,9 @@ export function defaultPage(size?: number): Page {
 }
 
 export enum ItemFeature {
-    CHEAPEST_TODAY,
-    CHEAPEST_FIRST,
-    CHEAPEST_LAST,
-    GREATER_SAVINGS_FIRST,
-    GREATER_SAVINGS_LAST,
+    CHEAPEST_TODAY = 'CHEAPEST_TODAY',
+    CHEAPEST_FIRST = 'todo',
+    CHEAPEST_LAST= 'todo',
+    GREATER_SAVINGS_FIRST = 'todo',
+    GREATER_SAVINGS_LAST= 'todo',
 }

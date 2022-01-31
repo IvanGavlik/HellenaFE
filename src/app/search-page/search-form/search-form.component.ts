@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, OnDestroy} from '@angular/core';
-import {defaultPage, SearchItem} from '../search-item';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {defaultPage, ItemFeature, SearchItem} from '../search-item';
 import {FormControl, FormGroup} from '@angular/forms';
 import {debounceTime, Observable, Subscription} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -25,6 +25,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   @Input() set search(searchItem: SearchItem) {
       this._search = searchItem;
       this.searchForm.controls['name'].setValue(searchItem?.name);
+      if (searchItem?.feature) { // TODO
+          this.searchForm.controls['featureControl']
+              .setValue({ id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas' } as Pair<ItemFeature, string> );
+      }
   }
 
   @Output()
@@ -38,11 +42,14 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         name: new FormControl(''),
         priceMIn: new FormControl(0),
         priceMax: new FormControl(0),
+        featureControl: new FormControl({}),
         categoryControl: new FormControl([]),
         locationControl: new FormControl([]),
         storeControl: new FormControl([])
     });
 
+  @ViewChild('featureSelect') featureSelect: ElementRef<HTMLInputElement> = {} as ElementRef;
+  features: Pair<ItemFeature, string>[] = [ { id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas' } as Pair<ItemFeature, string> ];
     // category
   @ViewChild('categoryChipper') categoryChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
   category: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([], [],
@@ -104,6 +111,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         name: value.name,
         priceMIn: value.priceMIn,
         priceMax: value.priceMax,
+        feature: value?.featureControl,
         categoryIds: (value?.categoryControl as Pair<any, any>[]).map(el => el.id),
         cityIds: (value?.locationControl as Pair<any, any>[]).map(el => el.id),
         storeIds: (value?.storeControl as Pair<any, any>[]).map(el => el.id),
