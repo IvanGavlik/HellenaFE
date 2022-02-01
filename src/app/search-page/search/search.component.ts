@@ -19,8 +19,9 @@ import {LoadPage} from '../../ui/table/table.component';
 })
 export class SearchComponent implements OnInit {
 
+//  columnNames: ['icon', 'name', 'actions'],
   table = {
-    columnNames: ['icon', 'name', 'actions'],
+    columnNames: ['icon', 'name'],
     data: [],
     totalCount: 100,
   } as Table;
@@ -66,7 +67,8 @@ export class SearchComponent implements OnInit {
     this.spinner.showProgress.emit(true);
     this.searchItemService.search(search)
         .pipe(
-            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['icon', 'name', 'actions'] } as Table;  }),
+            // columnNames: ['icon', 'name', 'actions']
+            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['icon', 'name'] } as Table;  }),
             tap(response => this.spinner.showProgress.emit(true)),
             tap(response => this.table.totalCount = response.size), // here set total count
             map(response => response.page.map(el => this.toTableItem(el as ItemSearchEntity)))
