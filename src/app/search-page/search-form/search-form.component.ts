@@ -25,10 +25,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   @Input() set search(searchItem: SearchItem) {
       this._search = searchItem;
       this.searchForm.controls['name'].setValue(searchItem?.name);
-      if (searchItem?.feature) { // TODO
-          this.searchForm.controls['featureControl']
-              .setValue({ id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas' } as Pair<ItemFeature, string> );
-      }
   }
 
   @Output()
@@ -48,7 +44,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         storeControl: new FormControl([])
     });
 
-  @ViewChild('featureSelect') featureSelect: ElementRef<HTMLInputElement> = {} as ElementRef;
+  @ViewChild('featureSelect') featureSelect: ElementRef<HTMLSelectElement> = {} as ElementRef;
   features: Pair<ItemFeature, string>[] = [ { id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas' } as Pair<ItemFeature, string> ];
     // category
   @ViewChild('categoryChipper') categoryChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
@@ -89,7 +85,14 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     });
     const subLocation = initData.allLocation.subscribe(locations => {
-        this.location.allItems = locations;
+        this.location.allItems = [];
+        locations.forEach(l => {
+            // only unique
+           const inList = this.location.allItems.find(el => el.value === l.value);
+           if (inList == null || inList === undefined) {
+               this.location.allItems.push(l);
+           }
+        });
     });
     const subStore = initData.allStore.subscribe(stores => {
         this.store.allItems = stores;
@@ -107,16 +110,23 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       this.displayFullSearchForm = true;
     }
 
-    this.searchEvent.emit( {
-        name: value.name,
+    const search =  {
         priceMIn: value.priceMIn,
         priceMax: value.priceMax,
-        feature: value?.featureControl,
         categoryIds: (value?.categoryControl as Pair<any, any>[]).map(el => el.id),
         cityIds: (value?.locationControl as Pair<any, any>[]).map(el => el.id),
         storeIds: (value?.storeControl as Pair<any, any>[]).map(el => el.id),
         page : defaultPage()
-    } as SearchItem );
+      } as SearchItem;
+
+    if (value.name) {
+        search.name = value.name;
+    }
+    if (value.featureControl && value.featureControl.length > 0) {
+        search.feature = value.featureControl;
+    }
+
+    this.searchEvent.emit( search );
   }
 
   addCategory(event: MatChipInputEvent): void {
