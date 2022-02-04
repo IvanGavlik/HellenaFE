@@ -1,16 +1,25 @@
-<div class="container-md g-1">
-<hellena-search-form
-        [search]="search"
-        (searchEvent)="handleSearch($event)" ></hellena-search-form>
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Pretraga">
+        <div class="container-md g-1">
+            <hellena-search-form
+                    [search]="search"
+                    (searchEvent)="handleSearch($event)" ></hellena-search-form>
 
-<div class="row" style="margin-bottom: 1rem; margin-top: 1rem; " >
-  <!-- TODO save search -->
-  <!-- sortiranje u tablici -->
-  <div class="col-12" >
-     <div>
-         <hellena-spinner class="center" [spinner]="spinner" > </hellena-spinner>
-     </div>
-      <hellena-table [table]="table" (loadPage)="handleLoadPage($event)" ></hellena-table>
-  </div>
-</div>
-</div>
+            <div class="row" style="margin-bottom: 1rem; margin-top: 1rem; " >
+                <!-- TODO save search -->
+                <!-- sortiranje u tablici -->
+                <div class="col-12" >
+                    <div>
+                        <hellena-spinner class="center" [spinner]="spinner" > </hellena-spinner>
+                    </div>
+                    <hellena-table [table]="table" (loadPage)="handleLoadPage($event)" ></hellena-table>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Popis za kupovinu" >
+        <hellena-shopping-list>
+        </hellena-shopping-list>
+    </mat-tab>
+</mat-tab-group>
+

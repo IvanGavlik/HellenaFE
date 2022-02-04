@@ -17,7 +17,8 @@ import { InputFieldComponent } from './input-field/input-field.component';
 import {MatButtonModule} from '@angular/material/button';
 import { SpinnerComponent } from './spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatPaginatorModule} from '@angular/material/paginator'
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-table.component'
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MatPaginatorModule} from '@angular/material/paginator'
     SelectMultipleComponent,
     TableComponent,
     InputFieldComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ShoppingListTableComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,7 @@ import {MatPaginatorModule} from '@angular/material/paginator'
     TableComponent,
     InputFieldComponent,
     SpinnerComponent,
+    ShoppingListTableComponent
   ]
 })
 export class UiModule { }

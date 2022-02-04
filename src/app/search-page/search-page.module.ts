@@ -12,7 +12,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatTabsModule} from '@angular/material/tabs';
+import {ShoppingListModule} from '../shopping-list/shopping-list.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatSelectModule,
     MatAutocompleteModule,
     MatChipsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule,
+    ShoppingListModule,
   ],
   exports: [
     SearchComponent
