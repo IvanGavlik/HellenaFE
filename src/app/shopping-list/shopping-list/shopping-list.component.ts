@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Table} from '../../ui/table/table';
 import {LoadShoppingListTablePage} from '../../ui/shopping-list-table/shopping-list-table.component';
 import { ShoppingListTableItem} from '../../ui/shopping-list-table/shopping-list-table';
+import {LocalStorageService} from '../../local-storage/local-storage.service';
+import {ShoppingListItem, ShoppingLIstService} from './shopping-list.service';
 
 @Component({
   selector: 'hellena-shopping-list',
@@ -16,9 +18,19 @@ export class ShoppingListComponent implements OnInit {
     totalCount: 100,
   } as Table;
 
-  constructor() { }
+  constructor(private service: ShoppingLIstService) { }
 
   ngOnInit(): void {
+    const item = {
+      icon: 'test',
+      name: 'test',
+      store: 'test',
+      actionPrice: 1,
+      quantity: 1,
+      activeTo: new Date(),
+      originalPrice: 1,
+    } as ShoppingListItem;
+    this.service.addToShoppingList('test', item);
   }
 
   handleLoadPage($event: LoadShoppingListTablePage): void {
