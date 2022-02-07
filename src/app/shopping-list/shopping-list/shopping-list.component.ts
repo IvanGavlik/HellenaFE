@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Table} from '../../ui/table/table';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Table, TableItem} from '../../ui/table/table';
 import {LoadShoppingListTablePage} from '../../ui/shopping-list-table/shopping-list-table.component';
-import { ShoppingListTableItem} from '../../ui/shopping-list-table/shopping-list-table';
-import {LocalStorageService} from '../../local-storage/local-storage.service';
-import {ShoppingListItem, ShoppingLIstService} from './shopping-list.service';
+import {ShoppingListTable, ShoppingListTableItem} from '../../ui/shopping-list-table/shopping-list-table';
+import {ShoppingList, ShoppingListItem, ShoppingLIstService} from './shopping-list.service';
+import {observable, Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'hellena-shopping-list',
@@ -14,27 +14,23 @@ export class ShoppingListComponent implements OnInit {
 
   table = {
     columnNames: ['icon', 'name', 'actions'],
-    data: [this.toTableItem('Kruh', 12.00, 16.00, ), this.toTableItem('Kruh', 12.00, 16.00, )],
+    data: [],
     totalCount: 100,
-  } as Table;
+  } as ShoppingListTable;
 
   constructor(private service: ShoppingLIstService) { }
 
+  // TODO DO I NEED SUBSCRIBE
   ngOnInit(): void {
-    const item = {
-      icon: 'test',
-      name: 'test',
-      store: 'test',
-      actionPrice: 1,
-      quantity: 1,
-      activeTo: new Date(),
-      originalPrice: 1,
-    } as ShoppingListItem;
-    this.service.addToShoppingList('test', item);
+    this.service.getShoppingLists().forEach(el => {
+      el.items.forEach(it => {
+        this.table.data.push( this.toTableItem(it.name, it.actionPrice, it.originalPrice) );
+      });
+    });
   }
 
   handleLoadPage($event: LoadShoppingListTablePage): void {
-    // TOODO
+    // TODO PAGGING
 //    this.search.page.index = $event.index;
 //    this.search.page.size = $event.size;
 //    this.doSearch(this.search);

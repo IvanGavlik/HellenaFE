@@ -7,6 +7,7 @@ import {Entity} from '../../crud/entity';
 import {defaultPage, SearchItem} from '../search-item';
 import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 import {LoadPage} from '../../ui/table/table.component';
+import {ShoppingListItem, ShoppingLIstService} from '../../shopping-list/shopping-list/shopping-list.service';
 
 
 @Component({
@@ -19,9 +20,8 @@ import {LoadPage} from '../../ui/table/table.component';
 })
 export class SearchComponent implements OnInit {
 
-//  columnNames: ['icon', 'name', 'actions'],
   table = {
-    columnNames: ['icon', 'name'],
+    columnNames: ['icon', 'name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
     data: [],
     totalCount: 100,
   } as Table;
@@ -40,7 +40,7 @@ export class SearchComponent implements OnInit {
     showProgress: new EventEmitter<boolean>()
   } as SpinnerConfig;
 
-  constructor(private searchItemService: SearchItemService) {}
+  constructor(private searchItemService: SearchItemService,  private shoppingLIstService: ShoppingLIstService) {}
 
   ngOnInit(): void {
     // get navigation data resource: https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
@@ -68,7 +68,7 @@ export class SearchComponent implements OnInit {
     this.searchItemService.search(search)
         .pipe(
             // columnNames: ['icon', 'name', 'actions']
-            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['icon', 'name'] } as Table;  }),
+            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['icon', 'name', 'actions'] } as Table;  }),
             tap(response => this.spinner.showProgress.emit(true)),
             tap(response => this.table.totalCount = response.size), // here set total count
             map(response => response.page.map(el => this.toTableItem(el as ItemSearchEntity)))
@@ -100,6 +100,26 @@ export class SearchComponent implements OnInit {
     this.search.page.index = $event.index;
     this.search.page.size = $event.size;
     this.doSearch(this.search);
+  }
+
+  handleAddTableItemToShoppingList($event: TableItem): void {
+    // TODO select name if not exist create new, open dialog to do it
+    // TODO select quantity
+    console.log('test ', $event);
+    this.shoppingLIstService.addItemToShoppingList({ listName: 'test', item: {
+        id:  $event.id,
+        icon: $event.icon,
+        name: $event.name,
+        originalPrice: $event.originalPrice,
+        actionPrice: $event.actionPrice,
+        store: $event.store,
+        activeTo: $event.activeTo,
+        quantity: 1,
+      } as ShoppingListItem });
+  }
+
+  handleCompareTableItem($event: TableItem): void {
+    // TODO
   }
 }
 

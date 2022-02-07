@@ -18,6 +18,12 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output()
   loadPage: EventEmitter<LoadPage> = new EventEmitter<LoadPage>();
 
+  @Output()
+  addTableItemToShoppingList: EventEmitter<TableItem> = new EventEmitter<TableItem>();
+
+  @Output()
+  compareTableItem: EventEmitter<TableItem> = new EventEmitter<TableItem>();
+
   dataSource = new MatTableDataSource<TableItem>();
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
 

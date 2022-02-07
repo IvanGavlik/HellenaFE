@@ -12,7 +12,12 @@
                     <div>
                         <hellena-spinner class="center" [spinner]="spinner" > </hellena-spinner>
                     </div>
-                    <hellena-table [table]="table" (loadPage)="handleLoadPage($event)" ></hellena-table>
+                    <hellena-table [table]="table"
+                                   (loadPage)="handleLoadPage($event)"
+                                   (addTableItemToShoppingList)="handleAddTableItemToShoppingList($event)"
+                                   (compareTableItem)="handleCompareTableItem($event)"
+                    >
+                    </hellena-table>
                 </div>
             </div>
         </div>
