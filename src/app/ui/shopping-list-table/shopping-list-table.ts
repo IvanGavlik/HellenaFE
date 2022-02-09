@@ -16,12 +16,14 @@ export interface ShoppingListTableItem {
     activeTo?: Date;
 }
 
+// TOOO what about paggination ..itd
 export class ObservableShoppingListData extends DataSource<ShoppingListTableItem> {
     private dataStream = new ReplaySubject<ShoppingListTableItem[]>();
+    private dataToDisplay: ShoppingListTableItem[] = [];
 
     constructor(initData: ShoppingListTableItem[]) {
         super();
-        this.setData(initData);
+        this.setAllData(initData);
     }
 
     connect(collectionViewer: CollectionViewer): Observable<ShoppingListTableItem[]> {
@@ -34,7 +36,30 @@ export class ObservableShoppingListData extends DataSource<ShoppingListTableItem
         }
     }
 
-    setData(data: ShoppingListTableItem[]): void {
-        this.dataStream.next(data);
+    setAllData(data: ShoppingListTableItem[]): void {
+        this.dataToDisplay = data;
+        this.dataStream.next(this.dataToDisplay);
     }
+
+    addItem(item: ShoppingListTableItem): void {
+        this.dataToDisplay.push(item);
+        this.dataStream.next(this.dataToDisplay);
+    }
+
+    appendItems(items: ShoppingListTableItem[]): void {
+        items.forEach(el => {
+           this.dataToDisplay.push(el);
+        });
+        this.dataStream.next(this.dataToDisplay);
+    }
+
+    removeItem(item: ShoppingListTableItem): void {
+        this.dataToDisplay.slice(0, 1); // TODO
+        this.dataStream.next(this.dataToDisplay);
+    }
+
+    getData(): ShoppingListTableItem[] {
+        return this.dataToDisplay;
+    }
+
 }

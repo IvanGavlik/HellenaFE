@@ -25,26 +25,30 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   // TODO DO I NEED SUBSCRIBE
   ngOnInit(): void {
-    console.log('init shoping list');
     // load data from local service
     this.localStorageService.getShoppingLists().forEach(el => {
-      // TODO
+      // TODO MAP for performace
+      this.table.data.addItem( this.toTableItem(el.name, el.actionPrice, el.originalPrice));
     });
 
     const addSubs = this.service.onAddItemToShoppingList().subscribe(el => {
-      // TODO
+      this.table.data.addItem( this.toTableItem(el.item.name, el.item.actionPrice, el.item.originalPrice));
     });
     this.subs.push(addSubs);
 
     const removeSubs = this.service.onRemoveItemFromShoppingListEvent().subscribe(el => {
-//      this.table.data.slice(0, 1); //TODO remove
+      this.table.data.removeItem({ } as ShoppingListTableItem); //TODO remove
     });
     this.subs.push(removeSubs);
   }
 
   // save data to local service
   ngOnDestroy(): void {
-    // TOOO this.localStorageService.updateLocalStorage([shoppingList]);
+    const storageData: ShoppingListItem[] = [];
+    this.table.data.getData().forEach(el => {
+      storageData.push( this.toShoppingListItem(el) );
+    });
+    this.localStorageService.updateLocalStorage(storageData);
 
     this.subs.forEach(sub => {
       if (sub) {

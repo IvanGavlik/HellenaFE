@@ -56,3 +56,7 @@ Steps
 * https://allfront.io/blog/deploying-your-angular-app-to-the-the-google-play-store
 
 * look https://www.picodi.com/ and https://www.picodi.com/ae/
+
+* idjevi za shoping list i pretraživanje tablicu
+* popis za kupovinu treba imati compare ( i info da li postoji jeftinije i di)
+
