@@ -7,7 +7,8 @@ import {Entity} from '../../crud/entity';
 import {defaultPage, SearchItem} from '../search-item';
 import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 import {LoadPage} from '../../ui/table/table.component';
-import {ShoppingListItem, ShoppingLIstService} from '../../shopping-list/shopping-list/shopping-list.service';
+import {ShoppingLIstService} from '../../shopping-list/shopping-list.service';
+import {ShoppingListItem} from '../../shopping-list/shopping-list';
 
 
 @Component({

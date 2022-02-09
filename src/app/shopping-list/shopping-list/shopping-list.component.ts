@@ -1,9 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Table, TableItem} from '../../ui/table/table';
+import {Component, OnInit} from '@angular/core';
 import {LoadShoppingListTablePage} from '../../ui/shopping-list-table/shopping-list-table.component';
 import {ShoppingListTable, ShoppingListTableItem} from '../../ui/shopping-list-table/shopping-list-table';
-import {ShoppingList, ShoppingListItem, ShoppingLIstService} from './shopping-list.service';
-import {observable, Observable, Subscription} from 'rxjs';
+import {ShoppingLIstService} from '../shopping-list.service';
 
 @Component({
   selector: 'hellena-shopping-list',
@@ -22,11 +20,11 @@ export class ShoppingListComponent implements OnInit {
 
   // TODO DO I NEED SUBSCRIBE
   ngOnInit(): void {
-    this.service.getShoppingLists().forEach(el => {
+ /*   this.service.getShoppingLists().forEach(el => {
       el.items.forEach(it => {
         this.table.data.push( this.toTableItem(it.name, it.actionPrice, it.originalPrice) );
       });
-    });
+    });*/
   }
 
   handleLoadPage($event: LoadShoppingListTablePage): void {
