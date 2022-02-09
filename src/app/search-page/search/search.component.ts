@@ -8,7 +8,7 @@ import {defaultPage, SearchItem} from '../search-item';
 import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 import {LoadPage} from '../../ui/table/table.component';
 import {ShoppingLIstService} from '../../shopping-list/shopping-list.service';
-import {ShoppingListItem} from '../../shopping-list/shopping-list';
+import {AddItemToShoppingListEvent, ShoppingListItem} from '../../shopping-list/shopping-list';
 
 
 @Component({
@@ -44,6 +44,7 @@ export class SearchComponent implements OnInit {
   constructor(private searchItemService: SearchItemService,  private shoppingLIstService: ShoppingLIstService) {}
 
   ngOnInit(): void {
+    console.log('search component init');
     // get navigation data resource: https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
     const initSearch = history.state;
 
@@ -106,7 +107,7 @@ export class SearchComponent implements OnInit {
   handleAddTableItemToShoppingList($event: TableItem): void {
     // TODO select name if not exist create new, open dialog to do it
     // TODO select quantity
-    console.log('test ', $event);
+    console.log('handleAddTableItemToShoppingList ', $event);
     this.shoppingLIstService.addItemToShoppingList({ listName: 'test', item: {
         id:  $event.id,
         icon: $event.icon,
@@ -116,7 +117,7 @@ export class SearchComponent implements OnInit {
         store: $event.store,
         activeTo: $event.activeTo,
         quantity: 1,
-      } as ShoppingListItem });
+      } as ShoppingListItem } as AddItemToShoppingListEvent);
   }
 
   handleCompareTableItem($event: TableItem): void {

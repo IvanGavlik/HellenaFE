@@ -18,7 +18,7 @@ export class ShoppingListTableComponent implements OnInit, AfterViewInit, OnDest
   @Output()
   loadPage: EventEmitter<LoadShoppingListTablePage> = new EventEmitter<LoadShoppingListTablePage>();
 
-  dataSource = new MatTableDataSource<ShoppingListTableItem>();
+//  dataSource = new MatTableDataSource<ShoppingListTableItem>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
 
@@ -28,12 +28,12 @@ export class ShoppingListTableComponent implements OnInit, AfterViewInit, OnDest
 
   ngOnInit(): void {
     if (this.table?.data) {
-      this.dataSource.data = this.table?.data;
+//      this.dataSource.data = this.table?.data;
     }
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+//    this.dataSource.paginator = this.paginator;
 
     this.pageSub = this.paginator.page.subscribe(el => {
       this.loadPage.emit({

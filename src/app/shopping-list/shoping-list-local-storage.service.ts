@@ -10,6 +10,7 @@ export class ShopingListLocalStorageService {
 
   constructor(private localStorage: LocalStorageService) { }
 
+  /*
   public addItemToShoppingList(addEvent: AddItemToShoppingListEvent): void {
    const lists = this.getShoppingLists();
    if (lists.length <= 0) {
@@ -39,7 +40,7 @@ export class ShopingListLocalStorageService {
    }
    this.updateLocalStorage(lists);
  }
-
+  */
   public getShoppingLists(): ShoppingList[] {
     const list = this.localStorage.getItem(this.shoppinglistKey);
     if (list) {
@@ -48,6 +49,7 @@ export class ShopingListLocalStorageService {
     return [];
   }
 
+  /*
   public removeItemFromShoppingListEvent(item: RemoveItemFromShoppingListEvent): void {
     const lists = this.getShoppingLists();
     if (lists.length <= 0) {
@@ -65,8 +67,8 @@ export class ShopingListLocalStorageService {
     }
     this.updateLocalStorage(lists);
   }
-
-  private updateLocalStorage(lists: ShoppingList[]): void {
+  */
+  public updateLocalStorage(lists: ShoppingList[]): void {
     this.localStorage.addItem(this.shoppinglistKey, JSON.stringify(lists));
   }
 }
