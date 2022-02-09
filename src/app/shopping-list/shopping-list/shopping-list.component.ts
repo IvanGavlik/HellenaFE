@@ -3,7 +3,7 @@ import {LoadShoppingListTablePage} from '../../ui/shopping-list-table/shopping-l
 import {ObservableShoppingListData, ShoppingListTable, ShoppingListTableItem} from '../../ui/shopping-list-table/shopping-list-table';
 import {ShoppingLIstService} from '../shopping-list.service';
 import {ShopingListLocalStorageService} from '../shoping-list-local-storage.service';
-import {ShoppingList, ShoppingListItem} from '../shopping-list';
+import {ShoppingListItem} from '../shopping-list';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -28,21 +28,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     console.log('init shoping list');
     // load data from local service
     this.localStorageService.getShoppingLists().forEach(el => {
-      const data: ShoppingListTableItem[] = [];
-      el.items.forEach(it => {
-        data.push( this.toTableItem(it.name, it.actionPrice, it.originalPrice) );
-      });
-      this.table.data.setData(data);
+      // TODO
     });
 
     const addSubs = this.service.onAddItemToShoppingList().subscribe(el => {
-      // el.listName for now all in same list
-      console.log('subs on onAddItemToShoppingList', el);
-      console.log('subs on onAddItemToShoppingList data start ', this.table.data);
-      const data: ShoppingListTableItem[] = [];
-      data.push( this.toTableItem(el.item.name, el.item.actionPrice, el.item.originalPrice) );
-      this.table.data.setData(data);
-      console.log('subs on onAddItemToShoppingList data end ', this.table.data);
+      // TODO
     });
     this.subs.push(addSubs);
 

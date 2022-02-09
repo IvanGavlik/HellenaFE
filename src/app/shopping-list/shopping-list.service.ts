@@ -37,22 +37,5 @@ export class ShoppingLIstService {
   public onRemoveItemFromShoppingListEvent(): Observable<RemoveItemFromShoppingListEvent> {
     return this.removeItemObs;
   }
-
-/*
-  public save(list: ShoppingList): void {
-//      this.localStorage.addItem(this.shoppinglistKey, JSON.stringify(list));
-  }
-
-  public getOrDefault(): ShoppingList {
-      const list = this.localStorage.getItem(this.shoppinglistKey);
-      if (list === null || list === undefined) {
-          return {
-              name: '',
-              items: [],
-          } as ShoppingList;
-      }
-      return JSON.parse(list);
-  }
- */
 }
 
