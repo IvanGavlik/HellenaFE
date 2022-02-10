@@ -36,6 +36,7 @@ export class SearchComponent implements OnInit {
     page: defaultPage()
   } as SearchItem;
 
+  // TODO should spinenr be servie
   spinner: SpinnerConfig = {
     color : 'primary',
     mode : 'indeterminate',
@@ -88,6 +89,7 @@ export class SearchComponent implements OnInit {
 
   toTableItem(el: ItemSearchEntity): TableItem {
     return {
+      id: el.id,
       icon: '../../assets/image/spar-logo_1x.png',
       name: el.name,
       actionPrice: el.actionPrice,
@@ -107,12 +109,9 @@ export class SearchComponent implements OnInit {
   }
 
   handleAddTableItemToShoppingList($event: TableItem): void {
-    // TODO select name if not exist create new, open dialog to do it
-    // TODO select quantity
-
     this.dialogService.openHellenaDialog({
       title: 'Popis za kupovinu',
-      content: 'Želite li dodati ' + $event.name + ' na popis',
+      content: 'Želite li dodati ' + $event.name + ' na popis za kupovinu ?',
     } as Dialog);
 
     this.shoppingLIstService.addItemToShoppingList({ listName: 'test', item: {

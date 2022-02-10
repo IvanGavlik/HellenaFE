@@ -23,16 +23,15 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   constructor(private service: ShoppingLIstService, private localStorageService: ShopingListLocalStorageService) { }
 
-  // TODO DO I NEED SUBSCRIBE
   ngOnInit(): void {
     // load data from local service
     this.localStorageService.getShoppingLists().forEach(el => {
       // TODO MAP for performace
-      this.table.data.addItem( this.toTableItem(el.name, el.actionPrice, el.originalPrice));
+      this.table.data.addItem( this.toTableItem(el.id, el.name, el.actionPrice, el.originalPrice));
     });
 
     const addSubs = this.service.onAddItemToShoppingList().subscribe(el => {
-      this.table.data.addItem( this.toTableItem(el.item.name, el.item.actionPrice, el.item.originalPrice));
+      this.table.data.addItem( this.toTableItem(el.item.id, el.item.name, el.item.actionPrice, el.item.originalPrice));
     });
     this.subs.push(addSubs);
 
@@ -64,8 +63,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 //    this.doSearch(this.search);
   }
 
-  toTableItem(n: string, ap: number, op: number): ShoppingListTableItem {
+  toTableItem(i: number, n: string, ap: number, op: number): ShoppingListTableItem {
     return {
+      id: i,
       icon: '../../assets/image/spar-logo_1x.png',
       name: n,
       actionPrice: ap,
@@ -76,7 +76,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   toShoppingListItem(item: ShoppingListTableItem): ShoppingListItem {
     return {
-      id: '1', // TODO
+      id: item.id,
       icon: item.icon,
       name: item.name,
       originalPrice: item.originalPrice,

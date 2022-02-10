@@ -105,7 +105,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   }
 
   handleSearchFormValueChange(value: any): void {
-    console.log('value ', value);
     if (value.name) {
       this.displayFullSearchForm = true;
     }

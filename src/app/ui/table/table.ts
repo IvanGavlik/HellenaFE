@@ -5,7 +5,7 @@ export interface Table {
 }
 
 export interface TableItem {
-    id: string; // TODO POPULATE
+    id: number;
     icon: string;
     name: string;
     originalPrice: number;

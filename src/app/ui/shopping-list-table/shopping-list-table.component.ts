@@ -12,6 +12,7 @@ import {LoadPage} from '../table/table.component';
 })
 export class ShoppingListTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  // TODO select quantity
   @Input()
   table?: ShoppingListTable;
 
@@ -26,11 +27,7 @@ export class ShoppingListTableComponent implements OnInit, AfterViewInit, OnDest
 
   constructor() { }
 
-  ngOnInit(): void {
-    if (this.table?.data) {
-//      this.dataSource.data = this.table?.data;
-    }
-  }
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
 //    this.dataSource.paginator = this.paginator;
