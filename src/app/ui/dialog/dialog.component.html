@@ -1,0 +1,12 @@
+<h3 mat-dialog-title  class="text-secondary" > {{ dialog.title }} </h3>
+<mat-dialog-content>
+    {{ dialog.content }}
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button mat-stroked-button [mat-dialog-close]="false" style="width: 35%" >
+        <mat-icon>close</mat-icon>
+    </button>
+    <button mat-stroked-button  [mat-dialog-close]="true" cdkFocusInitial style="width: 35%">
+        <mat-icon>done</mat-icon>
+    </button>
+</mat-dialog-actions>

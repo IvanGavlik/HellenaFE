@@ -18,7 +18,9 @@ import {MatButtonModule} from '@angular/material/button';
 import { SpinnerComponent } from './spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-table.component'
+import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-table.component';
+import { DialogComponent } from './dialog/dialog.component'
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-
     TableComponent,
     InputFieldComponent,
     SpinnerComponent,
-    ShoppingListTableComponent
+    ShoppingListTableComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +47,8 @@ import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-
     MatTableModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
   exports: [
     CardComponent,
@@ -53,7 +57,8 @@ import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-
     TableComponent,
     InputFieldComponent,
     SpinnerComponent,
-    ShoppingListTableComponent
+    ShoppingListTableComponent,
+    DialogComponent,
   ]
 })
 export class UiModule { }
