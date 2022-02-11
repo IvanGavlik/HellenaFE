@@ -18,7 +18,6 @@ import {MatButtonModule} from '@angular/material/button';
 import { SpinnerComponent } from './spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-table.component';
 import { DialogComponent } from './dialog/dialog.component'
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
@@ -31,7 +30,6 @@ import {MatMenuModule} from '@angular/material/menu';
     TableComponent,
     InputFieldComponent,
     SpinnerComponent,
-    ShoppingListTableComponent,
     DialogComponent
   ],
   imports: [
@@ -59,7 +57,6 @@ import {MatMenuModule} from '@angular/material/menu';
     TableComponent,
     InputFieldComponent,
     SpinnerComponent,
-    ShoppingListTableComponent,
     DialogComponent,
   ]
 })

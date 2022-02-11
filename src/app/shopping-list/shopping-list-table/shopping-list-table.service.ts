@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {AddItemToShoppingListEvent, RemoveItemFromShoppingListEvent} from '../../shopping-list/shopping-list';
+import {AddItemToShoppingListEvent, RemoveItemFromShoppingListEvent} from '../shopping-list';
 import {Observable} from 'rxjs';
 
 @Injectable({

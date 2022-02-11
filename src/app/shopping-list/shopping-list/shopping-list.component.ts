@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoadShoppingListTablePage} from '../../ui/shopping-list-table/shopping-list-table.component';
-import {ObservableShoppingListData, ShoppingListTable, ShoppingListTableItem} from '../../ui/shopping-list-table/shopping-list-table';
+import {LoadShoppingListTablePage} from '../shopping-list-table/shopping-list-table.component';
+import {ObservableShoppingListData, ShoppingListTable, ShoppingListTableItem} from '../shopping-list-table/shopping-list-table';
 import {ShoppingLIstService} from '../shopping-list.service';
 import {ShopingListLocalStorageService} from '../shoping-list-local-storage.service';
 import {ShoppingListItem} from '../shopping-list';
 import {Subscription} from 'rxjs';
-import {ShoppingLIstTableService} from '../../ui/shopping-list-table/shopping-list-table.service';
+import {ShoppingLIstTableService} from '../shopping-list-table/shopping-list-table.service';
 
 @Component({
   selector: 'hellena-shopping-list',

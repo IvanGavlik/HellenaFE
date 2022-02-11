@@ -3,9 +3,9 @@ import {MatTable, MatTableDataSource} from '@angular/material/table';;
 import {ObservableShoppingListData, ShoppingListTable, ShoppingListTableItem} from './shopping-list-table';
 import {MatPaginator} from '@angular/material/paginator';
 import {Subscription} from 'rxjs';
-import {LoadPage} from '../table/table.component';
+import {LoadPage} from '../../ui/table/table.component';
 import {ShoppingLIstTableService} from './shopping-list-table.service';
-import {ShoppingListItem} from '../../shopping-list/shopping-list';
+import {ShoppingListItem} from '../shopping-list';
 
 @Component({
   selector: 'hellena-shopping-list-table',

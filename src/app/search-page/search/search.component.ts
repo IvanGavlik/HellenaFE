@@ -7,11 +7,10 @@ import {Entity} from '../../crud/entity';
 import {defaultPage, SearchItem} from '../search-item';
 import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 import {LoadPage} from '../../ui/table/table.component';
-import {ShoppingLIstService} from '../../shopping-list/shopping-list.service';
 import {AddItemToShoppingListEvent, ShoppingListItem} from '../../shopping-list/shopping-list';
 import {DialogService} from '../../ui/dialog/dialog.service';
 import {Dialog} from '../../ui/dialog/dialog';
-import {ShoppingLIstTableService} from '../../ui/shopping-list-table/shopping-list-table.service';
+import {ShoppingLIstTableService} from '../../shopping-list/shopping-list-table/shopping-list-table.service';
 
 
 @Component({
