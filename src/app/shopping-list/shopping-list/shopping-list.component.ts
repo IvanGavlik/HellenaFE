@@ -27,11 +27,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     // load data from local service
     this.localStorageService.getShoppingLists().forEach(el => {
       // TODO MAP for performace
-      this.table.data.addItem( this.toTableItem(el.id, el.name, el.actionPrice, el.originalPrice));
+      this.table.data.addItem( this.toTableItem(el));
     });
 
     const addSubs = this.service.onAddItemToShoppingList().subscribe(el => {
-      this.table.data.addItem( this.toTableItem(el.item.id, el.item.name, el.item.actionPrice, el.item.originalPrice));
+      this.table.data.addItem( this.toTableItem(el.item));
     });
     this.subs.push(addSubs);
 
@@ -63,14 +63,14 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 //    this.doSearch(this.search);
   }
 
-  toTableItem(i: number, n: string, ap: number, op: number): ShoppingListTableItem {
+  toTableItem(item: ShoppingListItem): ShoppingListTableItem {
     return {
-      id: i,
-      icon: '../../assets/image/spar-logo_1x.png',
-      name: n,
-      actionPrice: ap,
-      originalPrice: op,
-      store: 'test test test test test',
+      id: item.id,
+      icon: item.icon,
+      name: item.name,
+      actionPrice: item.actionPrice,
+      originalPrice: item.originalPrice,
+      store: item.store,
     } as ShoppingListTableItem;
   }
 

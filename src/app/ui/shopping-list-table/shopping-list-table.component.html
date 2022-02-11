@@ -29,17 +29,26 @@ S
 
 
         <ng-container matColumnDef="actions">
-            <td mat-cell *matCellDef="let element" >
-                <div>
-                    <button mat-stroked-button>
+            <td mat-cell *matCellDef="let element" style="text-align: center;" >
+
+                <button mat-stroked-button [matMenuTriggerFor]="options" style="width: 100%" >
+                    <mat-icon>toc</mat-icon>
+                </button>
+                <mat-menu #options="matMenu" xPosition="before" yPosition="below" >
+                    <button mat-menu-item mat-stroked-button>
                         <mat-icon>done</mat-icon>
-                     </button>
-                </div>
-                <div>
-                    <button mat-stroked-button>
+                    </button>
+                    <button mat-menu-item mat-stroked-button>
                         <mat-icon>close</mat-icon>
                     </button>
-                </div>
+                    <button mat-stroked-button mat-menu-item>
+                        <mat-icon>compare_arrows</mat-icon>
+                    </button>
+                    <mat-form-field mat-menu-item appearance="standard" (click)="$event.stopPropagation()">
+                        <input matInput placeholder="Količina" type="number" [value]="element.quantity" (click)="$event.stopPropagation()"  >
+                    </mat-form-field>
+                </mat-menu>
+
             </td>
         </ng-container>
 

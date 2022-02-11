@@ -15,6 +15,7 @@ export interface ShoppingListTableItem {
     actionPrice: number;
     store: string;
     activeTo?: Date;
+    quantity: number;
 }
 
 // TOOO what about paggination ..itd
