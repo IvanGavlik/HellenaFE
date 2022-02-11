@@ -60,3 +60,4 @@ Steps
 * idjevi za shoping list i pretraživanje tablicu
 * popis za kupovinu treba imati compare ( i info da li postoji jeftinije i di)
 
+* navigation is not working

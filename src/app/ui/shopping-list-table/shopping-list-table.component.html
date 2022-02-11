@@ -44,6 +44,7 @@ S
                     <button mat-stroked-button mat-menu-item>
                         <mat-icon>compare_arrows</mat-icon>
                     </button>
+                    <!-- on enter -->
                     <mat-form-field mat-menu-item appearance="standard" (click)="$event.stopPropagation()">
                         <input matInput placeholder="Količina" type="number" [value]="element.quantity" (click)="$event.stopPropagation()"  >
                     </mat-form-field>

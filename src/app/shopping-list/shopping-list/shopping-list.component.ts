@@ -26,11 +26,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // load data from local service
     this.localStorageService.getShoppingLists().forEach(el => {
-      // TODO MAP for performace
       this.table.data.addItem( this.toTableItem(el));
     });
 
-    const addSubs = this.service.onAddItemToShoppingList().subscribe(el => {
+/*    const addSubs = this.service.onAddItemToShoppingList().subscribe(el => {
+      console.log('table ', this.table);
       this.table.data.addItem( this.toTableItem(el.item));
     });
     this.subs.push(addSubs);
@@ -38,7 +38,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     const removeSubs = this.service.onRemoveItemFromShoppingListEvent().subscribe(el => {
       this.table.data.removeItem({ } as ShoppingListTableItem); //TODO remove
     });
-    this.subs.push(removeSubs);
+    this.subs.push(removeSubs);*/
   }
 
   // save data to local service

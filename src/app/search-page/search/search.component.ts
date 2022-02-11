@@ -44,7 +44,7 @@ export class SearchComponent implements OnInit {
     showProgress: new EventEmitter<boolean>()
   } as SpinnerConfig;
 
-  constructor(private searchItemService: SearchItemService,  private shoppingLIstService: ShoppingLIstService,
+  constructor(private searchItemService: SearchItemService,  private shoppingListService: ShoppingLIstService,
               private dialogService: DialogService) {}
 
   ngOnInit(): void {
@@ -114,16 +114,16 @@ export class SearchComponent implements OnInit {
       content: 'Želite li dodati ' + $event.name + ' na popis za kupovinu ?',
     } as Dialog);
 
-    this.shoppingLIstService.addItemToShoppingList({ listName: 'test', item: {
-        id:  $event.id,
-        icon: $event.icon,
-        name: $event.name,
-        originalPrice: $event.originalPrice,
-        actionPrice: $event.actionPrice,
-        store: $event.store,
-        activeTo: $event.activeTo,
-        quantity: 1,
-      } as ShoppingListItem } as AddItemToShoppingListEvent);
+    this.shoppingListService.addItemToShoppingList({ listName: 'test', item: {
+      id:  $event.id,
+      icon: $event.icon,
+      name: $event.name,
+          originalPrice: $event.originalPrice,
+          actionPrice: $event.actionPrice,
+          store: $event.store,
+          activeTo: $event.activeTo,
+          quantity: 1,
+       } as ShoppingListItem } as AddItemToShoppingListEvent);
   }
 
   handleCompareTableItem($event: TableItem): void {
