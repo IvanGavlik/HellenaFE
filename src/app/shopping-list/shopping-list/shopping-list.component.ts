@@ -5,6 +5,7 @@ import {ShoppingLIstService} from '../shopping-list.service';
 import {ShopingListLocalStorageService} from '../shoping-list-local-storage.service';
 import {ShoppingListItem} from '../shopping-list';
 import {Subscription} from 'rxjs';
+import {ShoppingLIstTableService} from '../../ui/shopping-list-table/shopping-list-table.service';
 
 @Component({
   selector: 'hellena-shopping-list',
@@ -13,38 +14,20 @@ import {Subscription} from 'rxjs';
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
 
-  table = {
-    columnNames: ['icon', 'name', 'actions'],
-    data: new ObservableShoppingListData([]),
-    totalCount: 100,
-  } as ShoppingListTable;
 
-  private subs: Subscription[] = [];
-
-  constructor(private service: ShoppingLIstService, private localStorageService: ShopingListLocalStorageService) { }
+  constructor(private localStorageService: ShopingListLocalStorageService) { }
 
   ngOnInit(): void {
     // load data from local service
     this.localStorageService.getShoppingLists().forEach(el => {
-      this.table.data.addItem( this.toTableItem(el));
+   //   this.table.data.addItem( this.toTableItem(el));
     });
-
-/*    const addSubs = this.service.onAddItemToShoppingList().subscribe(el => {
-      console.log('table ', this.table);
-      this.table.data.addItem( this.toTableItem(el.item));
-    });
-    this.subs.push(addSubs);
-
-    const removeSubs = this.service.onRemoveItemFromShoppingListEvent().subscribe(el => {
-      this.table.data.removeItem({ } as ShoppingListTableItem); //TODO remove
-    });
-    this.subs.push(removeSubs);*/
   }
 
   // save data to local service
   ngOnDestroy(): void {
     const storageData: ShoppingListItem[] = [];
-    this.table.data.getData().forEach(el => {
+ /*   this.table.data.getData().forEach(el => {
       storageData.push( this.toShoppingListItem(el) );
     });
     this.localStorageService.updateLocalStorage(storageData);
@@ -53,7 +36,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       if (sub) {
         sub.unsubscribe();
       }
-    });
+    }); */
   }
 
   handleLoadPage($event: LoadShoppingListTablePage): void {

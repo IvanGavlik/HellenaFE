@@ -11,6 +11,7 @@ import {ShoppingLIstService} from '../../shopping-list/shopping-list.service';
 import {AddItemToShoppingListEvent, ShoppingListItem} from '../../shopping-list/shopping-list';
 import {DialogService} from '../../ui/dialog/dialog.service';
 import {Dialog} from '../../ui/dialog/dialog';
+import {ShoppingLIstTableService} from '../../ui/shopping-list-table/shopping-list-table.service';
 
 
 @Component({
@@ -44,7 +45,7 @@ export class SearchComponent implements OnInit {
     showProgress: new EventEmitter<boolean>()
   } as SpinnerConfig;
 
-  constructor(private searchItemService: SearchItemService,  private shoppingListService: ShoppingLIstService,
+  constructor(private searchItemService: SearchItemService,  private shoppingListService: ShoppingLIstTableService,
               private dialogService: DialogService) {}
 
   ngOnInit(): void {

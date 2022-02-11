@@ -3,7 +3,7 @@ import {Observable, ReplaySubject} from 'rxjs';
 
 export interface ShoppingListTable {
     columnNames: string[];
-    data: ObservableShoppingListData;
+    data: ShoppingListTableItem[];
     totalCount: number;
 }
 
