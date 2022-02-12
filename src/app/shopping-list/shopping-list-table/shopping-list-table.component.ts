@@ -1,11 +1,10 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {MatTable, MatTableDataSource} from '@angular/material/table';;
-import {ObservableShoppingListData, ShoppingListTable, ShoppingListTableItem} from './shopping-list-table';
-import {MatPaginator} from '@angular/material/paginator';
-import {Subscription} from 'rxjs';
-import {LoadPage} from '../../ui/table/table.component';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {Subscription, tap} from 'rxjs';
+import {ShoppingListTableItem} from './shopping-list-table';
 import {ShoppingLIstTableService} from './shopping-list-table.service';
 import {ShoppingListItem} from '../shopping-list';
+
 
 @Component({
   selector: 'hellena-shopping-list-table',
@@ -14,55 +13,30 @@ import {ShoppingListItem} from '../shopping-list';
 })
 export class ShoppingListTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  // TODO select quantity
-  @Input()
-  table: ShoppingListTable = {
-    data : [],
-    columnNames: ['icon', 'name', 'actions'],
-    totalCount: 0,
-  } as ShoppingListTable;
-
-  @ViewChild(MatTable) viewTable: MatTable<ShoppingListTableItem> = {} as MatTable<ShoppingListTableItem>;
-
   @Output()
   loadPage: EventEmitter<LoadShoppingListTablePage> = new EventEmitter<LoadShoppingListTablePage>();
 
-  @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
+  @ViewChild(MatTable) viewTable: MatTable<ShoppingListTableItem> = {} as MatTable<ShoppingListTableItem>;
 
-  pageSub: Subscription[] = [];
+  data: ShoppingListTableItem[] = [];
+  dataSource: MatTableDataSource<ShoppingListTableItem> = new MatTableDataSource<ShoppingListTableItem>(this.data);
+  columnNames = ['icon', 'name', 'actions'];
+
+  private pageSub: Subscription[] = [];
 
   constructor(private service: ShoppingLIstTableService) { }
 
-  ngOnInit(): void {
-    const addSubs = this.service.onAddItemToShoppingList().subscribe(el => {
-           this.table.data.push( this.toTableItem(el.item));
-           this.viewTable.renderRows();
-    });
-    this.pageSub.push(addSubs);
+  ngOnInit(): void {}
 
-    const removeSubs = this.service.onRemoveItemFromShoppingListEvent().subscribe(el => {
-//          this.table.data.removeItem({ } as ShoppingListTableItem); //TODO remove
-    });
-    this.pageSub.push(removeSubs);
-  }
-
-  ngAfterViewInit(): void {
-/*    this.dataSource.paginator = this.paginator;
-
-    this.pageSub = this.paginator.page.subscribe(el => {
-      this.loadPage.emit({
-        index: el.pageIndex,
-        size: el.pageSize
-      } as LoadShoppingListTablePage);
-    });*/
-  }
+  ngAfterViewInit(): void {}
 
   ngOnDestroy(): void {
-    if (this.pageSub) {
-//      this.pageSub.unsubscribe();
-    }
+    this.pageSub.forEach(el => {
+      if (el) {
+        el.unsubscribe();
+      }
+    });
   }
-
 
   toTableItem(item: ShoppingListItem): ShoppingListTableItem {
     return {
@@ -72,6 +46,7 @@ export class ShoppingListTableComponent implements OnInit, AfterViewInit, OnDest
       actionPrice: item.actionPrice,
       originalPrice: item.originalPrice,
       store: item.store,
+      quantity: item.quantity,
     } as ShoppingListTableItem;
   }
 
@@ -84,7 +59,7 @@ export class ShoppingListTableComponent implements OnInit, AfterViewInit, OnDest
       actionPrice: item.actionPrice,
       store: item.store,
       activeTo: item.activeTo,
-      quantity: 1 // TODO
+      quantity: item.quantity
     } as ShoppingListItem;
   }
 

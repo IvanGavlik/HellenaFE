@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import {Component, OnInit, EventEmitter, OnDestroy} from '@angular/core';
 import {Table, TableItem} from '../../ui/table/table';
 import {SearchItemConfiguration} from '../search-item-configuration';
 import {SearchItemService} from '../search-item.service';
@@ -11,6 +11,7 @@ import {AddItemToShoppingListEvent, ShoppingListItem} from '../../shopping-list/
 import {DialogService} from '../../ui/dialog/dialog.service';
 import {Dialog} from '../../ui/dialog/dialog';
 import {ShoppingLIstTableService} from '../../shopping-list/shopping-list-table/shopping-list-table.service';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -21,7 +22,7 @@ import {ShoppingLIstTableService} from '../../shopping-list/shopping-list-table/
     { provide: 'searchItemConfiguration', useClass: SearchItemConfiguration }
   ]
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
   table = {
     columnNames: ['icon', 'name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
@@ -44,6 +45,8 @@ export class SearchComponent implements OnInit {
     showProgress: new EventEmitter<boolean>()
   } as SpinnerConfig;
 
+  private subs: Subscription[] = [];
+
   constructor(private searchItemService: SearchItemService,  private shoppingListService: ShoppingLIstTableService,
               private dialogService: DialogService) {}
 
@@ -62,6 +65,14 @@ export class SearchComponent implements OnInit {
       } as SearchItem;
     }
     this.doSearch(this.search);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(el => {
+      if (el) {
+        el.unsubscribe();
+      }
+    });
   }
 
   handleSearch($event: SearchItem): void {
@@ -109,21 +120,27 @@ export class SearchComponent implements OnInit {
   }
 
   handleAddTableItemToShoppingList($event: TableItem): void {
-    this.dialogService.openHellenaDialog({
+    const dialog = this.dialogService.openHellenaDialog({
       title: 'Popis za kupovinu',
-      content: 'Želite li dodati ' + $event.name + ' na popis za kupovinu ?',
-    } as Dialog);
+      content: 'Želite li dodati ' + $event.name + ' na popis za kupovinu ?'} as Dialog)
+        .subscribe(result =>  {
+          console.log('res', result);
+          if (result) { // use select yes in dialog
+            console.log('add');
+            this.shoppingListService.addItemToShoppingList({ listName: 'test', item: {
+                id:  $event.id,
+                icon: $event.icon,
+                name: $event.name,
+                originalPrice: $event.originalPrice,
+                actionPrice: $event.actionPrice,
+                store: $event.store,
+                activeTo: $event.activeTo,
+                quantity: 1,
+              } as ShoppingListItem } as AddItemToShoppingListEvent);
 
-    this.shoppingListService.addItemToShoppingList({ listName: 'test', item: {
-      id:  $event.id,
-      icon: $event.icon,
-      name: $event.name,
-          originalPrice: $event.originalPrice,
-          actionPrice: $event.actionPrice,
-          store: $event.store,
-          activeTo: $event.activeTo,
-          quantity: 1,
-       } as ShoppingListItem } as AddItemToShoppingListEvent);
+          }
+        });
+    this.subs.push(dialog);
   }
 
   handleCompareTableItem($event: TableItem): void {
