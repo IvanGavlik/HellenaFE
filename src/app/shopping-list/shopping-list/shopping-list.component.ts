@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoadShoppingListTablePage} from '../shopping-list-table/shopping-list-table.component';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
   selector: 'hellena-shopping-list',
@@ -14,6 +13,12 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
-  handleLoadPage($event: LoadShoppingListTablePage): void {}
+  /*
+  Konzum
+  Lidl
+  Kauflan T
+  Intespar T
+  PLodne T
+   */
 
 }

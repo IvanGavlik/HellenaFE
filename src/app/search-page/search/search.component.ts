@@ -7,11 +7,10 @@ import {Entity} from '../../crud/entity';
 import {defaultPage, SearchItem} from '../search-item';
 import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 import {LoadPage} from '../../ui/table/table.component';
-import {AddItemToShoppingListEvent, ShoppingListItem} from '../../shopping-list/shopping-list';
 import {DialogService} from '../../ui/dialog/dialog.service';
 import {Dialog} from '../../ui/dialog/dialog';
-import {ShoppingLIstTableService} from '../../shopping-list/shopping-list-table/shopping-list-table.service';
 import {Subscription} from 'rxjs';
+import {MatTabChangeEvent} from '@angular/material/tabs';
 
 
 @Component({
@@ -47,8 +46,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private subs: Subscription[] = [];
 
-  constructor(private searchItemService: SearchItemService,  private shoppingListService: ShoppingLIstTableService,
-              private dialogService: DialogService) {}
+  constructor(private searchItemService: SearchItemService, private dialogService: DialogService) {}
 
   ngOnInit(): void {
     // get navigation data resource: https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
@@ -127,17 +125,6 @@ export class SearchComponent implements OnInit, OnDestroy {
           console.log('res', result);
           if (result) { // use select yes in dialog
             console.log('add');
-            this.shoppingListService.addItemToShoppingList({ listName: 'test', item: {
-                id:  $event.id,
-                icon: $event.icon,
-                name: $event.name,
-                originalPrice: $event.originalPrice,
-                actionPrice: $event.actionPrice,
-                store: $event.store,
-                activeTo: $event.activeTo,
-                quantity: 1,
-              } as ShoppingListItem } as AddItemToShoppingListEvent);
-
           }
         });
     this.subs.push(dialog);
@@ -145,6 +132,24 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   handleCompareTableItem($event: TableItem): void {
     // TODO
+  }
+
+  handleTabChanged($event: MatTabChangeEvent): void {
+    console.log($event.tab.textLabel);
+    if ($event.tab.textLabel === 'Popis za kupovinu') {
+  /*    this.shoppingListService.getList().forEach( el => {
+        this.shoppingList.push({
+          name: el.name,
+          id: el.id,
+          actionPrice: el.actionPrice,
+          originalPrice: el.originalPrice,
+          store: el.store,
+          activeTo: el.activeTo,
+          quantity: el.quantity,
+        } as ShoppingListTableItem );
+      });
+   */
+    }
   }
 }
 

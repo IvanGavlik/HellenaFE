@@ -14,5 +14,5 @@ export interface AddItemToShoppingListEvent {
 }
 
 export interface RemoveItemFromShoppingListEvent {
-    itemId: string;
+    itemId: number;
 }

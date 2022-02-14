@@ -1,4 +1,4 @@
-<mat-tab-group mat-align-tabs="center">
+<mat-tab-group mat-align-tabs="center" (selectedTabChange)="handleTabChanged($event)"> >
     <mat-tab label="Pretraga">
         <div class="container-md g-1">
             <hellena-search-form
@@ -22,7 +22,7 @@
             </div>
         </div>
     </mat-tab>
-    <mat-tab label="Popis za kupovinu" >
+    <mat-tab label="Popis za kupovinu">
         <hellena-shopping-list>
         </hellena-shopping-list>
     </mat-tab>
