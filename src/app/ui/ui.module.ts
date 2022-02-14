@@ -21,6 +21,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { DialogComponent } from './dialog/dialog.component'
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
+import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-table.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {MatMenuModule} from '@angular/material/menu';
     TableComponent,
     InputFieldComponent,
     SpinnerComponent,
-    DialogComponent
+    DialogComponent,
+    ShoppingListTableComponent
   ],
   imports: [
     CommonModule,
@@ -58,6 +60,7 @@ import {MatMenuModule} from '@angular/material/menu';
     InputFieldComponent,
     SpinnerComponent,
     DialogComponent,
+    ShoppingListTableComponent
   ]
 })
 export class UiModule { }
