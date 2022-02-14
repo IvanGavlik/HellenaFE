@@ -11,6 +11,9 @@ import {DialogService} from '../../ui/dialog/dialog.service';
 import {Dialog} from '../../ui/dialog/dialog';
 import {Subscription} from 'rxjs';
 import {MatTabChangeEvent} from '@angular/material/tabs';
+import {ShoppingListService} from '../../shopping-list/shopping-list.service';
+import {ShoppingListItem} from '../../shopping-list/shopping-list';
+import {ShoppingListTable, ShoppingListTableItem} from '../../ui/shopping-list-table/shopping-list-table';
 
 
 @Component({
@@ -29,6 +32,12 @@ export class SearchComponent implements OnInit, OnDestroy {
     totalCount: 100,
   } as Table;
 
+  shoppingList = {
+    columnNames: ['icon', 'name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
+    data: [],
+    totalCount: 100,
+  } as ShoppingListTable;
+
   search: SearchItem = {
     cityIds: [],
     categoryIds: [],
@@ -46,7 +55,9 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private subs: Subscription[] = [];
 
-  constructor(private searchItemService: SearchItemService, private dialogService: DialogService) {}
+  constructor(private searchItemService: SearchItemService,
+              private shoppingListService: ShoppingListService,
+              private dialogService: DialogService) {}
 
   ngOnInit(): void {
     // get navigation data resource: https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
@@ -122,9 +133,17 @@ export class SearchComponent implements OnInit, OnDestroy {
       title: 'Popis za kupovinu',
       content: 'Želite li dodati ' + $event.name + ' na popis za kupovinu ?'} as Dialog)
         .subscribe(result =>  {
-          console.log('res', result);
           if (result) { // use select yes in dialog
             console.log('add');
+            this.shoppingListService.addToShoppingList({
+              name: $event.name,
+              id: $event.id,
+              actionPrice: $event.actionPrice,
+              originalPrice: $event.originalPrice,
+              store: $event.store,
+              activeTo: $event.activeTo,
+              quantity: 1,
+            } as ShoppingListItem);
           }
         });
     this.subs.push(dialog);
@@ -135,20 +154,19 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   handleTabChanged($event: MatTabChangeEvent): void {
-    console.log($event.tab.textLabel);
     if ($event.tab.textLabel === 'Popis za kupovinu') {
-  /*    this.shoppingListService.getList().forEach( el => {
-        this.shoppingList.push({
-          name: el.name,
-          id: el.id,
-          actionPrice: el.actionPrice,
-          originalPrice: el.originalPrice,
-          store: el.store,
-          activeTo: el.activeTo,
-          quantity: el.quantity,
-        } as ShoppingListTableItem );
+      this.shoppingList.data = [];
+      this.shoppingListService.getShoppingList().forEach(el => {
+          this.shoppingList.data.push( {
+            id: el.id,
+            name: el.name,
+            activeTo: el.activeTo,
+            icon: el.icon,
+            actionPrice: el.actionPrice,
+            originalPrice: el.originalPrice,
+            store: el.store,
+          } as ShoppingListTableItem );
       });
-   */
     }
   }
 }

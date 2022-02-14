@@ -22,11 +22,7 @@ export class ShoppingListTableComponent  implements OnInit, AfterViewInit, OnDes
 
   constructor() { }
 
-  ngOnInit(): void {
-    if (this.table?.data) {
-      this.dataSource.data = this.table?.data;
-    }
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -43,9 +39,9 @@ export class ShoppingListTableComponent  implements OnInit, AfterViewInit, OnDes
   }
 
   ngOnDestroy(): void {
-    if (this.pageSub) {
-      this.pageSub.unsubscribe();
-    }
+ //   if (this.pageSub) {
+ //     this.pageSub.unsubscribe();
+ //   }
   }
 }
 

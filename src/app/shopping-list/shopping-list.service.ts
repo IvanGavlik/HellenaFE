@@ -1,11 +1,23 @@
 import { Injectable } from '@angular/core';
+import {ShoppingListItem} from './shopping-list';
+import {ShopingListLocalStorageService} from './shoping-list-local-storage.service';
+import {Observable, Observer, of, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingListService {
 
-//  private add
+  constructor(private localStorage: ShopingListLocalStorageService) { }
 
-  constructor() { }
+  public addToShoppingList(item: ShoppingListItem): void {
+    const list = this.localStorage.getShoppingLists();
+    list.push(item);
+    this.localStorage.updateLocalStorage(list);
+  }
+
+  public getShoppingList(): ShoppingListItem[] {
+    return this.localStorage.getShoppingLists();
+  }
+
 }

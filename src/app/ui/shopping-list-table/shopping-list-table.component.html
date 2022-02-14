@@ -8,7 +8,7 @@
 
         <ng-container matColumnDef="name">
             <td mat-cell *matCellDef="let element">
-                <span style="font-size: large" >  {{ element.id }}, {{ element.name }} </span>
+                <span style="font-size: large" > {{ element.name }} </span>
                 <br>
                 <span *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"
                       style="font-size: large; color: blue" > {{ element.actionPrice }}  kn
