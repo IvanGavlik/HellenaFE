@@ -150,7 +150,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   handleCompareTableItem($event: TableItem): void {
-    // TODO
+    const dialog = this.dialogService.openHellenaDialog({
+      title: 'Usporedi',
+      content: 'Uskoro dostupno'
+    } as Dialog ).subscribe(result => {
+      // TODO implement
+    });
+    this.subs.push(dialog);
   }
 
   handleTabChanged($event: MatTabChangeEvent): void {
