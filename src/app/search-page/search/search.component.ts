@@ -14,6 +14,7 @@ import {MatTabChangeEvent} from '@angular/material/tabs';
 import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
 import {ShoppingListTable, ShoppingListTableItem} from '../../ui/shopping-list-table/shopping-list-table';
+import {SearchUIService} from '../search-ui.service';
 
 
 @Component({
@@ -57,7 +58,8 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(private searchItemService: SearchItemService,
               private shoppingListService: ShoppingListService,
-              private dialogService: DialogService) {}
+              private dialogService: DialogService,
+              private searchUi: SearchUIService) {}
 
   ngOnInit(): void {
     // get navigation data resource: https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
@@ -131,6 +133,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   handleAddTableItemToShoppingList($event: TableItem): void {
     const dialog = this.dialogService.openHellenaDialog({
       title: 'Popis za kupovinu',
+      onOF: true,
       content: 'Želite li dodati ' + $event.name + ' na popis za kupovinu ?'} as Dialog)
         .subscribe(result =>  {
           if (result) { // use select yes in dialog
@@ -152,6 +155,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   handleCompareTableItem($event: TableItem): void {
     const dialog = this.dialogService.openHellenaDialog({
       title: 'Usporedi',
+      onOF: false,
       content: 'Uskoro dostupno'
     } as Dialog ).subscribe(result => {
       // TODO implement
@@ -161,18 +165,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   handleTabChanged($event: MatTabChangeEvent): void {
     if ($event.tab.textLabel === 'Popis za kupovinu') {
-      this.shoppingList.data = [];
-      this.shoppingListService.getShoppingList().forEach(el => {
-          this.shoppingList.data.push( {
-            id: el.id,
-            name: el.name,
-            activeTo: el.activeTo,
-            icon: el.icon,
-            actionPrice: el.actionPrice,
-            originalPrice: el.originalPrice,
-            store: el.store,
-          } as ShoppingListTableItem );
-      });
+      this.searchUi.nextChangeTab('Popis za kupovinu');
     }
   }
 }

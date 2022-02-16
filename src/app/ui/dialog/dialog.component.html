@@ -3,10 +3,17 @@
     {{ dialog.content }}
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-    <button mat-stroked-button [mat-dialog-close]="false" style="width: 35%" >
-        <mat-icon>close</mat-icon>
-    </button>
-    <button mat-stroked-button  [mat-dialog-close]="true" cdkFocusInitial style="width: 35%">
-        <mat-icon>done</mat-icon>
-    </button>
+    <div *ngIf="dialog.onOF; else ok">
+        <button mat-stroked-button [mat-dialog-close]="false" style="width: 45%" >
+            <mat-icon>close</mat-icon>
+        </button>
+        <button mat-stroked-button  [mat-dialog-close]="true" cdkFocusInitial style="width: 45%">
+            <mat-icon>done</mat-icon>
+        </button>
+    </div>
+    <ng-template #ok>
+        <button mat-stroked-button  [mat-dialog-close]="true" cdkFocusInitial style="width: 70%">
+            <mat-icon>done</mat-icon>
+        </button>
+    </ng-template>
 </mat-dialog-actions>

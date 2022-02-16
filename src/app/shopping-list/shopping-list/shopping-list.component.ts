@@ -1,5 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ShoppingListTable, ShoppingListTableItem} from '../../ui/shopping-list-table/shopping-list-table';
+import {SearchUIService} from '../../search-page/search-ui.service';
+import {ShoppingListService} from '../shopping-list.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'hellena-shopping-list',
@@ -15,10 +18,40 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     totalCount: 100,
   } as ShoppingListTable;
 
-  constructor() { }
+  private subs: Subscription[] = [];
 
-  ngOnInit(): void {}
+  constructor(private searchUI: SearchUIService, private shoppingListService: ShoppingListService) { }
 
-  ngOnDestroy(): void {}
+  ngOnInit(): void {
+    const sub = this.searchUI.onTabChange().subscribe(tab => {
+      if (tab === 'Popis za kupovinu') {
+        this.onTabChange();
+      }
+    });
+    this.subs.push(sub);
+  }
+
+  private onTabChange(): void {
+    this.table.data = [];
+    this.shoppingListService.getShoppingList().forEach(el => {
+      this.table.data.push( {
+        id: el.id,
+        name: el.name,
+        activeTo: el.activeTo,
+        icon: el.icon,
+        actionPrice: el.actionPrice,
+        originalPrice: el.originalPrice,
+        store: el.store,
+      } as ShoppingListTableItem );
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(el => {
+      if (el) {
+        el.unsubscribe();
+      }
+    });
+  }
 
 }
