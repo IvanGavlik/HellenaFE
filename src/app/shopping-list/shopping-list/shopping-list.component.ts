@@ -11,7 +11,7 @@ import {Subscription} from 'rxjs';
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
 
-  @Input()
+
   table: ShoppingListTable = {
     columnNames: ['icon', 'name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
     data: [],

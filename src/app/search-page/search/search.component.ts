@@ -33,12 +33,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     totalCount: 100,
   } as Table;
 
-  shoppingList = {
-    columnNames: ['icon', 'name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
-    data: [],
-    totalCount: 100,
-  } as ShoppingListTable;
-
   search: SearchItem = {
     cityIds: [],
     categoryIds: [],
@@ -137,7 +131,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       content: 'Želite li dodati ' + $event.name + ' na popis za kupovinu ?'} as Dialog)
         .subscribe(result =>  {
           if (result) { // use select yes in dialog
-            console.log('add');
             this.shoppingListService.addToShoppingList({
               name: $event.name,
               id: $event.id,

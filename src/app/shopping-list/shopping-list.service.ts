@@ -11,7 +11,12 @@ export class ShoppingListService {
 
   public addToShoppingList(item: ShoppingListItem): void {
     const list = this.localStorage.getShoppingLists();
-    list.push(item);
+    const element = list.find(el => item.id === el.id);
+    if (element) {
+      element.quantity += 1;
+    } else {
+      list.push(item);
+    }
     this.localStorage.updateLocalStorage(list);
   }
 
