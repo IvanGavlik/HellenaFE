@@ -36,7 +36,7 @@
 
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>
-                <button mat-stroked-button style="width: 100%" (click)="clear.emit()" >
+                <button mat-stroked-button style="width: 100%" (click)="clear.emit()" [disabled]="table.data.length < 1" >
                     <mat-icon>delete_outline</mat-icon>
                 </button>
             </th>
@@ -46,7 +46,7 @@
                     <mat-icon>toc</mat-icon>
                 </button>
                 <mat-menu #options="matMenu" xPosition="before" yPosition="below" >
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="itemDone.emit(element)" >
                         <mat-icon>done</mat-icon>
                     </button>
                     <button mat-menu-item>

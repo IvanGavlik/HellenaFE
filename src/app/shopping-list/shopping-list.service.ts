@@ -20,6 +20,11 @@ export class ShoppingListService {
     this.localStorage.updateLocalStorage(list);
   }
 
+  public replace(items: ShoppingListItem[]): void {
+    this.clearShoppingList();
+    this.localStorage.updateLocalStorage(items);
+  }
+
   public getShoppingList(): ShoppingListItem[] {
     return this.localStorage.getShoppingLists();
   }

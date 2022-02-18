@@ -4,6 +4,7 @@
             <hellena-shopping-list-table
                     [table]="table"
                     (clear)="handleClear()"
+                    (itemDone)="handleItemDone($event)"
             >
             </hellena-shopping-list-table>
         </div>

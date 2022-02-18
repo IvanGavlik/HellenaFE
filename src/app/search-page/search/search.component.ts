@@ -139,6 +139,7 @@ export class SearchComponent implements OnInit, OnDestroy {
               store: $event.store,
               activeTo: $event.activeTo,
               quantity: 1,
+              isPurchased: false,
             } as ShoppingListItem);
           }
         });

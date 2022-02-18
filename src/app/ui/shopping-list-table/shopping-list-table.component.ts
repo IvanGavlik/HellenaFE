@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {ShoppingListTable} from './shopping-list-table';
+import {ShoppingListTable, ShoppingListTableItem} from './shopping-list-table';
 import {DialogService} from '../dialog/dialog.service';
 import {Dialog} from '../dialog/dialog';
 import {Subscription} from 'rxjs';
@@ -16,6 +16,9 @@ export class ShoppingListTableComponent implements OnDestroy {
 
   @Output()
   clear: EventEmitter<void> = new EventEmitter<void>();
+
+  @Output()
+  itemDone: EventEmitter<ShoppingListTableItem> = new EventEmitter<ShoppingListTableItem>();
 
   private subs: Subscription[] = [];
   constructor() { }

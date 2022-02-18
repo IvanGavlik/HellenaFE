@@ -34,6 +34,10 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   private onTabChange(): void {
+    this.updateShoppingListDataTable();
+  }
+
+  private updateShoppingListDataTable(): void {
     this.table.data = [];
     this.shoppingListService.getShoppingList().forEach(el => {
       this.table.data.push( {
@@ -45,6 +49,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
         originalPrice: el.originalPrice,
         store: el.store,
         quantity: el.quantity,
+        isPurchased: el.isPurchased,
       } as ShoppingListTableItem );
     });
   }
@@ -73,5 +78,31 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
           }
         });
     this.subs.push(sub);
+  }
+
+  handleItemDone($event: ShoppingListTableItem): void {
+
+    const dialog = {
+      onOF: true,
+      content: 'Želite li ' + $event.name + ' označiti kao obavljeno ?',
+      title: 'Popis za kupovinu'
+    } as Dialog;
+
+    const sub = this.dialog.openHellenaDialog(dialog)
+        .subscribe(res => {
+          if (res) {
+            this.itemDoneUnit($event);
+          }
+        });
+  }
+
+  private itemDoneUnit(element: ShoppingListTableItem): void {
+    const items = this.shoppingListService.getShoppingList();
+    const item = items.find(el => el.id === element.id);
+    if (item) {
+      item.isPurchased = true;
+      this.shoppingListService.replace(items);
+      this.updateShoppingListDataTable();
+    }
   }
 }

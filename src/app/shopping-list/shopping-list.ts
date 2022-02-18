@@ -7,6 +7,7 @@ export interface ShoppingListItem {
     store: string;
     activeTo?: Date;
     quantity: number;
+    isPurchased: boolean;
 }
 
 export interface AddItemToShoppingListEvent {
