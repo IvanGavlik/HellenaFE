@@ -36,7 +36,7 @@
 
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>
-                <button mat-stroked-button style="width: 100%" >
+                <button mat-stroked-button style="width: 100%" (click)="handleClear()" >
                     <mat-icon>delete_outline</mat-icon>
                 </button>
             </th>
@@ -68,5 +68,6 @@
         <tr mat-header-row *matHeaderRowDef="table.columnNames"></tr>
         <tr mat-row *matRowDef="let row; columns: table.columnNames" class="gx-0" ></tr>
     </table>
+
 
 </ng-container>
