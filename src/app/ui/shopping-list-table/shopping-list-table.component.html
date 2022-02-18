@@ -33,19 +33,20 @@
                     <mat-icon>toc</mat-icon>
                 </button>
                 <mat-menu #options="matMenu" xPosition="before" yPosition="below" >
-                    <button mat-menu-item mat-stroked-button>
+                    <button mat-menu-item>
                         <mat-icon>done</mat-icon>
                     </button>
-                    <button mat-menu-item mat-stroked-button>
+                    <button mat-menu-item>
                         <mat-icon>close</mat-icon>
                     </button>
-                    <button mat-stroked-button mat-menu-item>
+                    <button mat-menu-item>
                         <mat-icon>compare_arrows</mat-icon>
                     </button>
-                    <!-- on enter -->
-                    <mat-form-field mat-menu-item appearance="standard" (click)="$event.stopPropagation()">
-                        <input matInput placeholder="Količina" type="number" [value]="element.quantity" (click)="$event.stopPropagation()"  >
-                    </mat-form-field>
+
+                    <input mat-menu-item placeholder="Količina" type="number"
+                           [value]="element.quantity"
+                           (click)="$event.stopPropagation()"  >
+
                 </mat-menu>
 
             </td>

@@ -42,6 +42,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
         actionPrice: el.actionPrice,
         originalPrice: el.originalPrice,
         store: el.store,
+        quantity: el.quantity,
       } as ShoppingListTableItem );
     });
   }
