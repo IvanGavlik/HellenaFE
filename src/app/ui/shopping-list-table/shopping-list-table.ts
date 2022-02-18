@@ -13,4 +13,5 @@ export interface ShoppingListTableItem {
     store: string;
     activeTo?: Date;
     quantity: number;
+    isPurchased: boolean;
 }

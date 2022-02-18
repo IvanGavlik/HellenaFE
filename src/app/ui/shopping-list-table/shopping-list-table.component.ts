@@ -18,25 +18,8 @@ export class ShoppingListTableComponent implements OnDestroy {
   clear: EventEmitter<void> = new EventEmitter<void>();
 
   private subs: Subscription[] = [];
-  constructor(private dialog: DialogService) { }
+  constructor() { }
 
-  handleClear(): void {
-      const dialog = {
-          onOF: true,
-          content: 'Želite li obrisati popis za kupovinu ?',
-          title: 'Popis za kupovinu'
-      } as Dialog;
-
-      const sub = this.dialog.openHellenaDialog(dialog)
-        .subscribe(res => {
-          if (res && this.table) {
-              // @ts-ignore
-              this.table?.data = [];
-            }
-          });
-
-      this.subs.push(sub);
-  }
 
   ngOnDestroy(): void {
       this.subs.forEach(el => {

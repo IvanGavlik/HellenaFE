@@ -24,4 +24,8 @@ export class ShoppingListService {
     return this.localStorage.getShoppingLists();
   }
 
+  public clearShoppingList(): void {
+    this.localStorage.updateLocalStorage([]);
+  }
+
 }

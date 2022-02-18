@@ -3,6 +3,8 @@ import {ShoppingListTable, ShoppingListTableItem} from '../../ui/shopping-list-t
 import {SearchUIService} from '../../search-page/search-ui.service';
 import {ShoppingListService} from '../shopping-list.service';
 import {Subscription} from 'rxjs';
+import {Dialog} from '../../ui/dialog/dialog';
+import {DialogService} from '../../ui/dialog/dialog.service';
 
 @Component({
   selector: 'hellena-shopping-list',
@@ -20,7 +22,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   private subs: Subscription[] = [];
 
-  constructor(private searchUI: SearchUIService, private shoppingListService: ShoppingListService) { }
+  constructor(private searchUI: SearchUIService, private shoppingListService: ShoppingListService, private dialog: DialogService) { }
 
   ngOnInit(): void {
     const sub = this.searchUI.onTabChange().subscribe(tab => {
@@ -53,5 +55,23 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
         el.unsubscribe();
       }
     });
+  }
+
+  handleClear(): void {
+    const dialog = {
+      onOF: true,
+      content: 'Želite li obrisati popis za kupovinu ?',
+      title: 'Popis za kupovinu'
+    } as Dialog;
+
+    const sub = this.dialog.openHellenaDialog(dialog)
+        .subscribe(res => {
+          if (res && this.table) {
+            // @ts-ignore
+            this.table?.data = [];
+            this.shoppingListService.clearShoppingList();
+          }
+        });
+    this.subs.push(sub);
   }
 }

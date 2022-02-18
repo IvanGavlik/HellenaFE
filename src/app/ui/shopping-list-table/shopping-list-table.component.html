@@ -36,7 +36,7 @@
 
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>
-                <button mat-stroked-button style="width: 100%" (click)="handleClear()" >
+                <button mat-stroked-button style="width: 100%" (click)="clear.emit()" >
                     <mat-icon>delete_outline</mat-icon>
                 </button>
             </th>
