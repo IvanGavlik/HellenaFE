@@ -39,7 +39,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   private updateShoppingListDataTable(): void {
     this.table.data = [];
-    this.shoppingListService.getShoppingList().forEach(el => {
+    this.shoppingListService.getShoppingList()
+        .sort(el => el.isPurchased ? 1 : -1)
+        .forEach(el => {
       this.table.data.push( {
         id: el.id,
         name: el.name,
@@ -129,4 +131,14 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
 
+  handleItemCompare(): void {
+    const dialog = this.dialog.openHellenaDialog({
+      title: 'Usporedi',
+      onOF: false,
+      content: 'Uskoro dostupno'
+    } as Dialog ).subscribe(() => {
+      // TODO implement
+    });
+    this.subs.push(dialog);
+  }
 }

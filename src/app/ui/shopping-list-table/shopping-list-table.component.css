@@ -2,6 +2,10 @@
     width: 100%;
 }
 
+.green {
+    background: greenyellow;
+}
+
 .mat-row .mat-cell {
     border-bottom: 1px solid transparent;
 }
