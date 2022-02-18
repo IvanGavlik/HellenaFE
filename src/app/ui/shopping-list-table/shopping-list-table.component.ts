@@ -20,6 +20,9 @@ export class ShoppingListTableComponent implements OnDestroy {
   @Output()
   itemDone: EventEmitter<ShoppingListTableItem> = new EventEmitter<ShoppingListTableItem>();
 
+  @Output()
+  itemRemove: EventEmitter<ShoppingListTableItem> = new EventEmitter<ShoppingListTableItem>();
+
   private subs: Subscription[] = [];
   constructor() { }
 

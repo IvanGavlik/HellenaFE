@@ -105,4 +105,28 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       this.updateShoppingListDataTable();
     }
   }
+
+  handleItemRemove($event: ShoppingListTableItem): void {
+    const dialog = {
+      onOF: true,
+      content: 'Želite li ' + $event.name + ' maknuti sa popisa ?',
+      title: 'Popis za kupovinu'
+    } as Dialog;
+
+    const sub = this.dialog.openHellenaDialog(dialog)
+        .subscribe(res => {
+          if (res) {
+            this.itemRemoveUtil($event);
+          }
+        });
+  }
+
+  private itemRemoveUtil(item: ShoppingListTableItem): void {
+    const items = this.shoppingListService.getShoppingList()
+        .filter(el => item.id !== el.id);
+    this.shoppingListService.replace(items);
+    this.updateShoppingListDataTable();
+  }
+
+
 }
