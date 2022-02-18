@@ -17,14 +17,15 @@ import {Entity} from '../../crud/entity';
 })
 export class SearchFormComponent implements OnInit, OnDestroy {
 
-    // tslint:disable-next-line:variable-name
-  private _search: SearchItem = {} as SearchItem;
+
+  private searchItem: SearchItem = {} as SearchItem;
   get search(): SearchItem {
-      return this._search;
+      return this.searchItem;
   }
   @Input() set search(searchItem: SearchItem) {
-      this._search = searchItem;
-      this.searchForm.controls['name'].setValue(searchItem?.name);
+      this.searchItem = searchItem;
+      const name = 'name';
+      this.searchForm.controls[name].setValue(searchItem?.name);
   }
 
   @Output()
@@ -198,9 +199,9 @@ export class SelectMultiple<ELEMENT extends Pair<any, any>> {
             startWith(null),
             map((pairList: string | Pair<any, any>) => {
                 if (typeof pairList === 'string') {
-                    return this._fiterByString(pairList);
+                    return this.filterByString(pairList);
                 }
-                return (pairList ? this._filterByPair(pairList) : this.allItems);
+                return (pairList ? this.filterByPair(pairList) : this.allItems);
             }),
         );
 
@@ -231,11 +232,11 @@ export class SelectMultiple<ELEMENT extends Pair<any, any>> {
         }
     }
 
-    private _filterByPair(pairList: Pair<any, any>): ELEMENT[] {
+    private filterByPair(pairList: Pair<any, any>): ELEMENT[] {
         return this.allItems.filter(el => el === pairList);
     }
 
-    private _fiterByString(input: string): ELEMENT[] {
+    private filterByString(input: string): ELEMENT[] {
         return this.allItems.filter(el => el.value.toString()?.toLowerCase().includes(input?.toLowerCase()));
     }
 }

@@ -1,6 +1,5 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
-import {CardContainer} from "../../ui/card-container/card-container";
-import {SpinnerConfig} from '../../ui/spinner/spinner-config';
+import {Component, OnInit} from '@angular/core';
+import {CardContainer} from '../../ui/card-container/card-container';
 
 @Component({
   selector: 'app-front-page',
