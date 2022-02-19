@@ -1,5 +1,5 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ShoppingListTable, ShoppingListTableItem} from '../../ui/shopping-list-table/shopping-list-table';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ShoppingListTable, ShoppingListTableItem, ShoppingListTableSum} from '../../ui/shopping-list-table/shopping-list-table';
 import {SearchUIService} from '../../search-page/search-ui.service';
 import {ShoppingListService} from '../shopping-list.service';
 import {Subscription} from 'rxjs';
@@ -13,11 +13,11 @@ import {DialogService} from '../../ui/dialog/dialog.service';
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
 
-
   table: ShoppingListTable = {
     columnNames: ['icon', 'name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
     data: [],
     totalCount: 100,
+    sum : { sumDone: 0, sumAll: 0 } as ShoppingListTableSum
   } as ShoppingListTable;
 
   private subs: Subscription[] = [];
@@ -39,20 +39,28 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   private updateShoppingListDataTable(): void {
     this.table.data = [];
+    this.table.sum = { sumDone: 0, sumAll: 0 } as ShoppingListTableSum;
     this.shoppingListService.getShoppingList()
         .sort(el => el.isPurchased ? 1 : -1)
         .forEach(el => {
-      this.table.data.push( {
-        id: el.id,
-        name: el.name,
-        activeTo: el.activeTo,
-        icon: el.icon,
-        actionPrice: el.actionPrice,
-        originalPrice: el.originalPrice,
-        store: el.store,
-        quantity: el.quantity,
-        isPurchased: el.isPurchased,
-      } as ShoppingListTableItem );
+          const item =  {
+            id: el.id,
+            name: el.name,
+            activeTo: el.activeTo,
+            icon: el.icon,
+            actionPrice: el.actionPrice,
+            originalPrice: el.originalPrice,
+            store: el.store,
+            quantity: el.quantity,
+            isPurchased: el.isPurchased,
+          } as ShoppingListTableItem;
+
+          this.table.data.push( item );
+          const price = item.actionPrice * item.quantity;
+          this.table.sum.sumAll += price;
+          if (item.isPurchased) {
+            this.table.sum.sumDone += price;
+          }
     });
   }
 

@@ -1,7 +1,7 @@
 export interface ShoppingListTable {
     columnNames: string[];
     data: ShoppingListTableItem[];
-    totalCount: number;
+    sum: ShoppingListTableSum;
 }
 
 export interface ShoppingListTableItem {
@@ -14,4 +14,9 @@ export interface ShoppingListTableItem {
     activeTo?: Date;
     quantity: number;
     isPurchased: boolean;
+}
+
+export interface ShoppingListTableSum {
+    sumAll: number;
+    sumDone: number;
 }

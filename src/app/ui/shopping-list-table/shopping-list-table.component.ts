@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs';
 })
 export class ShoppingListTableComponent implements OnDestroy {
 
-    @Input()
+  @Input()
   table?: ShoppingListTable;
 
   @Output()

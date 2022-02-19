@@ -9,12 +9,15 @@
 
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>
-                <span style="font-size: medium; color: grey;  text-decoration: line-through; margin-right: 0.5rem;" > originalPrice  kn </span>
-                <span style="font-size: large; color: blue;  margin-right: 0.5rem;" > actionPrice  kn </span>
-                <br>
-                <span style="font-size: medium; color: grey;" >
-                    Ušteda 123  kn
+                <ng-container *ngIf="table.data.length > 0 else noData">
+                    <span style="font-size: medium; color: grey;  margin-right: 0.5rem;" >
+                        Ukupno: {{ table.sum.sumAll | number : '1.2-2' }} kn
+                        <span style="color: limegreen" > ({{ table.sum.sumDone | number : '1.2-2' }} kn) </span>
                     </span>
+                </ng-container>
+                <ng-template #noData >
+                    <span style="font-size: medium; color: grey; margin-right: 0.5rem;" > Popis za kupovinu je prazan </span>
+                </ng-template>
             </th>
             <td mat-cell *matCellDef="let element">
                 <span style="font-size: large" > {{ element.name }} </span>
@@ -36,9 +39,11 @@
 
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>
-                <button mat-stroked-button style="width: 100%" (click)="clear.emit()" [disabled]="table.data.length < 1" >
-                    <mat-icon>delete_outline</mat-icon>
-                </button>
+                <ng-container *ngIf="table.data.length > 0">
+                    <button mat-stroked-button style="width: 100%" (click)="clear.emit()" >
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                </ng-container>
             </th>
             <td mat-cell *matCellDef="let element" >
 
@@ -67,7 +72,7 @@
             </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="table.columnNames"></tr>
+        <tr mat-header-row *matHeaderRowDef="table.columnNames" ></tr>
         <tr mat-row *matRowDef="let row; columns: table.columnNames" class="gx-0" [ngClass]="row.isPurchased ? 'green' :''" ></tr>
     </table>
 
