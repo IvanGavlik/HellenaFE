@@ -69,9 +69,6 @@ section {
 
 }
 
-.mobile-size {
-    max-width: 100%;
-}
 
 @media(max-width: 600px) {
     .mobile-label {
@@ -90,9 +87,6 @@ section {
         padding: 8px 24px;
     }
 
-    .mobile-size {
-        max-width: 260px;
-    }
 
     .no-pad-left {
         padding-left: 5px;
