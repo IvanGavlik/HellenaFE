@@ -51,3 +51,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @media (min-width: 1400px) {
 
 }
+
+/* https://stackoverflow.com/questions/53213555/mat-tab-body-wrapper-cannot-edit-css-angular */
+.mat-tab-body-content {
+    overflow: hidden !important;
+}
