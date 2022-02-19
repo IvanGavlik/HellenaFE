@@ -89,11 +89,8 @@ section {
         align-items: start;
         padding: 8px 24px;
     }
-}
-
-@media(max-width: 400px) {
     .mobile-size {
-        max-width: 270px;
+        max-width: 260px;
     }
 
     .no-pad-left {

@@ -57,7 +57,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     overflow: hidden !important;
 }
 
-@media(max-width: 400px) {
+@media(max-width: 600px) {
     td.mat-cell:first-of-type {
         padding-left: 5px !important;
     }
