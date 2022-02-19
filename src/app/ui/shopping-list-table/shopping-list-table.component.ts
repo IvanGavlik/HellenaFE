@@ -24,6 +24,9 @@ export class ShoppingListTableComponent implements OnDestroy {
   @Output()
   itemCompare: EventEmitter<void> = new EventEmitter<void>();
 
+  @Output()
+  itemQuantity: EventEmitter<ShoppingListTableItem> = new EventEmitter<ShoppingListTableItem>();
+
   private subs: Subscription[] = [];
   constructor() { }
 
@@ -34,6 +37,30 @@ export class ShoppingListTableComponent implements OnDestroy {
               el.unsubscribe();
           }
       });
+  }
+
+  onChange(item: ShoppingListTableItem, $event: Event): void {
+      // TODO 1.5 CASE letters case
+      // @ts-ignore
+      if ($event.target.value && $event.target.value > 0) {
+          const el = {
+              name: item.name,
+              icon: item.icon,
+              originalPrice: item.originalPrice,
+              actionPrice: item.actionPrice,
+              store: item.store,
+              activeTo: item.activeTo,
+              id: item.id,
+              isPurchased: item.isPurchased,
+              // @ts-ignore
+              quantity: $event.target.value,
+          } as ShoppingListTableItem;
+          this.itemQuantity.emit(el);
+      } else {
+          // @ts-ignore
+          $event.target.value = item.quantity;
+          $event.preventDefault();
+      }
   }
 }
 

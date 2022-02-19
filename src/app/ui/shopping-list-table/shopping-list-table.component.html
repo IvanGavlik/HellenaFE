@@ -52,14 +52,16 @@
                     <button mat-menu-item (click)="itemRemove.emit(element)" >
                         <mat-icon>close</mat-icon>
                     </button>
-                    <button mat-menu-item (click)="itemCompare.emit()" >
+                    <button mat-menu-item
+                            (click)="itemCompare.emit()" >
                         <mat-icon>compare_arrows</mat-icon>
                     </button>
 
                     <input mat-menu-item placeholder="Količina" type="number"
                            [value]="element.quantity"
-                           (click)="$event.stopPropagation()"  >
-
+                           [disabled]="element.isPurchased"
+                           (change)="onChange(element, $event)"
+                           (click)="$event.stopPropagation()" >
                 </mat-menu>
 
             </td>

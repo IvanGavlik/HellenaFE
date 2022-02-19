@@ -141,4 +141,30 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     });
     this.subs.push(dialog);
   }
+
+  handleItemQuantity($event: ShoppingListTableItem): void {
+    const dialog = {
+      onOF: true,
+      content: 'Želite li količinu postaviti na ' +  $event.quantity + ' ?',
+      title: 'Popis za kupovinu'
+    } as Dialog;
+
+    const sub = this.dialog.openHellenaDialog(dialog)
+        .subscribe(res => {
+          if (res) {
+            this.itemQuantityUtil($event);
+          }
+        });
+  }
+
+  itemQuantityUtil(element: ShoppingListTableItem): void {
+    const items = this.shoppingListService.getShoppingList();
+    const item = items.find(el => el.id === element.id);
+    if (item) {
+      item.quantity = element.quantity;
+      this.shoppingListService.replace(items);
+      this.updateShoppingListDataTable();
+    }
+  }
+
 }
