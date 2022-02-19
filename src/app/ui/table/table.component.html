@@ -16,6 +16,7 @@
             <ng-template #allInfo>
                 <span style="font-size: medium; color: grey;  text-decoration: line-through; margin-right: 0.5rem;" > {{ element.originalPrice }}  kn </span>
                 <span style="font-size: large; color: blue;  margin-right: 0.5rem;" > {{ element.actionPrice }}  kn </span>
+                <br>
                 <span style="font-size: medium; color: grey;" >
                     Ušteda {{ (element.originalPrice - element.actionPrice)  | number : '1.2-2' }}  kn
                 </span>
