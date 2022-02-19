@@ -79,6 +79,5 @@ section {
     .mat-row {
         flex-direction: column;
         align-items: start;
-        padding: 8px 24px;
     }
 }
