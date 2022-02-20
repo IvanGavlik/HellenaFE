@@ -141,7 +141,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   handleItemCompare(): void {
     const dialog = this.dialog.openHellenaDialog({
-      title: 'Usporedi',
+      title: 'Postoji li povoljnije ?',
       onOF: false,
       content: 'Uskoro dostupno'
     } as Dialog ).subscribe(() => {
