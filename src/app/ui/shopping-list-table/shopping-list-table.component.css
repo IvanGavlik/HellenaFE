@@ -89,7 +89,7 @@ section {
 
 @media(max-width: 400px) {
     .mobile-size {
-        max-width: 270px;
+        max-width: 260px;
     }
 
     .no-pad-left {
