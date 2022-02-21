@@ -106,12 +106,22 @@ export class SearchComponent implements OnInit, OnDestroy {
   toTableItem(el: ItemSearchEntity): TableItem {
     return {
       id: el.id,
-      icon: '../../assets/image/spar-logo_1x.png',
+      icon: this.getIcon(el.storeName),
       name: el.name,
       actionPrice: el.actionPrice,
       originalPrice: el.orginalPrice,
       store: el.storeName,
     } as TableItem;
+  }
+
+  private getIcon(store: string): string {
+    if (store.includes('Lidl')) {
+      return '../../assets/image/lidl.png';
+    }
+    if (store.includes('Intespar')) {
+      return '../../assets/image/spar-logo_1x.png';
+    }
+    return '';
   }
 
   haveData(input: any): boolean {
