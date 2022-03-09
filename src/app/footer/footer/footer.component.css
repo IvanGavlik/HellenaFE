@@ -1,0 +1,93 @@
+
+.footerSection {
+    padding-top: 30px;
+}
+
+.footerLogo h1 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 43px;
+    line-height: 44px;
+    margin-bottom: 40px;
+    background-image: linear-gradient(180deg, #550ACD 0%, #8001D9 100%);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.footerContent p {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 30px;
+    color: #263238;
+}
+
+.importantLink h1{
+ 
+    font-style: normal;
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 28px;
+    color: #263238;
+    margin-bottom: 40px;
+ 
+}
+.importantLink a{
+    display: block;
+    text-decoration: none;
+    font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 26px;
+line-height: 38px;
+color: #263238;
+}
+
+.socialLInk h1{
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 28px;
+    color: #263238;
+    margin-bottom: 40px;
+ 
+}
+.socialLInk a{
+    display: block;
+    text-decoration: none;
+    font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 26px;
+line-height: 38px;
+color: #263238;
+}
+.copyRight{
+    margin-top: 80px;
+    padding: 10px 0px;
+    border-top: 1px solid rgba(0, 0, 0, 0.44);
+}
+.copyRight p{
+    font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 26px;
+line-height: 30px;
+color: #A3A6A8;
+}
+.copyRight p b{
+    background-image: linear-gradient(180deg, #550ACD 0%, #8001D9 100%);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
