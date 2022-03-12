@@ -1,9 +1,118 @@
-<hellena-card-container [cardContainer]="itemCategoryContainer"
-  (footerAction)="handleFooterActionContainer($event)"
->
-  <app-card *ngFor="let item of cards$ | async"
-            [card]="item"
-            (footerAction)="handleFooterActionCard($event)"
-  >
-  </app-card>
-</hellena-card-container >
+
+<section class="categories">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="categoryHeading">
+          <h1><span class="bottomColor">Istraži</span> kategorije</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-3" style="max-width: 100%;">
+          <div class="row g-0">
+            <div class="col-md-4 cardImage">
+              <img src="../../../assets/image/category (4).png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Vegetables</h5>
+                <p class="card-text">It is a long established fact that a reader will be distracted by the readable content of a</p>
+                <a class="card-text">See More <img src="../../../assets/image/Double arrow.svg" alt=""></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+       <div class="col-md-4">
+        <div class="card mb-3" style="max-width: 100%;">
+          <div class="row g-0">
+            <div class="col-md-4 cardImage">
+              <img src="../../../assets/image/category (3).png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Vegetables</h5>
+                <p class="card-text">It is a long established fact that a reader will be distracted by the readable content of a</p>
+                <a class="card-text">See More <img src="../../../assets/image/Double arrow.svg" alt=""></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-3" style="max-width: 100%;">
+          <div class="row g-0">
+            <div class="col-md-4 cardImage">
+              <img src="../../../assets/image/category (5).png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Vegetables</h5>
+                <p class="card-text">It is a long established fact that a reader will be distracted by the readable content of a</p>
+                <a class="card-text">See More <img src="../../../assets/image/Double arrow.svg" alt=""></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-3" style="max-width: 100%;">
+          <div class="row g-0">
+            <div class="col-md-4 cardImage">
+              <img src="../../../assets/image/category (1).png class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Vegetables</h5>
+                <p class="card-text">It is a long established fact that a reader will be distracted by the readable content of a</p>
+                <a class="card-text">See More <img src="../../../assets/image/Double arrow.svg" alt=""></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-3" style="max-width: 100%;">
+          <div class="row g-0">
+            <div class="col-md-4 cardImage">
+              <img src="../../../assets/image/category (4).png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Vegetables</h5>
+                <p class="card-text">It is a long established fact that a reader will be distracted by the readable content of a</p>
+                <a class="card-text">See More <img src="../../../assets/image/Double arrow.svg" alt=""></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-3" style="max-width: 100%;">
+          <div class="row g-0">
+            <div class="col-md-4 cardImage">
+              <img src="../../../assets/image/category (2).png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Vegetables</h5>
+                <p class="card-text">It is a long established fact that a reader will be distracted by the readable content of a</p>
+                <a class="card-text">See More <img src="../../../assets/image/Double arrow.svg" alt=""></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="seeMoreBtn">
+          <a href="#">See More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

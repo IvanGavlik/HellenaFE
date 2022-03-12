@@ -1,43 +1,76 @@
 <!-- Header-->
-<app-header [title]="subTitle" ></app-header>
+<app-header [title]="subTitle"></app-header>
 
 <div class="container-md g-1">
   <section class="py-5" style="padding-bottom: 0 !important; padding-top: 0 !important; ">
-  <hellena-daily-deal-container>
-  </hellena-daily-deal-container>
-</section>
-<section class="py-5" style="padding-bottom: 0 !important; padding-top: 0 !important; " >
-  <div class="container px-4 px-lg-5 mt-5">
-    <div class="row">
-    <div class="col-md-6 col-sm-12" >
-      <div class="text-secondary" >
-      <h4 class="text-decoration-underline" > Akcije iz svih trgovina na jednom mjestu </h4>
-      <p> Hellena je tvoja <b> mala pomoćnica </b> za pronalaženje najboljih ponuda. Hellena ima pristup
-        svim aktualnim katalozima te ti omogućuje njihovo jednostavno pretraživanje. </p>
-      <ul>
-        <li> <h5> Brzo pronađi ono što trebaš </h5> </li>
-        <li> <h5> Usporedi cijene i kvalitetu te izaberi najbolje za sebe </h5> </li>
-        <li> <h5> Napravi popis za kupovinu</h5></li>
-      </ul>
-        <br>
+    <hellena-daily-deal-container>
+    </hellena-daily-deal-container>
+  </section>
+  <section class="detailsInformation">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="detailHeading">
+            <h1><span class="bottomColor">Akcije</span> iz svih trgovina na jednom mjestu</h1>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5 mb-5">
+        <div class="col-md-6">
+          <div class="mainContent">
+            <div class="topImage">
+              <img src="../../../assets/image/Group 16.png" alt="">
+              <h1>Brzo pronađi ono što trebš</h1>
+              <p>It is a long established fact that a reader will be distracted by the readable content of a page when
+                looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
+                of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mainImage">
+            <img src="../../../assets/image/Eco shopping-amico 1.png" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="row gapSet">
+        <div class="col-md-6">
+          <div class="mainImage">
+            <img src="../../../assets/image/bro.png" alt="">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mainContent">
+            <div class="topImage">
+              <img src="../../../assets/image/Group 16.png" alt="">
+              <h1>Usporedi cijene i kvalitetu te izaberi najbolje 
+                za sebe</h1>
+              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+       <div class="row mt-5 mb-5">
+        <div class="col-md-6">
+          <div class="mainContent">
+            <div class="topImage">
+              <img src="../../../assets/image/Group 20.png" alt="">
+              <h1>Napravi popis za kupovinu</h1>
+              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mainImage">
+            <img src="../../../assets/image/amico.png" alt="">
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-6 col-sm-12" >
-      <div class="bg-secondary" style="border: 1px solid #5f6368; border-radius: 5%; padding: 5%; color: white" >
-        <p><i> "Super mi je što su napokon ponude iz svih kataloga na jednom mjestu." </i></p>
-       <h5 style="text-align: right" > Marko </h5>
-      </div>
-      <div class="bg-secondary" style="border: 1px solid #5f6368; border-radius: 5%; padding: 5%; color: white; margin-top: 1rem;" >
-      <p> <i> "Kupujem pelene i svako malo morala sam listati letke kako bih pronašla one koje odgovaraju
-        mom djetetu, sada samo jednostavno upišem pelene i odmah imam ponudu iz svih trgovina na jednom mjestu."</i> </p>
-      <h5 style="text-align: right" > Ana </h5>
-      </div>
-    </div>
-  </div>
-  </div>
-</section>
-<section class="py-5" style="padding-top: 0 !important; ">
-  <hellena-item-category-container>
-  </hellena-item-category-container>
-</section>
+  </section>
+  <section class="py-5" style="padding-top: 0 !important; ">
+    <hellena-item-category-container>
+    </hellena-item-category-container>
+  </section>
 </div>
