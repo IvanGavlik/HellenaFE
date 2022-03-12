@@ -13,7 +13,6 @@
 
 .detailHeading .bottomColor {
     position: relative;
-
 }
 
 .detailHeading .bottomColor:after {
@@ -75,4 +74,128 @@
 
 .gapSet {
     margin: 120px 0px;
+}
+
+
+/* faq section */
+
+.faqSection {
+    padding: 100px 0px;
+    position: relative;
+}
+
+.faqCurve {
+    background: linear-gradient(180deg, #8001D9 -0.55%, #550ACD 99.44%);
+    -webkit-transform: skew(0deg, -6deg);
+    transform: skew(0deg, -6deg);
+    padding: 110px 0;
+}
+
+.faqContent {
+    width: 100%;
+    -webkit-transform: skew(0deg, 6deg);
+    transform: skew(0deg, 6deg);
+}
+
+.faqSection .accordion-button {
+    background-color: transparent !important;
+}
+
+.faqSection .accordion-item {
+    border: none !important;
+    background-color: transparent !important;
+}
+
+.accordion-button:before {
+    background-image: url("../../../assets/image/plus.png");
+    position: absolute;
+    bottom: -11px;
+    left: -1px;
+    border-bottom: 12px solid transparent;
+    border-right: 12px solid #3DC9B3;
+}
+
+.accordion-button:not(.collapsed):before {
+    display: none;
+    background-image: url("../../../assets/image/minus.png");
+}
+
+.accordion-button:after {
+    background-image: url("../../../assets/image/plus.png");
+    transform: scale(0.75) !important;
+    width: 50px;
+    height: 50px;
+    background-size: 48px;
+    order: -1;
+    margin-left: 0;
+    margin-right: 0.5em;
+}
+
+.accordion-button:not(.collapsed):after {
+    background-image: url("../../../assets/image/minus.png");
+}
+
+.accordion h2 a {
+    text-decoration: none;
+}
+
+.accordion h2 span {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 26px;
+    /* identical to box height */
+    text-transform: capitalize;
+    color: #FFFFFF;
+}
+
+.accordion .accordion-collapse .card-body {
+    padding: 5px 70px !important;
+}
+
+.accordion .accordion-collapse .card-body p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 23px;
+    text-transform: capitalize;
+    color: #C4C4C4;
+}
+
+.accordion-button:not(.collapsed) {
+    box-shadow: none !important;
+}
+
+.faqHeading h1 {
+    text-align: center;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 52px;
+    line-height: 58px;
+    text-transform: capitalize;
+    color: #FFFFFF;
+    padding: 30px 0px;
+}
+
+.faqSet {
+    position: relative;
+}
+
+.faqImage {
+    position: absolute;
+}
+
+.faqImage img {
+    /* position: relative; */
+    width: auto;
+    height: 380px;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
 }

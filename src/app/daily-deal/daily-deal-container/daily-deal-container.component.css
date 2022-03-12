@@ -1,0 +1,122 @@
+.favorableItem {
+    padding: 50px 0px;
+}
+
+.favorableItem .card {
+    background: #FFFFFF !important;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.15) !important;
+    border-radius: 34px !important;
+}
+
+.favorableItem .card-body {
+    padding: 20px !important;
+}
+
+.favorableItem .favorableHeading h1 {
+    position: relative;
+    text-align: center;
+    padding: 40px 0px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 54px;
+    color: #272727;
+    margin-bottom: 30px;
+}
+
+.favorableItem .favorableHeading .bottomColor {
+    position: relative;
+}
+
+.favorableItem .favorableHeading .bottomColor:after {
+    content: '';
+    height: 5px;
+    width: 100%;
+    background: #550ACD;
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    right: 0;
+    border-radius: 13px;
+    -webkit-border-radius: 13px;
+    -moz-border-radius: 13px;
+    -ms-border-radius: 13px;
+    -o-border-radius: 13px;
+}
+
+.favorableItem .card-body .price {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 35px;
+    text-transform: capitalize;
+    color: #550ACD;
+}
+
+.favorableItem .card-body .price span {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 27px;
+    text-decoration-line: line-through;
+    text-transform: capitalize;
+    color: #C4C4C4;
+}
+
+.favorableItem .card-body img {
+    width: 100%;
+}
+
+.favorableItem .card-body p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 27px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #000000;
+}
+
+.favorableItem .card-body .viewBtn {
+    margin-top: 35px;
+    text-align: end;
+}
+
+.favorableItem .card-body a {
+    text-decoration: none;
+    background: #550ACD;
+    box-shadow: 0 3px 4px 0px #550acd7a;
+    border-radius: 25px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 19px;
+    text-transform: capitalize;
+    color: #fff;
+    padding: 9px 33px;
+}
+
+.seeMoreBtn {
+    padding: 50px 0px;
+    text-align: center;
+}
+
+.seeMoreBtn a {
+    text-decoration: none;
+    background: #550ACD;
+    box-shadow: 0 5px 8px 3px #550acd7a;
+    border-radius: 12px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 25px;
+    text-transform: capitalize;
+    color: #fff;
+    padding: 16px 37px;
+}

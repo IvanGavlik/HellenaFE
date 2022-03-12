@@ -1,19 +1,70 @@
-<hellena-card-container [cardContainer]="dailyDealContainer"
-                        (footerAction)="handleFooterActionContainer($event)"
->
-    <app-card *ngFor="let item of cards$ | async"
-              [card]="item"
-              (footerAction)="handleFooterActionCard($event)"
-    >
-        <div style="text-align: right;" >
-            <div>
-                <span style="font-size: medium; color: grey;  text-decoration: line-through; margin-right: 0.5rem;" >
-                {{ item.oldPrice }}
-                </span>
+<hellena-card-container>
+<section class="favorableItem">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="favorableHeading">
+                    <h1><span class="bottomColor">Najpo</span>voljnije Danas</h1>
+                </div>
             </div>
-            <span style="font-size: large; margin-right: 0.5rem;" >
-                {{ item.desc }}
-            </span>
         </div>
-    </app-card>
-</hellena-card-container >
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="price">21.99kn <span> 39.99kn</span></h5>
+                      <img src="../../../assets/image/favo (1).png" alt="">
+                      <p class="card-text">Svježi svinjski kotleti cca 600g</p>
+                      <div class="viewBtn">
+                        <a href="#">View</a>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="price">21.99kn <span> 39.99kn</span></h5>
+                      <img src="../../../assets/image/favo (1).png" alt="">
+                      <p class="card-text">Svježi svinjski kotleti cca 600g</p>
+                      <div class="viewBtn">
+                        <a href="#">View</a>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="price">21.99kn <span> 39.99kn</span></h5>
+                      <img src="../../../assets/image/favo (1).png" alt="">
+                      <p class="card-text">Svježi svinjski kotleti cca 600g</p>
+                      <div class="viewBtn">
+                        <a href="#">View</a>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="price">21.99kn <span> 39.99kn</span></h5>
+                      <img src="../../../assets/image/favo (1).png" alt="">
+                      <p class="card-text">Svježi svinjski kotleti cca 600g</p>
+                      <div class="viewBtn">
+                        <a href="#">View</a>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="seeMoreBtn">
+                    <a href="#">See More</a>
+                  </div>
+            </div>
+        </div>
+    </div>
+</section>
+</hellena-card-container>
