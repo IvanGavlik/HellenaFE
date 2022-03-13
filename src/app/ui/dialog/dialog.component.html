@@ -1,19 +1,79 @@
-<h3 mat-dialog-title  class="text-secondary" > {{ dialog.title }} </h3>
-<mat-dialog-content>
-    {{ dialog.content }}
-</mat-dialog-content>
-<mat-dialog-actions align="center">
-    <div *ngIf="dialog.onOF; else ok">
-        <button mat-stroked-button [mat-dialog-close]="false" style="width: 45%" >
-            <mat-icon>close</mat-icon>
+<div class="container-fluid">
+    <h3 mat-dialog-title class="text-secondary"> {{ dialog.title }} </h3>
+    <mat-dialog-content>
+        <!-- {{ dialog.content }} -->
+        <table class="table-responsive table align-middle table-borderless">
+            <tbody>
+
+                <ng-container>
+                    <td class="iconImage">
+                        <label class="checkbox bounce">
+                    <input type="checkbox">
+                    <svg viewBox="0 0 21 21">
+                        <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                    </svg>
+                </label>
+                        <img src="../../../assets/image/lidl.png" />
+                    </td>
+                </ng-container>
+
+                <ng-container>
+                    <td class="productInfo">
+                        <h1>namr </h1>
+                        <h5> 201 kn</h5>
+                        <ng-template>
+                            <h5>10 kn <span> 41 kn </span></h5>
+                        </ng-template>
+                        <br>
+                    </td>
+                </ng-container>
+
+                <ng-container>
+                    <td class="buttonDesign">
+                        <div>
+                            <button class="addCart">
+                    Add To Cart
+                </button>
+                            <button class="similarBtn">
+                    Similar Item
+                </button>
+                        </div>
+
+                    </td>
+                </ng-container>
+            </tbody>
+        </table>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+        <div *ngIf="dialog.onOF; else ok">
+            <button mat-stroked-button [mat-dialog-close]="false" style="width: 45%">
+           close
         </button>
-        <button mat-stroked-button  [mat-dialog-close]="true" cdkFocusInitial style="width: 45%">
+            <button mat-stroked-button [mat-dialog-close]="true" cdkFocusInitial style="width: 45%">
+            done
+        </button>
+        </div>
+        <ng-template #ok>
+            <button mat-stroked-button [mat-dialog-close]="true" cdkFocusInitial style="width: 70%">
             <mat-icon>done</mat-icon>
         </button>
+        </ng-template>
+    </mat-dialog-actions>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <ng-template #ok>
-        <button mat-stroked-button  [mat-dialog-close]="true" cdkFocusInitial style="width: 70%">
-            <mat-icon>done</mat-icon>
-        </button>
-    </ng-template>
-</mat-dialog-actions>
+</div>

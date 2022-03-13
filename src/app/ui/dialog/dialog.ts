@@ -3,3 +3,4 @@ export interface Dialog {
     content: string;
     onOF: boolean;
 }
+

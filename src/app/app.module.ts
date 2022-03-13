@@ -7,6 +7,7 @@ import {NavigationModule} from './navigation/navigation.module';
 import {FooterModule} from './footer/footer.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { CarouselModule } from 'ngx-owl-carousel-o';
 @NgModule({
   declarations: [
     AppComponent
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         FooterModule,
         BrowserModule,
         AppRoutingModule,
+        CarouselModule,
         BrowserAnimationsModule,
     ],
   providers: [],

@@ -7,6 +7,8 @@ import {UiModule} from "../ui/ui.module";
 import {HeaderModule} from "../header/header.module";
 import {DailyDealModule} from '../daily-deal/daily-deal.module';
 
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
 @NgModule({
   declarations: [
     FrontPageComponent,
@@ -15,6 +17,7 @@ import {DailyDealModule} from '../daily-deal/daily-deal.module';
         CommonModule,
         ItemModule,
         ItemCategoryModule,
+        CarouselModule,
         UiModule,
         HeaderModule,
         DailyDealModule,

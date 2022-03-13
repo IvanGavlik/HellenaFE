@@ -1,61 +1,49 @@
 <ng-container *ngIf="table">
-<table mat-table [dataSource]="table.data" class="mat-elevation-z8 demo-table">
-    <ng-container matColumnDef="icon">
-        <td mat-cell *matCellDef="let element" class="no-pad-left" >
-         <img class="md-hide" [src]="element.icon" />
-        </td>
-    </ng-container>
 
-    <ng-container matColumnDef="name">
-        <td mat-cell *matCellDef="let element" class="mobile-size" >
-            <span style="font-size: large" >{{ element.name }} </span>
-            <br>
-            <span *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"
-                    style="font-size: large; color: blue" > {{ element.actionPrice }}  kn
-            </span>
-            <ng-template #allInfo>
-                <span style="font-size: medium; color: grey;  text-decoration: line-through; margin-right: 0.5rem;" > {{ element.originalPrice }}  kn </span>
-                <span style="font-size: large; color: blue;  margin-right: 0.5rem;" > {{ element.actionPrice }}  kn </span>
+    <table mat-table [dataSource]="table.data" class="table-responsive table align-middle table-borderless">
+
+        <ng-container matColumnDef="icon">
+            <td mat-cell *matCellDef="let element" class="iconImage">
+                <label class="checkbox bounce">
+                        <input type="checkbox">
+                        <svg viewBox="0 0 21 21">
+                            <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                        </svg>
+                    </label>
+                <img [src]="element.icon" />
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <td mat-cell *matCellDef="let element" class="productInfo">
+                <h1>{{ element.name }} </h1>
+                <h5 *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"> {{ element.actionPrice }} kn</h5>
+                <ng-template #allInfo>
+                    <h5>{{ element.originalPrice }} kn <span> {{ element.actionPrice }} kn </span></h5>
+                </ng-template>
                 <br>
-                <span style="font-size: medium; color: grey;" >
-                    Ušteda {{ (element.originalPrice - element.actionPrice)  | number : '1.2-2' }}  kn
-                </span>
-            </ng-template>
-            <br>
-            <span style="text-overflow: ellipsis; white-space: nowrap; font-size: smaller" > {{ element.store }} </span>
-            <!-- TODO disply location on map only full web page-->
-        </td>
-    </ng-container>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="actions">
-        <td mat-cell *matCellDef="let element" >
-            <div>
-                <button mat-stroked-button [matMenuTriggerFor]="options" style="width: 100%">
-                    <mat-icon>toc</mat-icon>
-                </button>
-                <mat-menu #options="matMenu">
-                    <button mat-menu-item
-                            (click)="addTableItemToShoppingList.emit(element)">
-                        <mat-icon>shopping_cart</mat-icon>
+        <ng-container matColumnDef="actions">
+            <td class="buttonDesign" mat-cell *matCellDef="let element">
+                <div>
+                    <button class="addCart" mat-menu-item (click)="addTableItemToShoppingList.emit(element)">
+                        Add To Cart
                     </button>
-                    <button mat-menu-item
-                            (click)="compareTableItem.emit(element)">
-                        <mat-icon>compare_arrows</mat-icon>
+                    <button class="similarBtn" mat-menu-item (click)="compareTableItem.emit(element)">
+                        Similar Item
                     </button>
-                </mat-menu>
-            </div>
+                </div>
 
-        </td>
-    </ng-container>
+            </td>
+        </ng-container>
 
-    <tr mat-row *matRowDef="let row; columns: table.columnNames" class="gx-0" ></tr>
-</table>
+        <tr mat-row *matRowDef="let row; columns: table.columnNames"></tr>
+    </table>
 
 
-    <mat-paginator [pageSizeOptions]="[12, 24]"
-                   [length]="table.totalCount"
-                   showFirstLastButtons
-                   aria-label="Select page of periodic elements">
+    <mat-paginator [pageSizeOptions]="[12, 24]" [length]="table.totalCount" showFirstLastButtons aria-label="Select page of periodic elements">
     </mat-paginator>
 
 </ng-container>

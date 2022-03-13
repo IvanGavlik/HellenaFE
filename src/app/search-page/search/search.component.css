@@ -1,22 +1,81 @@
-.element {
-    background-color: #fff;
-    border: 1px #dadce0 solid;
-    color: #5f6368;
-    fill: #5f6368;
-    border-radius: 8px;
-    display: inline-block;
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.right {
-    margin-right: 0.5rem;
-}
-
-.center {
+.detailHeading {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+}
+
+.detailHeading h1 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #FFFFFF;
+}
+
+.detailHeading .bottomColor {
+    position: relative;
+}
+
+.detailHeading .bottomColor:after {
+    content: '';
+    height: 5px;
+    width: 100%;
+    background: #000;
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    right: 0;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    -ms-border-radius: 14px;
+    -o-border-radius: 14px;
+}
+
+.detailHeading p {
+    margin-top: 35px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 29px;
+    /* or 163% */
+    text-align: justify;
+    text-transform: capitalize;
+    color: #FFFFFF;
+}
+
+.rightimage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rightimage img {
+    width: 100%;
+}
+
+.faqSection {
+    padding: 100px 0px;
+    position: relative;
+}
+
+.faqCurve {
+    background: linear-gradient(180deg, #8001D9 -0.55%, #550ACD 99.44%);
+    -webkit-transform: skew(0deg, -4deg);
+    transform: skew(0deg, -4deg);
+    padding: 110px 0;
+    -moz-transform: skew(0deg, -4deg);
+    -ms-transform: skew(0deg, -4deg);
+    -o-transform: skew(0deg, -4deg);
+}
+
+.faqContent {
+    width: 100%;
+    -webkit-transform: skew(0deg, 4deg);
+    transform: skew(0deg, 4deg);
+    -moz-transform: skew(0deg, 4deg);
+    -ms-transform: skew(0deg, 4deg);
+    -o-transform: skew(0deg, 4deg);
 }

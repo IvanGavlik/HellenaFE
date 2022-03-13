@@ -2,29 +2,22 @@
     <mat-tab label="Pretraga">
         <div class="container-md g-1">
 
-            <hellena-search-form
-                    [search]="search"
-                    (searchEvent)="handleSearch($event)" ></hellena-search-form>
+            <hellena-search-form [search]="search" (searchEvent)="handleSearch($event)"></hellena-search-form>
 
-            <div class="row" style="margin-bottom: 1rem; margin-top: 1rem; " >
+            <div class="row" style="margin-bottom: 1rem; margin-top: 1rem; ">
                 <!-- TODO save search -->
                 <!-- sortiranje u tablici -->
-                <div class="col-12" >
+                <div class="col-12">
                     <div>
-                        <hellena-spinner class="center" [spinner]="spinner" > </hellena-spinner>
+                        <hellena-spinner class="center" [spinner]="spinner"> </hellena-spinner>
                     </div>
 
-                    <hellena-table [table]="table"
-                                   (loadPage)="handleLoadPage($event)"
-                                   (addTableItemToShoppingList)="handleAddTableItemToShoppingList($event)"
-                                   (compareTableItem)="handleCompareTableItem($event)"
-                                   style="word-break: break-all;"
-                    >
+                    <hellena-table [table]="table" (loadPage)="handleLoadPage($event)" (addTableItemToShoppingList)="handleAddTableItemToShoppingList($event)" (compareTableItem)="handleCompareTableItem($event)" style="word-break: break-all;">
                     </hellena-table>
                 </div>
             </div>
 
-            </div>
+        </div>
     </mat-tab>
     <mat-tab label="Popis za kupovinu">
         <hellena-shopping-list>
@@ -32,3 +25,27 @@
     </mat-tab>
 </mat-tab-group>
 
+<section class="faqSection">
+    <div class="faqCurve">
+        <div class="faqContent">
+            <div class="container">
+                <div class="row faqSet">
+                    <div class="col-md-6">
+                        <div class="detailHeading">
+                            <div>
+                                <h1><span class="bottomColor">Korišt</span>enje Podataka</h1>
+                                <p>Podatke proizvoda (ime artikla, cijena, lokacija trgovine, datum trajanja akcije) objavljeni su na dobrovoljnoj bazi bez naručene usluge oglašavanja od strane prodavatelja istih te za njih nije nastala obveza plaćanja naknade.
+                                    Prodavatelj ima pravo povući prikaz artikla u bilo kojem trenutk.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="rightimage">
+                            <img src="../../../assets/image/cuate.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

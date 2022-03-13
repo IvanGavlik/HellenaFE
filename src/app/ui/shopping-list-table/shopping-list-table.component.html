@@ -1,41 +1,40 @@
 <ng-container *ngIf="table">
     <table mat-table [dataSource]="table.data" class="mat-elevation-z8 demo-table">
         <ng-container matColumnDef="icon">
-            <th mat-header-cell *matHeaderCellDef  class="no-pad-left" style="display: block; !important;" ></th>
-            <td mat-cell *matCellDef="let element" class="no-pad-left" >
+            <th mat-header-cell *matHeaderCellDef class="no-pad-left"></th>
+            <td mat-cell *matCellDef="let element" class="no-pad-left">
                 <img class="md-hide" [src]="element.icon" />
             </td>
         </ng-container>
 
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef  class="mobile-size" >
+            <th mat-header-cell *matHeaderCellDef class="mobile-size">
                 <ng-container *ngIf="table.data.length > 0 else noData">
-                    <span style="font-size: medium; color: grey;" >
+                    <span style="font-size: medium; color: grey;">
                         Ukupno: {{ table.sum.sumAll | number : '1.2-2' }} kn
                         <span style="color: limegreen" > ({{ table.sum.sumDone | number : '1.2-2' }} kn) </span>
                     </span>
                 </ng-container>
-                <ng-template #noData >
-                    <span style="font-size: medium; color: grey; margin-right: 0.5rem;" > Popis za kupovinu je prazan </span>
+                <ng-template #noData>
+                    <span style="font-size: medium; color: grey; margin-right: 0.5rem;"> Popis za kupovinu je prazan </span>
                 </ng-template>
             </th>
 
-            <td mat-cell *matCellDef="let element" class="mobile-size" >
-                <span style="font-size: large" >{{ element.name }} </span>
+            <td mat-cell *matCellDef="let element" class="mobile-size">
+                <span style="font-size: large">{{ element.name }} </span>
                 <br>
-                <span *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"
-                      style="font-size: large; color: blue" > {{ element.actionPrice }}  kn
+                <span *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo" style="font-size: large; color: blue"> {{ element.actionPrice }}  kn
             </span>
                 <ng-template #allInfo>
-                    <span style="font-size: medium; color: grey;  text-decoration: line-through; margin-right: 0.5rem;" > {{ element.originalPrice }}  kn </span>
-                    <span style="font-size: large; color: blue;  margin-right: 0.5rem;" > {{ element.actionPrice }}  kn </span>
+                    <span style="font-size: medium; color: grey;  text-decoration: line-through; margin-right: 0.5rem;"> {{ element.originalPrice }}  kn </span>
+                    <span style="font-size: large; color: blue;  margin-right: 0.5rem;"> {{ element.actionPrice }}  kn </span>
                     <br>
-                    <span style="font-size: medium; color: grey;" >
+                    <span style="font-size: medium; color: grey;">
                     Ušteda {{ (element.originalPrice - element.actionPrice)  | number : '1.2-2' }}  kn
                 </span>
                 </ng-template>
                 <br>
-                <span style="text-overflow: ellipsis; white-space: nowrap; font-size: smaller" > {{ element.store }} </span>
+                <span style="text-overflow: ellipsis; white-space: nowrap; font-size: smaller"> {{ element.store }} </span>
                 <!-- TODO disply location on map only full web page-->
             </td>
         </ng-container>
@@ -43,41 +42,36 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>
                 <ng-container *ngIf="table.data.length > 0">
-                    <button mat-stroked-button style="width: 100%" (click)="clear.emit()" >
+                    <button mat-stroked-button style="width: 100%" (click)="clear.emit()">
                         <mat-icon>delete_outline</mat-icon>
                     </button>
                 </ng-container>
             </th>
-            <td mat-cell *matCellDef="let element" >
+            <td mat-cell *matCellDef="let element">
                 <div>
                     <button mat-stroked-button [matMenuTriggerFor]="options" style="width: 100%">
                         <mat-icon>toc</mat-icon>
                     </button>
-                    <mat-menu #options="matMenu" xPosition="before" yPosition="below" >
-                        <button mat-menu-item (click)="itemDone.emit(element)" >
+                    <mat-menu #options="matMenu" xPosition="before" yPosition="below">
+                        <button mat-menu-item (click)="itemDone.emit(element)">
                             <mat-icon>done</mat-icon>
                         </button>
-                        <button mat-menu-item (click)="itemRemove.emit(element)" >
+                        <button mat-menu-item (click)="itemRemove.emit(element)">
                             <mat-icon>close</mat-icon>
                         </button>
-                        <button mat-menu-item
-                                (click)="itemCompare.emit()" >
+                        <button mat-menu-item (click)="itemCompare.emit()">
                             <mat-icon>compare_arrows</mat-icon>
                         </button>
 
-                        <input mat-menu-item placeholder="Količina" type="number"
-                               [value]="element.quantity"
-                               [disabled]="element.isPurchased"
-                               (change)="onChange(element, $event)"
-                               (click)="$event.stopPropagation()" >
+                        <input mat-menu-item placeholder="Količina" type="number" [value]="element.quantity" [disabled]="element.isPurchased" (change)="onChange(element, $event)" (click)="$event.stopPropagation()">
                     </mat-menu>
                 </div>
 
             </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="table.columnNames" ></tr>
-        <tr mat-row *matRowDef="let row; columns: table.columnNames" class="gx-0" [ngClass]="row.isPurchased ? 'green' :''" ></tr>
+        <tr mat-header-row *matHeaderRowDef="table.columnNames"></tr>
+        <tr mat-row *matRowDef="let row; columns: table.columnNames" class="gx-0" [ngClass]="row.isPurchased ? 'green' :''"></tr>
     </table>
 
 </ng-container>
