@@ -1,3 +1,8 @@
+.tableContent {
+    background-color: #fff;
+    padding: 25px;
+}
+
 .iconImage img {
     width: 60px;
     height: 60px;
@@ -197,4 +202,80 @@
     100% {
         transform: scale(1);
     }
+}
+
+
+/* .categoryTab ul {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.23) !important;
+} */
+
+.categoryTab ul li {
+    width: 50%;
+}
+
+.nav-pills .nav-link a {
+    border-radius: none !important;
+    -webkit-border-radius: none !important;
+    -moz-border-radius: none !important;
+    -ms-border-radius: none !important;
+    -o-border-radius: none !important;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: transparent;
+    /* border-bottom: 2px solid #550ACD !important; */
+    width: 100%;
+    text-align: left !important;
+    color: #550ACD;
+    border-radius: none !important;
+    -webkit-border-radius: none !important;
+    -moz-border-radius: none !important;
+    -ms-border-radius: none !important;
+    -o-border-radius: none !important;
+    border-bottom: 2px solid #550ACD;
+}
+
+.nav-pills .nav-link img {
+    width: 40px;
+    padding-right: 15px;
+}
+
+.sveBox {
+    padding: 25px;
+}
+
+.nav-item a {
+    border-radius: none !important;
+    -webkit-border-radius: none !important;
+    -moz-border-radius: none !important;
+    -ms-border-radius: none !important;
+    -o-border-radius: none !important;
+}
+
+.nav-pills .nav-link,
+.nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: transparent;
+    /* border-bottom: 2px solid #550ACD !important; */
+    width: 100%;
+    text-align: left !important;
+    color: #C4C4C4;
+    border-radius: none !important;
+    -webkit-border-radius: none !important;
+    -moz-border-radius: none !important;
+    -ms-border-radius: none !important;
+    -o-border-radius: none !important;
+    border-bottom: 2px solid #C4C4C4;
+}
+
+.nav-pills .nav-link {
+    background: 0 0;
+    border: 0;
+    border-radius: 0rem !important;
+    -webkit-border-radius: 0rem !important;
+    -moz-border-radius: 0rem !important;
+    -ms-border-radius: 0rem !important;
+    -o-border-radius: 0rem !important;
 }

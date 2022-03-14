@@ -1,13 +1,13 @@
 <mat-tab-group mat-align-tabs="center" (selectedTabChange)="handleTabChanged($event)"> >
     <mat-tab label="Pretraga">
-        <div class="container-md g-1">
+        <div class="container-fluid paddingSerach">
 
             <hellena-search-form [search]="search" (searchEvent)="handleSearch($event)"></hellena-search-form>
 
-            <div class="row" style="margin-bottom: 1rem; margin-top: 1rem; ">
+            <div class="row">
                 <!-- TODO save search -->
                 <!-- sortiranje u tablici -->
-                <div class="col-12">
+                <div class="col-12 tableBackground">
                     <div>
                         <hellena-spinner class="center" [spinner]="spinner"> </hellena-spinner>
                     </div>

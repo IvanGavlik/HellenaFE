@@ -1,5 +1,5 @@
-<div class="container">
-    <form class="example-form mat-elevation-z8" style="margin-top: 1rem; white-space: nowrap; padding: 1rem;" [formGroup]="searchForm">
+<div class="container-fluid">
+    <form class="example-form" [formGroup]="searchForm">
         <div class="row">
             <div class="col-md-3">
                 <div class="categoryDropdown">
@@ -48,6 +48,13 @@
                     <span>1 kn </span>
                     <input type="range" min="0" formControlName="priceMax" max="1000">
                     <span> 1k kn</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="rangeSlider">
+                    <p>1-3 of 15
+                        <>
+                    </p>
                 </div>
             </div>
         </div>
