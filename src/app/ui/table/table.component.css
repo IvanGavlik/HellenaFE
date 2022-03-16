@@ -1,6 +1,6 @@
 .tableContent {
     background-color: #fff;
-    padding: 25px;
+    padding: 25px 0px;
 }
 
 .iconImage img {
@@ -278,4 +278,61 @@
     -moz-border-radius: 0rem !important;
     -ms-border-radius: 0rem !important;
     -o-border-radius: 0rem !important;
+}
+
+
+/* table flex container */
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+margin-top: 15px;
+}
+/* .flex-container .flexBoxOne{
+    flex: 15%;
+}
+.flex-container .flexBoxTwo{
+    flex: 55%;
+} */
+.flex-container .flexBoxThree{
+    flex: 40%;
+}
+
+
+/* Responsive layout - makes a one column-layout instead of two-column layout */
+
+@media (max-width: 800px) {
+    .flex-container .flexBoxOne{
+        flex: 40%;
+    }
+    .flex-container .flexBoxTwo{
+        flex: 60%;
+    }
+    .flex-container .flexBoxThree{
+        flex: 100%;
+    }
+    .flexBoxOne img{
+        width: 50px;
+    }
+    
+.productInfo h1 {
+    font-size: 21px;
+    line-height: 25px;
+    padding-top: 0px;
+}
+
+.productInfo h5 {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.productInfo h5 span {
+    font-size: 18px;
+    line-height: 20px;
+}
+}
+
+tr.mat-row,
+tr.mat-footer-row {
+ height:auto !important;
 }

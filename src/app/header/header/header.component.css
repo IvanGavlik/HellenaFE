@@ -66,3 +66,13 @@
     bottom: 20%;
     right: -6%;
 }
+
+@media(max-width:776px) {
+    .rightHeaing .rightImage img {
+        position: absolute;
+        height: auto;
+        width: auto;
+        bottom: 20%;
+        right: 1%;
+    }
+}
