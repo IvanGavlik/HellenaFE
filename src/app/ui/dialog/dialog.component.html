@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row topModal">
-        <div class="col-md-5">
+        <div class="col-md-5 selectBox">
             <label class="checkbox bounce">
                 <input type="checkbox">
                 <svg viewBox="0 0 21 21">
@@ -9,10 +9,22 @@
             </label>
             <span>SELECT ALL (0 ITEM(S))</span>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 selectBox">
             <p><img src="../../../assets/image/Cheap 2.png" alt=""> Buy Now</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 selectBox">
+            <button mat-button mat-dialog-close><img src="../../../assets/image/Trash.png" alt=""> DELETE</button>
+        </div>
+    </div>
+    <div class="row mobileModal">
+        <div class="col-md-12 d-flex flex-row">
+            <label class="checkbox bounce">
+                <input type="checkbox">
+                <svg viewBox="0 0 21 21">
+                    <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                </svg>
+            </label>
+            <p><img src="../../../assets/image/Cheap 2.png" alt=""> Buy Now</p>
             <button mat-button mat-dialog-close><img src="../../../assets/image/Trash.png" alt=""> DELETE</button>
         </div>
     </div>
@@ -21,7 +33,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <table class="table-responsive table align-middle table-borderless">
+
+                <!-- <table class="table-responsive table align-middle table-borderless">
                     <tbody>
 
                         <tr>
@@ -57,15 +70,65 @@
                         </tr>
 
                     </tbody>
+                </table> -->
+
+                <table class="table-responsive table align-middle table-borderless">
+                    <tr class="flex-container mt-5">
+                        <div class="flexBoxOne">
+                            <label class="checkbox bounce">
+                                                <input type="checkbox">
+                                                <svg viewBox="0 0 21 21">
+                                                    <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                                                </svg>
+                                            </label>
+                            <img src="../../../assets/image/lidl.png" />
+                        </div>
+
+                        <div class="flexBoxTwo productInfo">
+                            <h1>Svježi svinjski kotleti cca 400g</h1>
+                            <h5>20 kn <span> 25 kn </span></h5>
+                        </div>
+                        <div class="buttonDesign flexBoxThree">
+                            <div class="number-input">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+                                <input class="quantity" min="0" name="quantity" value="1" type="number">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                            </div>
+                        </div>
+
+                    </tr>
+                    <tr class="flex-container mt-5">
+                        <div class="flexBoxOne">
+                            <label class="checkbox bounce">
+                                                <input type="checkbox">
+                                                <svg viewBox="0 0 21 21">
+                                                    <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                                                </svg>
+                                            </label>
+                            <img src="../../../assets/image/lidl.png" />
+                        </div>
+
+                        <div class="flexBoxTwo productInfo">
+                            <h1>Svježi svinjski kotleti cca 400g</h1>
+                            <h5>20 kn <span> 25 kn </span></h5>
+                        </div>
+                        <div class="buttonDesign flexBoxThree">
+                            <div class="number-input">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+                                <input class="quantity" min="0" name="quantity" value="1" type="number">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                            </div>
+                        </div>
+
+                    </tr>
                 </table>
+
+
             </div>
         </div>
     </div>
 </mat-dialog-content>
-<mat-dialog-actions>
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
-</mat-dialog-actions>
+
 
 
 

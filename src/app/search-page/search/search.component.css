@@ -90,3 +90,10 @@
     -ms-transform: skew(0deg, 4deg);
     -o-transform: skew(0deg, 4deg);
 }
+
+@media(max-width:778px) {
+    .paddingSerach {
+        padding: 50px 5px 40px 5px;
+        background-color: #fff;
+    }
+}

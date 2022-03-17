@@ -2,14 +2,12 @@
     <div class="categoryTab">
         <ul class="nav nav-pills" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                    type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
                     <img src="../../../assets/image/sve.png" alt=""><span> Sve</span>
                 </a>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
-                    type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
                     <img src="../../../assets/image/danas.png" alt=""><span> najpovoljnije danas</span>
                 </button>
             </li>
@@ -21,41 +19,41 @@
             <ng-container *ngIf="table">
 
                 <table mat-table [dataSource]="table.data" class="table-responsive table align-middle table-borderless">
-                  
-                            <div matColumnDef="icon">
-                                <div *matCellDef="let element" class="flexBoxOne">
-                                    <label class="checkbox bounce">
+
+                    <div matColumnDef="icon">
+                        <div *matCellDef="let element" class="flexBoxOne">
+                            <label class="checkbox bounce">
                                                     <input type="checkbox">
                                                     <svg viewBox="0 0 21 21">
                                                         <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                                                     </svg>
                                                 </label>
-                                    <img [src]="element.icon" />
-                                </div>
-                            </div>
-                            <div matColumnDef="name">
-                                <div *matCellDef="let element" class="flexBoxTwo productInfo">
-                                    <h1>{{ element.name }} </h1>
-                                    <h5 *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"> {{ element.actionPrice }} kn</h5>
-                                    <ng-template #allInfo>
-                                        <h5>{{ element.originalPrice }} kn <span> {{ element.actionPrice }} kn </span></h5>
-                                    </ng-template>
-                                    <br>
-                                </div>
-                            </div>
-                            <div matColumnDef="actions">
-                                <div class="buttonDesign flexBoxThree" *matCellDef="let element">
-                                    <button class="addCart" mat-menu-item (click)="addTableItemToShoppingList.emit(element)">
+                            <img [src]="element.icon" />
+                        </div>
+                    </div>
+                    <div matColumnDef="name">
+                        <div *matCellDef="let element" class="flexBoxTwo productInfo">
+                            <h1>{{ element.name }} </h1>
+                            <h5 *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"> {{ element.actionPrice }} kn</h5>
+                            <ng-template #allInfo>
+                                <h5>{{ element.originalPrice }} kn <span> {{ element.actionPrice }} kn </span></h5>
+                            </ng-template>
+                            <br>
+                        </div>
+                    </div>
+                    <div matColumnDef="actions">
+                        <div class="buttonDesign flexBoxThree" *matCellDef="let element">
+                            <button class="addCart" mat-menu-item (click)="addTableItemToShoppingList.emit(element)">
                                                 Add To Cart
                                             </button>
-                                    <button class="similarBtn" mat-menu-item (click)="compareTableItem.emit(element)">
+                            <button class="similarBtn" mat-menu-item (click)="compareTableItem.emit(element)">
                                                 Similar Item
                                             </button>
-                                </div>
-                            </div>
-                    
+                        </div>
+                    </div>
+
                     <tr mat-row *matRowDef="let row; columns: table.columnNames" class="flex-container"></tr>
-                </table> 
+                </table>
 
 
                 <!-- <table mat-table [dataSource]="table.data" class="table-responsive table align-middle table-borderless">
@@ -116,9 +114,6 @@
                 </table> -->
 
 
-                <mat-paginator [pageSizeOptions]="[12, 24]" [length]="table.totalCount" showFirstLastButtons
-                    aria-label="Select page of periodic elements">
-                </mat-paginator>
 
             </ng-container>
         </div>

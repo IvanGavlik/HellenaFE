@@ -9,6 +9,7 @@
     font-size: 17px;
     line-height: 22px;
     color: rgba(0, 0, 0, 0.52);
+    margin-bottom: 0px;
 }
 
 .topModal button img {
@@ -77,22 +78,23 @@
 }
 
 .productInfo h1 {
-    font-family: 'Roboto';
+    font-family: Roboto;
     font-style: normal;
     font-weight: 600;
-    font-size: 26px;
-    line-height: 28px;
+    font-size: 24px;
     text-transform: capitalize;
-    color: #000000;
-    padding-top: 15px;
+    color: #000;
+    margin-bottom: 0px;
+    padding: 0px 10px;
 }
 
 .productInfo h5 {
     font-family: Roboto;
     font-style: normal;
     font-weight: 700;
-    font-size: 28px;
-    line-height: 32px;
+    font-size: 22px;
+    margin-bottom: 0px;
+    padding: 0px 10px;
     text-transform: capitalize;
     color: #550acd;
 }
@@ -225,10 +227,6 @@
     }
 }
 
-.mat-dialog-container {
-    width: 70vw !important;
-}
-
 .number-input input[type="number"] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
@@ -257,8 +255,8 @@
     border: none;
     align-items: center;
     justify-content: center;
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     cursor: pointer;
     margin: 0;
     position: relative;
@@ -273,7 +271,7 @@
     content: '';
     width: 1rem;
     height: 2px;
-    background-color: #212121;
+    background-color: #aaa;
     transform: translate(-50%, -50%);
 }
 
@@ -283,12 +281,136 @@
 
 .number-input input[type=number] {
     font-family: sans-serif;
-    max-width: 5rem;
+    width: 3rem;
     padding: .5rem;
     border: none;
     border-width: 0 2px;
     font-size: 2rem;
-    height: 3rem;
+    height: 2rem;
     font-weight: bold;
     text-align: center;
+}
+
+.mat-dialog-container {
+    width: 80vw !important;
+}
+
+.mobileModal {
+    display: none;
+}
+
+.selectBox {
+    display: flex;
+    align-items: center;
+}
+
+@media(max-width:850px) {
+    .mat-dialog-container {
+        width: 80vw !important;
+        padding: 10px 0px !important;
+    }
+    .topModal {
+        display: none;
+    }
+    .mobileModal {
+        display: block;
+    }
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.flex-container .flexBoxOne {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-container .flexBoxOne .checkbox {
+    padding-right: 35px;
+}
+
+
+/* .flex-container .flexBoxOne{
+    flex: 15%;
+}
+.flex-container .flexBoxTwo{
+    flex: 55%;
+} */
+
+.flex-container .flexBoxThree {
+    flex: 40%;
+}
+
+tr.mat-row,
+tr.mat-footer-row {
+    height: auto !important;
+}
+
+.flexBoxOne img {
+    width: 60px;
+}
+
+
+/* Responsive layout - makes a one column-layout instead of two-column layout */
+
+@media (max-width: 850px) {
+    .flex-container .flexBoxOne {
+        flex: 100%;
+    }
+    .flex-container .flexBoxTwo {
+        flex: 100%;
+    }
+    .flex-container .flexBoxThree {
+        flex: 100%;
+    }
+    .flexBoxOne img {
+        width: 50px;
+    }
+    .productInfo h1 {
+        font-size: 21px;
+        line-height: 25px;
+        padding-top: 0px;
+    }
+    .productInfo h5 {
+        font-size: 18px;
+        line-height: 20px;
+    }
+    .productInfo h5 span {
+        font-size: 18px;
+        line-height: 20px;
+        display: block;
+    }
+    /* .flexBoxOne {
+        display: none;
+    } */
+    .flex-container .flexBoxTwo {
+        flex: 60%;
+    }
+    .flex-container .flexBoxThree {
+        flex: 40%;
+    }
+    .sveBox {
+        padding: 0px;
+    }
+    .buttonDesign {
+        text-align: center;
+    }
+    .buttonDesign button.addCart {
+        padding: 10px 6px;
+        font-size: 16px;
+        line-height: 18px;
+    }
+    .buttonDesign button.similarBtn {
+        margin-top: 3px;
+        padding: 10px 6px;
+        font-size: 16px;
+        line-height: 18px;
+    }
+    .mat-dialog-container {
+        padding: 0px !important;
+    }
 }
