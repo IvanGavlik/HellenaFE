@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DailyDealContainerComponent } from './daily-deal-container/daily-deal-container.component';
 import {UiModule} from '../ui/ui.module';
-
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 
 @NgModule({
@@ -11,6 +11,7 @@ import {UiModule} from '../ui/ui.module';
   ],
   imports: [
     CommonModule,
+    CarouselModule,
     UiModule
   ],
   exports: [

@@ -9,6 +9,7 @@ import {DailyDealModule} from '../daily-deal/daily-deal.module';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
+
 @NgModule({
   declarations: [
     FrontPageComponent,

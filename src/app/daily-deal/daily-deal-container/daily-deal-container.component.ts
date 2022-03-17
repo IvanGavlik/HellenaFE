@@ -8,6 +8,7 @@ import {Observable, of} from 'rxjs';
 import {DailyDealService} from '../daily-deal.service';
 import {map} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'hellena-daily-deal-container',
@@ -18,6 +19,34 @@ import {Entity} from '../../crud/entity';
   ]
 })
 export class DailyDealContainerComponent implements OnInit {
+
+  customOptions: any = {
+    loop: true,
+    margin: 10,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    autoplay: true,
+    responsive: {
+      0: {
+        items: 1,
+        dots: true,
+        stagePadding: 30
+      },
+      400: {
+        items: 2,
+        dots: true,
+        stagePadding: 50
+      },
+      740: {
+        items: 4
+      },
+      940: {
+        items: 4
+      }
+    }
+  }
 
   cards$: Observable<DayilDealCard[]> = of();
 
