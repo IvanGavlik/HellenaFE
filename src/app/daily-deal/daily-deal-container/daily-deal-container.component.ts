@@ -22,12 +22,12 @@ export class DailyDealContainerComponent implements OnInit {
 
   customOptions: any = {
     loop: true,
-    margin: 10,
     mouseDrag: false,
     touchDrag: false,
     pullDrag: false,
     dots: false,
     autoplay: true,
+    margin: 5,
     responsive: {
       0: {
         items: 1,

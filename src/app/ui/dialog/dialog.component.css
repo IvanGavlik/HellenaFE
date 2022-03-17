@@ -322,7 +322,7 @@
     flex-wrap: wrap;
     margin-top: 15px;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 7px;
+    border-radius: 10px 7px;
 }
 
 .flex-container .flexBoxOne {
@@ -432,5 +432,8 @@ tr.mat-footer-row {
     .productInfo {
         margin-top: 25px;
         text-align: center;
+    }
+    .flex-container {
+        border-radius: 7px;
     }
 }
