@@ -8,7 +8,6 @@ import {Observable, of} from 'rxjs';
 import {DailyDealService} from '../daily-deal.service';
 import {map} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
-import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'hellena-daily-deal-container',
@@ -20,7 +19,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class DailyDealContainerComponent implements OnInit {
 
-  customOptions: any = {
+  carouselOptions: any = {
     loop: true,
     mouseDrag: false,
     touchDrag: false,

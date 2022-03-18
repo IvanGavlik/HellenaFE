@@ -3,7 +3,7 @@ import {CardContainer} from '../../ui/card-container/card-container';
 
 
 @Component({
-  selector: 'app-front-page',
+  selector: 'hellena-front-page',
   templateUrl: './front-page.component.html',
   styleUrls: ['./front-page.component.css']
 })
