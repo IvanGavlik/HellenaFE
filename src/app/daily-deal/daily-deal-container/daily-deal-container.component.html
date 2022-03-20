@@ -10,53 +10,19 @@
             </div>
             <div class="row">
                 <owl-carousel-o [options]="carouselOptions">
-                    <ng-template carouselSlide>
-                        <div class="card" style="width: 97%;">
-                            <div class="card-body">
-                                <h5 class="price">21.99kn <span> 39.99kn</span></h5>
-                                <img src="../../../assets/image/favo (1).png" alt="">
-                                <p class="card-text">Svježi svinjski kotleti cca 600g</p>
-                                <div class="viewBtn">
-                                    <a href="#">View</a>
+                    <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
+                        <ng-template carouselSlide>
+                            <div class="card" style="width: 97%;">
+                                <div class="card-body">
+                                    <h5 class="price"> {{ item.actionPrice }} kn<span> {{ item.orginalPrice }} kn</span></h5>
+                                    <img src="../../../assets/image/favo (1).png" alt="">
+                                    <p class="card-text"> {{ item.name }} </p>
+                                    <div class="viewBtn">
+                                        <a href="#">View</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </ng-template>
-                    <ng-template carouselSlide>
-                        <div class="card" style="width: 97%;">
-                            <div class="card-body">
-                                <h5 class="price">21.99kn <span> 39.99kn</span></h5>
-                                <img src="../../../assets/image/favo (1).png" alt="">
-                                <p class="card-text">Svježi svinjski kotleti cca 600g</p>
-                                <div class="viewBtn">
-                                    <a href="#">View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template carouselSlide>
-                        <div class="card" style="width: 97%;">
-                            <div class="card-body">
-                                <h5 class="price">21.99kn <span> 39.99kn</span></h5>
-                                <img src="../../../assets/image/favo (1).png" alt="">
-                                <p class="card-text">Svježi svinjski kotleti cca 600g</p>
-                                <div class="viewBtn">
-                                    <a href="#">View</a>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template carouselSlide>
-                        <div class="card" style="width: 97%;">
-                            <div class="card-body">
-                                <h5 class="price">21.99kn <span> 39.99kn</span></h5>
-                                <img src="../../../assets/image/favo (1).png" alt="">
-                                <p class="card-text">Svježi svinjski kotleti cca 600g</p>
-                                <div class="viewBtn">
-                                    <a href="#">View</a>
-                                </div>
-                            </div>
-                        </div>
+                        </ng-template>
                     </ng-template>
                 </owl-carousel-o>
             </div>

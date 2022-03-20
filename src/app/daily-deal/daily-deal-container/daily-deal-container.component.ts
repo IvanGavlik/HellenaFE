@@ -4,10 +4,10 @@ import {CardContainer} from '../../ui/card-container/card-container';
 import {Router} from '@angular/router';
 import {Card} from '../../ui/card/card';
 import {defaultPage, ItemFeature, SearchItem} from '../../search-page/search-item';
-import {Observable, of} from 'rxjs';
 import {DailyDealService} from '../daily-deal.service';
 import {map} from 'rxjs/operators';
-import {Entity} from '../../crud/entity';
+import {Entity, Paginator} from '../../crud/entity';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'hellena-daily-deal-container',
@@ -30,12 +30,12 @@ export class DailyDealContainerComponent implements OnInit {
     responsive: {
       0: {
         items: 1,
-        dots: true,
+        dots: false,
         stagePadding: 30
       },
       400: {
         items: 2,
-        dots: true,
+        dots: false,
         stagePadding: 50
       },
       740: {
@@ -45,44 +45,22 @@ export class DailyDealContainerComponent implements OnInit {
         items: 4
       }
     }
-  }
+  };
 
-  cards$: Observable<DayilDealCard[]> = of();
-
-  dailyDealContainer: CardContainer =  {
-    title: 'Najpovoljnije danas',
-    footer: 'Pogledaj sve'
-  } as CardContainer;
+  cards: ItemSearchEntity[] = [];
 
   constructor(private service: DailyDealService, private router: Router) { }
 
   ngOnInit(): void {
-    this.cards$ = this.service.search({ cityIds: [],
+    this.service.search({ cityIds: [],
       storeIds: [],
       categoryIds: [],
       feature: ItemFeature.CHEAPEST_TODAY,
-      page: defaultPage(5)
+      page: defaultPage(8)
     } as SearchItem)
         .pipe(
-            map(entities => entities.page.map( el => this.toCard(el as ItemSearchEntity))),
-        );
-  }
-
-  toCard(item: ItemSearchEntity): DayilDealCard {
-    return {
-      id: item.id,
-      title: item.name,
-      oldPrice: `${item.orginalPrice} kn`,
-      desc: `${item.actionPrice} kn`,
-      footer: 'Pogledaj'
-    } as DayilDealCard;
-  }
-
-  getPrice(item: ItemSearchEntity): number {
-    if (item.actionPrice) {
-      return item.actionPrice;
-    }
-    return item.orginalPrice;
+            map(response => response.page as ItemSearchEntity[]),
+        ).subscribe(entities => this.cards = entities);
   }
 
   handleFooterActionContainer($event: CardContainer): void {
