@@ -63,7 +63,7 @@ export class DailyDealContainerComponent implements OnInit {
         ).subscribe(entities => this.cards = entities);
   }
 
-  handleFooterActionContainer($event: CardContainer): void {
+  handleFooterActionContainer(): void {
     this.router.navigateByUrl('/search', { state: {
         cityIds: [],
         storeIds: [],
@@ -73,9 +73,9 @@ export class DailyDealContainerComponent implements OnInit {
       } as SearchItem });
   }
 
-  handleFooterActionCard($event: Card): void {
+  handleFooterActionCard($event: ItemSearchEntity): void {
     this.router.navigateByUrl('/search', { state: {
-        name : $event.title,
+        name : $event.name,
         cityIds: [],
         storeIds: [],
         categoryIds: [],
@@ -90,8 +90,4 @@ interface ItemSearchEntity extends Entity {
   storeName: string;
   orginalPrice: number;
   actionPrice: number;
-}
-
-interface DayilDealCard extends Card {
-    oldPrice: string;
 }
