@@ -90,7 +90,7 @@
     text-align: end;
 }
 
-.favorableItem .card-body a {
+.favorableItem .card-body .link {
     text-decoration: none;
     background: #550ACD;
     box-shadow: 0 3px 4px 0px #550acd7a;
@@ -110,7 +110,7 @@
     text-align: center;
 }
 
-.seeMoreBtn a {
+.seeMoreBtn .link {
     text-decoration: none;
     background: #550ACD;
     box-shadow: 0 5px 8px 3px #550acd7a;

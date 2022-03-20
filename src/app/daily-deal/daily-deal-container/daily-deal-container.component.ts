@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {DailyDealConfiguration} from '../daily-deal-configuration';
-import {CardContainer} from '../../ui/card-container/card-container';
 import {Router} from '@angular/router';
-import {Card} from '../../ui/card/card';
 import {defaultPage, ItemFeature, SearchItem} from '../../search-page/search-item';
 import {DailyDealService} from '../daily-deal.service';
 import {map} from 'rxjs/operators';
-import {Entity, Paginator} from '../../crud/entity';
-import {Observable} from 'rxjs';
+import {Entity} from '../../crud/entity';
+
 
 @Component({
   selector: 'hellena-daily-deal-container',

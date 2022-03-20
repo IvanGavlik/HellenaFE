@@ -18,7 +18,7 @@
                                     <img src="../../../assets/image/favo (1).png" alt="">
                                     <p class="card-text"> {{ item.name }} </p>
                                     <div class="viewBtn">
-                                        <a href="#">View</a>
+                                        <span class="link" (click)="handleFooterActionCard(item)" >View</span>
                                     </div>
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="seeMoreBtn">
-                        <a href="#">See More</a>
+                        <span class="link" (click)="handleFooterActionContainer()" >See More</span>
                     </div>
                 </div>
             </div>
