@@ -6,6 +6,7 @@ import {ItemCategoryModule} from "../item-category/item-category.module";
 import {UiModule} from "../ui/ui.module";
 import {HeaderModule} from "../header/header.module";
 import {DailyDealModule} from '../daily-deal/daily-deal.module';
+import {MatCardModule} from '@angular/material/card';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
@@ -22,7 +23,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
         UiModule,
         HeaderModule,
         DailyDealModule,
-
+        MatCardModule
     ],
   exports: [
     FrontPageComponent
