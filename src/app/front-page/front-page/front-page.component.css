@@ -145,7 +145,6 @@
     font-size: 23px;
     line-height: 26px;
     /* identical to box height */
-    text-transform: capitalize;
     color: #FFFFFF;
 }
 
@@ -159,7 +158,6 @@
     font-weight: 500;
     font-size: 19px;
     line-height: 23px;
-    text-transform: capitalize;
     color: #C4C4C4;
 }
 
