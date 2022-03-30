@@ -81,10 +81,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       this.displayFullSearchForm = true;
     }
 
-    // todo
     const search =  {
         priceMIn: value.priceMIn,
         priceMax: value.priceMax,
+        categoryIds: [],
+        cityIds: [],
         storeIds: (value?.storeControl as Pair<any, any>[]).map(el => el.id),
         page : defaultPage()
       } as SearchItem;
