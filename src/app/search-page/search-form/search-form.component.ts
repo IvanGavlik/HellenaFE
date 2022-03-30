@@ -40,29 +40,17 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         priceMIn: new FormControl(0),
         priceMax: new FormControl(0),
         featureControl: new FormControl({}),
-        categoryControl: new FormControl([]),
-        locationControl: new FormControl([]),
+ //       categoryControl: new FormControl([]),
+//        locationControl: new FormControl([]),
         storeControl: new FormControl([])
     });
 
   @ViewChild('featureSelect') featureSelect: ElementRef<HTMLSelectElement> = {} as ElementRef;
   features: Pair<ItemFeature, string>[] = [ { id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas' } as Pair<ItemFeature, string> ];
-    // category
-  @ViewChild('categoryChipper') categoryChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-  category: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([], [],
-      new Observable<Pair<number, string>[]>(),
-      this.searchForm.get('categoryControl') as FormControl);
 
-  // location
-  @ViewChild('locationChipper') locationChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-  location: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([],[],
-      new Observable<Pair<number, string>[]>(),
-      this.searchForm.get('locationControl') as FormControl);
-
-  // store
   storeControl = new FormControl('');
   @ViewChild('storeChipper') storeChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-  store: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([],[],
+  store: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([], [],
             new Observable<Pair<number, string>[]>(),
             this.searchForm.get('storeControl') as FormControl);
 
@@ -78,27 +66,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     });
 
     const initData = new InitDataHelper(this.service);
-    const subCategory = initData.allCategory.subscribe(categories => {
-        this.category.allItems = categories;
-        if (this.search.categoryIds && this.search.categoryIds.length > 0) {
-            this.category.items = categories.filter(el => this.search?.categoryIds.find(id => el.id === id) );
-        }
-
-    });
-    const subLocation = initData.allLocation.subscribe(locations => {
-        this.location.allItems = [];
-        locations.forEach(l => {
-            // only unique
-           const inList = this.location.allItems.find(el => el.value === l.value);
-           if (inList == null || inList === undefined) {
-               this.location.allItems.push(l);
-           }
-        });
-    });
     const subStore = initData.allStore.subscribe(stores => {
         this.store.allItems = stores;
     });
-    this.subs.push(subCategory, subLocation, subStore);
+    this.subs.push(subStore);
   }
 
   ngOnDestroy(): void {
@@ -110,11 +81,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
       this.displayFullSearchForm = true;
     }
 
+    // todo
     const search =  {
         priceMIn: value.priceMIn,
         priceMax: value.priceMax,
-        categoryIds: (value?.categoryControl as Pair<any, any>[]).map(el => el.id),
-        cityIds: (value?.locationControl as Pair<any, any>[]).map(el => el.id),
         storeIds: (value?.storeControl as Pair<any, any>[]).map(el => el.id),
         page : defaultPage()
       } as SearchItem;
@@ -129,45 +99,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     this.searchEvent.emit( search );
   }
 
-  addCategory(event: MatChipInputEvent): void {
-      const value = (event.value || '').trim();
-      const find = this.category.allItems.find(el => el.value === value);
-      if (find) {
-          this.category.add(find);
-      }
-      event.chipInput?.clear();
-  }
-
-  removeCategory(el: Pair<number, string>): void {
-      this.category.remove(el);
-  }
-
-  selectedCategory(event: MatAutocompleteSelectedEvent): void {
-      this.category.selected(event.option.value, this.categoryChipper);
-  }
-
-  addLocation(event: MatChipInputEvent): void {
-      const value = (event.value || '').trim();
-      const find = this.location.allItems.find(el => el.value === value);
-      if (find) {
-          this.location.add(find);
-      }
-      event.chipInput?.clear();
-  }
-
-  removeLocation(el: Pair<number, string>): void {
-    this.location.remove(el);
-  }
-
-  selectedLocation(event: MatAutocompleteSelectedEvent): void {
-    this.location.selected(event.option.value, this.locationChipper);
-  }
 
   addStore(event: MatChipInputEvent): void {
       const value = (event.value || '').trim();
       const find = this.store.allItems.find(el => el.value === value);
       if (find) {
-          this.location.add(find);
+          this.store.add(find);
       }
       event.chipInput?.clear();
   }
@@ -244,33 +181,13 @@ export class SelectMultiple<ELEMENT extends Pair<any, any>> {
 
 export class InitDataHelper {
     // tslint:disable-next-line:variable-name
-    private _allCategory: Observable<Pair<number, string>[]> = new Observable<Pair<number, string>[]>();
-    // tslint:disable-next-line:variable-name
-    private _allLocation: Observable<Pair<number, string>[]> = new Observable<Pair<number, string>[]>();
-    // tslint:disable-next-line:variable-name
     private _allStore: Observable<Pair<number, string>[]> = new Observable<Pair<number, string>[]>();
 
     constructor(private service: SearchItemService) {
-        this._allCategory = this.service.findAllCategory()
-            .pipe(
-                map(entities => entities.map( el => this.toPair(el as EntityPair))),
-            );
-        this._allLocation = this.service.findAllCity()
-            .pipe(
-                map(entities => entities.map( el => this.toPair(el as EntityPair))),
-            );
         this._allStore = this.service.findAllStore()
             .pipe(
                 map(entities => entities.map( el => this.toPair(el as EntityPair))),
             );
-    }
-
-    get allCategory(): Observable<Pair<number, string>[]> {
-        return this._allCategory;
-    }
-
-    get allLocation(): Observable<Pair<number, string>[]> {
-        return this._allLocation;
     }
 
     get allStore(): Observable<Pair<number, string>[]> {
