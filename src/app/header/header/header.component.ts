@@ -15,7 +15,6 @@ export class HeaderComponent {
   constructor(private router: Router) { }
 
   navigateToSearch(): void {
-    console.log('value ', this.search.value);
     this.router.navigateByUrl('/search', {
       state: {
         name: this.search.value,
