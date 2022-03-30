@@ -13,7 +13,6 @@ import {Subscription} from 'rxjs';
 import {MatTabChangeEvent} from '@angular/material/tabs';
 import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
-import {ShoppingListTable, ShoppingListTableItem} from '../../ui/shopping-list-table/shopping-list-table';
 import {SearchUIService} from '../search-ui.service';
 
 

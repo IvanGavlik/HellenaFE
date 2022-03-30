@@ -1,19 +1,4 @@
-<div class="tableContent">
-    <div class="categoryTab">
-        <ul class="nav nav-pills" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
-                    <img src="../../../assets/image/sve.png" alt=""><span> Sve</span>
-                </a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
-                    <img src="../../../assets/image/danas.png" alt=""><span> najpovoljnije danas</span>
-                </button>
-            </li>
-        </ul>
-    </div>
-    <div class="tab-content" id="pills-tabContent">
+<div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active sveBox" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
             <ng-container *ngIf="table">
@@ -55,6 +40,11 @@
                     <tr mat-row *matRowDef="let row; columns: table.columnNames" class="flex-container"></tr>
                 </table>
 
+                <mat-paginator [pageSizeOptions]="[12, 24]"
+                               [length]="table.totalCount"
+                               showFirstLastButtons
+                               aria-label="Select page of periodic elements">
+                </mat-paginator>
 
                 <!-- <table mat-table [dataSource]="table.data" class="table-responsive table align-middle table-borderless">
 
@@ -121,65 +111,3 @@
             <p>other tab</p>
         </div>
     </div>
-</div>
-
-<!-- <ng-container *ngIf="table">
-    <table mat-table [dataSource]="table.data" class="mat-elevation-z8 demo-table">
-        <ng-container matColumnDef="icon">
-            <td mat-cell *matCellDef="let element" class="no-pad-left" >
-             <img class="md-hide" [src]="element.icon" />
-            </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="name">
-            <td mat-cell *matCellDef="let element" class="mobile-size" >
-                <span style="font-size: large" >{{ element.name }} </span>
-                <br>
-                <span *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"
-                        style="font-size: large; color: blue" > {{ element.actionPrice }}  kn
-                </span>
-                <ng-template #allInfo>
-                    <span style="font-size: medium; color: grey;  text-decoration: line-through; margin-right: 0.5rem;" > {{ element.originalPrice }}  kn </span>
-                    <span style="font-size: large; color: blue;  margin-right: 0.5rem;" > {{ element.actionPrice }}  kn </span>
-                    <br>
-                    <span style="font-size: medium; color: grey;" >
-                        Ušteda {{ (element.originalPrice - element.actionPrice)  | number : '1.2-2' }}  kn
-                    </span>
-                </ng-template>
-                <br>
-                <span style="text-overflow: ellipsis; white-space: nowrap; font-size: smaller" > {{ element.store }} </span>
-            </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="actions">
-            <td mat-cell *matCellDef="let element" >
-                <div>
-                    <button mat-stroked-button [matMenuTriggerFor]="options" style="width: 100%">
-                        <mat-icon>toc</mat-icon>
-                    </button>
-                    <mat-menu #options="matMenu">
-                        <button mat-menu-item
-                                (click)="addTableItemToShoppingList.emit(element)">
-                            <mat-icon>shopping_cart</mat-icon>
-                        </button>
-                        <button mat-menu-item
-                                (click)="compareTableItem.emit(element)">
-                            <mat-icon>compare_arrows</mat-icon>
-                        </button>
-                    </mat-menu>
-                </div>
-    
-            </td>
-        </ng-container>
-    
-        <tr mat-row *matRowDef="let row; columns: table.columnNames" class="gx-0" ></tr>
-    </table>
-    
-    
-        <mat-paginator [pageSizeOptions]="[12, 24]"
-                       [length]="table.totalCount"
-                       showFirstLastButtons
-                       aria-label="Select page of periodic elements">
-        </mat-paginator>
-    
-    </ng-container> -->

@@ -1,29 +1,42 @@
-<mat-tab-group mat-align-tabs="center" (selectedTabChange)="handleTabChanged($event)"> >
-    <mat-tab label="Pretraga">
-        <div class="container-fluid paddingSerach">
+<div class="container-fluid paddingSerach" style="margin-top: 100px;">
+    <hellena-search-form [search]="search" (searchEvent)="handleSearch($event)"></hellena-search-form>
+</div>
 
-            <hellena-search-form [search]="search" (searchEvent)="handleSearch($event)"></hellena-search-form>
+<hellena-spinner class="center" [spinner]="spinner"> </hellena-spinner>
 
-            <div class="row">
-                <!-- TODO save search -->
-                <!-- sortiranje u tablici -->
-                <div class="col-12 tableBackground">
-                    <div>
-                        <hellena-spinner class="center" [spinner]="spinner"> </hellena-spinner>
-                    </div>
+<div class="container-fluid paddingSerach">
+    <div class="row">
+        <!-- TODO save search -->
+        <!-- sortiranje u tablici -->
+        <div class="col-12 tableBackground">
 
-                    <hellena-table [table]="table" (loadPage)="handleLoadPage($event)" (addTableItemToShoppingList)="handleAddTableItemToShoppingList($event)" (compareTableItem)="handleCompareTableItem($event)" style="word-break: break-all;">
-                    </hellena-table>
+            <div class="tableContent">
+                <div class="categoryTab">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                                <img src="../../../assets/image/sve.png" alt=""><span> Sve</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                <img src="../../../assets/image/danas.png" alt=""><span> najpovoljnije danas</span>
+                            </button>
+                        </li>
+                    </ul>
                 </div>
-            </div>
 
+                <hellena-table [table]="table"
+                           (loadPage)="handleLoadPage($event)"
+                           (addTableItemToShoppingList)="handleAddTableItemToShoppingList($event)"
+                           (compareTableItem)="handleCompareTableItem($event)"
+                           style="word-break: break-all;">
+                </hellena-table>
+
+            </div>
         </div>
-    </mat-tab>
-    <mat-tab label="Popis za kupovinu">
-        <hellena-shopping-list>
-        </hellena-shopping-list>
-    </mat-tab>
-</mat-tab-group>
+    </div>
+</div>
 
 <section class="faqSection">
     <div class="faqCurve">
