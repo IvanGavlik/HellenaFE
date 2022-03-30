@@ -1,29 +1,24 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl } from '@angular/forms';
 import {defaultPage, SearchItem} from '../../search-page/search-item';
 
 @Component({
-  selector: 'app-header',
+  selector: 'hellena-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  // TODO template form
-  @Input()
-  title: string = '';
-
-  searchForm = new FormGroup({name: new FormControl('')});
+  search = new FormControl('');
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void {}
-
   navigateToSearch(): void {
+    console.log('value ', this.search.value);
     this.router.navigateByUrl('/search', {
       state: {
-        name:  this.searchForm.controls['name'].value,
+        name: this.search.value,
         categoryIds: [],
         storeIds: [],
         cityIds: [],

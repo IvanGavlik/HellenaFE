@@ -9,8 +9,6 @@ import {CardContainer} from '../../ui/card-container/card-container';
 })
 export class FrontPageComponent implements OnInit {
 
-  subTitle = 'Pronađi proizvode na akciji';
-
   dailyDeal: CardContainer = {
     title: 'Najpovoljnije danas',
     footer: 'Pogledaj sve'
