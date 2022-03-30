@@ -1,20 +1,20 @@
 <div class="container-fluid">
-    <form class="example-form" [formGroup]="searchForm">
+    <form [formGroup]="searchForm">
         <div class="row">
-            <div class="col-md-3">
-                <div class="dropdown">
-                    <div class="input-group">
-                        <span class="input-group-text" id="basic-addon1"><img src="../../../assets/image/Frame(4).png" alt=""></span>
-                        <select class="form-select" aria-label="Default select example" formControlName="featureControl" #featureSelect>
-                            <option>Sve</option>
-                            <option *ngFor="let f of features" [value]="f.id">
-                                {{ f.value }}
-                            </option>
-                          </select>
-                    </div>
+            <div class="col-md-6">
+                <mat-form-field style="width: 100%" appearance="fill">
+                    <mat-label>Input</mat-label>
+                    <input matInput>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <div class="rangeSlider">
+                    <span>0 kn </span>
+                    <input type="range" min="0" formControlName="priceMax" max="1000">
+                    <span> 1k kn</span>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="dropdown">
                     <div class="input-group">
                         <span class="input-group-text"><img src="../../../assets/image/Group 102.png" alt=""></span>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="dropdown">
                     <div class="input-group">
                         <span class="input-group-text"><img src="../../../assets/image/Frame(4).png" alt=""></span>
@@ -38,13 +38,6 @@
                             </option>
                         </select>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="rangeSlider">
-                    <span>0 kn </span>
-                    <input type="range" min="0" formControlName="priceMax" max="1000">
-                    <span> 1k kn</span>
                 </div>
             </div>
         </div>
