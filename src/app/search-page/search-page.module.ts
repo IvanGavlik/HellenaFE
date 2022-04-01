@@ -14,6 +14,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {ShoppingListModule} from '../shopping-list/shopping-list.module';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {ShoppingListModule} from '../shopping-list/shopping-list.module';
     MatButtonModule,
     MatTabsModule,
     ShoppingListModule,
+    MatSliderModule
   ],
   exports: [
     SearchComponent
