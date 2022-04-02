@@ -114,10 +114,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   private getIcon(store: string): string {
+    console.log('store::', store);
     if (store.includes('Lidl')) {
       return '../../assets/image/lidl.png';
     }
-    if (store.includes('Intespar')) {
+    if (store.includes('INTERSPAR')) {
       return '../../assets/image/spar-logo_1x.png';
     }
     return '';

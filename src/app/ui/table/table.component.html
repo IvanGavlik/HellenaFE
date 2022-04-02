@@ -5,37 +5,31 @@
 
                 <table mat-table [dataSource]="table.data" class="table-responsive table align-middle table-borderless">
 
-                    <div matColumnDef="icon">
-                        <div *matCellDef="let element" class="flexBoxOne">
-                            <label class="checkbox bounce">
-                                                    <input type="checkbox">
-                                                    <svg viewBox="0 0 21 21">
-                                                        <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
-                                                    </svg>
-                                                </label>
+                    <ng-container matColumnDef="icon">
+                        <td *matCellDef="let element" class="flexBoxOne">
                             <img [src]="element.icon" />
-                        </div>
-                    </div>
-                    <div matColumnDef="name">
-                        <div *matCellDef="let element" class="flexBoxTwo productInfo">
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <td *matCellDef="let element" class="flexBoxTwo productInfo">
                             <h1>{{ element.name }} </h1>
                             <h5 *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"> {{ element.actionPrice }} kn</h5>
                             <ng-template #allInfo>
                                 <h5>{{ element.originalPrice }} kn <span> {{ element.actionPrice }} kn </span></h5>
                             </ng-template>
                             <br>
-                        </div>
-                    </div>
-                    <div matColumnDef="actions">
-                        <div class="buttonDesign flexBoxThree" *matCellDef="let element">
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <td class="buttonDesign flexBoxThree" *matCellDef="let element">
                             <button class="addCart" mat-menu-item (click)="addTableItemToShoppingList.emit(element)">
                                                 Add To Cart
                                             </button>
                             <button class="similarBtn" mat-menu-item (click)="compareTableItem.emit(element)">
                                                 Similar Item
                                             </button>
-                        </div>
-                    </div>
+                        </td>
+                    </ng-container>
 
                     <tr mat-row *matRowDef="let row; columns: table.columnNames" class="flex-container"></tr>
                 </table>
