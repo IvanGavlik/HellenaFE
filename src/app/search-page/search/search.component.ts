@@ -134,26 +134,37 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.doSearch(this.search);
   }
 
-  handleAddTableItemToShoppingList($event: TableItem): void {
-    const dialog = this.dialogService.openHellenaDialog({
-      title: 'Popis za kupovinu',
-      onOF: true,
-      content: 'Želite li dodati ' + $event.name + ' na popis za kupovinu ?'} as Dialog)
-        .subscribe(result =>  {
-          if (result) { // use select yes in dialog
-            this.shoppingListService.addToShoppingList({
-              name: $event.name,
-              id: $event.id,
-              actionPrice: $event.actionPrice,
-              originalPrice: $event.originalPrice,
-              store: $event.store,
-              activeTo: $event.activeTo,
-              quantity: 1,
-              isPurchased: false
-            } as ShoppingListItem);
-          }
-        });
-    this.subs.push(dialog);
+  handleAddTableItemToShoppingList($event: TableItem | null): void {
+    if ($event == null) {
+      const dialog = this.dialogService.openHellenaDialog({
+        title: 'Popis za kupovinu',
+        onOF: false,
+      } as Dialog)
+          .subscribe(res => {});
+      this.subs.push(dialog);
+
+    } else {
+      const dialog = this.dialogService.openHellenaDialog({
+        title: 'Popis za kupovinu',
+        onOF: true,
+        content: 'Želite li dodati ' + $event.name + ' na popis za kupovinu ?'} as Dialog)
+          .subscribe(result =>  {
+            if (result) { // use select yes in dialog
+              this.shoppingListService.addToShoppingList({
+                name: $event.name,
+                id: $event.id,
+                actionPrice: $event.actionPrice,
+                originalPrice: $event.originalPrice,
+                store: $event.store,
+                activeTo: $event.activeTo,
+                quantity: 1,
+                isPurchased: false
+              } as ShoppingListItem);
+            }
+          });
+      this.subs.push(dialog);
+    }
+
   }
 
   handleCompareTableItem($event: TableItem): void {
