@@ -1,3 +1,39 @@
+<div class="container" style="margin-top: 1rem; border: 1px solid #550ACD; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px">
+    <form [formGroup]="searchForm" >
+        <div class="row" id="filter" >
+            <div class="col">
+                <mat-form-field  appearance="outline" >
+                    <mat-label>Trgovina</mat-label>
+                    <mat-chip-list #storeChipperList>
+                        <mat-chip
+                                *ngFor="let el of store.items"
+                                (removed)="removeStore(el)">
+                            {{el.value}}
+                            <button matChipRemove>
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip>
+                        <input
+                                placeholder="npr. Lidl"
+                                #storeChipper
+                                formControlName="storeControl"
+                                [matAutocomplete]="autoStore"
+                                [matChipInputFor]="storeChipperList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="addStore($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #autoStore="matAutocomplete" (optionSelected)="selectedStore($event)">
+                        <mat-option *ngFor="let el of store.filteredItems | async" [value]="el">
+                            {{el.value}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--
 <form class="example-form mat-elevation-z8" style="margin-top: 1rem; white-space: nowrap; padding: 1rem;"
       [formGroup]="searchForm"
 >
@@ -12,7 +48,7 @@
         </div>
     </div>
 
-    <!-- TODO  style="display: none" -->
+    TODO  style="display: none"
     <div class="row" *ngIf="displayFullSearchForm" >
         <div class="col">
             <div class="rangeSlider">
@@ -81,7 +117,7 @@
             </mat-form-field>
         </div>
 
-        <!--
+        !--
         <div class="col">
             <mat-form-field style="display: block;" >
                 <mat-label>Lokacija</mat-label>
@@ -110,7 +146,8 @@
                 </mat-autocomplete>
             </mat-form-field>
         </div>
-        -->
+        --
+
         <div class="col">
             <mat-form-field style="display: block;" >
                 <mat-label>Trgovina</mat-label>
@@ -139,7 +176,6 @@
                 </mat-autocomplete>
             </mat-form-field>
         </div>
-
     </div>
-
 </form>
+-->
