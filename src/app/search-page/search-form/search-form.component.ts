@@ -46,7 +46,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         });
 
     @ViewChild('featureSelect') featureSelect: ElementRef<HTMLSelectElement> = {} as ElementRef;
-    features: Pair<ItemFeature, string>[] = [ { id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas' } as Pair<ItemFeature, string> ];
+    features: Pair<ItemFeature, string>[] = [ { id: ItemFeature.ALL, value: 'Sve' }, { id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas' } as Pair<ItemFeature, string> ];
     // category
     @ViewChild('categoryChipper') categoryChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
     category: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([], [],
@@ -129,7 +129,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         if (value.name) {
             search.name = value.name;
         }
-        if (value.featureControl && value.featureControl.length > 0) {
+        if (value.featureControl && value.featureControl.length > 0 && value.featureControl !== ItemFeature.ALL) {
             search.feature = value.featureControl;
         }
 
