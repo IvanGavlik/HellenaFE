@@ -105,6 +105,13 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.subs.forEach(el => el?.unsubscribe());
     }
 
+    formatLabel(value: number): string {
+        if (value >= 999) {
+
+        }
+        return value + ' kn';
+    }
+
     handleSearchFormValueChange(value: any): void {
         if (value.name) {
             this.displayFullSearchForm = true;
