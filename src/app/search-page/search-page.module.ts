@@ -16,6 +16,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {ShoppingListModule} from '../shopping-list/shopping-list.module';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {MatDividerModule} from '@angular/material/divider';
     ShoppingListModule,
     MatSliderModule,
     MatDividerModule,
+    MatSidenavModule
   ],
   exports: [
     SearchComponent

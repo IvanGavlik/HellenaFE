@@ -1,46 +1,48 @@
 <div class="container-fluid" style="margin-top: 66px; padding-left: 0px !important; padding-right: 0px !important;">
-    <!-- background: linear-gradient(92.02deg,#550ACD 26.67%,#8001D9 73.9%); -->
     <hellena-search-form [search]="search" (searchEvent)="handleSearch($event)"></hellena-search-form>
 </div>
 
 <hellena-spinner class="center" [spinner]="spinner"> </hellena-spinner>
 
-<div class="container-fluid paddingSerach">
-    <div class="row">
-        <!-- TODO save search -->
-        <!-- sortiranje u tablici -->
-        <div class="col-12 tableBackground">
+<section>
+    <div class="container">
+        <div class="row">
+            <!-- TODO save search -->
+            <!-- sortiranje u tablici -->
+            <div class="col-12" >
 
-            <div class="tableContent">
-                <div class="categoryTab">
-                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
-                                <img src="../../../assets/image/sve.png" alt=""><span> Sve</span>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <!-- for now open dialog and stay in the same tab (#pills-home) -->
-                            <button class="nav-link"  type="button"
-                                    (click)="handleAddTableItemToShoppingList(null)"
-                            >
-                                <img src="../../../assets/image/danas.png" alt=""><span> Popis za kupovinu </span>
+                <mat-drawer-container class="example-container" autosize>
+                    <mat-drawer #drawer class="example-sidenav" mode="side" position="end" >
+                       <div class="col-12">
+                           <p>Popis za kupovinu bla bla bla </p>
+                           <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+                       </div>
+                    </mat-drawer>
+
+                    <div class="example-sidenav-content">
+                        <div class="col-12">
+                            <button type="button" mat-button (click)="drawer.toggle()">
+                                tablica
                             </button>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
+                    </div>
 
-                <hellena-table [table]="table"
-                           (loadPage)="handleLoadPage($event)"
-                           (addTableItemToShoppingList)="handleAddTableItemToShoppingList($event)"
-                           (compareTableItem)="handleCompareTableItem($event)"
-                           style="word-break: break-all;">
+                </mat-drawer-container>
+
+
+            </div>
+            <div class="col-12" style="border: 1px solid black">
+                <hellena-table
+                        [table]="table"
+                        (loadPage)="handleLoadPage($event)"
+                        (addTableItemToShoppingList)="handleAddTableItemToShoppingList($event)"
+                        (compareTableItem)="handleCompareTableItem($event)"
+                        style="word-break: break-all;">
                 </hellena-table>
-
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <section class="faqSection">
     <div class="faqCurve">

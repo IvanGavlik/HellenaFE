@@ -25,6 +25,7 @@ import {SearchUIService} from '../search-ui.service';
   ]
 })
 export class SearchComponent implements OnInit, OnDestroy {
+  showFiller = false;
 
   table = {
     columnNames: ['icon', 'name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
