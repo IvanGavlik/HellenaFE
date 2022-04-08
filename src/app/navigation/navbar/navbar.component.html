@@ -8,13 +8,28 @@
                 <a class="navbar-brand" href="#">Hellena</a>
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index">Naslovna</a>
+<!--                        <a class="nav-link active" aria-current="page" href="index">Naslovna</a> -->
+                        <button mat-button class="white-icon" (click)="handleNavigationClickHome()" >
+                            <mat-icon>home</mat-icon>
+                        </button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="search">Pretraga</a>
+<!--                        <a class="nav-link" href="about-us">O nama</a> -->
+                        <button mat-button class="white-icon" (click)="handleNavigationClickAboutUs()"  >
+                            <mat-icon>business</mat-icon>
+                        </button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about-us">O nama</a>
+
+                        <button mat-button (click)="handleNavigationClickSearch()" >
+                            <mat-icon class="white-icon">search</mat-icon>
+                        </button>
+<!--                        <a class="nav-link" href="search">Pretraga</a> -->
+                    </li>
+                    <li class="nav-item" >
+                        <button mat-button  (click)="handleNavigationClickShoppingCart()" >
+                            <mat-icon class="white-icon" >shopping_cart</mat-icon>
+                        </button>
                     </li>
                 </ul>
             </div>

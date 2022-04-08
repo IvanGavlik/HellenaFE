@@ -26,6 +26,10 @@
     opacity: 1; /* Firefox */
 }
 
+.white-icon {
+    color: white;
+}
+
 #filter .mat-form-field-appearance-outline .mat-form-field-outline-start {
     border-radius: 1.59rem;
 }
