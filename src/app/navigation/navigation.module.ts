@@ -5,12 +5,11 @@ import {RouterModule} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
-import { NavTestDialogComponent } from './nav-test-dialog/nav-test-dialog.component';
+import {ShoppingListModule} from '../shopping-list/shopping-list.module';
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    NavTestDialogComponent
   ],
     imports: [
         CommonModule,
@@ -18,6 +17,7 @@ import { NavTestDialogComponent } from './nav-test-dialog/nav-test-dialog.compon
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
+        ShoppingListModule
     ],
   exports: [
     NavbarComponent

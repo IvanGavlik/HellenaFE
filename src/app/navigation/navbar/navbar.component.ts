@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {NavTestDialogComponent} from '../nav-test-dialog/nav-test-dialog.component';
 import {Router} from '@angular/router';
+import {ShoppingListComponent} from '../../shopping-list/shopping-list/shopping-list.component';
 
 @Component({
   selector: 'hellena-navbar',
@@ -27,8 +27,8 @@ export class NavbarComponent implements OnInit {
     const config = {} as MatDialogConfig;
     config.width = '30%';
     config.height = '100%';
-    const dialog = this.dialog.open(NavTestDialogComponent, config);
-    dialog.updatePosition({ top: '0px', right: '0px' }  );
+    const dialog = this.dialog.open(ShoppingListComponent, config);
+    dialog.updatePosition({ top: '100px', right: '0px' }  );
     this.isOpened = true;
 
     dialog.afterClosed().subscribe(result => {

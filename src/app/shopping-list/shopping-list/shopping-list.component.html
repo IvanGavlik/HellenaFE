@@ -1,16 +1,22 @@
-<div class="container-md g-1">
-    <div class="row" style="margin-bottom: 1rem; margin-top: 1rem; " >
-        <div class="col-12" >
-            <hellena-shopping-list-table
-                    [table]="table"
-                    (clear)="handleClear()"
-                    (itemDone)="handleItemDone($event)"
-                    (itemRemove)="handleItemRemove($event)"
-                    (itemCompare)="handleItemCompare()"
-                    (itemQuantity)="handleItemQuantity($event)"
-                    style="word-break: break-all;"
-            >
-            </hellena-shopping-list-table>
-        </div>
-    </div>
+<div style="margin-top: 66px;" >
+    <h1 mat-dialog-title style="color: #8001D9" >Popis za kupovinu</h1>
+
+    <mat-dialog-content class="mat-typography">
+        <hellena-shopping-list-table
+                [table]="table"
+                (clear)="handleClear()"
+                (itemDone)="handleItemDone($event)"
+                (itemRemove)="handleItemRemove($event)"
+                (itemCompare)="handleItemCompare()"
+                (itemQuantity)="handleItemQuantity($event)"
+                style="word-break: break-all;"
+        >
+        </hellena-shopping-list-table>
+    </mat-dialog-content>
+
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+    </mat-dialog-actions>
+
 </div>
