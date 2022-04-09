@@ -1,10 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild, NgZone} from '@angular/core';
 import {ShoppingListTable, ShoppingListTableItem, ShoppingListTableSum} from '../../ui/shopping-list-table/shopping-list-table';
 import {SearchUIService} from '../../search-page/search-ui.service';
 import {ShoppingListService} from '../shopping-list.service';
 import {Subscription} from 'rxjs';
 import {Dialog} from '../../ui/dialog/dialog';
 import {DialogService} from '../../ui/dialog/dialog.service';
+import {Square} from './square';
 
 @Component({
   selector: 'hellena-shopping-list',
@@ -22,7 +23,13 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   private subs: Subscription[] = [];
 
-  constructor(private searchUI: SearchUIService, private shoppingListService: ShoppingListService, private dialog: DialogService) { }
+  @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement> = {} as ElementRef;
+  ctx: CanvasRenderingContext2D | null = this.canvas.nativeElement.getContext('2d');
+  requestId =  1 ;
+  interval = 200;
+  squares: Square[] = [];
+
+  public constructor(private searchUI: SearchUIService, private shoppingListService: ShoppingListService, private dialog: DialogService, private ngZone: NgZone) { }
 
   ngOnInit(): void {
     const sub = this.searchUI.onTabChange().subscribe(tab => {
@@ -31,7 +38,29 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       }
     });
     this.subs.push(sub);
+
+    this.ctx = this.canvas.nativeElement.getContext('2d');
+    // @ts-ignore
+    this.ctx.fillStyle = 'red';
+    this.ngZone.runOutsideAngular(() => this.tick());
+    setInterval(() => {
+      this.tick();
+    }, 200);
   }
+
+  tick(): void {
+    this.ctx?.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    this.squares.forEach((square: Square) => {
+      square.moveRight();
+    });
+    this.requestId = requestAnimationFrame(() => this.tick);
+  }
+
+  play(): void {
+    const square = new Square(this.ctx);
+    this.squares = this.squares.concat(square);
+  }
+
 
   private onTabChange(): void {
     this.updateShoppingListDataTable();
