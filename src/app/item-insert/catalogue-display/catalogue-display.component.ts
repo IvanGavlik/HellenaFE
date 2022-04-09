@@ -1,5 +1,4 @@
-import {Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Square} from './square';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'hellena-catalogue-display',
@@ -10,36 +9,46 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
 
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement> = {} as ElementRef;
   ctx: CanvasRenderingContext2D | null = null;
-  requestId =  1 ;
-  interval = 200;
-  squares: Square[] = [];
+  rect = { startX: 0, startY: 0, w : 0, h : 0, };
+  drag = false;
+  offsetLeft = 0;
+  offsetTop = 0;
 
-  constructor(private ngZone: NgZone) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
-    // @ts-ignore
-    this.ctx.fillStyle = 'red';
-    this.ngZone.runOutsideAngular(() => this.tick());
-    setInterval(() => {
-      this.tick();
-    }, 200);
+    this.offsetLeft = this.canvas.nativeElement.offsetLeft;
+    this.offsetTop =  this.canvas.nativeElement.offsetTop;
+    this.canvas.nativeElement.addEventListener('mousedown', ev => this.mouseDown(ev), false);
+    this.canvas.nativeElement.addEventListener('mouseup', ev => this.mouseUp(ev), false);
+    this.canvas.nativeElement.addEventListener('mousemove', ev => this.mouseMove(ev), false);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy(): void {}
+
+  mouseDown(e: any): void {
+    this.rect.startX = e.pageX - this.offsetLeft;
+    this.rect.startY = e.pageY - this.offsetTop;
+    this.drag = true;
   }
 
-  tick(): void {
-    this.ctx?.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-    this.squares.forEach((square: Square) => {
-      square.moveRight();
-    });
-    this.requestId = requestAnimationFrame(() => this.tick);
+  mouseUp(e: any): void {
+    this.drag = false;
   }
 
-  play(): void {
-    const square = new Square(this.ctx);
-    this.squares = this.squares.concat(square);
+  mouseMove(e: any): void {
+    if (this.drag) {
+
+      this.ctx?.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+//        this.ctx.drawImage(imageObj,imageObj.width/2,imageObj.width/2);
+
+      this.rect.w = (e.pageX - this.offsetLeft) - this.rect.startX;
+      this.rect.h = (e.pageY - this.offsetTop) - this.rect.startY;
+      // @ts-ignore
+      this.ctx.strokeStyle = 'red';
+      this.ctx?.strokeRect(this.rect.startX, this.rect.startY, this.rect.w, this.rect.h);
+    }
   }
 
 }
