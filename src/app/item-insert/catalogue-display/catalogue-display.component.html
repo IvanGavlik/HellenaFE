@@ -1,3 +1,15 @@
-<p>catalogue-display works!</p>
-<canvas #canvas id="canvas" style="overflow:none; border: 1px solid green"></canvas>
-<br>
+<div class="container-fluid" style="margin-top: 4.2rem; " >
+    <div class="row">
+        <div class="col-9" style="border: 1px solid black" >
+            <canvas #canvas id="canvas" style="overflow:none; border: 1px solid green"></canvas>
+            <br>
+            <button (click)="doAction()" > Take Screen </button>
+        </div>
+        <div class="col-3" >
+            <canvas #canvas2 id="canvas" style="overflow:none; border: 1px solid rebeccapurple"></canvas>
+        </div>
+    </div>
+</div>
+
+
+
