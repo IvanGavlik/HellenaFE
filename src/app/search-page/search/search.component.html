@@ -9,29 +9,7 @@
         <div class="row">
             <!-- TODO save search -->
             <!-- sortiranje u tablici -->
-            <div class="col-12" >
-
-                <mat-drawer-container class="example-container" autosize>
-                    <mat-drawer #drawer class="example-sidenav" mode="side" position="end" >
-                       <div class="col-12">
-                           <p>Popis za kupovinu bla bla bla </p>
-                           <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-                       </div>
-                    </mat-drawer>
-
-                    <div class="example-sidenav-content">
-                        <div class="col-12">
-                            <button type="button" mat-button (click)="drawer.toggle()">
-                                tablica
-                            </button>
-                        </div>
-                    </div>
-
-                </mat-drawer-container>
-
-
-            </div>
-            <div class="col-12" style="border: 1px solid black">
+            <div class="col-12" style="border: 1px solid black; margin-top: 1rem;">
                 <hellena-table
                         [table]="table"
                         (loadPage)="handleLoadPage($event)"
