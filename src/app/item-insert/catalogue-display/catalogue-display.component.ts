@@ -23,7 +23,7 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
     this.imageObj.onload = (event) => this.loadImage(event, this.ctx);
-    this.imageObj.src = '../../assets/image/lidl.png';
+    this.imageObj.src = '../../assets/image/p1.png';
     this.offsetLeft = this.canvas.nativeElement.offsetLeft;
     this.offsetTop =  this.canvas.nativeElement.offsetTop;
     this.canvas.nativeElement.addEventListener('mousedown', ev => this.mouseDown(ev), false);
@@ -32,7 +32,11 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   }
 
   loadImage(event: any, ctx: CanvasRenderingContext2D | null): void {
-    ctx?.drawImage(this.imageObj, 0, 0);
+    this.drawImage(ctx);
+  }
+
+  drawImage(ctx: CanvasRenderingContext2D | null): void {
+    ctx?.drawImage(this.imageObj, 0, 0, 1775, 1775, 0, 0, 1775, 1775);
   }
 
   ngOnDestroy(): void {}
@@ -45,13 +49,14 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
 
   mouseUp(e: any): void {
     this.drag = false;
+    this.doAction();
   }
 
   mouseMove(e: any): void {
     if (this.drag) {
 
       this.ctx?.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
-      this.ctx?.drawImage(this.imageObj, 0, 0);
+      this.drawImage(this.ctx);
 
       this.rect.w = (e.pageX - this.offsetLeft) - this.rect.startX;
       this.rect.h = (e.pageY - this.offsetTop) - this.rect.startY;
