@@ -1,11 +1,11 @@
 <div style="float: left; margin-left: 1rem; margin-top: 1rem;">
     <input type="file" (change)="handleLoadImageFile($event)" name="imageLoader"/>
     <br>
-    <canvas #canvas id="canvas" style="overflow:none; border: 1px solid green" width="600" height="800"></canvas>
+    <canvas #catalogue id="canvas" style="overflow:none; border: 1px solid green" width="600" height="800"></canvas>
 </div>
 <div style="float: left; margin-left: 1rem; margin-top: 2.9rem; border: 2px solid #8001D9; border-radius: 10px;" >
     <div style="float: left" >
-        <canvas #canvas2 id="canvas"  width="271" height="185"
+        <canvas #item id="canvas"  width="271" height="185"
                 style="overflow:none; margin: .5rem; border: 1px solid #550ACD" ></canvas>
     </div>
     <div style="float: right" >
@@ -15,18 +15,52 @@
                     <form [formGroup]="catalogueForm" (ngSubmit)="handleItemSubmit()" >
                         <input id="name" type="text" placeholder="item name" formControlName="name">
                         <br>
-                        <input id="category" type="text" placeholder="category" formControlName="category">
+                        <label for="category">Category:</label>
+                        <select id="category" name="categories" formControlName="category" >
+                            <option value="-1">None</option>
+                            <option value="1">Children</option>
+                            <option value="3">Fruits and vegetables</option>
+                            <option value="4">Milk products, eggs</option>
+                            <option value="5">Meat and fish</option>
+                            <option value="6">Delicatessen</option>
+                            <option value="7">Drinks</option>
+                            <option value="8">Bakery</option>
+                            <option value="9">Sweets and snacks</option>
+                            <option value="10">Frozen food</option>
+                            <option value="11">Meal preparation</option>
+                            <option value="12">Pasta, rice, gnocchi, tortillas</option>
+                            <option value="13">Sauces and spices</option>
+                            <option value="14">Quick meal</option>
+                            <option value="15">Canned and soups</option>
+                            <option value="16">Preparation of cakes</option>
+                            <option value="17">Flakes, spreads, coffees, teas</option>
+                            <option value="18">Pets</option>
+                            <option value="19">Cleaning</option>
+                            <option value="20">Care and hygiene</option>
+                            <option value="21">Household supplies</option>
+                            <option value="25">Party</option>
+                            <option value="23">School and office</option>
+                            <option value="24">Car</option>
+                        </select>
                         <br>
                         <div style="border: 1px solid grey; margin: 10px;"  >
                             <input id="price" type="text" placeholder="original price" formControlName="price">
                             <br>
                             <input id="action_price" type="text" placeholder="action price" formControlName="actionPrice">
                             <br>
-                            <input id="price_from" type="text" placeholder="price active form" formControlName="priceFrom">
+                            <input id="price_from" type="date" placeholder="price active form" formControlName="priceFrom">
                             <br>
-                            <input id="price_to" type="text" placeholder="price active to" formControlName="priceTo">
+                            <input id="price_to" type="date" placeholder="price active to" formControlName="priceTo">
                         </div>
-                        <input id="store" type="text" placeholder="store" formControlName="store">
+                        <label for="store">Category:</label>
+                        <select id="store" name="stores" formControlName="store" >
+                            <option value="-1">None</option>
+                            <option value="1">PLODINE</option>
+                            <option value="2">INTERSPAR</option>
+                            <option value="3">KAUFLAND</option>
+                            <option value="4">LIDL</option>
+                            <option value="5">KONZUM</option>
+                        </select>
                         <br>
                         <button type="submit"> Submit</button>
                     </form>

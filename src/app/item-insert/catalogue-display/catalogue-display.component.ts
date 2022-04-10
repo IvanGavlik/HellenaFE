@@ -8,7 +8,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class CatalogueDisplayComponent implements OnInit, OnDestroy {
 
-  @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement> = {} as ElementRef;
+  @ViewChild('catalogue', { static: true }) catalogue: ElementRef<HTMLCanvasElement> = {} as ElementRef;
   ctx: CanvasRenderingContext2D | null = null;
   rect = { startX: 0, startY: 0, w : 0, h : 0, };
   imageObj = new Image();
@@ -16,7 +16,7 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   offsetLeft = 0;
   offsetTop = 0;
 
-  @ViewChild('canvas2', { static: true }) canvas2: ElementRef<HTMLCanvasElement> = {} as ElementRef;
+  @ViewChild('item', { static: true }) item: ElementRef<HTMLCanvasElement> = {} as ElementRef;
 
   catalogueForm = new FormGroup({
     name: new FormControl(''),
@@ -31,14 +31,13 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit(): void {
-    this.ctx = this.canvas.nativeElement.getContext('2d');
+    this.ctx = this.catalogue.nativeElement.getContext('2d');
     this.imageObj.onload = (event) => this.loadImage(event, this.ctx);
- //   this.imageObj.src = '../../assets/image/p1.png';
-    this.offsetLeft = this.canvas.nativeElement.offsetLeft;
-    this.offsetTop =  this.canvas.nativeElement.offsetTop;
-    this.canvas.nativeElement.addEventListener('mousedown', ev => this.mouseDown(ev), false);
-    this.canvas.nativeElement.addEventListener('mouseup', ev => this.mouseUp(ev), false);
-    this.canvas.nativeElement.addEventListener('mousemove', ev => this.mouseMove(ev), false);
+    this.offsetLeft = this.catalogue.nativeElement.offsetLeft;
+    this.offsetTop =  this.catalogue.nativeElement.offsetTop;
+    this.catalogue.nativeElement.addEventListener('mousedown', ev => this.mouseDown(ev), false);
+    this.catalogue.nativeElement.addEventListener('mouseup', ev => this.mouseUp(ev), false);
+    this.catalogue.nativeElement.addEventListener('mousemove', ev => this.mouseMove(ev), false);
   }
 
   ngOnDestroy(): void {}
@@ -78,7 +77,7 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   mouseMove(e: any): void {
     if (this.drag) {
 
-      this.ctx?.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+      this.ctx?.clearRect(0, 0, this.catalogue.nativeElement.width, this.catalogue.nativeElement.height);
       this.drawImage(this.ctx);
 
       this.rect.w = (e.pageX - this.offsetLeft) - this.rect.startX;
@@ -90,12 +89,15 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   }
 
   doAction(): void {
-    const ctx = this.canvas2.nativeElement.getContext('2d');
-    ctx?.clearRect(0, 0, this.canvas2.nativeElement.width, this.canvas2.nativeElement.height);
-    ctx?.drawImage(this.canvas.nativeElement, this.rect.startX, this.rect.startY, this.rect.w, this.rect.h, 0, 0, this.rect.w, this.rect.h);
+    const ctx = this.item.nativeElement.getContext('2d');
+    ctx?.clearRect(0, 0, this.item.nativeElement.width, this.item.nativeElement.height);
+    ctx?.drawImage(this.catalogue.nativeElement, this.rect.startX, this.rect.startY, this.rect.w, this.rect.h, 0, 0, this.rect.w, this.rect.h);
   }
 
+  // display data
   handleItemSubmit(): void {
     console.log('submit ', this.catalogueForm.value);
+    console.log('data url ', this.item.nativeElement.toDataURL());
   }
+
 }
