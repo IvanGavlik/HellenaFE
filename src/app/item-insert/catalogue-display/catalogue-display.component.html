@@ -3,16 +3,16 @@
     <br>
     <canvas #canvas id="canvas" style="overflow:none; border: 1px solid green" width="600" height="800"></canvas>
 </div>
-<div style="float: left; margin-left: 1rem; margin-top: 2.9rem; border: 2px solid blue; border-radius: 10px;" >
+<div style="float: left; margin-left: 1rem; margin-top: 2.9rem; border: 2px solid #8001D9; border-radius: 10px;" >
     <div style="float: left" >
-        <canvas #canvas2 id="canvas"  width="320" height="320"
-                style="overflow:none;" ></canvas>
+        <canvas #canvas2 id="canvas"  width="271" height="185"
+                style="overflow:none; margin: .5rem; border: 1px solid #550ACD" ></canvas>
     </div>
     <div style="float: right" >
         <div class="container-fluid" style="padding-top: 1rem" >
             <div class="row">
                 <div class="col-12">
-                    <form [formGroup]="catalogueForm"  >
+                    <form [formGroup]="catalogueForm" (ngSubmit)="handleItemSubmit()" >
                         <input id="name" type="text" placeholder="item name" formControlName="name">
                         <br>
                         <input id="category" type="text" placeholder="category" formControlName="category">
@@ -27,6 +27,8 @@
                             <input id="price_to" type="text" placeholder="price active to" formControlName="priceTo">
                         </div>
                         <input id="store" type="text" placeholder="store" formControlName="store">
+                        <br>
+                        <button type="submit"> Submit</button>
                     </form>
                 </div>
             </div>

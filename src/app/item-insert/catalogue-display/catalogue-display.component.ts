@@ -39,10 +39,6 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
     this.canvas.nativeElement.addEventListener('mousedown', ev => this.mouseDown(ev), false);
     this.canvas.nativeElement.addEventListener('mouseup', ev => this.mouseUp(ev), false);
     this.canvas.nativeElement.addEventListener('mousemove', ev => this.mouseMove(ev), false);
-
-    this.catalogueForm.valueChanges.subscribe(form => {
-      console.log('form ', form);
-    });
   }
 
   ngOnDestroy(): void {}
@@ -97,5 +93,9 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
     const ctx = this.canvas2.nativeElement.getContext('2d');
     ctx?.clearRect(0, 0, this.canvas2.nativeElement.width, this.canvas2.nativeElement.height);
     ctx?.drawImage(this.canvas.nativeElement, this.rect.startX, this.rect.startY, this.rect.w, this.rect.h, 0, 0, this.rect.w, this.rect.h);
+  }
+
+  handleItemSubmit(): void {
+    console.log('submit ', this.catalogueForm.value);
   }
 }
