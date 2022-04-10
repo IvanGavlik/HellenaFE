@@ -44,15 +44,15 @@
                         </select>
                         <br>
                         <div style="border: 1px solid grey; margin: 10px;"  >
-                            <input id="price" type="text" placeholder="original price" formControlName="price">
+                            <input id="price" type="number" placeholder="original price" formControlName="price">
                             <br>
-                            <input id="action_price" type="text" placeholder="action price" formControlName="actionPrice">
+                            <input id="action_price" type="number" placeholder="action price" formControlName="actionPrice">
                             <br>
                             <input id="price_from" type="date" placeholder="price active form" formControlName="priceFrom">
                             <br>
                             <input id="price_to" type="date" placeholder="price active to" formControlName="priceTo">
                         </div>
-                        <label for="store">Category:</label>
+                        <label for="store">Store:</label>
                         <select id="store" name="stores" formControlName="store" >
                             <option value="-1">None</option>
                             <option value="1">PLODINE</option>

@@ -1,5 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {ItemInsertPageComponent} from '../item-insert-page/item-insert-page.component';
+import {ItemInsert} from './item-insert';
 
 @Component({
   selector: 'hellena-catalogue-display',
@@ -96,8 +98,17 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
 
   // display data
   handleItemSubmit(): void {
-    console.log('submit ', this.catalogueForm.value);
-    console.log('data url ', this.item.nativeElement.toDataURL());
+    const item = {
+      name: this.catalogueForm.value.name,
+      orginalPrice: this.catalogueForm.value.price,
+      actionPrice: this.catalogueForm.value.actionPrice,
+      activeFrom: this.catalogueForm.value.priceFrom,
+      activeTo: this.catalogueForm.value.priceTo,
+      store: this.catalogueForm.value.store,
+      category: this.catalogueForm.value.category,
+      image: this.item.nativeElement.toDataURL()
+    } as ItemInsert;
+    console.log('item to insert ', item);
   }
 
 }
