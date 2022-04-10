@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'hellena-catalogue-display',
@@ -15,20 +16,48 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   offsetLeft = 0;
   offsetTop = 0;
 
-
   @ViewChild('canvas2', { static: true }) canvas2: ElementRef<HTMLCanvasElement> = {} as ElementRef;
+
+  catalogueForm = new FormGroup({
+    name: new FormControl(''),
+    category: new FormControl(''),
+    price: new FormControl(''),
+    actionPrice: new FormControl(''),
+    priceFrom: new FormControl(''),
+    priceTo: new FormControl(''),
+    store: new FormControl(''),
+  });
 
   constructor() { }
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
     this.imageObj.onload = (event) => this.loadImage(event, this.ctx);
-    this.imageObj.src = '../../assets/image/p1.png';
+ //   this.imageObj.src = '../../assets/image/p1.png';
     this.offsetLeft = this.canvas.nativeElement.offsetLeft;
     this.offsetTop =  this.canvas.nativeElement.offsetTop;
     this.canvas.nativeElement.addEventListener('mousedown', ev => this.mouseDown(ev), false);
     this.canvas.nativeElement.addEventListener('mouseup', ev => this.mouseUp(ev), false);
     this.canvas.nativeElement.addEventListener('mousemove', ev => this.mouseMove(ev), false);
+
+    this.catalogueForm.valueChanges.subscribe(form => {
+      console.log('form ', form);
+    });
+  }
+
+  ngOnDestroy(): void {}
+
+  //  https://stackoverflow.com/questions/10906734/how-to-upload-image-into-html5-canvas
+  handleLoadImageFile($event: any): void {
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imageObj = new Image();
+      this.imageObj.onload = () => {
+        this.drawImage(this.ctx);
+      };
+      this.imageObj.src = event.target.result;
+    };
+    reader.readAsDataURL($event.target.files[0]);
   }
 
   loadImage(event: any, ctx: CanvasRenderingContext2D | null): void {
@@ -38,8 +67,6 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   drawImage(ctx: CanvasRenderingContext2D | null): void {
     ctx?.drawImage(this.imageObj, 0, 0, 1775, 1775, 0, 0, 1775, 1775);
   }
-
-  ngOnDestroy(): void {}
 
   mouseDown(e: any): void {
     this.rect.startX = e.pageX - this.offsetLeft;
