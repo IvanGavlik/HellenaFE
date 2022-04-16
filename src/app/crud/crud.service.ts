@@ -38,7 +38,8 @@ export abstract class CrudService implements Crud {
   }
 
   save(entity: Entity): Observable<Entity> {
-    return of();
+    const endpoint = environment.host + this.crudConfiguration.saveEndpoint;
+    return this.http.post<Entity>(endpoint, entity);
   }
   saveAll(entityList: Entity[]): Observable<Entity[]> {
     return of();

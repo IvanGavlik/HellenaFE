@@ -1,12 +1,20 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {ItemInsertPageComponent} from '../item-insert-page/item-insert-page.component';
 import {ItemInsert} from './item-insert';
+import {CatalogueDisplayService} from './catalogue-display.service';
+import {CatalogueConfiguration} from './catalogue-configuration';
+import {Dialog} from '../../ui/dialog/dialog';
+import {DialogService} from '../../ui/dialog/dialog.service';
+import {Subscription} from 'rxjs';
+import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 
 @Component({
   selector: 'hellena-catalogue-display',
   templateUrl: './catalogue-display.component.html',
-  styleUrls: ['./catalogue-display.component.css']
+  styleUrls: ['./catalogue-display.component.css'],
+  providers: [
+    { provide: 'configuration', useClass: CatalogueConfiguration}
+  ]
 })
 export class CatalogueDisplayComponent implements OnInit, OnDestroy {
 
@@ -33,7 +41,9 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
     store: new FormControl(''),
   });
 
-  constructor() { }
+  private subs: Subscription[] = [];
+
+  constructor(private service: CatalogueDisplayService, private dialog: DialogService) { }
 
   ngOnInit(): void {
     this.ctx = this.catalogue.nativeElement.getContext('2d');
@@ -45,7 +55,13 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
     this.catalogue.nativeElement.addEventListener('mousemove', ev => this.mouseMove(ev), false);
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.subs.forEach(el => {
+      if (el) {
+        el.unsubscribe();
+      }
+    });
+  }
 
   //  https://stackoverflow.com/questions/10906734/how-to-upload-image-into-html5-canvas
   handleLoadImageFile($event: any): void {
@@ -109,10 +125,49 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
       activeTo: this.catalogueForm.value.priceTo,
       store: this.catalogueForm.value.store,
       category: this.catalogueForm.value.category,
-      image: this.item.nativeElement.toDataURL(),
+      imageContent: this.item.nativeElement.toDataURL(),
+      image: this.catalogueForm.value.name,
       user: this.user
     } as ItemInsert;
-    console.log('item to insert ', item);
+    console.log('insert ', item);
+    const service = this.service.save(item).subscribe(
+        res => this.submitOk(),
+        error => this.submitNOk(error));
+    this.subs.push(service);
   }
 
+  private submitOk(): void {
+    // everyting ok
+    const dialog = {
+      onOF: false,
+      content: 'Saved',
+      title: 'Item saved'
+    } as Dialog;
+
+    const sub = this.dialog.openHellenaDialog(dialog).subscribe(() => {});
+    this.subs.push(sub);
+
+    // clear form
+    this.catalogueForm.controls['name'].setValue('');
+    this.catalogueForm.controls['price'].setValue(null);
+    this.catalogueForm.controls['actionPrice'].setValue(null);
+    this.catalogueForm.controls['priceFrom'].setValue(null);
+    this.catalogueForm.controls['priceTo'].setValue(null);
+    this.catalogueForm.controls['store'].setValue(null);
+    this.catalogueForm.controls['category'].setValue(null);
+    // clear image box
+    const ctx = this.item.nativeElement.getContext('2d');
+    ctx?.clearRect(0, 0, this.item.nativeElement.width, this.item.nativeElement.height);
+  }
+
+  private submitNOk(error: any): void {
+    const dialog = {
+      onOF: false,
+      content: error,
+      title: 'Item not saved'
+    } as Dialog;
+
+    const sub = this.dialog.openHellenaDialog(dialog).subscribe(() => {});
+    this.subs.push(sub);
+  }
 }

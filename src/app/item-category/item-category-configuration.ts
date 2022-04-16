@@ -6,4 +6,5 @@ import {Injectable} from '@angular/core';
 })
 export class ItemCategoryConfiguration implements CrudConfiguration {
   findAllEndpoint = '/v1/item/category/all';
+  saveEndpoint = '';
 }
