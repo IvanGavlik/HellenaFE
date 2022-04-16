@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ItemInsertPageComponent} from '../item-insert-page/item-insert-page.component';
 import {ItemInsert} from './item-insert';
@@ -9,6 +9,9 @@ import {ItemInsert} from './item-insert';
   styleUrls: ['./catalogue-display.component.css']
 })
 export class CatalogueDisplayComponent implements OnInit, OnDestroy {
+
+  @Input()
+  user = '';
 
   @ViewChild('catalogue', { static: true }) catalogue: ElementRef<HTMLCanvasElement> = {} as ElementRef;
   ctx: CanvasRenderingContext2D | null = null;
@@ -106,7 +109,8 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
       activeTo: this.catalogueForm.value.priceTo,
       store: this.catalogueForm.value.store,
       category: this.catalogueForm.value.category,
-      image: this.item.nativeElement.toDataURL()
+      image: this.item.nativeElement.toDataURL(),
+      user: this.user
     } as ItemInsert;
     console.log('item to insert ', item);
   }

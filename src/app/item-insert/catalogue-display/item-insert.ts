@@ -7,4 +7,5 @@ export interface ItemInsert {
     store: number;
     category: number;
     image: string;
+    user: string;
 }

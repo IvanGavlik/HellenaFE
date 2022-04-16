@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Insert your user name</h2>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="userForm">
+        <input id="name" type="text" placeholder="user name" formControlName="name">
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button mat-button  [disabled]="!userName" [mat-dialog-close]="userName" cdkFocusInitial>Set</button>
+</mat-dialog-actions>
