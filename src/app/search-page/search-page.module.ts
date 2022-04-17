@@ -17,6 +17,7 @@ import {ShoppingListModule} from '../shopping-list/shopping-list.module';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     ShoppingListModule,
     MatSliderModule,
     MatDividerModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatPaginatorModule
   ],
   exports: [
     SearchComponent

@@ -12,4 +12,5 @@ export interface TableItem {
     actionPrice: number;
     store: string;
     activeTo?: Date;
+    imageContent: string;
 }

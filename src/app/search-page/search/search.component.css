@@ -480,3 +480,69 @@ tr.mat-footer-row {
 
 .example-sidenav {
 }
+
+.card {
+    background: #FFFFFF !important;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.15) !important;
+    border-radius: 25px !important;
+    -webkit-border-radius: 25px !important;
+    -moz-border-radius: 25px !important;
+    -ms-border-radius: 25px !important;
+    -o-border-radius: 25px !important;
+}
+
+.card-body {
+    padding: 20px !important;
+}
+
+.price {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 35px;
+    text-transform: capitalize;
+    color: #550ACD;
+}
+
+.price span {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 27px;
+    text-decoration-line: line-through;
+    text-transform: capitalize;
+    color: #C4C4C4;
+}
+
+.centerImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.viewBtn {
+    text-align: end;
+}
+
+.link {
+    text-decoration: none;
+    background: #550ACD;
+    box-shadow: 0 3px 4px 0px #550acd7a;
+    border-radius: 25px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 19px;
+    text-transform: capitalize;
+    color: #fff;
+    padding: 6px 40px;
+}
+
+.card-text {
+    text-align: center;
+    font-family: Roboto;
+    font-weight: bold;
+}

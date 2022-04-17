@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, OnDestroy} from '@angular/core';
+import {Component, OnInit, EventEmitter, OnDestroy, ViewChild} from '@angular/core';
 import {Table, TableItem} from '../../ui/table/table';
 import {SearchItemConfiguration} from '../search-item-configuration';
 import {SearchItemService} from '../search-item.service';
@@ -14,6 +14,8 @@ import {MatTabChangeEvent} from '@angular/material/tabs';
 import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
 import {SearchUIService} from '../search-ui.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatPaginator} from '@angular/material/paginator';
 
 
 @Component({
@@ -48,12 +50,15 @@ export class SearchComponent implements OnInit, OnDestroy {
     showProgress: new EventEmitter<boolean>()
   } as SpinnerConfig;
 
+  @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
+
   private subs: Subscription[] = [];
 
   constructor(private searchItemService: SearchItemService,
               private shoppingListService: ShoppingListService,
               private dialogService: DialogService,
-              private searchUi: SearchUIService) {}
+              private searchUi: SearchUIService,
+              public sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     // get navigation data resource: https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
@@ -70,6 +75,11 @@ export class SearchComponent implements OnInit, OnDestroy {
       } as SearchItem;
     }
     this.doSearch(this.search);
+
+    const pageSub = this.paginator.page.subscribe(el => {
+      console.log('paddinator el ', el);
+    });
+    this.subs.push(pageSub);
   }
 
   ngOnDestroy(): void {
@@ -109,8 +119,9 @@ export class SearchComponent implements OnInit, OnDestroy {
       icon: this.getIcon(el.storeName),
       name: el.name,
       actionPrice: el.actionPrice,
-      originalPrice: el.orginalPrice,
+      originalPrice: el.originalPrice,
       store: el.storeName,
+      imageContent: el.imageContent,
     } as TableItem;
   }
 
@@ -184,11 +195,16 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.searchUi.nextChangeTab('Popis za kupovinu');
     }
   }
+
+  handleFooterActionCard(item: any): void {
+    console.log('todo');
+  }
 }
 
 interface ItemSearchEntity extends Entity {
   name: string;
   storeName: string;
-  orginalPrice: number;
+  originalPrice: number;
   actionPrice: number;
+  imageContent: string;
 }
