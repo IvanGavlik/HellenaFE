@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ItemInsert} from './item-insert';
 import {CatalogueDisplayService} from './catalogue-display.service';
@@ -21,6 +21,9 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   @Input()
   user = '';
 
+  @Output()
+  addedItem: EventEmitter<void> = new EventEmitter<void>();
+
   @ViewChild('catalogue', { static: true }) catalogue: ElementRef<HTMLCanvasElement> = {} as ElementRef;
   ctx: CanvasRenderingContext2D | null = null;
   rect = { startX: 0, startY: 0, w : 0, h : 0, };
@@ -32,7 +35,7 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   @ViewChild('item', { static: true }) item: ElementRef<HTMLCanvasElement> = {} as ElementRef;
 
   catalogueForm = new FormGroup({
-    name: new FormControl(''),
+    name: new FormControl(null),
     category: new FormControl(''),
     price: new FormControl(''),
     actionPrice: new FormControl(''),
@@ -137,6 +140,7 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   }
 
   private submitOk(): void {
+    this.addedItem.emit();
     // everyting ok
     const dialog = {
       onOF: false,
@@ -148,7 +152,7 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
     this.subs.push(sub);
 
     // clear form
-    this.catalogueForm.controls['name'].setValue('');
+    this.catalogueForm.controls['name'].setValue(null);
     this.catalogueForm.controls['price'].setValue(null);
     this.catalogueForm.controls['actionPrice'].setValue(null);
     this.catalogueForm.controls['priceFrom'].setValue(null);
@@ -163,7 +167,7 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
   private submitNOk(error: any): void {
     const dialog = {
       onOF: false,
-      content: error,
+      content: error.error + ' ' + error.message,
       title: 'Item not saved'
     } as Dialog;
 

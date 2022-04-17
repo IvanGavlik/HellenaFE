@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {UserItemInsertDialogComponent} from '../user-item-insert-dialog/user-item-insert-dialog.component';
+import {InsertedTableComponent, TableItem} from '../inserted-table/inserted-table.component';
 
 @Component({
   selector: 'hellena-item-insert-page',
@@ -10,6 +11,8 @@ import {UserItemInsertDialogComponent} from '../user-item-insert-dialog/user-ite
 export class ItemInsertPageComponent implements OnInit {
 
   user = '';
+
+  @ViewChild(InsertedTableComponent) table: InsertedTableComponent = {} as InsertedTableComponent;
 
   constructor(public dialog: MatDialog) { }
 
@@ -24,4 +27,8 @@ export class ItemInsertPageComponent implements OnInit {
     });
   }
 
+  handleAddedItem(): void {
+    console.log('handleAddedItem');
+    this.table.fetchData();
+  }
 }

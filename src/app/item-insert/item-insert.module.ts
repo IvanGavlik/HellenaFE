@@ -7,7 +7,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { UserItemInsertDialogComponent } from './user-item-insert-dialog/user-item-insert-dialog.component';
 import {UiModule} from '../ui/ui.module';
 import { InsertedTableComponent } from './inserted-table/inserted-table.component';
-
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { InsertedTableComponent } from './inserted-table/inserted-table.componen
     CommonModule,
     ReactiveFormsModule,
     MatDialogModule,
-    UiModule
+    UiModule,
+    MatTableModule,
   ]
 })
 export class ItemInsertModule { }
