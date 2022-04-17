@@ -8,6 +8,7 @@ import { UserItemInsertDialogComponent } from './user-item-insert-dialog/user-it
 import {UiModule} from '../ui/ui.module';
 import { InsertedTableComponent } from './inserted-table/inserted-table.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {MatTableModule} from '@angular/material/table';
     MatDialogModule,
     UiModule,
     MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class ItemInsertModule { }

@@ -1,11 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {SearchItemService} from '../../search-page/search-item.service';
 import {SearchItemConfiguration} from '../../search-page/search-item-configuration';
 import {defaultPage, SearchItem} from '../../search-page/search-item';
-import {tap} from 'rxjs';
+import {Subscription, tap} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
-import {MatTable} from '@angular/material/table';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {LoadPage} from '../../ui/table/table.component';
 
 @Component({
   selector: 'hellena-inserted-table',
@@ -15,12 +17,15 @@ import {MatTable} from '@angular/material/table';
     { provide: 'searchItemConfiguration', useClass: SearchItemConfiguration }
   ]
 })
-export class InsertedTableComponent implements OnInit {
+export class InsertedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   displayedColumns = ['name', 'storeName', 'originalPrice', 'actionPrice'];
-  dataSource: TableItem[] = [];
+  dataSource = new MatTableDataSource<TableItem>([]);
 
   @ViewChild(MatTable) table: MatTable<TableItem> = {} as MatTable<TableItem>;
+  @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
+
+  private subs: Subscription[] = [];
 
   constructor(private searchItemService: SearchItemService) { }
 
@@ -28,20 +33,38 @@ export class InsertedTableComponent implements OnInit {
     this.fetchData();
   }
 
-  public fetchData(): void {
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+
+    const pageSub = this.paginator.page.subscribe(el => {
+      this.fetchData(el.pageSize, el.pageIndex);
+    });
+    this.subs.push(pageSub);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(el => {
+      if (el) {
+        el.unsubscribe();
+      }
+    });
+  }
+
+  public fetchData(size?: number, index?: number): void {
     this.delayIt();
     const search = {
       categoryIds: [],
       storeIds: [],
       cityIds: [],
-      page: defaultPage(),
+      page: defaultPage(size, index),
     } as SearchItem;
-    this.searchItemService.search(search)
+    const sub = this.searchItemService.search(search)
         .pipe(
-            tap(response => this.dataSource = []),
+            tap(response => this.dataSource.data = []),
             map(response => response.page.map(el => this.toTableItem(el as ItemSearch)))
         )
-        .subscribe(page => { this.dataSource = page; this.table.renderRows();  console.log('fetchData ', this.dataSource.length); } );
+        .subscribe(page => { this.dataSource.data = page; this.table.renderRows(); } );
+    this.subs.push(sub);
   }
 
   async delayIt(): Promise<any>  {

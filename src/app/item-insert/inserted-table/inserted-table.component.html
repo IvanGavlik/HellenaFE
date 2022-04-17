@@ -1,4 +1,8 @@
 <h3> Data: </h3>
+<mat-paginator [pageSizeOptions]="[6, 12, 24]"
+               showFirstLastButtons
+               aria-label="Select page of periodic elements">
+</mat-paginator>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="name">
