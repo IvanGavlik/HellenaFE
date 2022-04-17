@@ -15,7 +15,7 @@
                             <div class="card" style="width: 97%;">
                                 <div class="card-body">
                                     <h5 class="price"> {{ item.actionPrice }} kn<span> {{ item.orginalPrice }} kn</span></h5>
-                                    <img src="../../../assets/image/favo (1).png" alt="">
+                                    <img [src]="sanitizer.bypassSecurityTrustResourceUrl(item.imageContent)" alt="" class="centerImg" >
                                     <p class="card-text"> {{ item.name }} </p>
                                     <div class="viewBtn">
                                         <span class="link" (click)="handleFooterActionCard(item)" >View</span>

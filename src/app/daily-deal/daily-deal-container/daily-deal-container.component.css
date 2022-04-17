@@ -124,3 +124,10 @@
     color: #fff;
     padding: 16px 37px;
 }
+
+.centerImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

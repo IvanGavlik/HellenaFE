@@ -35,11 +35,6 @@ export class InsertedTableComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-
-    const pageSub = this.paginator.page.subscribe(el => {
-      this.fetchData(el.pageSize, el.pageIndex);
-    });
-    this.subs.push(pageSub);
   }
 
   ngOnDestroy(): void {
@@ -50,13 +45,13 @@ export class InsertedTableComponent implements OnInit, AfterViewInit, OnDestroy 
     });
   }
 
-  public fetchData(size?: number, index?: number): void {
+  public fetchData(): void {
     this.delayIt();
     const search = {
       categoryIds: [],
       storeIds: [],
       cityIds: [],
-      page: defaultPage(size, index),
+      page: defaultPage(100000, 0), // all
     } as SearchItem;
     const sub = this.searchItemService.search(search)
         .pipe(

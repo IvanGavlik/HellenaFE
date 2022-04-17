@@ -5,7 +5,7 @@ import {defaultPage, ItemFeature, SearchItem} from '../../search-page/search-ite
 import {DailyDealService} from '../daily-deal.service';
 import {map} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
-
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'hellena-daily-deal-container',
@@ -47,7 +47,7 @@ export class DailyDealContainerComponent implements OnInit {
 
   cards: ItemSearchEntity[] = [];
 
-  constructor(private service: DailyDealService, private router: Router) { }
+  constructor(private service: DailyDealService, private router: Router, public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.service.search({ cityIds: [],
@@ -88,4 +88,6 @@ interface ItemSearchEntity extends Entity {
   storeName: string;
   orginalPrice: number;
   actionPrice: number;
+  image: string;
+  imageContent: string;
 }
