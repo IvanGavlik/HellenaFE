@@ -32,7 +32,6 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
-    text-transform: capitalize;
     color: #FFFFFF;
 }
 
@@ -51,7 +50,6 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
-    text-transform: capitalize;
     color: #FFFFFF;
 }
 
@@ -61,7 +59,6 @@
     font-weight: 600;
     font-size: 26px;
     line-height: 28px;
-    text-transform: capitalize;
     color: #000000;
 }
 
@@ -71,7 +68,6 @@
     font-weight: 700;
     font-size: 28px;
     line-height: 32px;
-    text-transform: capitalize;
     color: #550acd;
 }
 
@@ -83,7 +79,6 @@
     line-height: 24px;
     -webkit-text-decoration-line: line-through;
     text-decoration-line: line-through;
-    text-transform: capitalize;
     color: #c4c4c4;
 }
 

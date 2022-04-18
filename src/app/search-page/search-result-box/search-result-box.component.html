@@ -3,11 +3,14 @@
         <div class="col-md-4 col-sm-12"  *ngFor="let item of data;" >
             <div class="card" style="width: 97%;">
                 <div class="card-body" >
+                    <!-- todo original price -->
                     <h6 class="price"> {{ item.actionPrice }} kn <span *ngIf="item.originalPrice" > {{ item.originalPrice }} kn</span></h6>
                     <img [src]="sanitizer.bypassSecurityTrustResourceUrl(item.imageContent)" alt="" class="centerImg" >
                     <h4 class="card-text" style="margin-top: 0.5rem" > {{ item.name }} </h4>
                     <div class="viewBtn">
-                        <span class="link" (click)="handleFooterActionCard(item)" >View</span>
+                        <button class="addCart" mat-button (click)="handleFooterActionCard(item)">
+                            <mat-icon>shopping_cart</mat-icon>
+                        </button>
                     </div>
                 </div>
             </div>

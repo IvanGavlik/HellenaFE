@@ -45,7 +45,7 @@
 
 .link {
     text-decoration: none;
-    background: #550ACD;
+    border: 1px solid #550ACD;
     box-shadow: 0 3px 4px 0px #550acd7a;
     border-radius: 25px;
     font-family: Roboto;
@@ -53,9 +53,6 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 19px;
-    text-transform: capitalize;
-    color: #fff;
-    padding: 6px 40px;
 }
 
 .card-text {
@@ -63,4 +60,23 @@
     font-family: Roboto;
     font-weight: bold;
     margin-top: 10px;
+}
+
+button.addCart {
+    background-color: #550ACD;
+    padding: 10px 17px;
+    border: none;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    margin-right: 7px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    text-transform: capitalize;
+    color: #FFFFFF;
 }

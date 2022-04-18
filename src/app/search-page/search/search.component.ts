@@ -114,7 +114,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       id: el.id,
       name: el.name,
       actionPrice: el.actionPrice,
-      originalPrice: el.originalPrice,
+      originalPrice: el.orginalPrice,
       store: el.storeName,
       imageContent: el.imageContent,
     } as TableItem;

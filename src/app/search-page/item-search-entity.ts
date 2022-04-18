@@ -3,7 +3,7 @@ import {Entity} from '../crud/entity';
 export interface ItemSearchEntity extends Entity {
     name: string;
     storeName: string;
-    originalPrice: number;
+    orginalPrice: number;
     actionPrice: number;
     imageContent: string;
 }
