@@ -66,7 +66,6 @@
     font-size: 25px;
     line-height: 27px;
     text-decoration-line: line-through;
-    text-transform: capitalize;
     color: #C4C4C4;
 }
 
@@ -81,8 +80,11 @@
     font-size: 26px;
     line-height: 27px;
     text-align: center;
-    text-transform: capitalize;
     color: #000000;
+}
+
+.favorableItem .card-body .storeLogo {
+    text-align: start;
 }
 
 .favorableItem .card-body .viewBtn {
@@ -99,7 +101,6 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 19px;
-    text-transform: capitalize;
     color: #fff;
     padding: 6px 40px;
 }
@@ -119,7 +120,6 @@
     font-weight: 500;
     font-size: 23px;
     line-height: 25px;
-    text-transform: capitalize;
     color: #fff;
     padding: 16px 37px;
 }
@@ -134,4 +134,11 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.card-text {
+    text-align: center;
+    font-family: Roboto;
+    font-weight: bold;
+    margin-top: 0.5rem;
 }

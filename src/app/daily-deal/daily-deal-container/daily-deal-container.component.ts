@@ -70,8 +70,15 @@ export class DailyDealContainerComponent implements OnInit {
             map(response => response.page as ItemSearchEntity[]),
         ).subscribe(entities => {
          this.cards = entities;
+         this.cards.forEach(card => {this.setStoreLogo(card)});
          this.loaded = true;
         });
+  }
+
+  setStoreLogo(card: ItemSearchEntity): void {
+    if (card.storeName.includes('PLODINE')) {
+        card.storeLogo = '../../../assets/icons/Plodine.png';
+    }
   }
 
   handleFooterActionContainer(): void {
@@ -96,6 +103,7 @@ export class DailyDealContainerComponent implements OnInit {
   }
 }
 
+
 interface ItemSearchEntity extends Entity {
   name: string;
   storeName: string;
@@ -103,4 +111,5 @@ interface ItemSearchEntity extends Entity {
   actionPrice: number;
   image: string;
   imageContent: string;
+  storeLogo: string;
 }

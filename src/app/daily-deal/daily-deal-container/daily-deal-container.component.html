@@ -21,7 +21,9 @@
                                 <div class="card-body">
                                     <h5 class="price"> {{ item.actionPrice }} kn<span> {{ item.orginalPrice }} kn</span></h5>
                                     <img [src]="sanitizer.bypassSecurityTrustResourceUrl(item.imageContent)" alt="" class="centerImg" >
-                                    <p class="card-text"> {{ item.name }} </p>
+                                    <p class="card-text"> {{ item.name }}
+                                        <span style="font-family:Roboto; font-weight: lighter; font-size: 1rem; text-align: right" > <br> {{ item.storeName }} </span>
+                                    </p>
                                     <div class="viewBtn">
                                         <span class="link" (click)="handleFooterActionCard(item)" >Pogledaj</span>
                                     </div>
