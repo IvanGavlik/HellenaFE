@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TableComponent implements OnInit, OnDestroy {
 
   @Input()
   table?: Table;
@@ -25,7 +25,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   compareTableItem: EventEmitter<TableItem> = new EventEmitter<TableItem>();
 
   dataSource = new MatTableDataSource<TableItem>();
-  @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
 
   pageSub: Subscription = {} as Subscription;
 
@@ -35,17 +34,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.table?.data) {
       this.dataSource.data = this.table?.data;
     }
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-
-    this.pageSub = this.paginator.page.subscribe(el => {
-       this.loadPage.emit({
-        index: el.pageIndex,
-        size: el.pageSize
-      } as LoadPage);
-    });
   }
 
   ngOnDestroy(): void {

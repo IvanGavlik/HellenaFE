@@ -6,15 +6,6 @@
 
 <section>
     <div class="container">
-        <div class="row" style="margin-top: 1rem;" >
-            <div class="col-12" >
-                <mat-paginator [pageSizeOptions]="[12, 24]"
-                               [length]="table.totalCount"
-                               showFirstLastButtons
-                               aria-label="Select page of periodic elements">
-                </mat-paginator>
-            </div>
-        </div>
         <div class="row" >
             <div class="col-12">
                 <mat-tab-group mat-align-tabs="center" mat-stretch-tabs animationDuration="1500ms" >
@@ -34,7 +25,6 @@
                         <div class="col-12" >
                             <hellena-table
                                     [table]="table"
-                                    (loadPage)="handleLoadPage($event)"
                                     (addTableItemToShoppingList)="handleAddTableItemToShoppingList($event)"
                                     (compareTableItem)="handleCompareTableItem($event)"
                                     style="word-break: break-all;">
@@ -45,6 +35,16 @@
             </div>
             <!-- TODO save search -->
             <!-- sortiranje u tablici -->
+        </div>
+        <div class="row" style="margin-top: 1rem;" >
+            <div class="col-12" >
+                <mat-paginator [pageSizeOptions]="[12, 24]"
+                               [length]="table.totalCount"
+                               showFirstLastButtons
+                               (page)="handlePage($event)"
+                               aria-label="Select page of periodic elements">
+                </mat-paginator>
+            </div>
         </div>
     </div>
 </section>

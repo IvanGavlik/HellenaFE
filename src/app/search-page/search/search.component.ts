@@ -12,7 +12,7 @@ import {Subscription} from 'rxjs';
 import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
 import {SearchUIService} from '../search-ui.service';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {ItemSearchEntity} from '../item-search-entity';
 
 
@@ -95,7 +95,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.spinner.showProgress.emit(true);
     this.searchItemService.search(search)
         .pipe(
-            // columnNames: ['icon', 'name', 'actions']
             tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['icon', 'name', 'actions'] } as Table;  }),
             tap(response => this.spinner.showProgress.emit(true)),
             tap(response => this.table.totalCount = response.size), // here set total count
@@ -123,12 +122,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   haveData(input: any): boolean {
     return input !== undefined && input != null;
-  }
-
-  handleLoadPage($event: LoadPage): void {
-    this.search.page.index = $event.index;
-    this.search.page.size = $event.size;
-    this.doSearch(this.search);
   }
 
   handleAddTableItemToShoppingList($event: TableItem | null): void {
@@ -177,5 +170,11 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   handleFooterActionCard(item: any): void {
     console.log('todo');
+  }
+
+  handlePage($event: PageEvent): void {
+    this.search.page.index = $event.pageIndex;
+    this.search.page.size = $event.pageSize;
+    this.doSearch(this.search);
   }
 }

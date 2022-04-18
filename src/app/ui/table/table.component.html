@@ -34,12 +34,6 @@
 
                     <tr mat-row *matRowDef="let row; columns: table.columnNames" class="flex-container"></tr>
                 </table>
-
-                <mat-paginator [pageSizeOptions]="[12, 24]"
-                               [length]="table.totalCount"
-                               showFirstLastButtons
-                               aria-label="Select page of periodic elements">
-                </mat-paginator>
             </ng-container>
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
