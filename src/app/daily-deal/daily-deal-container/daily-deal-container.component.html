@@ -8,7 +8,12 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="!loaded" >
+                <div>
+                    <hellena-spinner [spinner]="spinner" ></hellena-spinner>
+                </div>
+            </div>
+            <div class="row" *ngIf="loaded" >
                 <owl-carousel-o [options]="carouselOptions">
                     <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
                         <ng-template carouselSlide>
@@ -18,7 +23,7 @@
                                     <img [src]="sanitizer.bypassSecurityTrustResourceUrl(item.imageContent)" alt="" class="centerImg" >
                                     <p class="card-text"> {{ item.name }} </p>
                                     <div class="viewBtn">
-                                        <span class="link" (click)="handleFooterActionCard(item)" >View</span>
+                                        <span class="link" (click)="handleFooterActionCard(item)" >Pogledaj</span>
                                     </div>
                                 </div>
                             </div>
@@ -26,10 +31,10 @@
                     </ng-template>
                 </owl-carousel-o>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="loaded" >
                 <div class="col-md-12">
                     <div class="seeMoreBtn">
-                        <span class="link" (click)="handleFooterActionContainer()" >See More</span>
+                        <span class="link" (click)="handleFooterActionContainer()">Istraži</span>
                     </div>
                 </div>
             </div>

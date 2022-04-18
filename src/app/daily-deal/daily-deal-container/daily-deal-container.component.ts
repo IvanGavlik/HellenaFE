@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {DailyDealConfiguration} from '../daily-deal-configuration';
 import {Router} from '@angular/router';
 import {defaultPage, ItemFeature, SearchItem} from '../../search-page/search-item';
@@ -6,6 +6,7 @@ import {DailyDealService} from '../daily-deal.service';
 import {map} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
 import { DomSanitizer } from '@angular/platform-browser';
+import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 
 @Component({
   selector: 'hellena-daily-deal-container',
@@ -46,10 +47,19 @@ export class DailyDealContainerComponent implements OnInit {
   };
 
   cards: ItemSearchEntity[] = [];
+  loaded = false;
+
+    spinner: SpinnerConfig = {
+        color : 'primary',
+        mode : 'indeterminate',
+        value: 50,
+        showProgress: new EventEmitter<boolean>()
+    } as SpinnerConfig;
 
   constructor(private service: DailyDealService, private router: Router, public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+    this.loaded = false;
     this.service.search({ cityIds: [],
       storeIds: [],
       categoryIds: [],
@@ -58,7 +68,10 @@ export class DailyDealContainerComponent implements OnInit {
     } as SearchItem)
         .pipe(
             map(response => response.page as ItemSearchEntity[]),
-        ).subscribe(entities => this.cards = entities);
+        ).subscribe(entities => {
+         this.cards = entities;
+         this.loaded = true;
+        });
   }
 
   handleFooterActionContainer(): void {

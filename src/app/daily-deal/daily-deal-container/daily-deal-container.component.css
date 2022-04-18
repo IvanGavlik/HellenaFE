@@ -86,7 +86,6 @@
 }
 
 .favorableItem .card-body .viewBtn {
-    margin-top: 55px;
     text-align: end;
 }
 
@@ -129,5 +128,10 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+}
+
+.centerSpinner {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {SpinnerConfig} from './spinner-config';
-import {Observable, of, Subscription, switchAll} from 'rxjs';
+import {of, Subscription} from 'rxjs';
 
 @Component({
   selector: 'hellena-spinner',
