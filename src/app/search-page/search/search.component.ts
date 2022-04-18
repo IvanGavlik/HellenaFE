@@ -3,19 +3,17 @@ import {Table, TableItem} from '../../ui/table/table';
 import {SearchItemConfiguration} from '../search-item-configuration';
 import {SearchItemService} from '../search-item.service';
 import {map, tap} from 'rxjs/operators';
-import {Entity} from '../../crud/entity';
 import {defaultPage, SearchItem} from '../search-item';
 import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 import {LoadPage} from '../../ui/table/table.component';
 import {DialogService} from '../../ui/dialog/dialog.service';
 import {Dialog} from '../../ui/dialog/dialog';
 import {Subscription} from 'rxjs';
-import {MatTabChangeEvent} from '@angular/material/tabs';
 import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
 import {SearchUIService} from '../search-ui.service';
-import {DomSanitizer} from '@angular/platform-browser';
 import {MatPaginator} from '@angular/material/paginator';
+import {ItemSearchEntity} from '../item-search-entity';
 
 
 @Component({
@@ -57,8 +55,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(private searchItemService: SearchItemService,
               private shoppingListService: ShoppingListService,
               private dialogService: DialogService,
-              private searchUi: SearchUIService,
-              public sanitizer: DomSanitizer) {}
+              private searchUi: SearchUIService) {}
 
   ngOnInit(): void {
     // get navigation data resource: https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
@@ -116,24 +113,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   toTableItem(el: ItemSearchEntity): TableItem {
     return {
       id: el.id,
-      icon: this.getIcon(el.storeName),
       name: el.name,
       actionPrice: el.actionPrice,
       originalPrice: el.originalPrice,
       store: el.storeName,
       imageContent: el.imageContent,
     } as TableItem;
-  }
-
-  private getIcon(store: string): string {
-    console.log('store::', store);
-    if (store.includes('Lidl')) {
-      return '../../assets/image/lidl.png';
-    }
-    if (store.includes('INTERSPAR')) {
-      return '../../assets/image/spar-logo_1x.png';
-    }
-    return '';
   }
 
   haveData(input: any): boolean {
@@ -190,21 +175,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.subs.push(dialog);
   }
 
-  handleTabChanged($event: MatTabChangeEvent): void {
-    if ($event.tab.textLabel === 'Popis za kupovinu') {
-      this.searchUi.nextChangeTab('Popis za kupovinu');
-    }
-  }
-
   handleFooterActionCard(item: any): void {
     console.log('todo');
   }
-}
-
-interface ItemSearchEntity extends Entity {
-  name: string;
-  storeName: string;
-  originalPrice: number;
-  actionPrice: number;
-  imageContent: string;
 }
