@@ -6,7 +6,9 @@
                     <!-- todo original price -->
                     <h6 class="price"> {{ item.actionPrice }} kn <span *ngIf="item.originalPrice" > {{ item.originalPrice }} kn</span></h6>
                     <img [src]="sanitizer.bypassSecurityTrustResourceUrl(item.imageContent)" alt="" class="centerImg" >
-                    <h4 class="card-text" style="margin-top: 0.5rem" > {{ item.name }} </h4>
+                    <p class="card-text"> {{ item.name }}
+                        <span style="font-family:Roboto; font-weight: lighter; font-size: 1rem; text-align: right" > <br> {{ item.store }} </span>
+                    </p>
                     <div class="viewBtn">
                         <button class="addCart" mat-button (click)="handleFooterActionCard(item)">
                             <mat-icon>shopping_cart</mat-icon>

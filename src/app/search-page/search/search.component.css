@@ -53,7 +53,6 @@
     line-height: 29px;
     /* or 163% */
     text-align: justify;
-    text-transform: capitalize;
     color: #FFFFFF;
 }
 
@@ -133,7 +132,6 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
-    text-transform: capitalize;
     color: #FFFFFF;
 }
 
@@ -152,7 +150,6 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
-    text-transform: capitalize;
     color: #FFFFFF;
 }
 
@@ -162,7 +159,6 @@
     font-weight: 600;
     font-size: 26px;
     line-height: 28px;
-    text-transform: capitalize;
     color: #000000;
 }
 
@@ -172,7 +168,6 @@
     font-weight: 700;
     font-size: 28px;
     line-height: 32px;
-    text-transform: capitalize;
     color: #550acd;
 }
 
@@ -184,7 +179,6 @@
     line-height: 24px;
     -webkit-text-decoration-line: line-through;
     text-decoration-line: line-through;
-    text-transform: capitalize;
     color: #c4c4c4;
 }
 
@@ -501,7 +495,6 @@ tr.mat-footer-row {
     font-weight: 700;
     font-size: 30px;
     line-height: 35px;
-    text-transform: capitalize;
     color: #550ACD;
 }
 
@@ -512,7 +505,6 @@ tr.mat-footer-row {
     font-size: 25px;
     line-height: 27px;
     text-decoration-line: line-through;
-    text-transform: capitalize;
     color: #C4C4C4;
 }
 
@@ -536,7 +528,6 @@ tr.mat-footer-row {
     font-weight: 500;
     font-size: 18px;
     line-height: 19px;
-    text-transform: capitalize;
     color: #fff;
     padding: 6px 40px;
 }

@@ -1,9 +1,7 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {Table, TableItem} from './table';
 import {Subscription} from 'rxjs';
-
 
 @Component({
   selector: 'hellena-table',
