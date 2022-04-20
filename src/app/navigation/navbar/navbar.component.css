@@ -26,3 +26,21 @@ line-height: 21px;
 
 color: #FFFFFF;
 }
+
+.viewBtn {
+    text-align: end;
+}
+
+.addCart {
+    text-decoration: none;
+    background: #550ACD;
+    box-shadow: 0 5px 8px 3px #550acd7a;
+    border-radius: 12px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 25px;
+    color: #fff;
+    padding: 16px 37px;
+}

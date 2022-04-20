@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ShoppingListTable, ShoppingListTableItem, ShoppingListTableSum} from '../../ui/shopping-list-table/shopping-list-table';
-import {SearchUIService} from '../../search-page/search-ui.service';
 import {ShoppingListService} from '../shopping-list.service';
 import {Subscription} from 'rxjs';
 import {Dialog} from '../../ui/dialog/dialog';
@@ -22,18 +21,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   private subs: Subscription[] = [];
 
-  public constructor(private searchUI: SearchUIService, private shoppingListService: ShoppingListService, private dialog: DialogService) { }
+  public constructor(private shoppingListService: ShoppingListService, private dialog: DialogService) { }
 
   ngOnInit(): void {
-    const sub = this.searchUI.onTabChange().subscribe(tab => {
-      if (tab === 'Popis za kupovinu') {
-        this.onTabChange();
-      }
-    });
-    this.subs.push(sub);
-  }
-
-  private onTabChange(): void {
     this.updateShoppingListDataTable();
   }
 
@@ -42,6 +32,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     this.table.sum = { sumDone: 0, sumAll: 0 } as ShoppingListTableSum;
     this.shoppingListService.getShoppingList()
         .sort(el => el.isPurchased ? 1 : -1)
+        .sort((el, el2) => el.store.localeCompare(el2.store))
         .forEach(el => {
           const item =  {
             id: el.id,

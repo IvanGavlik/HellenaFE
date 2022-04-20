@@ -5,13 +5,11 @@ import {SearchItemService} from '../search-item.service';
 import {map, tap} from 'rxjs/operators';
 import {defaultPage, SearchItem} from '../search-item';
 import {SpinnerConfig} from '../../ui/spinner/spinner-config';
-import {LoadPage} from '../../ui/table/table.component';
 import {DialogService} from '../../ui/dialog/dialog.service';
 import {Dialog} from '../../ui/dialog/dialog';
 import {Subscription} from 'rxjs';
 import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
-import {SearchUIService} from '../search-ui.service';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {ItemSearchEntity} from '../item-search-entity';
 
@@ -54,8 +52,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(private searchItemService: SearchItemService,
               private shoppingListService: ShoppingListService,
-              private dialogService: DialogService,
-              private searchUi: SearchUIService) {}
+              private dialogService: DialogService) {}
 
   ngOnInit(): void {
     // get navigation data resource: https://www.tektutorialshub.com/angular/angular-pass-data-to-route/

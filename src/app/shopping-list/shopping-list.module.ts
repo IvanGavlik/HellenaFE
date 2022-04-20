@@ -4,6 +4,8 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import {UiModule} from '../ui/ui.module';
 import {LocalStorageModule} from '../local-storage/local-storage.module';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
     declarations: [
@@ -16,7 +18,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         CommonModule,
         UiModule,
         LocalStorageModule,
-        MatDialogModule
+        MatDialogModule,
+        MatButtonModule
     ]
 })
 export class ShoppingListModule { }
