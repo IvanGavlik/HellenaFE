@@ -24,8 +24,6 @@ export class TableComponent implements OnInit, OnDestroy {
 
   dataSource = new MatTableDataSource<TableItem>();
 
-  pageSub: Subscription = {} as Subscription;
-
   constructor() { }
 
   ngOnInit(): void {
@@ -34,11 +32,7 @@ export class TableComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    if (this.pageSub) {
-      this.pageSub.unsubscribe();
-    }
-  }
+  ngOnDestroy(): void {}
 }
 
 export interface LoadPage {
