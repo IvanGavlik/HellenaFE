@@ -80,3 +80,7 @@
 .mat-slider-track-fill {
    background-color: #550acd !important;
 }
+
+.mat-tab-header {
+    margin-bottom: 1rem;
+}
