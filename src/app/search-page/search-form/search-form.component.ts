@@ -74,6 +74,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.searchForm.valueChanges
             .pipe(debounceTime(1000))
             .subscribe(value => {
+                console.log('value ', value);
                 this.handleSearchFormValueChange(value);
             });
 
@@ -105,12 +106,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.subs.forEach(el => el?.unsubscribe());
     }
 
-    formatLabel(value: number): string {
-        if (value >= 999) {
-
-        }
-        return value + ' kn';
-    }
 
     handleSearchFormValueChange(value: any): void {
         if (value.name) {
@@ -133,6 +128,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             search.feature = value.featureControl;
         }
 
+        console.log('SF EMIT ', search);
         this.searchEvent.emit( search );
     }
 

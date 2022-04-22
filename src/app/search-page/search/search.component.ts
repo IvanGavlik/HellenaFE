@@ -68,7 +68,8 @@ export class SearchComponent implements OnInit, OnDestroy {
         page: defaultPage(),
       } as SearchItem;
     }
-    this.doSearch(this.search);
+    console.log('init search ', this.search);
+    this.doSearch(this.search, false);
 
     const pageSub = this.paginator.page.subscribe(el => {
       console.log('paddinator el ', el);
@@ -84,11 +85,11 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  handleSearch($event: SearchItem): void {
-    this.doSearch($event);
-  }
-
-  doSearch(search: SearchItem): void {
+  doSearch(search: SearchItem, fromForm: boolean): void {
+    if (fromForm && JSON.stringify(this.search) === JSON.stringify(search)) {
+      return;
+    }
+    this.search = search;
     this.spinner.showProgress.emit(true);
     this.searchItemService.search(search)
         .pipe(
@@ -170,8 +171,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   handlePage($event: PageEvent): void {
+    console.log('hanle page :) ');
     this.search.page.index = $event.pageIndex;
     this.search.page.size = $event.pageSize;
-    this.doSearch(this.search);
+    if (this.search.page.index !== 0) {
+      this.search.page.index = this.search.page.index * this.search.page.size;
+    }
+    this.doSearch(this.search, false);
   }
 }
