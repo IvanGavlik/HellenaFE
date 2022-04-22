@@ -12,6 +12,7 @@ import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {ItemSearchEntity} from '../item-search-entity';
+import {SpinnerServiceService} from '../../ui/spinner/spinner-service.service';
 
 
 @Component({
@@ -39,13 +40,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     page: defaultPage()
   } as SearchItem;
 
-  // TODO should spinenr be servie
-  spinner: SpinnerConfig = {
-    color : 'primary',
-    mode : 'indeterminate',
-    value: 50,
-    showProgress: new EventEmitter<boolean>()
-  } as SpinnerConfig;
 
   @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
 
@@ -53,7 +47,9 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(private searchItemService: SearchItemService,
               private shoppingListService: ShoppingListService,
-              private dialogService: DialogService) {}
+              private dialogService: DialogService,
+              private spinnerService: SpinnerServiceService
+  ) {}
 
   ngOnInit(): void {
     // get navigation data resource: https://www.tektutorialshub.com/angular/angular-pass-data-to-route/
@@ -92,18 +88,17 @@ export class SearchComponent implements OnInit, OnDestroy {
       return;
     }
     this.search = search;
-    this.spinner.showProgress.emit(true);
+    const dialog = this.spinnerService.openSpinnerDialog();
     this.searchItemService.search(search)
         .pipe(
             tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['icon', 'name', 'actions'] } as Table;  }),
-            tap(response => this.spinner.showProgress.emit(true)),
             tap(response => this.table.totalCount = response.size), // here set total count
             map(response => response.page.map(el => this.toTableItem(el as ItemSearchEntity)))
         )
         .subscribe(
             items => {
               this.table.data = items; // here set data
-              this.spinner.showProgress.emit(false);
+              this.spinnerService.closeSpinnerDialog(dialog);
             }
         );
     // TODO SHOULD TOTOAL COUNT AND DATA BE SET AT SAME PLACE
