@@ -21,6 +21,7 @@ export class HeaderComponent {
         categoryIds: [],
         storeIds: [],
         cityIds: [],
+        fetchImage: false,
         page: defaultPage(),
       } as SearchItem
     });

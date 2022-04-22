@@ -64,6 +64,7 @@ export class DailyDealContainerComponent implements OnInit {
       storeIds: [],
       categoryIds: [],
       feature: ItemFeature.CHEAPEST_TODAY,
+      fetchImage: true,
       page: defaultPage(8)
     } as SearchItem)
         .pipe(
@@ -87,6 +88,7 @@ export class DailyDealContainerComponent implements OnInit {
         storeIds: [],
         categoryIds: [],
         feature: ItemFeature.CHEAPEST_TODAY,
+        fetchImage: true,
         page: defaultPage()
       } as SearchItem });
   }
@@ -98,6 +100,7 @@ export class DailyDealContainerComponent implements OnInit {
         storeIds: [],
         categoryIds: [],
         feature: ItemFeature.CHEAPEST_TODAY,
+        fetchImage: true,
         page: defaultPage()
       } as SearchItem });
   }

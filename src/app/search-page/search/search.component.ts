@@ -35,6 +35,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     cityIds: [],
     categoryIds: [],
     storeIds: [],
+    fetchImage: true,
     page: defaultPage()
   } as SearchItem;
 
@@ -65,6 +66,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         storeIds: initSearch?.storeIds ? initSearch?.storeIds : [],
         cityIds: initSearch?.cityIds ? initSearch?.cityIds : [],
         feature: initSearch?.feature,
+        fetchImage: true,
         page: defaultPage(),
       } as SearchItem;
     }
