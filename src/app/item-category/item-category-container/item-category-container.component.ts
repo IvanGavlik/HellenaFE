@@ -48,7 +48,6 @@ export class ItemCategoryContainerComponent implements OnInit {
     this.router.navigateByUrl('/search', { state: { cityIds: [],
       storeIds: [],
       categoryIds: [ $event.id ],
-      fetchImage: false,
       page: defaultPage(),
     } as SearchItem });
   }

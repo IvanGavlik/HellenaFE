@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
 import { DomSanitizer } from '@angular/platform-browser';
 import {SpinnerConfig} from '../../ui/spinner/spinner-config';
+import {Cloudinary, CloudinaryImage} from '@cloudinary/url-gen';
 
 @Component({
   selector: 'hellena-daily-deal-container',
@@ -56,6 +57,12 @@ export class DailyDealContainerComponent implements OnInit {
         showProgress: new EventEmitter<boolean>()
     } as SpinnerConfig;
 
+  cld = new Cloudinary({
+      cloud: {
+          cloudName: 'hellena'
+      }
+  });
+
   constructor(private service: DailyDealService, private router: Router, public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -64,22 +71,19 @@ export class DailyDealContainerComponent implements OnInit {
       storeIds: [],
       categoryIds: [],
       feature: ItemFeature.CHEAPEST_TODAY,
-      fetchImage: true,
       page: defaultPage(8)
     } as SearchItem)
         .pipe(
             map(response => response.page as ItemSearchEntity[]),
         ).subscribe(entities => {
          this.cards = entities;
-         this.cards.forEach(card => {this.setStoreLogo(card)});
+         this.cards.forEach(card => {this.setImage(card)});
          this.loaded = true;
         });
   }
 
-  setStoreLogo(card: ItemSearchEntity): void {
-    if (card.storeName.includes('PLODINE')) {
-        card.storeLogo = '../../../assets/icons/Plodine.png';
-    }
+  setImage(card: ItemSearchEntity): void {
+      card.img = this.cld.image(card.imageName);
   }
 
   handleFooterActionContainer(): void {
@@ -88,7 +92,6 @@ export class DailyDealContainerComponent implements OnInit {
         storeIds: [],
         categoryIds: [],
         feature: ItemFeature.CHEAPEST_TODAY,
-        fetchImage: true,
         page: defaultPage()
       } as SearchItem });
   }
@@ -100,7 +103,6 @@ export class DailyDealContainerComponent implements OnInit {
         storeIds: [],
         categoryIds: [],
         feature: ItemFeature.CHEAPEST_TODAY,
-        fetchImage: true,
         page: defaultPage()
       } as SearchItem });
   }
@@ -112,7 +114,7 @@ interface ItemSearchEntity extends Entity {
   storeName: string;
   orginalPrice: number;
   actionPrice: number;
-  image: string;
-  imageContent: string;
+  imageName: string;
+  img: CloudinaryImage;
   storeLogo: string;
 }

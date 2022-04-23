@@ -118,7 +118,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             categoryIds: (value?.categoryControl as Pair<any, any>[]).map(el => el.id),
             cityIds: (value?.locationControl as Pair<any, any>[]).map(el => el.id),
             storeIds: (value?.storeControl as Pair<any, any>[]).map(el => el.id),
-            fetchImage: true,
             page : defaultPage()
         } as SearchItem;
 

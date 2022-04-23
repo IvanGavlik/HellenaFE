@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DailyDealContainerComponent } from './daily-deal-container/daily-deal-container.component';
 import {UiModule} from '../ui/ui.module';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import {CloudinaryModule} from '@cloudinary/ng';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   imports: [
     CommonModule,
     CarouselModule,
-    UiModule
+    UiModule,
+    CloudinaryModule
   ],
   exports: [
       DailyDealContainerComponent

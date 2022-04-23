@@ -8,7 +8,6 @@ export interface SearchItem extends Search {
     cityIds: number[];
     storeIds: number[];
     feature?: ItemFeature;
-    fetchImage: boolean;
     page: Page;
 }
 

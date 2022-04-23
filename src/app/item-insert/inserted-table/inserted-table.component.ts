@@ -51,7 +51,6 @@ export class InsertedTableComponent implements OnInit, AfterViewInit, OnDestroy 
       categoryIds: [],
       storeIds: [],
       cityIds: [],
-      fetchImage: false,
       page: defaultPage(100000, 0), // all
     } as SearchItem;
     const sub = this.searchItemService.search(search)

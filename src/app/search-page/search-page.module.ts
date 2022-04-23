@@ -19,6 +19,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { SearchResultBoxComponent } from './search-result-box/search-result-box.component';
+import {CloudinaryModule} from '@cloudinary/ng';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SearchResultBoxComponent } from './search-result-box/search-result-box.
     MatSliderModule,
     MatDividerModule,
     MatSidenavModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    CloudinaryModule
   ],
   exports: [
     SearchComponent

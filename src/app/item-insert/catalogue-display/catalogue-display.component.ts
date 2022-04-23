@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ItemInsert} from './item-insert';
-import {CatalogueDisplayService} from './catalogue-display.service';
+import {CatalogueDisplayService, CloudinaryImageResponse} from './catalogue-display.service';
 import {CatalogueConfiguration} from './catalogue-configuration';
 import {Dialog} from '../../ui/dialog/dialog';
 import {DialogService} from '../../ui/dialog/dialog.service';
@@ -120,24 +120,33 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
 
   // display data
   handleItemSubmit(): void {
-    const item = {
-      name: this.catalogueForm.value.name,
-      orginalPrice: this.catalogueForm.value.price,
-      actionPrice: this.catalogueForm.value.actionPrice,
-      activeFrom: this.catalogueForm.value.priceFrom,
-      activeTo: this.catalogueForm.value.priceTo,
-      store: this.catalogueForm.value.store,
-      category: this.catalogueForm.value.category,
-      imageContent: this.item.nativeElement.toDataURL(),
-      image: this.catalogueForm.value.name,
-      user: this.user
-    } as ItemInsert;
-    console.log('insert ', item);
-    const service = this.service.save(item).subscribe(
-        res => this.submitOk(),
-        error => this.submitNOk(error));
-    this.subs.push(service);
-  }
+    const imageService = this.service.uploadImageToCloudinary(this.item.nativeElement.toDataURL())
+        .subscribe(image => {
+          const item = {
+            name: this.catalogueForm.value.name,
+            orginalPrice: this.catalogueForm.value.price,
+            actionPrice: this.catalogueForm.value.actionPrice,
+            activeFrom: this.catalogueForm.value.priceFrom,
+            activeTo: this.catalogueForm.value.priceTo,
+            store: this.catalogueForm.value.store,
+            category: this.catalogueForm.value.category,
+            image: image.public_id,
+            user: this.user
+          } as ItemInsert;
+
+          const service = this.service.save(item).subscribe(
+              res => this.submitOk(),
+              error => this.submitNOk(error));
+
+          this.subs.push(service);
+
+        },
+                error => this.submitNOk(error)
+        )
+    ;
+
+    this.subs.push(imageService);
+   }
 
   private submitOk(): void {
     this.addedItem.emit();

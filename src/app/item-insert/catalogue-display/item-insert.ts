@@ -9,6 +9,5 @@ export interface ItemInsert extends Entity {
     store: number;
     category: number;
     image: string;
-    imageContent: string;
     user: string;
 }

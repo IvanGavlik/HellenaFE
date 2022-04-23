@@ -4,7 +4,6 @@ import {SearchItemConfiguration} from '../search-item-configuration';
 import {SearchItemService} from '../search-item.service';
 import {map, tap} from 'rxjs/operators';
 import {defaultPage, SearchItem} from '../search-item';
-import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 import {DialogService} from '../../ui/dialog/dialog.service';
 import {Dialog} from '../../ui/dialog/dialog';
 import {Subscription} from 'rxjs';
@@ -13,6 +12,7 @@ import {ShoppingListItem} from '../../shopping-list/shopping-list';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {ItemSearchEntity} from '../item-search-entity';
 import {SpinnerServiceService} from '../../ui/spinner/spinner-service.service';
+import {Cloudinary} from '@cloudinary/url-gen';
 
 
 @Component({
@@ -36,10 +36,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     cityIds: [],
     categoryIds: [],
     storeIds: [],
-    fetchImage: true,
     page: defaultPage()
   } as SearchItem;
 
+  cld = new Cloudinary({
+    cloud: {
+      cloudName: 'hellena'
+    }
+  });
 
   @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
 
@@ -62,7 +66,6 @@ export class SearchComponent implements OnInit, OnDestroy {
         storeIds: initSearch?.storeIds ? initSearch?.storeIds : [],
         cityIds: initSearch?.cityIds ? initSearch?.cityIds : [],
         feature: initSearch?.feature,
-        fetchImage: true,
         page: defaultPage(),
       } as SearchItem;
     }
@@ -111,7 +114,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       actionPrice: el.actionPrice,
       originalPrice: el.orginalPrice,
       store: el.storeName,
-      imageContent: el.imageContent,
+      img: this.cld.image(el.imageName)
     } as TableItem;
   }
 

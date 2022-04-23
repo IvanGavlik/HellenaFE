@@ -5,5 +5,5 @@ export interface ItemSearchEntity extends Entity {
     storeName: string;
     orginalPrice: number;
     actionPrice: number;
-    imageContent: string;
+    imageName: string;
 }

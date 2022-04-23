@@ -1,3 +1,5 @@
+import {CloudinaryImage} from '@cloudinary/url-gen';
+
 export interface Table {
     columnNames: string[];
     data: TableItem[];
@@ -12,5 +14,5 @@ export interface TableItem {
     actionPrice: number;
     store: string;
     activeTo?: Date;
-    imageContent: string;
+    img: CloudinaryImage;
 }
