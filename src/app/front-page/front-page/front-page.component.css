@@ -66,7 +66,7 @@
     font-weight: 400;
     font-size: 23px;
     line-height: 29px;
-    text-align: justify;
+    text-align: left;
     text-transform: capitalize;
     color: #000000;
 }
@@ -263,7 +263,7 @@
     font-weight: normal;
     font-size: 23px;
     line-height: 34px;
-    text-align: justify;
+    text-align: left;
     color: #000000;
 }
 
