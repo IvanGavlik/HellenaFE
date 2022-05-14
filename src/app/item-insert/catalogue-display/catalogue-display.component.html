@@ -67,6 +67,25 @@
                         <button type="submit"> Submit</button>
                     </form>
                 </div>
+                <div class="col-12" style="margin-top: 1rem; background: #d8c5de" >
+                    <p> default values </p>
+                    <form [formGroup]="catalogueDefaultForm" (ngSubmit)="handleDefaultFormSubmit()" >
+                        <input id="default_price_from" type="date" placeholder="default price active form" formControlName="defaultPriceFrom">
+                        <br>
+                        <input id="default_price_to" type="date" placeholder="default price active to" formControlName="defaultPriceTo">
+                        <br>
+                        <label for="default_store">Store:</label>
+                        <select id="default_store" name="stores" formControlName="defaultStore" >
+                            <option value="-1">None</option>
+                            <option value="1">PLODINE</option>
+                            <option value="2">INTERSPAR</option>
+                            <option value="3">KAUFLAND</option>
+                            <option value="4">LIDL</option>
+                            <option value="5">KONZUM</option>
+                        </select>
+                        <button type="submit"> Set</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

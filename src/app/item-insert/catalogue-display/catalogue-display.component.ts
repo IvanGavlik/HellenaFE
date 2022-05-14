@@ -44,6 +44,16 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
     store: new FormControl(''),
   });
 
+  catalogueDefaultForm = new FormGroup({
+    defaultPriceFrom: new FormControl(''),
+    defaultPriceTo: new FormControl(''),
+    defaultStore: new FormControl(''),
+  });
+
+  defaultPriceFrom = null;
+  defaultPriceTo = null;
+  defaultStore = null;
+
   private subs: Subscription[] = [];
 
   constructor(private service: CatalogueDisplayService, private dialog: DialogService) { }
@@ -164,9 +174,9 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
     this.catalogueForm.controls['name'].setValue(null);
     this.catalogueForm.controls['price'].setValue(null);
     this.catalogueForm.controls['actionPrice'].setValue(null);
-    this.catalogueForm.controls['priceFrom'].setValue(null);
-    this.catalogueForm.controls['priceTo'].setValue(null);
-    this.catalogueForm.controls['store'].setValue(null);
+    this.catalogueForm.controls['priceFrom'].setValue(this.catalogueDefaultForm.value.defaultPriceFrom);
+    this.catalogueForm.controls['priceTo'].setValue(this.catalogueDefaultForm.value.defaultPriceTo);
+    this.catalogueForm.controls['store'].setValue(this.catalogueDefaultForm.value.defaultStore);
     this.catalogueForm.controls['category'].setValue(null);
     // clear image box
     const ctx = this.item.nativeElement.getContext('2d');
@@ -182,5 +192,12 @@ export class CatalogueDisplayComponent implements OnInit, OnDestroy {
 
     const sub = this.dialog.openHellenaDialog(dialog).subscribe(() => {});
     this.subs.push(sub);
+  }
+
+  handleDefaultFormSubmit(): void {
+    console.log('pozvan :) ');
+    this.catalogueForm.controls['priceFrom'].setValue(this.catalogueDefaultForm.value.defaultPriceFrom);
+    this.catalogueForm.controls['priceTo'].setValue(this.catalogueDefaultForm.value.defaultPriceTo);
+    this.catalogueForm.controls['store'].setValue(this.catalogueDefaultForm.value.defaultStore);
   }
 }
