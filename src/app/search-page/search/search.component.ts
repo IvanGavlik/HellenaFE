@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ElementRef} from '@angular/core';
 import {Table, TableItem} from '../../ui/table/table';
 import {SearchItemConfiguration} from '../search-item-configuration';
 import {SearchItemService} from '../search-item.service';
@@ -47,6 +47,8 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
 
+  @ViewChild('focus') focus = {} as ElementRef;
+
   private subs: Subscription[] = [];
 
   constructor(private searchItemService: SearchItemService,
@@ -92,6 +94,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     this.search = search;
     const dialog = this.spinnerService.openSpinnerDialog();
+    dialog.afterClosed().subscribe(el => this.focus.nativeElement.scrollIntoView({behavior: 'smooth'}));
     this.searchItemService.search(search)
         .pipe(
             tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['icon', 'name', 'actions'] } as Table;  }),
@@ -171,7 +174,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   handlePage($event: PageEvent): void {
-    console.log('hanle page :) ');
     this.search.page.index = $event.pageIndex;
     this.search.page.size = $event.pageSize;
     if (this.search.page.index !== 0) {
