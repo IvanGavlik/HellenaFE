@@ -115,6 +115,8 @@ interface ItemSearchEntity extends Entity {
   orginalPrice: number;
   actionPrice: number;
   imageName: string;
+  activeFrom: Date;
+  activeTo: Date;
   img: CloudinaryImage;
   storeLogo: string;
 }

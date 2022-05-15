@@ -17,11 +17,3 @@ export interface TableItem {
     activeTo?: Date;
     img: CloudinaryImage;
 }
-
-/*
-    @field:Valid
-    @field:JsonProperty("activeFrom") val activeFrom: java.time.LocalDate? = null,
-
-    @field:Valid
-    @field:JsonProperty("activeTo") val activeTo: java.time.LocalDate? = null,
- */
