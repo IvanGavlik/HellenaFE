@@ -7,7 +7,7 @@
                     <h6 class="price"> {{ item.actionPrice }} kn <span *ngIf="item.originalPrice" > {{ item.originalPrice }} kn</span></h6>
                     <advanced-image [cldImg]="item.img" ></advanced-image>
                     <p class="card-text"> {{ item.name }}
-                        <span style="font-family:Roboto; font-weight: lighter; font-size: 0.9rem; text-align: right" > <br> od {{ item?.activeFrom | date:"dd.MM"  }} do {{ item?.activeTo | date:"dd.MM" }} </span>
+                        <span style="font-family:Roboto; font-weight: lighter; font-size: 0.9rem; text-align: right" > <br> od {{ item?.activeFrom | date:"dd.MM."  }} do {{ item?.activeTo | date:"dd.MM." }} </span>
                         <span style="font-family:Roboto; font-weight: lighter; font-size: 1rem; text-align: right" > <br> {{ item.store }} </span>
                     </p>
                     <div class="viewBtn">
