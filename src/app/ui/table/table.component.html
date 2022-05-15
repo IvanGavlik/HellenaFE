@@ -11,13 +11,12 @@
                     </ng-container>
                     <ng-container matColumnDef="name">
                         <td *matCellDef="let element" class="flexBoxTwo productInfo">
-                            <h1>{{ element.name }}</h1>
+                            <h2>{{ element.name }}</h2>
                             <h5 *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"> {{ element.actionPrice }} kn</h5>
                             <ng-template #allInfo>
                                 <h5>{{ element.originalPrice }} kn <span> {{ element.actionPrice }} kn </span></h5>
                             </ng-template>
-                            <!-- TODO  Vrijedi do: {{ element.activeTo | date }} -->
-                            <span style="font-size: medium; font-weight: normal; margin-left: 0.5rem" >{{ element.store }} </span>
+                            <span style="font-size: medium; font-weight: normal; margin-left: 0.5rem" >od {{ element?.activeFrom | date:"dd.MM"  }} do {{ element?.activeTo | date:"dd.MM" }} u {{ element.store }} </span>
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="actions">
