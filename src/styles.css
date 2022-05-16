@@ -84,3 +84,8 @@
 .mat-tab-header {
     margin-bottom: 1rem;
 }
+
+.mat-toolbar {
+    background: transparent;
+    color: white;
+}

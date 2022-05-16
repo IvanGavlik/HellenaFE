@@ -1,38 +1,27 @@
 <section class="navigationSection">
     <nav class="navbar navbar-expand-lg fixed-top navbar-light">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse navItem" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="#">Hellena</a>
-                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-<!--                        <a class="nav-link active" aria-current="page" href="index">Naslovna</a> -->
-                        <button mat-button class="white-icon" (click)="handleNavigationClickHome()" >
-                            <mat-icon>home</mat-icon>
-                        </button>
-                    </li>
-                    <li class="nav-item">
-<!--                        <a class="nav-link" href="about-us">O nama</a> -->
-                        <button mat-button class="white-icon" (click)="handleNavigationClickAboutUs()"  >
-                            <mat-icon>business</mat-icon>
-                        </button>
-                    </li>
-                    <li class="nav-item">
-
-                        <button mat-button (click)="handleNavigationClickSearch()" >
-                            <mat-icon class="white-icon">search</mat-icon>
-                        </button>
-<!--                        <a class="nav-link" href="search">Pretraga</a> -->
-                    </li>
-                    <li class="nav-item" >
-                        <button mat-button  (click)="handleNavigationClickShoppingCart()" >
-                            <mat-icon class="white-icon" >shopping_cart</mat-icon>
-                        </button>
-                    </li>
-                </ul>
-            </div>
+      <mat-toolbar>
+          <a class="navbar-brand" style="font-family: Roboto;
+font-style: normal;
+font-weight: 900;
+font-size: 36px;
+line-height: 37px;
+color: #fff;" href="#">Hellena</a>
+          <span class="example-spacer"></span>
+          <button mat-button class="white-icon" (click)="handleNavigationClickHome()" >
+              <mat-icon>home</mat-icon>
+          </button>
+          <button mat-button class="white-icon" (click)="handleNavigationClickAboutUs()"  >
+              <mat-icon>business</mat-icon>
+          </button>
+          <button mat-button (click)="handleNavigationClickSearch()" >
+              <mat-icon class="white-icon">search</mat-icon>
+          </button>
+          <button mat-button  (click)="handleNavigationClickShoppingCart()" >
+              <mat-icon class="white-icon" >shopping_cart</mat-icon>
+          </button>
+      </mat-toolbar>
         </div>
     </nav>
 

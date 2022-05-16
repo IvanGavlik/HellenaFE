@@ -44,3 +44,7 @@ color: #FFFFFF;
     color: #fff;
     padding: 16px 37px;
 }
+
+.example-spacer {
+    flex: 1 1 auto;
+}

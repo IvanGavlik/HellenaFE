@@ -6,6 +6,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ShoppingListModule} from '../shopping-list/shopping-list.module';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {ShoppingListModule} from '../shopping-list/shopping-list.module';
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
-        ShoppingListModule
+        ShoppingListModule,
+        MatToolbarModule
     ],
   exports: [
     NavbarComponent
