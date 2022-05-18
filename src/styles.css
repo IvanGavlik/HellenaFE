@@ -7,6 +7,9 @@
         width: 90vw !important;
         padding: 15px 0px !important;
     }
+    .mat-slider {
+        padding: 8px;
+    }
 }
 
 #filter {
