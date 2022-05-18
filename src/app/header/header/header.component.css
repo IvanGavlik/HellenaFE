@@ -32,8 +32,14 @@
     -moz-border-radius: 7px;
     -ms-border-radius: 7px;
     -o-border-radius: 7px;
-    font-weight: bold;
 }
+
+.leftHeading input::placeholder {
+    font-weight: bold;
+    color: white;
+    opacity: 1; /* Firefox */
+}
+
 
 .rightHeaing {
     position: relative;
