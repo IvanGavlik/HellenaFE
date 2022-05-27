@@ -114,16 +114,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 middle">
+                <form (ngSubmit)="onSubmit()">
                 <div class="feedback">
                     <h1>Pošalji poruku autoru</h1>
                 </div>
                 <div class="inputForm">
-                    <input type="text" class="form-control" placeholder="Email">
-                    <textarea name="" id=""  class="form-control" placeholder="Poruka" ></textarea>
+                    <input id="email" type="text" class="form-control" [(ngModel)]="msg.from" placeholder="Email">
+                    <textarea id="body" name="body"  class="form-control" [(ngModel)]="msg.body" placeholder="Poruka" ></textarea>
                     <div class="endAlign">
-                        <button class="btn">Pošalji</button>
+                        <button type="submit" class="btn">Pošalji</button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>

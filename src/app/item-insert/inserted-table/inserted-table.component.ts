@@ -7,7 +7,6 @@ import {map} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import {LoadPage} from '../../ui/table/table.component';
 
 @Component({
   selector: 'hellena-inserted-table',

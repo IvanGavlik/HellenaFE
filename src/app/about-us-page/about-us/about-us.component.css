@@ -178,4 +178,13 @@ color: #000000;
     color: #000000;
 }
 
+#email::placeholder {
+    color: white;
+}
+
+#body::placeholder {
+    color: white;
+}
+
+
 /* feedback end */
