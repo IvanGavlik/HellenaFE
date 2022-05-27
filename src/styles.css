@@ -94,3 +94,7 @@
     background: transparent;
     color: white;
 }
+
+.cdk-overlay-pane {
+    max-width: 95vw !important;
+}

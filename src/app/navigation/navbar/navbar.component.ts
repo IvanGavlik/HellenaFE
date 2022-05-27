@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
     if (this.deviceService.isDesktop()) {
       config.width = '30%';
     } else {
-      config.width = '90%';
+      config.width = '100%';
     }
     config.height = '100%';
     const dialog = this.dialog.open(ShoppingListComponent, config);
