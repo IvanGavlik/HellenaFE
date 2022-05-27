@@ -43,6 +43,7 @@ export class AboutUsComponent implements OnInit, OnDestroy {
       } as Dialog)
           .subscribe(res => {});
       this.subs.push(dialog);
+      return;
     }
 
     this.msg.to = 'help@hellena.info';
