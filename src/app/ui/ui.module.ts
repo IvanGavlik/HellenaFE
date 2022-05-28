@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './card/card.component';
 import { CardContainerComponent } from './card-container/card-container.component';
 import { RouterModule } from '@angular/router';
-import { SelectMultipleComponent } from './select-multiple/select-multiple.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
@@ -27,7 +26,6 @@ import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-
   declarations: [
     CardComponent,
     CardContainerComponent,
-    SelectMultipleComponent,
     TableComponent,
     InputFieldComponent,
     SpinnerComponent,
@@ -55,7 +53,6 @@ import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-
   exports: [
     CardComponent,
     CardContainerComponent,
-    SelectMultipleComponent,
     TableComponent,
     InputFieldComponent,
     SpinnerComponent,
