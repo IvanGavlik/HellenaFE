@@ -6,6 +6,7 @@ import {Entity, Paginator} from '../crud/entity';
 import {Search} from './search';
 import {environment} from '../../environments/environment';
 
+// TODO what about version
 export abstract class SearchService extends CrudService {
 
    constructor(protected searchConfiguration: SearchConfiguration, protected http: HttpClient) {

@@ -119,8 +119,8 @@
                     <h1>Pošalji poruku autoru</h1>
                 </div>
                 <div class="inputForm">
-                    <input id="email" type="text" class="form-control" [(ngModel)]="msg.from" placeholder="Email">
-                    <textarea id="body" name="body"  class="form-control" [(ngModel)]="msg.body" placeholder="Poruka" ></textarea>
+                    <input id="email" type="text" class="form-control" data-hj-allow [(ngModel)]="msg.from" placeholder="Email">
+                    <textarea id="body" name="body"  class="form-control" data-hj-allow [(ngModel)]="msg.body" placeholder="Poruka" ></textarea>
                     <div class="endAlign">
                         <button type="submit" class="btn">Pošalji</button>
                     </div>
