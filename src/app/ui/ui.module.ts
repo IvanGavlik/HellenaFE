@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardComponent } from './card/card.component';
 import { CardContainerComponent } from './card-container/card-container.component';
 import { RouterModule } from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -16,14 +15,13 @@ import {MatButtonModule} from '@angular/material/button';
 import { SpinnerComponent } from './spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { DialogComponent } from './dialog/dialog.component'
+import { DialogComponent } from './dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
 import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-table.component';
 
 @NgModule({
   declarations: [
-    CardComponent,
     CardContainerComponent,
     TableComponent,
     SpinnerComponent,
@@ -49,7 +47,6 @@ import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-
     MatMenuModule
   ],
   exports: [
-    CardComponent,
     CardContainerComponent,
     TableComponent,
     SpinnerComponent,
