@@ -10,10 +10,3 @@ export interface ShoppingListItem {
     isPurchased: boolean;
 }
 
-export interface AddItemToShoppingListEvent {
-    item: ShoppingListItem;
-}
-
-export interface RemoveItemFromShoppingListEvent {
-    itemId: number;
-}

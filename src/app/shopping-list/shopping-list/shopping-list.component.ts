@@ -38,7 +38,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
             id: el.id,
             name: el.name,
             activeTo: el.activeTo,
-            icon: el.icon,
             actionPrice: el.actionPrice,
             originalPrice: el.originalPrice,
             store: el.store,
@@ -95,6 +94,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
             this.itemDoneUnit($event);
           }
         });
+    this.subs.push(sub);
   }
 
   private itemDoneUnit(element: ShoppingListTableItem): void {
@@ -120,6 +120,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
             this.itemRemoveUtil($event);
           }
         });
+    this.subs.push(sub);
   }
 
   private itemRemoveUtil(item: ShoppingListTableItem): void {
@@ -128,7 +129,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     this.shoppingListService.replace(items);
     this.updateShoppingListDataTable();
   }
-
 
   handleItemCompare(): void {
     const dialog = this.dialog.openHellenaDialog({
@@ -154,6 +154,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
             this.itemQuantityUtil($event);
           }
         });
+    this.subs.push(sub);
   }
 
   itemQuantityUtil(element: ShoppingListTableItem): void {
