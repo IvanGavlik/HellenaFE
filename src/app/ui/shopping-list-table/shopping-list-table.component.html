@@ -1,33 +1,37 @@
 <ng-container *ngIf="table">
-    <table mat-table [dataSource]="table.data" class="mat-elevation-z8 demo-table">
+    <table mat-table [dataSource]="table.data" class="mat-elevation-z8 full-width-table">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef class="mobile-size">
                 <ng-container *ngIf="table.data.length > 0 else noData">
-                    <span style="font-size: medium; color: grey;">
+                    <span class="medium-grey">
                         Ukupno: {{ table.sum.sumAll | number : '1.2-2' }} kn
-                        <span style="color: limegreen" > ({{ table.sum.sumDone | number : '1.2-2' }} kn) </span>
+                        <span class="text-green"> ({{ table.sum.sumDone | number : '1.2-2' }} kn) </span>
                     </span>
                 </ng-container>
                 <ng-template #noData>
-                    <span style="font-size: medium; color: grey; margin-right: 0.5rem;"> Popis za kupovinu je prazan </span>
+                    <span class="medium-grey move-right"> Popis za kupovinu je prazan </span>
                 </ng-template>
             </th>
 
-            <td mat-cell *matCellDef="let element" class="mobile-size">
-                <span style="font-size: large">{{ element.name }} </span>
+            <td mat-cell class="mobile-size" *matCellDef="let element">
+                <span class="font-large">{{ element.name }} </span>
                 <br>
-                <span *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo" style="font-size: large; color: blue"> {{ element.actionPrice }}  kn
-            </span>
-                <ng-template #allInfo>
-                    <span style="font-size: medium; color: grey;  text-decoration: line-through; margin-right: 0.5rem;"> {{ element.originalPrice }}  kn </span>
-                    <span style="font-size: large; color: blue;  margin-right: 0.5rem;"> {{ element.actionPrice }}  kn </span>
-                    <br>
-                    <span style="font-size: medium; color: grey;">
-                    Ušteda {{ (element.originalPrice - element.actionPrice)  | number : '1.2-2' }}  kn
+                <span class="font-large blue-text"
+                      *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"> {{ element.actionPrice }}>
+                    kn
                 </span>
+                <ng-template #allInfo>
+                    <span class="medium-grey move-right through-text"> {{ element.originalPrice }}  kn </span>
+                    <span class="move-right large-blue"> {{ element.actionPrice }}  kn </span>
+                    <br>
+                    <span class="medium-grey">
+                    Ušteda {{ (element.originalPrice - element.actionPrice)  | number : '1.2-2' }}  kn
+                    </span>
                 </ng-template>
                 <br>
-                <span style="text-overflow: ellipsis; font-size: smaller"> Vrijedi do {{ element.activeTo | date: 'dd.MM.' }} u {{ element.store }} </span>
+                <span class="small-ellipsis-text"> Vrijedi do {{ element.activeTo | date: 'dd.MM.' }}
+                    u {{ element.store }}
+                </span>
                 <!-- TODO disply location on map only full web page-->
             </td>
         </ng-container>
@@ -35,29 +39,31 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>
                 <ng-container *ngIf="table.data.length > 0">
-                    <button mat-stroked-button style="width: 100%" (click)="clear.emit()">
-                        <mat-icon style="color: #8001D9" >delete_outline</mat-icon>
+                    <button mat-stroked-button  class="full-width-table" (click)="clear.emit()">
+                        <mat-icon class="purple-text">delete_outline</mat-icon>
                     </button>
                 </ng-container>
             </th>
             <td mat-cell *matCellDef="let element">
                 <div>
                     <button mat-stroked-button [matMenuTriggerFor]="options" style="width: 100%">
-                        <mat-icon style="color: #8001D9" >toc</mat-icon>
+                        <mat-icon class="purple-text">toc</mat-icon>
                     </button>
                     <mat-menu #options="matMenu" xPosition="before" yPosition="below">
                         <button mat-menu-item (click)="itemDone.emit(element)">
-                            <mat-icon style="color: #8001D9" >done</mat-icon>
+                            <mat-icon class="purple-text">done</mat-icon>
                         </button>
                         <button mat-menu-item (click)="itemRemove.emit(element)">
-                            <mat-icon style="color: #8001D9" >close</mat-icon>
+                            <mat-icon class="purple-text">close</mat-icon>
                         </button>
                         <!-- TODO
                         <button mat-menu-item (click)="itemCompare.emit()">
                             <mat-icon>compare_arrows</mat-icon>
                         </button>
                          -->
-                        <input mat-menu-item placeholder="Količina" style="color: #8001D9" type="number" [value]="element.quantity" [disabled]="element.isPurchased" (change)="onChange(element, $event)" (click)="$event.stopPropagation()">
+                        <input mat-menu-item placeholder="Količina" style="color: #8001D9" type="number"
+                               [value]="element.quantity" [disabled]="element.isPurchased"
+                               (change)="onChange(element, $event)" (click)="$event.stopPropagation()" />
                     </mat-menu>
                 </div>
 
@@ -65,7 +71,8 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="table.columnNames"></tr>
-        <tr mat-row *matRowDef="let row; columns: table.columnNames" class="gx-0" [ngClass]="row.isPurchased ? 'green' :''"></tr>
+        <tr mat-row *matRowDef="let row; columns: table.columnNames" class="gx-0"
+            [ngClass]="row.isPurchased ? 'green' :''"></tr>
     </table>
 
 </ng-container>
