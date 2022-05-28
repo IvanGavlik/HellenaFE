@@ -1,14 +1,13 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {Table, TableItem} from './table';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'hellena-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit {
 
   @Input()
   table?: Table;
@@ -32,7 +31,6 @@ export class TableComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {}
 }
 
 export interface LoadPage {

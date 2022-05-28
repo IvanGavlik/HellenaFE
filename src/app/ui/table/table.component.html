@@ -1,41 +1,32 @@
-<div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active sveBox" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-            <ng-container *ngIf="table">
+<div>
+    <div class="sveBox">
+        <ng-container *ngIf="table">
+            <table mat-table [dataSource]="table.data" style="width: 100%" >
+                <ng-container matColumnDef="name">
+                    <td *matCellDef="let element" class="productInfo">
+                        <h4>{{ element.name }}</h4>
+                        <h5 *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"> {{ element.actionPrice }} kn</h5>
+                        <ng-template #allInfo>
+                            <h5>{{ element.originalPrice }} kn <span> {{ element.actionPrice }} kn </span></h5>
+                        </ng-template>
+                        <span style="font-size: medium; font-weight: normal;" >od {{ element?.activeFrom | date:"dd.MM."  }} do {{ element?.activeTo | date:"dd.MM." }} u {{ element.store }} </span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <td class="buttonDesign" *matCellDef="let element">
+                        <button class="addCart" mat-button (click)="addTableItemToShoppingList.emit(element)">
+                            <mat-icon>shopping_cart</mat-icon>
+                        </button>
+                        <!-- TODO must implement
+                        <button class="similarBtn" mat-button (click)="compareTableItem.emit(element)">
+                            <mat-icon>compare_arrows</mat-icon>
+                         </button>
+                         -->
+                    </td>
+                </ng-container>
 
-                <table mat-table [dataSource]="table.data" class="table-responsive table align-middle table-borderless">
-
-                    <ng-container matColumnDef="icon">
-                        <td *matCellDef="let element" class="flexBoxOne">
-                            <img [src]="element.icon" />
-                        </td>
-                    </ng-container>
-                    <ng-container matColumnDef="name">
-                        <td *matCellDef="let element" class="flexBoxTwo productInfo">
-                            <h2>{{ element.name }}</h2>
-                            <h5 *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"> {{ element.actionPrice }} kn</h5>
-                            <ng-template #allInfo>
-                                <h5>{{ element.originalPrice }} kn <span> {{ element.actionPrice }} kn </span></h5>
-                            </ng-template>
-                            <span style="font-size: medium; font-weight: normal; margin-left: 0.5rem" >od {{ element?.activeFrom | date:"dd.MM."  }} do {{ element?.activeTo | date:"dd.MM." }} u {{ element.store }} </span>
-                        </td>
-                    </ng-container>
-                    <ng-container matColumnDef="actions">
-                        <td class="buttonDesign flexBoxThree" *matCellDef="let element">
-                            <button class="addCart" mat-button (click)="addTableItemToShoppingList.emit(element)">
-                                <mat-icon>shopping_cart</mat-icon>
-                            </button>
-                            <!-- TODO must implement
-                            <button class="similarBtn" mat-button (click)="compareTableItem.emit(element)">
-                                <mat-icon>compare_arrows</mat-icon>
-                             </button>
-                             -->
-                        </td>
-                    </ng-container>
-
-                    <tr mat-row *matRowDef="let row; columns: table.columnNames" class="flex-container"></tr>
-                </table>
-            </ng-container>
-        </div>
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-        </div>
+                <tr mat-row *matRowDef="let row; columns: table.columnNames"></tr>
+            </table>
+        </ng-container>
+    </div>
 </div>

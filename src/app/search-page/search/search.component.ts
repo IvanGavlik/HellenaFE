@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   showFiller = false;
 
   table = {
-    columnNames: ['icon', 'name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
+    columnNames: ['name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
     data: [],
     totalCount: 100,
   } as Table;
@@ -97,7 +97,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     dialog.afterClosed().subscribe(el => this.focus.nativeElement.scrollIntoView({behavior: 'smooth'}));
     this.searchItemService.search(search)
         .pipe(
-            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['icon', 'name', 'actions'] } as Table;  }),
+            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['name', 'actions'] } as Table;  }),
             tap(response => this.table.totalCount = response.size), // here set total count
             map(response => response.page.map(el => this.toTableItem(el as ItemSearchEntity)))
         )
