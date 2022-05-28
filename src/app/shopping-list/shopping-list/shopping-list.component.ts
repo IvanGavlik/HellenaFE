@@ -13,7 +13,7 @@ import {DialogService} from '../../ui/dialog/dialog.service';
 export class ShoppingListComponent implements OnInit, OnDestroy {
 
   table: ShoppingListTable = {
-    columnNames: ['icon', 'name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
+    columnNames: ['name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
     data: [],
     totalCount: 100,
     sum : { sumDone: 0, sumAll: 0 } as ShoppingListTableSum

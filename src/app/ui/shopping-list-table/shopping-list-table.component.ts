@@ -45,7 +45,6 @@ export class ShoppingListTableComponent implements OnDestroy {
       if ($event.target.value && $event.target.value > 0) {
           const el = {
               name: item.name,
-              icon: item.icon,
               originalPrice: item.originalPrice,
               actionPrice: item.actionPrice,
               store: item.store,

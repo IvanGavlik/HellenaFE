@@ -6,7 +6,6 @@ export interface ShoppingListTable {
 
 export interface ShoppingListTableItem {
     id: number;
-    icon: string;
     name: string;
     originalPrice: number;
     actionPrice: number;
