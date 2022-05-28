@@ -12,7 +12,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatChipsModule} from '@angular/material/chips';
 import { TableComponent } from './table/table.component';
-import { InputFieldComponent } from './input-field/input-field.component';
 import {MatButtonModule} from '@angular/material/button';
 import { SpinnerComponent } from './spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -27,7 +26,6 @@ import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-
     CardComponent,
     CardContainerComponent,
     TableComponent,
-    InputFieldComponent,
     SpinnerComponent,
     DialogComponent,
     ShoppingListTableComponent
@@ -54,7 +52,6 @@ import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-
     CardComponent,
     CardContainerComponent,
     TableComponent,
-    InputFieldComponent,
     SpinnerComponent,
     DialogComponent,
     ShoppingListTableComponent
