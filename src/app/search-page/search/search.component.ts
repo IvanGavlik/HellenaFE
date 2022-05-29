@@ -73,11 +73,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     console.log('init search ', this.search);
     this.doSearch(this.search, false);
-
-    const pageSub = this.paginator.page.subscribe(el => {
-      console.log('paddinator el ', el);
-    });
-    this.subs.push(pageSub);
   }
 
   ngOnDestroy(): void {
@@ -91,6 +86,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   doSearch(search: SearchItem, fromForm: boolean): void {
     if (fromForm && JSON.stringify(this.search) === JSON.stringify(search)) {
       return;
+    }
+    if (fromForm) {
+      search.page = defaultPage();
+      this.paginator.pageIndex = 0;
     }
     this.search = search;
     const dialog = this.spinnerService.openSpinnerDialog();
