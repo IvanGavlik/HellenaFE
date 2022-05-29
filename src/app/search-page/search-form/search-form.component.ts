@@ -47,22 +47,18 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
     @ViewChild('featureSelect') featureSelect: ElementRef<HTMLSelectElement> = {} as ElementRef;
     features: Pair<ItemFeature, string>[] = [ { id: ItemFeature.ALL, value: 'Sve' }, { id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas' } as Pair<ItemFeature, string> ];
-    // category
-    @ViewChild('categoryChipper') categoryChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-    category: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([], [],
-        new Observable<Pair<number, string>[]>(),
-        this.searchForm.get('categoryControl') as FormControl);
+    categoryList: Pair<number, string>[] = [];
 
     // location
     @ViewChild('locationChipper') locationChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-    location: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([],[],
+    location: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([], [],
         new Observable<Pair<number, string>[]>(),
         this.searchForm.get('locationControl') as FormControl);
 
     // store
     storeControl = new FormControl('');
     @ViewChild('storeChipper') storeChipper: ElementRef<HTMLInputElement> = {} as ElementRef;
-    store: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([],[],
+    store: SelectMultiple<Pair<number, string>> = new SelectMultiple<Pair<number, string>>([], [],
         new Observable<Pair<number, string>[]>(),
         this.searchForm.get('storeControl') as FormControl);
 
@@ -80,11 +76,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
         const initData = new InitDataHelper(this.service);
         const subCategory = initData.allCategory.subscribe(categories => {
-            this.category.allItems = categories;
-            if (this.search.categoryIds && this.search.categoryIds.length > 0) {
-                this.category.items = categories.filter(el => this.search?.categoryIds.find(id => el.id === id) );
-            }
-
+            this.categoryList = categories;
         });
         const subLocation = initData.allLocation.subscribe(locations => {
             this.location.allItems = [];
@@ -115,7 +107,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         const search =  {
             priceMIn: value.priceMIn,
             priceMax: value.priceMax,
-            categoryIds: (value?.categoryControl as Pair<any, any>[]).map(el => el.id),
+            categoryIds: value?.categoryControl,
             cityIds: (value?.locationControl as Pair<any, any>[]).map(el => el.id),
             storeIds: (value?.storeControl as Pair<any, any>[]).map(el => el.id),
             page : defaultPage()
@@ -128,25 +120,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             search.feature = value.featureControl;
         }
 
-        console.log('SF EMIT ', search);
         this.searchEvent.emit( search );
-    }
-
-    addCategory(event: MatChipInputEvent): void {
-        const value = (event.value || '').trim();
-        const find = this.category.allItems.find(el => el.value === value);
-        if (find) {
-            this.category.add(find);
-        }
-        event.chipInput?.clear();
-    }
-
-    removeCategory(el: Pair<number, string>): void {
-        this.category.remove(el);
-    }
-
-    selectedCategory(event: MatAutocompleteSelectedEvent): void {
-        this.category.selected(event.option.value, this.categoryChipper);
     }
 
     addLocation(event: MatChipInputEvent): void {

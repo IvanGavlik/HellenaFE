@@ -1,8 +1,9 @@
 <div class="container" style="margin-top: 1rem;">
-    <form [formGroup]="searchForm" >
-        <div class="row" *ngIf="displayFullSearchForm" id="filter" style="border: 2px solid #550ACD; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;" >
-            <div class="col-md-3 col-sm-12"  >
-                <mat-form-field appearance="outline" style="width: 100%;" >
+    <form [formGroup]="searchForm">
+        <div class="row" *ngIf="displayFullSearchForm" id="filter"
+             style="border: 2px solid #550ACD; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+            <div class="col-md-3 col-sm-12">
+                <mat-form-field appearance="outline" style="width: 100%;">
                     <mat-label>Pretraži</mat-label>
                     <input matInput data-hj-allow type="text" placeholder="npr. Kruh"
                            formControlName="name"
@@ -27,44 +28,28 @@
                                 margin-left: 20px;
                                 color: #0009;
                                 font-family: Roboto;
-                                font-size: 16px;" >
-                    Cijena  <div style="display: inline" *ngIf="searchForm.controls['priceMax'].value > 0 && searchForm.controls['priceMax'].value < 999; else inf" >
-                                <span> od 0 do {{ searchForm.controls['priceMax'].value }} kn </span>
-                            </div>
-                            <ng-template #inf> <span> &#8734; kn </span> </ng-template>
+                                font-size: 16px;">
+                    Cijena
+                    <div style="display: inline"
+                         *ngIf="searchForm.controls['priceMax'].value > 0 && searchForm.controls['priceMax'].value < 999; else inf">
+                        <span> od 0 do {{ searchForm.controls['priceMax'].value }} kn </span>
+                    </div>
+                    <ng-template #inf><span> &#8734; kn </span></ng-template>
                 </mat-label>
             </div>
             <div class="col-md-2 col-sm-12 mobi-margin">
-                <mat-form-field appearance="outline" style="width: 100%;"  >
+                <mat-form-field appearance="outline" style="width: 100%;">
                     <mat-label>Kategorija</mat-label>
-                    <mat-chip-list #categoryChipperList>
-                        <mat-chip
-                                *ngFor="let el of category.items"
-                                (removed)="removeCategory(el)">
-                            {{el.value}}
-                            <button matChipRemove>
-                                <mat-icon>cancel</mat-icon>
-                            </button>
-                        </mat-chip>
-                        <input
-                                placeholder="npr. Piće"
-                                data-hj-allow
-                                #categoryChipper
-                                formControlName="categoryControl"
-                                [matAutocomplete]="autoCategory"
-                                [matChipInputFor]="categoryChipperList"
-                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                (matChipInputTokenEnd)="addCategory($event)">
-                    </mat-chip-list>
-                    <mat-autocomplete #autoCategory="matAutocomplete" (optionSelected)="selectedCategory($event)">
-                        <mat-option *ngFor="let el of category.filteredItems | async" [value]="el">
-                            {{el.value}}
+                    <mat-select formControlName="categoryControl" multiple>
+                        <mat-option *ngFor="let category of categoryList"
+                                    [value]="category.id" >
+                            {{ category.value  }}
                         </mat-option>
-                    </mat-autocomplete>
+                    </mat-select>
                 </mat-form-field>
             </div>
-            <div class="col-md-2 col-sm-12" >
-                <mat-form-field appearance="outline" style="width: 100%;"  >
+            <div class="col-md-2 col-sm-12">
+                <mat-form-field appearance="outline" style="width: 100%;">
                     <mat-label>Trgovina</mat-label>
                     <mat-chip-list #storeChipperList>
                         <mat-chip
@@ -92,11 +77,11 @@
                     </mat-autocomplete>
                 </mat-form-field>
             </div>
-            <div class="col-md-2 col-sm-12" >
-                <mat-form-field appearance="outline" style="width: 98%" >
-                    <mat-label> Prikaži </mat-label>
-                    <mat-select formControlName="featureControl" #featureSelect >
-                        <mat-option  *ngFor="let f of features" [value]="f.id" >
+            <div class="col-md-2 col-sm-12">
+                <mat-form-field appearance="outline" style="width: 98%">
+                    <mat-label> Prikaži</mat-label>
+                    <mat-select formControlName="featureControl" #featureSelect>
+                        <mat-option *ngFor="let f of features" [value]="f.id">
                             {{ f.value }}
                         </mat-option>
                     </mat-select>
@@ -105,98 +90,20 @@
 
         </div>
         <div class="row">
-            <div class="col-12" >
-                <div *ngIf="displayFullSearchForm" style="text-align: center" >
-                    <button (click)="displayFullSearchForm=false" mat-button style="margin-top: -2px; background: #550ACD" >
-                        <mat-icon style="color: white" >expand_less</mat-icon>
+            <div class="col-12">
+                <div *ngIf="displayFullSearchForm" style="text-align: center">
+                    <button (click)="displayFullSearchForm=false" mat-button
+                            style="margin-top: -2px; background: #550ACD">
+                        <mat-icon style="color: white">expand_less</mat-icon>
                     </button>
                 </div>
-                <div *ngIf="!displayFullSearchForm" style="text-align: center" >
-                    <button (click)="displayFullSearchForm=true" mat-button style="margin-top: -2px; background: #550ACD" >
-                        <mat-icon style="color: white" >expand_more</mat-icon>
+                <div *ngIf="!displayFullSearchForm" style="text-align: center">
+                    <button (click)="displayFullSearchForm=true" mat-button
+                            style="margin-top: -2px; background: #550ACD">
+                        <mat-icon style="color: white">expand_more</mat-icon>
                     </button>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
-<!--
-<form class="example-form mat-elevation-z8" style="margin-top: 1rem; white-space: nowrap; padding: 1rem;"
-      [formGroup]="searchForm"
->
-    <div class="row">
-        <div class="col-12">
-
-        </div>
-    </div>
-
-    TODO  style="display: none"
-    <div class="row" *ngIf="displayFullSearchForm" >
-
-
-        <div class="col">
-        </div>
-
-        !--
-        <div class="col">
-            <mat-form-field style="display: block;" >
-                <mat-label>Lokacija</mat-label>
-                <mat-chip-list #locationChipperList>
-                    <mat-chip
-                            *ngFor="let el of location.items"
-                            (removed)="removeLocation(el)">
-                        {{el.value}}
-                        <button matChipRemove>
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip>
-                    <input
-                            placeholder="npr. Zagreb"
-                            #locationChipper
-                            formControlName="locationControl"
-                            [matAutocomplete]="autoLocation"
-                            [matChipInputFor]="locationChipperList"
-                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                            (matChipInputTokenEnd)="addLocation($event)">
-                </mat-chip-list>
-                <mat-autocomplete #autoLocation="matAutocomplete" (optionSelected)="selectedLocation($event)">
-                    <mat-option *ngFor="let el of location.filteredItems | async" [value]="el">
-                        {{el.value}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </div>
-        --
-
-        <div class="col">
-            <mat-form-field style="display: block;" >
-                <mat-label>Trgovina</mat-label>
-                <mat-chip-list #storeChipperList>
-                    <mat-chip
-                            *ngFor="let el of store.items"
-                            (removed)="removeStore(el)">
-                        {{el.value}}
-                        <button matChipRemove>
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip>
-                    <input
-                            placeholder="npr. Lidl"
-                            #storeChipper
-                            formControlName="storeControl"
-                            [matAutocomplete]="autoStore"
-                            [matChipInputFor]="storeChipperList"
-                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                            (matChipInputTokenEnd)="addStore($event)">
-                </mat-chip-list>
-                <mat-autocomplete #autoStore="matAutocomplete" (optionSelected)="selectedStore($event)">
-                    <mat-option *ngFor="let el of store.filteredItems | async" [value]="el">
-                        {{el.value}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </div>
-    </div>
-</form>
--->
