@@ -13,6 +13,7 @@ import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {ItemSearchEntity} from '../item-search-entity';
 import {SpinnerServiceService} from '../../ui/spinner/spinner-service.service';
 import {Cloudinary} from '@cloudinary/url-gen';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 
 @Component({
@@ -54,7 +55,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(private searchItemService: SearchItemService,
               private shoppingListService: ShoppingListService,
               private dialogService: DialogService,
-              private spinnerService: SpinnerServiceService
+              private spinnerService: SpinnerServiceService,
+              public device: DeviceDetectorService
   ) {}
 
   ngOnInit(): void {

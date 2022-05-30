@@ -20,12 +20,14 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { SearchResultBoxComponent } from './search-result-box/search-result-box.component';
 import {CloudinaryModule} from '@cloudinary/ng';
+import { SearchFormMobileComponent } from './search-form-mobile/search-form-mobile.component';
 
 @NgModule({
   declarations: [
     SearchComponent,
     SearchFormComponent,
     SearchResultBoxComponent,
+    SearchFormMobileComponent,
   ],
   imports: [
     CommonModule,
