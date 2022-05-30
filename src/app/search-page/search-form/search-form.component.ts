@@ -6,6 +6,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {map } from 'rxjs/operators';
 import {SearchItemService} from '../search-item.service';
 import {Entity} from '../../crud/entity';
+import {InitDataHelper, Pair} from '../pair';
 
 
 @Component({
@@ -99,47 +100,5 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.searchEvent.emit( search );
     }
 
-}
-
-class Pair<KEY, VALUE> {
-    constructor(public id: KEY, public value: VALUE) {}
-}
-
-class InitDataHelper {
-    // tslint:disable-next-line:variable-name
-    private _allCategory: Observable<Pair<number, string>[]> = new Observable<Pair<number, string>[]>();
-    // tslint:disable-next-line:variable-name
-    private _allStore: Observable<Pair<number, string>[]> = new Observable<Pair<number, string>[]>();
-
-    constructor(private service: SearchItemService) {
-        this._allCategory = this.service.findAllCategory()
-            .pipe(
-                map(entities => entities.map( el => this.toPair(el as EntityPair))),
-            );
-        this._allStore = this.service.findAllStore()
-            .pipe(
-                map(entities => entities.map( el => this.toPair(el as EntityPair))),
-            );
-    }
-
-    get allCategory(): Observable<Pair<number, string>[]> {
-        return this._allCategory;
-    }
-
-    get allStore(): Observable<Pair<number, string>[]> {
-        return this._allStore;
-    }
-
-    private toPair(el1: EntityPair): Pair<number, string> {
-        return {
-            id: el1.id,
-            value: el1.name,
-        };
-    }
-}
-
-class EntityPair extends Entity {
-    id = -1;
-    name = '';
 }
 

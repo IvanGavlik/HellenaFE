@@ -2,6 +2,10 @@
     width: 70vw !important;
 }
 
+.mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-indeterminate, .mat-accent .mat-pseudo-checkbox-checked, .mat-accent .mat-pseudo-checkbox-indeterminate {
+    background: #8001D9;
+}
+
 @media(max-width:776px) {
     .mat-dialog-container {
         width: 90vw !important;

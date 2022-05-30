@@ -4,8 +4,9 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {FormControl, FormGroup} from '@angular/forms';
 import {debounceTime, Observable, Subscription} from 'rxjs';
 import {SearchItemService} from '../search-item.service';
-import {map} from 'rxjs/operators';
-import {Entity} from '../../crud/entity';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {CategoryComponent} from './category/category.component';
+import {InitDataHelper, Pair} from '../pair';
 
 @Component({
   selector: 'hellena-search-form-mobile',
@@ -48,7 +49,7 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
   // TODO locationList
   subs: Subscription[] = [];
 
-  constructor(private service: SearchItemService) {}
+  constructor(private service: SearchItemService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.searchForm.valueChanges
@@ -97,47 +98,11 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
     this.searchEvent.emit( search );
   }
 
-}
+  handleCategory(): void {
+    const config = { width: '100%', height: '100%', data: this.categoryList } as MatDialogConfig;
+    const dialog = this.dialog.open(CategoryComponent, config);
+    dialog.updatePosition({ top: '100px', right: '0px' }  );
 
-
-class Pair<KEY, VALUE> {
-  constructor(public id: KEY, public value: VALUE) {}
-}
-
-class InitDataHelper {
-  // tslint:disable-next-line:variable-name
-  private _allCategory: Observable<Pair<number, string>[]> = new Observable<Pair<number, string>[]>();
-  // tslint:disable-next-line:variable-name
-  private _allStore: Observable<Pair<number, string>[]> = new Observable<Pair<number, string>[]>();
-
-  constructor(private service: SearchItemService) {
-    this._allCategory = this.service.findAllCategory()
-        .pipe(
-            map(entities => entities.map( el => this.toPair(el as EntityPair))),
-        );
-    this._allStore = this.service.findAllStore()
-        .pipe(
-            map(entities => entities.map( el => this.toPair(el as EntityPair))),
-        );
+    dialog.afterClosed().subscribe(result => { });
   }
-
-  get allCategory(): Observable<Pair<number, string>[]> {
-    return this._allCategory;
-  }
-
-  get allStore(): Observable<Pair<number, string>[]> {
-    return this._allStore;
-  }
-
-  private toPair(el1: EntityPair): Pair<number, string> {
-    return {
-      id: el1.id,
-      value: el1.name,
-    };
-  }
-}
-
-class EntityPair extends Entity {
-  id = -1;
-  name = '';
 }

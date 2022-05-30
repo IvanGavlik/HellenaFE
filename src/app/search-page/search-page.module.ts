@@ -21,6 +21,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { SearchResultBoxComponent } from './search-result-box/search-result-box.component';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { SearchFormMobileComponent } from './search-form-mobile/search-form-mobile.component';
+import { CategoryComponent } from './search-form-mobile/category/category.component';
+import {MatListModule} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { SearchFormMobileComponent } from './search-form-mobile/search-form-mobi
     SearchFormComponent,
     SearchResultBoxComponent,
     SearchFormMobileComponent,
+    CategoryComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,9 @@ import { SearchFormMobileComponent } from './search-form-mobile/search-form-mobi
     MatDividerModule,
     MatSidenavModule,
     MatPaginatorModule,
-    CloudinaryModule
+    CloudinaryModule,
+    MatListModule,
+    MatDialogModule
   ],
   exports: [
     SearchComponent

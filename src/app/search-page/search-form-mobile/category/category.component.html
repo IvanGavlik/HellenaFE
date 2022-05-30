@@ -1,0 +1,23 @@
+<div class="top" >
+    <h1 mat-dialog-title class="pink-text">Kategorije</h1>
+
+    <mat-dialog-content class="mat-typography" style="overflow: hidden; display: contents" >
+        <mat-selection-list>
+            <mat-list-option *ngFor="let c of categories">
+                {{c.value}}
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-dialog-content>
+
+
+    <mat-dialog-actions align="end">
+        <div class="viewBtn">
+            <button class="addCart" mat-button mat-dialog-close>Potvrdi</button>
+        </div>
+    </mat-dialog-actions>
+
+</div>
+
+
+
+
