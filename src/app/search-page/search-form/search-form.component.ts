@@ -105,7 +105,7 @@ class Pair<KEY, VALUE> {
     constructor(public id: KEY, public value: VALUE) {}
 }
 
-export class InitDataHelper {
+class InitDataHelper {
     // tslint:disable-next-line:variable-name
     private _allCategory: Observable<Pair<number, string>[]> = new Observable<Pair<number, string>[]>();
     // tslint:disable-next-line:variable-name
