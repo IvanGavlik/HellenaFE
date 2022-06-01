@@ -73,7 +73,6 @@ export class SearchComponent implements OnInit, OnDestroy {
         page: defaultPage(),
       } as SearchItem;
     }
-    console.log('init search ', this.search);
     this.doSearch(this.search, false);
   }
 

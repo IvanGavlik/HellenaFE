@@ -4,7 +4,7 @@
     <hellena-search-form [search]="search" (searchEvent)="doSearch($event, true)"></hellena-search-form>
 </div>
 <div *ngIf="this.device.isMobile()" class="container-fluid" style="margin-top:78px; padding-left: 0px !important; padding-right: 0px !important;" >
-    <hellena-search-form-mobile> </hellena-search-form-mobile>
+    <hellena-search-form-mobile [search]="search" (searchEvent)="doSearch($event, true)"> </hellena-search-form-mobile>
 </div>
 
 <section>

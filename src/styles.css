@@ -102,3 +102,10 @@
 .cdk-overlay-pane {
     max-width: 95vw !important;
 }
+
+#category .mat-icon {
+    color: #550acd;
+}
+#category .material-icons {
+    font-size: 17px;
+}

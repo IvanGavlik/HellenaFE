@@ -4,6 +4,7 @@ import {map} from 'rxjs/operators';
 import {Entity} from '../crud/entity';
 
 export class Pair<KEY, VALUE> {
+    public selected = false;
     constructor(public id: KEY, public value: VALUE) {}
 }
 
@@ -36,6 +37,7 @@ export class InitDataHelper {
         return {
             id: el1.id,
             value: el1.name,
+            selected: false,
         };
     }
 }

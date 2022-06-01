@@ -45,7 +45,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         });
 
     @ViewChild('featureSelect') featureSelect: ElementRef<HTMLSelectElement> = {} as ElementRef;
-    features: Pair<ItemFeature, string>[] = [ { id: ItemFeature.ALL, value: 'Sve' }, { id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas' } as Pair<ItemFeature, string> ];
+    features: Pair<ItemFeature, string>[] = [ { id: ItemFeature.ALL, value: 'Sve', selected: false }, { id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas', selected: false } as Pair<ItemFeature, string> ];
     categoryList: Pair<number, string>[] = [];
     storeList: Pair<number, string>[] = [];
     // TODO locationList
@@ -57,7 +57,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.searchForm.valueChanges
             .pipe(debounceTime(1000))
             .subscribe(value => {
-                console.log('value ', value);
                 this.handleSearchFormValueChange(value);
             });
 
