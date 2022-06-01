@@ -24,6 +24,7 @@ import { SearchFormMobileComponent } from './search-form-mobile/search-form-mobi
 import { CategoryComponent } from './search-form-mobile/category/category.component';
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
+import { StoreComponent } from './search-form-mobile/store/store.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     SearchResultBoxComponent,
     SearchFormMobileComponent,
     CategoryComponent,
+    StoreComponent,
   ],
   imports: [
     CommonModule,

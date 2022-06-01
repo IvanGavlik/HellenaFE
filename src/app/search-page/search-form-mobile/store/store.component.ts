@@ -1,20 +1,19 @@
 import {Component, Inject, Optional, ViewChild} from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Pair} from '../../pair';
 import {MatSelectionList} from '@angular/material/list';
-
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Pair} from '../../pair';
 
 @Component({
-  selector: 'hellena-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  selector: 'hellena-store',
+  templateUrl: './store.component.html',
+  styleUrls: ['./store.component.css']
 })
-export class CategoryComponent {
+export class StoreComponent {
 
   @ViewChild(MatSelectionList) list: MatSelectionList = {} as MatSelectionList;
 
   constructor(
-      public dialogRef: MatDialogRef<CategoryComponent>,
+      public dialogRef: MatDialogRef<StoreComponent>,
       @Optional() @Inject(MAT_DIALOG_DATA) public data: Pair<number, string>[]) {
   }
 
@@ -26,4 +25,5 @@ export class CategoryComponent {
     const selected: number[] = this.list.selectedOptions.selected.map(el => el.value.id);
     this.dialogRef.close({event: 'Close', data : selected});
   }
+
 }
