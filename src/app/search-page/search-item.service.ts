@@ -38,4 +38,9 @@ export class SearchItemService extends SearchService {
       responseType: 'json'
     });
   }
+
+  findAllItemNames(name: string): Observable<string[]> {
+    const endpoint = environment.host + this.searchItemConfiguration.searchNamesEndpoint;
+    return this.http.post<string[]>(endpoint, name, { responseType: 'json'});
+  }
 }

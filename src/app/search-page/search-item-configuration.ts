@@ -10,5 +10,6 @@ export class SearchItemConfiguration implements SearchConfiguration {
     findAllCategoryEndpoint = '/v1/item/category/all';
     findAllCityEndpoint = '/v1/item/city/all';
     findAllStoreEndpoint = '/v1/item/store/all';
+    searchNamesEndpoint = '/v1/item/name/search';
     saveEndpoint = '';
 }
