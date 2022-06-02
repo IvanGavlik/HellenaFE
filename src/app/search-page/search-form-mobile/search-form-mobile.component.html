@@ -7,7 +7,13 @@
                     <mat-label>Pretraži</mat-label>
                     <input matInput data-hj-allow type="text" placeholder="npr. Kruh"
                            formControlName="name"
+                           [matAutocomplete]="auto"
                     >
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
             </div>
             <div class="col-md-3 col-sm-12">
@@ -29,7 +35,7 @@
                                 color: #0009;
                                 font-family: Roboto;
                                 font-size: 16px;">
-                    Cijena
+                     Cijena
                     <div style="display: inline"
                          *ngIf="searchForm.controls['priceMax'].value > 0 && searchForm.controls['priceMax'].value < 999; else inf">
                         <span> od 0 do {{ searchForm.controls['priceMax'].value }} kn </span>

@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {defaultPage, ItemFeature, SearchItem} from '../search-item';
 import {FormControl, FormGroup} from '@angular/forms';
-import {debounceTime, Observable, Subscription} from 'rxjs';
+import {debounceTime, flatMap, Observable, of, Subscription} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {map } from 'rxjs/operators';
 import {SearchItemService} from '../search-item.service';
@@ -33,9 +33,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     separatorKeysCodes: number[] = [ENTER, COMMA];
     displayFullSearchForm = true;
 
+    nameControl = new FormControl('');
+    public filteredOptions: Observable<string[]> = of([]);
+
     searchForm = new FormGroup(
         {
-            name: new FormControl(''),
+            name: this.nameControl,
             priceMIn: new FormControl(0),
             priceMax: new FormControl(0),
             featureControl: new FormControl({}),
@@ -60,6 +63,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 this.handleSearchFormValueChange(value);
             });
 
+        this.filteredOptions = this.nameControl.valueChanges.pipe(
+            debounceTime(500),
+            flatMap( value => this.filterName(value))
+        );
+
         const initData = new InitDataHelper(this.service);
         const subCategory = initData.allCategory.subscribe(categories => {
             this.categoryList = categories;
@@ -68,12 +76,20 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             this.storeList = stores;
         });
         this.subs.push(subCategory, subStore);
+
     }
 
     ngOnDestroy(): void {
         this.subs.forEach(el => el?.unsubscribe());
     }
 
+    private filterName(value: string): Observable<string[]> {
+        if (value === undefined || value == null || value.length < 2) {
+            return of([]);
+        }
+        const filterValue = value.toLowerCase();
+        return this.service.findAllItemNames(filterValue);
+    }
 
     handleSearchFormValueChange(value: any): void {
         if (value.name) {
