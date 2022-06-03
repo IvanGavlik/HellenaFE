@@ -103,6 +103,10 @@
     max-width: 95vw !important;
 }
 
+.mat-form-field-wrapper {
+    padding-bottom: 0em;
+}
+
 #category .mat-icon {
     color: #550acd;
 }

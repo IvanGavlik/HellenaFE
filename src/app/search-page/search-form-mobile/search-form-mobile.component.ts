@@ -60,11 +60,6 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
   constructor(private service: SearchItemService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.searchForm.valueChanges
-        .pipe(debounceTime(1000))
-        .subscribe(value => {
-          this.handleSearchFormValueChange(value);
-        });
 
     const initData = new InitDataHelper(this.service);
     const subCategory = initData.allCategory.subscribe(categories => {
@@ -75,8 +70,7 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
     });
 
     this.filteredOptions = this.nameControl.valueChanges.pipe(
-        debounceTime(500),
-         flatMap( value => this.filterName(value))
+        flatMap( value => this.filterName(value))
     );
 
     this.subs.push(subCategory, subStore);

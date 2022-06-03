@@ -19,6 +19,7 @@ export class StoreComponent {
 
   handleClean(): void {
     this.list.selectedOptions.clear();
+    this.dialogRef.close({event: 'Clean'});
   }
 
   handleConfirmation(): void {
