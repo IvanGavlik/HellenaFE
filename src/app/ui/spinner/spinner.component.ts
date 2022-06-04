@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnDestroy, OnInit, Optional} from '@angular/core';
 import {SpinnerConfig} from './spinner-config';
 import {of, Subscription} from 'rxjs';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -23,7 +23,7 @@ export class SpinnerComponent implements OnInit, OnDestroy {
   sub: Subscription = new Subscription();
 
   // when input comes from dialog
-  constructor(@Inject(MAT_DIALOG_DATA) public configuration: SpinnerConfig) {
+  constructor(@Optional() @Inject(MAT_DIALOG_DATA) public configuration: SpinnerConfig) {
   }
 
   ngOnInit(): void {
