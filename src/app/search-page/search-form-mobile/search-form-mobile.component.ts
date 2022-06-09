@@ -8,6 +8,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {CategoryComponent} from './category/category.component';
 import {InitDataHelper, Pair} from '../pair';
 import {StoreComponent} from './store/store.component';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'hellena-search-form-mobile',
@@ -54,7 +55,7 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
   // TODO locationList
   subs: Subscription[] = [];
 
-  constructor(private service: SearchItemService, private dialog: MatDialog) {}
+  constructor(private service: SearchItemService, public device: DeviceDetectorService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
 
@@ -149,5 +150,11 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
         this.searchForm.controls['storeControl'].setValue(result.data); // trigges value change
       }
     });
+  }
+
+  handleKeyPress($event: KeyboardEvent): void {
+    if (this.device.isMobile()) {
+      $event.stopPropagation();
+    }
   }
 }
