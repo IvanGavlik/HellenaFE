@@ -1,14 +1,14 @@
 <div #focus></div>
 <div *ngIf="this.device.isDesktop() || this.device.isTablet()"
-     class="container-fluid" style="margin-top:78px; padding-left: 0px !important; padding-right: 0px !important;">
+     class="container-fluid" style="z-index: 2; position: fixed; top: 79px; left: 0; background: white; padding-left: 0px !important; padding-right: 0px !important;">
     <hellena-search-form [search]="search" (searchEvent)="doSearch($event, true)"></hellena-search-form>
 </div>
-<div *ngIf="this.device.isMobile()" class="container-fluid" style="margin-top:78px; padding-left: 0px !important; padding-right: 0px !important;" >
+<div *ngIf="this.device.isMobile()" class="container-fluid" style="z-index: 2; position: fixed; top: 72px; left: 0; background: white; padding-left: 0px; padding-left: 0px !important; padding-right: 0px !important;" >
     <hellena-search-form-mobile [search]="search" (searchEvent)="doSearch($event, true)"> </hellena-search-form-mobile>
 </div>
 
 <section>
-    <div class="container" >
+    <div class="container" style="position: relative; margin-top: 200px; z-index: 1" >
         <div class="row" >
             <div class="col-12">
                 <mat-tab-group mat-align-tabs="center" mat-stretch-tabs animationDuration="1500ms" >

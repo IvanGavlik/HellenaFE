@@ -94,7 +94,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     this.search = search;
     const dialog = this.spinnerService.openSpinnerDialog();
-    dialog.afterClosed().subscribe(el => window.scroll({top: 0, left: 0, behavior: 'smooth'}) );
+//    dialog.afterClosed().subscribe(el => window.scroll({top: 0, left: 0, behavior: 'smooth'}) );
+    dialog.afterClosed().subscribe(el => this.focus.nativeElement.scrollIntoView({block: 'end', inline: 'end', behavior: 'smooth'}) );
     this.searchItemService.search(search)
         .pipe(
             tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['name', 'actions'] } as Table;  }),
