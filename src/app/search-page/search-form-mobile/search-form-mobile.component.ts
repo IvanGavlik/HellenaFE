@@ -36,13 +36,10 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   displayFullSearchForm = true;
 
-  nameControl = new FormControl('');
-  public filteredOptions: Observable<string[]> = of([]);
-
   // TODO refactor do I need all this components
   searchForm = new FormGroup(
       {
-        name: this.nameControl,
+        name: new FormControl(''),
         priceMIn: new FormControl(0),
         priceMax: new FormControl(0),
         featureControl: new FormControl({}),
@@ -69,23 +66,11 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
       this.storeList = stores;
     });
 
-    this.filteredOptions = this.nameControl.valueChanges.pipe(
-        flatMap( value => this.filterName(value))
-    );
-
     this.subs.push(subCategory, subStore);
   }
 
   ngOnDestroy(): void {
     this.subs.forEach(el => el?.unsubscribe());
-  }
-
-  private filterName(value: string): Observable<string[]> {
-    if (value === undefined || value == null || value.length < 2) {
-      return of([]);
-    }
-    const filterValue = value.toLowerCase();
-    return this.service.findAllItemNames(filterValue);
   }
 
   handleSearchFormValueChange(value: any): void {
