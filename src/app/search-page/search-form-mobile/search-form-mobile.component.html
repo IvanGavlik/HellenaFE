@@ -38,7 +38,7 @@
                 </mat-label>
             </div>
             <div class="col-md-2 col-sm-12 mobi-margin">
-                <button id="category" mat-stroked-button class="button-test" (click)="handleCategory($event)" >
+                <button id="category" #cat mat-stroked-button class="button-test" (click)="handleCategory($event)" >
                     Kategorija
                     <mat-icon *ngIf="this.searchForm.controls['categoryControl'].value.length > 0" >plus_one</mat-icon>
                 </button>
