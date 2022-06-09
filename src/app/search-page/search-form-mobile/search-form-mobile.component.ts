@@ -9,6 +9,7 @@ import {CategoryComponent} from './category/category.component';
 import {InitDataHelper, Pair} from '../pair';
 import {StoreComponent} from './store/store.component';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import {$e} from 'codelyzer/angular/styles/chars';
 
 @Component({
   selector: 'hellena-search-form-mobile',
@@ -155,8 +156,9 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
   }
 
   handleKeyPress($event: KeyboardEvent): void {
-    if (this.device.isMobile()) {
-      $event.stopPropagation();
+    console.log('event ', event);
+    if (this.device.isMobile() && $event.key === 'Enter') {
+      $event.preventDefault();
     }
   }
 }
