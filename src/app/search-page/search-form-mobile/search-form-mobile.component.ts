@@ -50,7 +50,6 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
       });
 
   @ViewChild('featureSelect') featureSelect: ElementRef<HTMLSelectElement> = {} as ElementRef;
-  @ViewChild('cat') cat: ElementRef<HTMLButtonElement> = {} as ElementRef;
 
   features: Pair<ItemFeature, string>[] = [ { id: ItemFeature.ALL, value: 'Sve', selected: false }, { id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas', selected: false } as Pair<ItemFeature, string> ];
   categoryList: Pair<number, string>[] = [];
@@ -104,7 +103,7 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
   }
 
   handleCategory($event: any): void {
-    console.log('event', $event);
+    console.log('handleCategory event', $event);
     if ($event.buttons !== 1) {
       return;
     }
@@ -158,13 +157,11 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
   }
 
   handleKeyPress($event: KeyboardEvent): void {
-    console.log('event ', event);
+    console.log('handleKeyPress event ', event);
     if (this.device.isMobile() && $event.key === 'Enter') {
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur();
         document.activeElement.focus();
-        this.cat.nativeElement.blur();
-        this.cat.nativeElement.focus();
       }
       $event.preventDefault();
     }
