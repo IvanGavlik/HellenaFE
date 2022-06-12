@@ -157,8 +157,9 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
   }
 
   handleKeyPress($event: KeyboardEvent): void {
-    console.log('handleKeyPress event ', event);
-    if (this.device.isMobile() && $event.key === 'Enter') {
+    console.log('handleKeyPress event ', $event);
+    console.log('is input', $event.target instanceof HTMLInputElement);
+    if (this.device.isMobile() && $event.key === 'Enter' && $event.target instanceof HTMLInputElement) {
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur();
         document.activeElement.focus();
