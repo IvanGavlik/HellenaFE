@@ -103,12 +103,6 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
   }
 
   handleCategory($event: any): void {
-    console.log('handleCategory event', $event);
-    if ($event.buttons !== 1) {
-      return;
-    }
-    console.log('event passed');
-
     // restore selected info from searchItem input
     this.categoryList.forEach(el => {
       const isSelected = this.searchItem.categoryIds.find(item => el.id === item);
