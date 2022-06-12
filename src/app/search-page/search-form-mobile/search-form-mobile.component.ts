@@ -120,6 +120,7 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
     dialog.afterClosed().subscribe(result => {
       if (result.event === 'Close') {
         this.searchForm.controls['categoryControl'].setValue(result.data); // trigges value change
+        this.searchItem.categoryIds = result.data;
       }
     });
   }
@@ -146,6 +147,7 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
     dialog.afterClosed().subscribe(result => {
       if (result.event === 'Close') {
         this.searchForm.controls['storeControl'].setValue(result.data); // trigges value change
+        this.searchItem.storeIds = result.data;
       }
     });
   }
