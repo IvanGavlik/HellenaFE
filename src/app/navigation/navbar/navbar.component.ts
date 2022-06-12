@@ -3,6 +3,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {ShoppingListComponent} from '../../shopping-list/shopping-list/shopping-list.component';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import {MatDialogRef} from '@angular/material/dialog/dialog-ref';
 
 @Component({
   selector: 'hellena-navbar',
@@ -15,6 +16,7 @@ export class NavbarComponent implements OnInit {
   title = '';
 
   isOpened = false;
+  dialogRef = {} as MatDialogRef<ShoppingListComponent>;
 
   constructor(private router: Router, private dialog: MatDialog, private deviceService: DeviceDetectorService) { }
 
@@ -23,6 +25,8 @@ export class NavbarComponent implements OnInit {
 
   handleNavigationClickShoppingCart(): void {
     if (this.isOpened) {
+      this.dialogRef.close();
+      this.isOpened = false;
       return;
     }
     const config = {} as MatDialogConfig;
@@ -32,24 +36,37 @@ export class NavbarComponent implements OnInit {
       config.width = '100%';
     }
     config.height = '100%';
-    const dialog = this.dialog.open(ShoppingListComponent, config);
-    dialog.updatePosition({ top: '100px', right: '0px' }  );
+    this.dialogRef = this.dialog.open(ShoppingListComponent, config);
+    this.dialogRef.updatePosition({ top: '100px', right: '0px' }  );
     this.isOpened = true;
 
-    dialog.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe(result => {
         this.isOpened = false;
     });
+
   }
 
   handleNavigationClickSearch(): void {
+    if (this.isOpened) {
+      this.dialogRef.close();
+      this.isOpened = false;
+    }
     this.router.navigateByUrl('/search');
   }
 
   handleNavigationClickAboutUs(): void {
+    if (this.isOpened) {
+      this.dialogRef.close();
+      this.isOpened = false;
+    }
     this.router.navigateByUrl('/about-us');
   }
 
   handleNavigationClickHome(): void {
+    if (this.isOpened) {
+      this.dialogRef.close();
+      this.isOpened = false;
+    }
     this.router.navigateByUrl('/index');
   }
 }
