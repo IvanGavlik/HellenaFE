@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, V
 import {defaultPage, ItemFeature, SearchItem} from '../search-item';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {FormControl, FormGroup} from '@angular/forms';
-import {debounceTime, flatMap, Observable, of, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {SearchItemService} from '../search-item.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {CategoryComponent} from './category/category.component';
@@ -100,7 +100,6 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
       search.feature = value.featureControl;
     }
 
-    this.searchItem = search;
     this.searchEvent.emit( search );
   }
 
@@ -122,7 +121,6 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
     dialog.afterClosed().subscribe(result => {
       if (result.event === 'Close') {
         this.searchForm.controls['categoryControl'].setValue(result.data); // trigges value change
-        this.searchItem.categoryIds = result.data;
       }
     });
   }
@@ -149,13 +147,11 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
     dialog.afterClosed().subscribe(result => {
       if (result.event === 'Close') {
         this.searchForm.controls['storeControl'].setValue(result.data); // trigges value change
-        this.searchItem.storeIds = result.data;
       }
     });
   }
 
   handleKeyPress($event: KeyboardEvent): void {
-    console.log('handleKeyPress event ', $event);
     if (this.device.isMobile() && $event.key === 'Enter' && $event.target instanceof HTMLInputElement) {
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur();
