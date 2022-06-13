@@ -407,6 +407,9 @@ tr.mat-footer-row {
     width: 60px;
 }
 
+.top {
+    margin-top: 200px;
+}
 
 /* Responsive layout - makes a one column-layout instead of two-column layout */
 
@@ -468,6 +471,9 @@ tr.mat-footer-row {
     }
     .mat-slider {
         padding: 8px;
+    }
+    .top {
+        margin-top: 115px;
     }
 }
 
@@ -547,3 +553,4 @@ tr.mat-footer-row {
     font-weight: bold;
     margin-top: 10px;
 }
+

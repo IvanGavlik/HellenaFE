@@ -30,8 +30,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     @Output()
     searchEvent = new EventEmitter<SearchItem>();
 
+    public displayFullSearchForm = true;
     separatorKeysCodes: number[] = [ENTER, COMMA];
-    displayFullSearchForm = true;
 
     nameControl = new FormControl('');
     public filteredOptions: Observable<string[]> = of([]);
