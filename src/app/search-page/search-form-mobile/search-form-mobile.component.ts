@@ -9,7 +9,6 @@ import {CategoryComponent} from './category/category.component';
 import {InitDataHelper, Pair} from '../pair';
 import {StoreComponent} from './store/store.component';
 import {DeviceDetectorService} from 'ngx-device-detector';
-import {$e} from 'codelyzer/angular/styles/chars';
 
 @Component({
   selector: 'hellena-search-form-mobile',
@@ -35,8 +34,11 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
   @Output()
   searchEvent = new EventEmitter<SearchItem>();
 
+  @Output()
+  expandedForm = new EventEmitter<boolean>();
+  displayFullSearchForm = true; // TODO REACTOR USE ONLY expandedForm
+
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  displayFullSearchForm = true;
 
   // TODO refactor do I need all this components
   searchForm = new FormGroup(
@@ -154,7 +156,6 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
 
   handleKeyPress($event: KeyboardEvent): void {
     console.log('handleKeyPress event ', $event);
-    console.log('is input', $event.target instanceof HTMLInputElement);
     if (this.device.isMobile() && $event.key === 'Enter' && $event.target instanceof HTMLInputElement) {
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur();
@@ -162,5 +163,10 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
       }
       $event.preventDefault();
     }
+  }
+
+  handleExpand(isExpand: boolean): void {
+    this.displayFullSearchForm = isExpand;
+    this.expandedForm.emit(this.displayFullSearchForm);
   }
 }

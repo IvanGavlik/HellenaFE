@@ -30,7 +30,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     @Output()
     searchEvent = new EventEmitter<SearchItem>();
 
-    public displayFullSearchForm = true;
+    @Output()
+    expandedForm = new EventEmitter<boolean>();
+    displayFullSearchForm = true; // TODO REACTOR USE ONLY expandedForm
+
     separatorKeysCodes: number[] = [ENTER, COMMA];
 
     nameControl = new FormControl('');
@@ -94,6 +97,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     handleSearchFormValueChange(value: any): void {
         if (value.name) {
             this.displayFullSearchForm = true;
+            this.expandedForm.emit(this.displayFullSearchForm);
         }
 
         const search =  {
@@ -113,6 +117,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         }
 
         this.searchEvent.emit( search );
+    }
+
+    handleExpand(isExpand: boolean): void {
+        this.displayFullSearchForm = isExpand;
+        this.expandedForm.emit(this.displayFullSearchForm);
     }
 
 }

@@ -80,13 +80,13 @@
         <div class="row">
             <div class="col-12">
                 <div *ngIf="displayFullSearchForm" style="text-align: center">
-                    <button (click)="displayFullSearchForm=false" mat-button
+                    <button (click)="handleExpand(false)" mat-button
                             style="margin-top: -2px; background: #550ACD">
                         <mat-icon style="color: white">expand_less</mat-icon>
                     </button>
                 </div>
                 <div *ngIf="!displayFullSearchForm" style="text-align: center">
-                    <button (click)="displayFullSearchForm=true" mat-button
+                    <button (click)="handleExpand(true)" mat-button
                             style="margin-top: -2px; background: #550ACD">
                         <mat-icon style="color: white">expand_more</mat-icon>
                     </button>

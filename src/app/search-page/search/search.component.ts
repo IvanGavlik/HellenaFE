@@ -46,6 +46,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   });
 
+  isFormExpanded = true; // default is true
+
   @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
 
   @ViewChild('focus') focus = {} as ElementRef;
@@ -184,4 +186,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     this.doSearch(this.search, false);
   }
+
+    handleExpandForm($event: boolean): void {
+      this.isFormExpanded = $event;
+    }
 }
