@@ -1,10 +1,10 @@
 .mat-table {
     overflow: auto;
-    max-height: 500px;
+    max-height: 65vh;
 }
 
 .mat-row .mat-cell {
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid #8001D9;
 }
 
 .mat-row:hover .mat-cell {
@@ -76,7 +76,6 @@ th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:
     .mat-row {
         flex-direction: column;
         align-items: start;
-        padding: 8px 24px;
     }
     th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
         padding-left: 0.2rem !important;

@@ -17,16 +17,12 @@
                 <span class="font-large">{{ element.name }} </span>
                 <br>
                 <span class="font-large blue-text"
-                      *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"> {{ element.actionPrice }}>
+                      *ngIf="element?.originalPrice === undefined || element?.originalPrice == null; else allInfo"> {{ element.actionPrice }}
                     kn
                 </span>
                 <ng-template #allInfo>
                     <span class="medium-grey move-right through-text"> {{ element.originalPrice }}  kn </span>
                     <span class="move-right large-blue"> {{ element.actionPrice }}  kn </span>
-                    <br>
-                    <span class="medium-grey">
-                    Ušteda {{ (element.originalPrice - element.actionPrice)  | number : '1.2-2' }}  kn
-                    </span>
                 </ng-template>
                 <br>
                 <span class="small-ellipsis-text"> Vrijedi do {{ element.activeTo | date: 'dd.MM.' }}
@@ -70,8 +66,8 @@
             </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="table.columnNames"></tr>
-        <tr mat-row *matRowDef="let row; columns: table.columnNames" class="gx-0"
+        <tr mat-header-row *matHeaderRowDef="table.columnNames; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: table.columnNames" class="gy-1"
             [ngClass]="row.isPurchased ? 'green' :''"></tr>
     </table>
 
