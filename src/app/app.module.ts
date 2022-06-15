@@ -8,9 +8,10 @@ import {FooterModule} from './footer/footer.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
     imports: [
         NavigationModule,
