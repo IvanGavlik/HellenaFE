@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CardContainer} from '../../ui/card-container/card-container';
+import {MatDialog} from '@angular/material/dialog';
+import {MobAppPromotionDialogComponent} from '../mob-app-promotion-dialog/mob-app-promotion-dialog.component';
 
 
 @Component({
@@ -14,11 +16,10 @@ export class FrontPageComponent implements OnInit {
     footer: 'Pogledaj sve'
   };
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.dialog.open(MobAppPromotionDialogComponent, {disableClose: true});
   }
-
-
 
 }
