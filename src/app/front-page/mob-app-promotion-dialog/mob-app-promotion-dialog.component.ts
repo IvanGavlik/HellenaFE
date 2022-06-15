@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { MatDialogRef} from '@angular/material/dialog';
+import {LocalStorageService} from '../../local-storage/local-storage.service';
 
 @Component({
   selector: 'hellena-mob-app-promotion-dialog',
@@ -8,9 +9,14 @@ import { MatDialogRef} from '@angular/material/dialog';
 })
 export class MobAppPromotionDialogComponent {
 
-  constructor(public dialogRef: MatDialogRef<MobAppPromotionDialogComponent>) {}
+  isSeen: string | null = 'N';
+  private key = 'isSeen';
+
+  constructor(public dialogRef: MatDialogRef<MobAppPromotionDialogComponent>, private service: LocalStorageService) {}
 
   handleClean(): void {
+    this.service.removeItem(this.key);
+    this.service.addItem(this.key, 'Y');
     this.dialogRef.close();
   }
 
