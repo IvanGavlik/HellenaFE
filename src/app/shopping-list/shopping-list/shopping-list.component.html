@@ -1,7 +1,7 @@
 <div class="top" >
-    <h1 mat-dialog-title class="pink-text" >Popis za kupovinu</h1>
+    <h1 mat-dialog-title class="pink-text mat-elevation-z1" style="padding: 0.2rem" >Popis za kupovinu</h1>
 
-    <mat-dialog-content class="mat-typography" style="overflow: hidden; display: contents" >
+    <mat-dialog-content class="mat-typography" style="overflow-y: scroll; overflow-x: hidden" >
         <hellena-shopping-list-table
                 [table]="table"
                 (clear)="handleClear()"
@@ -16,8 +16,8 @@
 
 
     <mat-dialog-actions align="end">
-        <div class="viewBtn">
-            <button class="addCart" mat-button mat-dialog-close>Zatvori</button>
+        <div>
+            <button class="mat-elevation-z1" mat-button mat-dialog-close>Zatvori</button>
         </div>
     </mat-dialog-actions>
 

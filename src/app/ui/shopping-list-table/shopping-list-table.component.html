@@ -1,5 +1,5 @@
 <ng-container *ngIf="table">
-    <table mat-table [dataSource]="table.data" class="mat-elevation-z8 full-width-table">
+    <table mat-table [dataSource]="table.data" class="full-width-table">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef class="mobile-size">
                 <ng-container *ngIf="table.data.length > 0 else noData">
