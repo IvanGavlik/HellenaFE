@@ -37,6 +37,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * angular.json (offical doc) see best practices and implement options
 * docker image is not working on local machine problem nginx configuration root url access like search for angular
 
+## update app version
+* https://medium.com/@tolvaly.zs/how-to-version-number-angular-6-applications-4436c03a3bd3
+
 ## publish to Heroku
 
 Steps

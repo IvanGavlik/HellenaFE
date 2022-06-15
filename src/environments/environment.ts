@@ -6,7 +6,8 @@ export const environment = {
   production: false,
 //  host: 'http://localhost:8080',
   host: 'https://mysterious-dusk-84277.herokuapp.com',
-  version1: '/v1'
+  version1: '/v1',
+  appVersion: require('../../package.json').version
 };
 
 /*
