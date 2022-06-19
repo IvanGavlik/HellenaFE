@@ -34,13 +34,13 @@ export class AboutUsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.msg === undefined || this.msg.from === null || this.msg.from === ''
-        || this.msg.body === undefined || this.msg.body == null || this.msg.body === '') {
-      const dialog = this.dialogService.openHellenaDialog({
+    if (!this.msg || !this.msg.from || !this.msg.body) {
+      const conf = {
         title: 'Pošalji poruku autoru',
         content: 'Email ili poruka nedostaje',
         onOF: false,
-      } as Dialog)
+      } as Dialog;
+      const dialog = this.dialogService.openHellenaDialog(conf)
           .subscribe(res => {});
       this.subs.push(dialog);
       return;
@@ -48,25 +48,33 @@ export class AboutUsComponent implements OnInit, OnDestroy {
 
     this.msg.to = 'help@hellena.info';
     this.msg.header = 'Pošalji poruku autoru';
-    const save = this.service.save(this.msg).subscribe(el => {
-      this.msg.body = '';
-      this.msg.from = '';
-      const dialog = this.dialogService.openHellenaDialog({
-        title: 'Pošalji poruku autoru',
-        content: 'Poruka poslana',
-        onOF: false,
-      } as Dialog)
-          .subscribe(res => {});
-      this.subs.push(dialog);
-      }, error => {
-      const dialog = this.dialogService.openHellenaDialog({
-        title: 'Pošalji poruku autoru',
-        content: 'Poruka nije poslana',
-        onOF: false,
-      } as Dialog)
-          .subscribe(res => {});
-    });
+    const save = this.service.save(this.msg).subscribe(
+        el => this.handleOk()
+      , error => this.handleError());
     this.subs.push(save);
+  }
+
+  handleOk(): void {
+    this.msg.body = '';
+    this.msg.from = '';
+    const dialog = this.dialogService.openHellenaDialog({
+      title: 'Pošalji poruku autoru',
+      content: 'Poruka poslana',
+      onOF: false,
+    } as Dialog)
+        .subscribe(res => {});
+    this.subs.push(dialog);
+  }
+
+  handleError(): void {
+    const conf = {
+      title: 'Pošalji poruku autoru',
+      content: 'Poruka nije poslana',
+      onOF: false,
+    } as Dialog;
+    const dialog = this.dialogService.openHellenaDialog(conf)
+        .subscribe(res => {});
+    this.subs.push(dialog);
   }
 }
 

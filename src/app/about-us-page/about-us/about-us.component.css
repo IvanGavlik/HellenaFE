@@ -1,5 +1,8 @@
 .aboutSection{
     margin-top: 100px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
 }
 
 .sideImage {
@@ -28,7 +31,6 @@
 }
 
 .contentSide h1 {
-    font-style: normal;
     font-weight: 700;
     font-size: 33px;
     line-height: 41px;
@@ -63,9 +65,6 @@
 }
 
 .contentDetails p {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 23px;
     line-height: 34px;
     text-align: left;
@@ -77,8 +76,6 @@
 }
 
 .aboutDetail h1{
-    font-family: Roboto;
-    font-style: normal;
     font-weight: 600;
     font-size: 35px;
     line-height: 54px;
@@ -86,9 +83,6 @@
 }
 
 .aboutDetail p{
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 22px;
     line-height: 25px;
     text-align: left;
@@ -96,9 +90,6 @@
 }
 
 .aboutDetail ol li{
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 22px;
     line-height: 25px;
     text-align: left;
@@ -114,8 +105,17 @@
 }
 
 .feedbackForm {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
     background: linear-gradient(106.88deg, #550ACD 23.61%, #8001D9 74.15%);
     padding: 35px 0px;
+}
+
+.feedbackForm .inputForm {
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
 .feedbackForm .inputForm input {
@@ -139,9 +139,6 @@
 .feedbackForm .inputForm button {
     padding: 15px 50px;
     background-color: #fff;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 26px;
     line-height: 26px;
     text-align: left;
@@ -149,21 +146,15 @@
 }
 
 .feedback h1 {
-    font-family: Roboto;
-    font-style: normal;
     font-weight: 500;
     font-size: 46px;
     line-height: 80px;
-    text-align: left;
     color: #FFFFFF;
     text-align: center;
     margin-bottom: 15px;
 }
 
 .feedbackForm .inputForm label {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 28px;
     line-height: 30px;
     text-align: left;
