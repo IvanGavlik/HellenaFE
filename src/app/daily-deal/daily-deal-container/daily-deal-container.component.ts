@@ -84,6 +84,7 @@ export class DailyDealContainerComponent implements OnInit {
 
   setImage(card: ItemSearchEntity): void {
       card.img = this.cld.image(card.imageName);
+      card.imgItem = card.imageName;
   }
 
   handleFooterActionContainer(): void {
@@ -106,6 +107,14 @@ export class DailyDealContainerComponent implements OnInit {
         page: defaultPage()
       } as SearchItem });
   }
+
+    iscldImg(store: string): boolean {
+        if (store === 'LIDL' || store ===  'INTERSPAR') {
+            return true;
+        }
+        return false;
+    }
+
 }
 
 
@@ -118,5 +127,6 @@ interface ItemSearchEntity extends Entity {
   activeFrom: Date;
   activeTo: Date;
   img: CloudinaryImage;
+  imgItem: string;
   storeLogo: string;
 }

@@ -22,4 +22,11 @@ export class SearchResultBoxComponent implements OnInit {
   handleFooterActionCard(item: TableItem): void {
     this.addToShoppingChart.emit(item);
   }
+
+  iscldImg(store: string): boolean {
+    if (store === 'LIDL' || store ===  'INTERSPAR') {
+      return true;
+    }
+    return false;
+  }
 }

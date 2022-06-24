@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-changelog',
+  selector: 'hellena-changelog',
   templateUrl: './changelog.component.html',
   styleUrls: ['./changelog.component.css']
 })

@@ -16,4 +16,5 @@ export interface TableItem {
     activeFrom?: Date;
     activeTo?: Date;
     img: CloudinaryImage;
+    imgItem: string;
 }

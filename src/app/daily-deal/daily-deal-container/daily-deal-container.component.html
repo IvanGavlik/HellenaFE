@@ -20,7 +20,8 @@
                             <div class="card" style="width: 97%;">
                                 <div class="card-body">
                                     <h5 class="price"> {{ item.actionPrice }} kn<span> {{ item.orginalPrice }} kn</span></h5>
-                                    <advanced-image [cldImg]="item.img" ></advanced-image>
+                                    <advanced-image *ngIf="iscldImg(item.storeName)"[cldImg]="item.img" ></advanced-image>
+                                    <img *ngIf="!iscldImg(item.storeName)" [src]="item.imgItem"  style="width: 150px; height: 150px"  >
                                     <p class="card-text"> {{ item.name }}
                                         <span style="font-family:Roboto; font-weight: lighter; font-size: 0.9rem; text-align: right" > <br> od {{ item?.activeFrom | date:"dd.MM."  }} do {{ item?.activeTo | date:"dd.MM." }} </span>
                                         <span style="font-family:Roboto; font-weight: lighter; font-size: 1rem; text-align: right" > <br> {{ item.storeName }} </span>
