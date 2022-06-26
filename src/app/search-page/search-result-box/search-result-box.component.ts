@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TableItem} from '../../ui/table/table';
 import {DomSanitizer} from '@angular/platform-browser';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'hellena-search-result-box',
@@ -15,7 +16,7 @@ export class SearchResultBoxComponent implements OnInit {
   @Output()
   addToShoppingChart: EventEmitter<TableItem> = new EventEmitter<TableItem>();
 
-  constructor(public sanitizer: DomSanitizer) { }
+  constructor(public sanitizer: DomSanitizer, public deviceService: DeviceDetectorService ) { }
 
   ngOnInit(): void { }
 

@@ -14,6 +14,7 @@ import {ItemSearchEntity} from '../item-search-entity';
 import {SpinnerServiceService} from '../../ui/spinner/spinner-service.service';
 import {Cloudinary} from '@cloudinary/url-gen';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import {thumbnail} from '@cloudinary/url-gen/actions/resize';
 
 
 @Component({
@@ -114,7 +115,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   toTableItem(el: ItemSearchEntity): TableItem {
-    return {
+    return  {
       id: el.id,
       name: el.name,
       actionPrice: el.actionPrice,
@@ -122,7 +123,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       store: el.storeName,
       activeFrom: el.activeFrom,
       activeTo: el.activeTo,
-      img: this.cld.image(el.imageName),
+      img: this.cld.image(el.imageName).resize(thumbnail().width(150)),
       imgItem: el.imageName,
     } as TableItem;
   }
