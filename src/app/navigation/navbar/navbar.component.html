@@ -12,7 +12,8 @@ color: #fff;" href="#">Hellena</a>
           <button mat-button class="white-icon" (click)="handleNavigationClickAboutUs()"  >
               <mat-icon>business</mat-icon>
           </button>
-          <button mat-button (click)="handleNavigationClickSearch()" >
+          <input type="text" data-hj-allow  placeholder="npr. Kruh" >
+          <button id="nav-button" style="background: transparent; height: 50px; margin-left: -65px;; border: none!important;"  mat-stroked-button (click)="handleNavigationClickSearch()" >
               <mat-icon class="white-icon">search</mat-icon>
           </button>
           <button mat-button  (click)="handleNavigationClickShoppingCart()" >

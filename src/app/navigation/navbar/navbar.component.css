@@ -47,3 +47,22 @@ color: #FFFFFF;
 .example-spacer {
     flex: 1 1 auto;
 }
+
+input {
+    width: 90%;
+    background: rgba(176, 176, 176, 0.61);
+    padding: 8px 12px;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+}
+
+input::placeholder {
+    font-weight: bold;
+    color: white;
+    opacity: 1; /* Firefox */
+}
