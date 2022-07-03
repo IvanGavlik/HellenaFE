@@ -9,10 +9,14 @@ import {ShoppingListModule} from '../shopping-list/shopping-list.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { NavbarDesktopComponent } from './navbar-desktop/navbar-desktop.component';
+import { NavbarMobileComponent } from './navbar-mobile/navbar-mobile.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
+    NavbarDesktopComponent,
+    NavbarMobileComponent,
   ],
     imports: [
         CommonModule,
