@@ -3,10 +3,8 @@ import {defaultPage, ItemFeature, SearchItem} from '../search-item';
 import {FormControl, FormGroup} from '@angular/forms';
 import {debounceTime, flatMap, Observable, of, Subscription} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {map } from 'rxjs/operators';
-import {SearchItemService} from '../search-item.service';
-import {Entity} from '../../crud/entity';
 import {InitDataHelper, Pair} from '../pair';
+import {SearchItemService} from '../search-item.service';
 
 
 @Component({
@@ -23,25 +21,17 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     }
     @Input() set search(searchItem: SearchItem) {
         this.searchItem = searchItem;
-        const name = 'name';
-        this.searchForm.controls[name].setValue(searchItem?.name);
     }
 
     @Output()
     searchEvent = new EventEmitter<SearchItem>();
 
-    @Output()
-    expandedForm = new EventEmitter<boolean>();
-    displayFullSearchForm = true; // TODO REACTOR USE ONLY expandedForm
-
     separatorKeysCodes: number[] = [ENTER, COMMA];
 
-    nameControl = new FormControl('');
     public filteredOptions: Observable<string[]> = of([]);
 
     searchForm = new FormGroup(
         {
-            name: this.nameControl,
             priceMIn: new FormControl(0),
             priceMax: new FormControl(0),
             featureControl: new FormControl({}),
@@ -66,11 +56,6 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 this.handleSearchFormValueChange(value);
             });
 
-        this.filteredOptions = this.nameControl.valueChanges.pipe(
-            debounceTime(500),
-            flatMap( value => this.filterName(value))
-        );
-
         const initData = new InitDataHelper(this.service);
         const subCategory = initData.allCategory.subscribe(categories => {
             this.categoryList = categories;
@@ -86,20 +71,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.subs.forEach(el => el?.unsubscribe());
     }
 
-    private filterName(value: string): Observable<string[]> {
-        if (value === undefined || value == null || value.length < 2) {
-            return of([]);
-        }
-        const filterValue = value.toLowerCase();
-        return this.service.findAllItemNames(filterValue);
-    }
-
     handleSearchFormValueChange(value: any): void {
-        if (value.name) {
-            this.displayFullSearchForm = true;
-            this.expandedForm.emit(this.displayFullSearchForm);
-        }
-
         const search =  {
             priceMIn: value.priceMIn,
             priceMax: value.priceMax,
@@ -109,19 +81,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             page : defaultPage()
         } as SearchItem;
 
-        if (value.name) {
-            search.name = value.name;
-        }
         if (value.featureControl && value.featureControl.length > 0 && value.featureControl !== ItemFeature.ALL) {
             search.feature = value.featureControl;
         }
 
         this.searchEvent.emit( search );
-    }
-
-    handleExpand(isExpand: boolean): void {
-        this.displayFullSearchForm = isExpand;
-        this.expandedForm.emit(this.displayFullSearchForm);
     }
 
 }

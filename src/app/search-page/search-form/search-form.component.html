@@ -1,28 +1,13 @@
 <div class="container">
     <form [formGroup]="searchForm">
-        <div class="row" *ngIf="displayFullSearchForm" id="filter"
-             style="border: 2px solid #550ACD; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
-            <div class="col-md-3 col-sm-12">
-                <mat-form-field appearance="outline" style="width: 100%;">
-                    <mat-label>Pretraži</mat-label>
-                    <input matInput data-hj-allow type="text" placeholder="npr. Kruh"
-                           formControlName="name"
-                           [matAutocomplete]="auto"
-                    >
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                            {{option}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
-            </div>
-            <div class="col-md-3 col-sm-12">
+        <div class="row" id="filter">
+            <div class="col-12">
                 <mat-slider
                         formControlName="priceMax"
                         style="vertical-align: bottom !important;
                             height: auto;
                             width: 100%;
-                            padding: 0;"
+                            padding: 6px;"
                         thumbLabel
                         tickInterval="1"
                         step="25"
@@ -43,10 +28,10 @@
                     <ng-template #inf><span> &#8734; kn </span></ng-template>
                 </mat-label>
             </div>
-            <div class="col-md-2 col-sm-12 mobi-margin">
+            <div class="col-12" style="margin-top: 1rem" >
                 <mat-form-field appearance="outline" style="width: 100%;">
                     <mat-label>Kategorija</mat-label>
-                    <mat-select formControlName="categoryControl" multiple>
+                    <mat-select formControlName="categoryControl" multiple  >
                         <mat-option *ngFor="let category of categoryList"
                                     [value]="category.id" >
                             {{ category.value  }}
@@ -54,7 +39,7 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="col-md-2 col-sm-12">
+            <div class="col-12">
                 <mat-form-field appearance="outline" style="width: 100%;">
                     <mat-label>Trgovina</mat-label>
                     <mat-select  formControlName="storeControl" multiple>
@@ -65,8 +50,8 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="col-md-2 col-sm-12">
-                <mat-form-field appearance="outline" style="width: 98%">
+            <div class="col-12">
+                <mat-form-field appearance="outline" style="width: 100%">
                     <mat-label> Prikaži</mat-label>
                     <mat-select formControlName="featureControl" #featureSelect>
                         <mat-option *ngFor="let f of features" [value]="f.id">
@@ -76,21 +61,13 @@
                 </mat-form-field>
             </div>
 
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div *ngIf="displayFullSearchForm" style="text-align: center">
-                    <button (click)="handleExpand(false)" mat-button
-                            style="margin-top: -2px; background: #550ACD">
-                        <mat-icon style="color: white">expand_less</mat-icon>
-                    </button>
-                </div>
-                <div *ngIf="!displayFullSearchForm" style="text-align: center">
-                    <button (click)="handleExpand(true)" mat-button
-                            style="margin-top: -2px; background: #550ACD">
-                        <mat-icon style="color: white">expand_more</mat-icon>
-                    </button>
-                </div>
+            <div class="col-12" style="padding-bottom: .3rem" >
+                <button id="submit" mat-stroked-button
+                        class="button-test" style="color: #8001D9; border: 1px solid #8001D9"
+                        type="submit"
+                        (click)="handleSearchFormValueChange(searchForm.value);" >
+                    Pretraži
+                </button>
             </div>
         </div>
     </form>

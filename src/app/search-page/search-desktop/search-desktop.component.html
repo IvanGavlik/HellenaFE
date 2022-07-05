@@ -2,7 +2,14 @@
 <section>
     <div class="container"  style="position: relative; z-index: 1;" >
         <div class="row" >
-            <div class="col-12">
+            <div class="col-3" >
+                <hellena-search-form
+                    [search]="this.search"
+                    (searchEvent)="doSearch($event, true)"
+                >
+                </hellena-search-form>
+            </div>
+            <div class="col-9">
                 <mat-tab-group mat-align-tabs="center" mat-stretch-tabs animationDuration="1500ms" >
                     <mat-tab>
                         <ng-template mat-tab-label>
