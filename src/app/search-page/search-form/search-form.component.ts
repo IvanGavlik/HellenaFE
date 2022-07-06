@@ -6,7 +6,6 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {InitDataHelper, Pair} from '../pair';
 import {SearchItemService} from '../search-item.service';
 
-
 @Component({
     selector: 'hellena-search-form',
     templateUrl: './search-form.component.html',
@@ -34,10 +33,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         {
             priceMIn: new FormControl(0),
             priceMax: new FormControl(0),
-            featureControl: new FormControl({}),
-            categoryControl: new FormControl([]),
+   //         featureControl: new FormControl({}),
             locationControl: new FormControl([]),
-            storeControl: new FormControl([])
+    //        storeControl: new FormControl([])
         });
 
     @ViewChild('featureSelect') featureSelect: ElementRef<HTMLSelectElement> = {} as ElementRef;
@@ -75,18 +73,22 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         const search =  {
             priceMIn: value.priceMIn,
             priceMax: value.priceMax,
-            categoryIds: value?.categoryControl,
+     //       categoryIds: value?.categoryControl,
+                   categoryIds: [],
+
             cityIds: (value?.locationControl as Pair<any, any>[]).map(el => el.id),
-            storeIds: value?.storeControl,
+   //         storeIds: value?.storeControl,
+                     storeIds: [],
+
             page : defaultPage()
         } as SearchItem;
 
+        /* TODO
         if (value.featureControl && value.featureControl.length > 0 && value.featureControl !== ItemFeature.ALL) {
             search.feature = value.featureControl;
-        }
+        }*/
 
         this.searchEvent.emit( search );
     }
 
 }
-
