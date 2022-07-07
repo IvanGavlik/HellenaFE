@@ -30,6 +30,8 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
   } as Table;
 
   search: SearchItem = {
+    priceMIn: 0,
+    priceMax: 10_000,
     cityIds: [],
     categoryIds: [],
     storeIds: [],
@@ -41,8 +43,6 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
       cloudName: 'hellena'
     }
   });
-
-  isFormExpanded = true; // default is true
 
   @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
 
@@ -81,14 +81,12 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
     });
   }
 
-  doSearch(search: SearchItem, fromForm: boolean): void {
-    if (fromForm && JSON.stringify(this.search) === JSON.stringify(search)) {
-      return;
-    }
-    if (fromForm) {
+  doSearch(search: SearchItem, fistPage: boolean): void {
+    if (fistPage) {
       search.page = defaultPage();
       this.paginator.pageIndex = 0;
     }
+    console.log(JSON.stringify(search))
     this.search = search;
     const dialog = this.spinnerService.openSpinnerDialog();
 //    dialog.afterClosed().subscribe(el => window.scroll({top: 0, left: 0, behavior: 'smooth'}) );
@@ -183,7 +181,4 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
     this.doSearch(this.search, false);
   }
 
-  handleExpandForm($event: boolean): void {
-    this.isFormExpanded = $event;
-  }
 }

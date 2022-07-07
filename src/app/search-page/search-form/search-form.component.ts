@@ -1,8 +1,6 @@
-import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {defaultPage, ItemFeature, SearchItem} from '../search-item';
-import {FormControl, FormGroup} from '@angular/forms';
-import {debounceTime, flatMap, Observable, of, Subscription} from 'rxjs';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ItemFeature, SearchItem} from '../search-item';
+import {Subscription} from 'rxjs';
 import {InitDataHelper, Pair} from '../pair';
 import {SearchItemService} from '../search-item.service';
 import {CheckboxConfig, CheckboxItem} from '../../ui/checkbox/checkbox-config';
@@ -14,33 +12,11 @@ import {CheckboxConfig, CheckboxItem} from '../../ui/checkbox/checkbox-config';
 })
 export class SearchFormComponent implements OnInit, OnDestroy {
 
-
-    private searchItem: SearchItem = {} as SearchItem;
-    get search(): SearchItem {
-        return this.searchItem;
-    }
-    @Input() set search(searchItem: SearchItem) {
-        this.searchItem = searchItem;
-    }
+    @Input()
+    searchItem: SearchItem = {} as SearchItem;
 
     @Output()
     searchEvent = new EventEmitter<SearchItem>();
-
-    separatorKeysCodes: number[] = [ENTER, COMMA];
-
-    public filteredOptions: Observable<string[]> = of([]);
-
-    searchForm = new FormGroup(
-        {
-            priceMIn: new FormControl(0),
-            priceMax: new FormControl(0),
-   //         featureControl: new FormControl({}),
-            locationControl: new FormControl([]),
-    //        storeControl: new FormControl([])
-        });
-
-    // TODO locationList
-    subs: Subscription[] = [];
 
     storeConfig = {
         title: 'Trgovina',
@@ -60,16 +36,13 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         ]
     } as CheckboxConfig;
 
+    // TODO locationList
+    subs: Subscription[] = [];
+
 
     constructor(private service: SearchItemService) {}
 
     ngOnInit(): void {
-        this.searchForm.valueChanges
-            .pipe(debounceTime(1000))
-            .subscribe(value => {
-                this.handleSearchFormValueChange(value);
-            });
-
         const initData = new InitDataHelper(this.service);
         const subCategory = initData.allCategory.subscribe(categories => {
             this.categoryConfig.list = categories;
@@ -84,37 +57,36 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.subs.forEach(el => el?.unsubscribe());
     }
 
-    handleSearchFormValueChange(value: any): void {
-        const search =  {
-            priceMIn: value.priceMIn,
-            priceMax: value.priceMax,
-     //       categoryIds: value?.categoryControl,
-                   categoryIds: [],
-
-            cityIds: (value?.locationControl as Pair<any, any>[]).map(el => el.id),
-   //         storeIds: value?.storeControl,
-                     storeIds: [],
-
-            page : defaultPage()
-        } as SearchItem;
-
-        /* TODO
-        if (value.featureControl && value.featureControl.length > 0 && value.featureControl !== ItemFeature.ALL) {
-            search.feature = value.featureControl;
-        }*/
-
-        this.searchEvent.emit( search );
-    }
-
     handleFeatureChange($event: CheckboxItem) {
-        console.log("handleFeatureChange ", $event);
+        if ($event.checked) {
+            this.searchItem.feature = $event.id;
+        } else {
+            this.searchItem.feature = ItemFeature.ALL;
+        }
+        this.searchEvent.emit(this.searchItem);
     }
 
     handleCategoryChange($event: CheckboxItem) {
-        console.log("handleCategoryChange ", $event);
+        if ($event.checked) {
+            this.searchItem.categoryIds.push($event.id);
+        } else {
+            const index = this.searchItem.categoryIds.indexOf($event.id)
+            if(index > -1) {
+                this.searchItem.categoryIds.splice(index, 1);
+            }
+        }
+        this.searchEvent.emit(this.searchItem);
     }
 
     handleStoreChange($event: CheckboxItem) {
-        console.log("handleStoreChange ", $event);
+        if ($event.checked) {
+            this.searchItem.storeIds.push($event.id);
+        } else {
+            const index = this.searchItem.storeIds.indexOf($event.id)
+            if(index > -1) {
+                this.searchItem.storeIds.splice(index, 1);
+            }
+        }
+        this.searchEvent.emit(this.searchItem);
     }
 }

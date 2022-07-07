@@ -67,7 +67,10 @@ export class DailyDealContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaded = false;
-    this.service.search({ cityIds: [],
+    this.service.search({
+        priceMIn: 0,
+        priceMax: 10_000,
+        cityIds: [],
       storeIds: [],
       categoryIds: [],
       feature: ItemFeature.CHEAPEST_TODAY,
@@ -89,6 +92,8 @@ export class DailyDealContainerComponent implements OnInit {
 
   handleFooterActionContainer(): void {
     this.router.navigateByUrl('/search', { state: {
+            priceMIn: 0,
+            priceMax: 10_000,
         cityIds: [],
         storeIds: [],
         categoryIds: [],
@@ -99,6 +104,8 @@ export class DailyDealContainerComponent implements OnInit {
 
   handleFooterActionCard($event: ItemSearchEntity): void {
     this.router.navigateByUrl('/search', { state: {
+            priceMIn: 0,
+            priceMax: 10_000,
         name : $event.name,
         cityIds: [],
         storeIds: [],

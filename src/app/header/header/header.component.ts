@@ -17,6 +17,8 @@ export class HeaderComponent {
   navigateToSearch(): void {
     this.router.navigateByUrl('/search', {
       state: {
+        priceMIn: 0,
+        priceMax: 10_000,
         name: this.search.value,
         categoryIds: [],
         storeIds: [],

@@ -22,10 +22,7 @@ export class InitDataHelper {
             );
         this._allStore = this.service.findAllStore()
             .pipe(
-                map(entities => entities
-                    .map( el => this.toCheckboxItem(el as EntityPair))
-                    .map(el => {el.checked = true; return el;})
-                ),
+                map(entities => entities.map( el => this.toCheckboxItem(el as EntityPair))),
             );
     }
 
