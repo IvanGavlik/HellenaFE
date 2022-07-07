@@ -19,6 +19,8 @@ import { DialogComponent } from './dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
 import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-table.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-
     TableComponent,
     SpinnerComponent,
     DialogComponent,
-    ShoppingListTableComponent
+    ShoppingListTableComponent,
+    CheckboxComponent
   ],
   imports: [
     CommonModule,
@@ -44,14 +47,16 @@ import { ShoppingListTableComponent } from './shopping-list-table/shopping-list-
     MatProgressSpinnerModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCheckboxModule
   ],
   exports: [
     CardContainerComponent,
     TableComponent,
     SpinnerComponent,
     DialogComponent,
-    ShoppingListTableComponent
+    ShoppingListTableComponent,
+    CheckboxComponent
   ]
 })
 export class UiModule { }

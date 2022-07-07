@@ -65,10 +65,10 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
 
     const initData = new InitDataHelper(this.service);
     const subCategory = initData.allCategory.subscribe(categories => {
-      this.categoryList = categories;
+//      this.categoryList = categories;
     });
     const subStore = initData.allStore.subscribe(stores => {
-      this.storeList = stores;
+ //     this.storeList = stores;
     });
 
     this.subs.push(subCategory, subStore);

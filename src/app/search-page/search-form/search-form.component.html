@@ -2,16 +2,14 @@
     <form [formGroup]="searchForm">
         <div class="row" id="filter">
             <div class="col-12" style="margin-top: 2rem" >
-                <h4>Kategorija</h4>
-                <section appearance="outline" style="width: 100%" >
-                    <p> <mat-checkbox color="primary" style="width: 100%" *ngFor="let category of categoryList" > {{ category.value }} </mat-checkbox> </p>
-                </section>
+                <hellena-checkbox [config]="categoryConfig"
+                                  (onChange)="handleCategoryChange($event)" >
+                </hellena-checkbox>
             </div>
             <div class="col-12">
-                <h4>Trgovina</h4>
-                <section appearance="outline" style="width: 100%" >
-                    <p> <mat-checkbox color="primary"  [checked]="true" style="width: 100%" *ngFor="let store of storeList" > {{ store.value }} </mat-checkbox> </p>
-                </section>
+                <hellena-checkbox [config]="storeConfig"
+                                  (onChange)="handleStoreChange($event)" >
+                </hellena-checkbox>
             </div>
             <div class="col-12" style="margin-top: 1rem" >
                 <h4 style="line-height: 0!important;"> Cijena </h4>
@@ -41,20 +39,7 @@
                 </mat-label>
             </div>
             <div class="col-12" style="margin-top: 2rem" >
-              <!--  <mat-form-field appearance="outline" style="width: 100%">
-                    <mat-label> Prikaži</mat-label>
-                    <mat-select formControlName="featureControl" #featureSelect>
-                        <mat-option *ngFor="let f of features" [value]="f.id">
-                            {{ f.value }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
--->
-                <h4>Prikaži</h4>
-                <section appearance="outline" style="width: 100%" >
-                    <!-- TODO -->
-                    <p> <mat-checkbox color="primary" style="" *ngFor="let f of features" > {{ f.value }} </mat-checkbox> </p>
-                </section>
+                <hellena-checkbox [config]="featuresConfig" (onChange)="handleFeatureChange($event)" ></hellena-checkbox>
             </div>
         </div>
     </form>

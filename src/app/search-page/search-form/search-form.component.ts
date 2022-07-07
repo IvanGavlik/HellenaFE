@@ -5,6 +5,7 @@ import {debounceTime, flatMap, Observable, of, Subscription} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {InitDataHelper, Pair} from '../pair';
 import {SearchItemService} from '../search-item.service';
+import {CheckboxConfig, CheckboxItem} from '../../ui/checkbox/checkbox-config';
 
 @Component({
     selector: 'hellena-search-form',
@@ -38,12 +39,27 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     //        storeControl: new FormControl([])
         });
 
-    @ViewChild('featureSelect') featureSelect: ElementRef<HTMLSelectElement> = {} as ElementRef;
-    features: Pair<ItemFeature, string>[] = [ { id: ItemFeature.ALL, value: 'Sve', selected: false }, { id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas', selected: false } as Pair<ItemFeature, string> ];
-    categoryList: Pair<number, string>[] = [];
-    storeList: Pair<number, string>[] = [];
     // TODO locationList
     subs: Subscription[] = [];
+
+    storeConfig = {
+        title: 'Trgovina',
+        list: []
+    } as CheckboxConfig;
+
+    categoryConfig = {
+        title: 'Kategorija',
+        list: []
+    } as CheckboxConfig;
+
+    featuresConfig = {
+        title: 'Prikaži',
+        list: [
+            { id: ItemFeature.ALL, value: 'Sve', checked: true } as CheckboxItem,
+            { id: ItemFeature.CHEAPEST_TODAY, value: 'Najpovoljnije danas', checked: false } as CheckboxItem
+        ]
+    } as CheckboxConfig;
+
 
     constructor(private service: SearchItemService) {}
 
@@ -56,13 +72,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
         const initData = new InitDataHelper(this.service);
         const subCategory = initData.allCategory.subscribe(categories => {
-            this.categoryList = categories;
+            this.categoryConfig.list = categories;
         });
         const subStore = initData.allStore.subscribe(stores => {
-            this.storeList = stores;
+            this.storeConfig.list = stores;
         });
         this.subs.push(subCategory, subStore);
-
     }
 
     ngOnDestroy(): void {
@@ -91,4 +106,15 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.searchEvent.emit( search );
     }
 
+    handleFeatureChange($event: CheckboxItem) {
+        console.log("handleFeatureChange ", $event);
+    }
+
+    handleCategoryChange($event: CheckboxItem) {
+        console.log("handleCategoryChange ", $event);
+    }
+
+    handleStoreChange($event: CheckboxItem) {
+        console.log("handleStoreChange ", $event);
+    }
 }
