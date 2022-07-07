@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'hellena-navbar-mobile',
   templateUrl: './navbar-mobile.component.html',

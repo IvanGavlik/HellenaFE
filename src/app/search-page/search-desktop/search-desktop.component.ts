@@ -13,6 +13,7 @@ import {ItemSearchEntity} from '../item-search-entity';
 import {thumbnail} from '@cloudinary/url-gen/actions/resize';
 import {Dialog} from '../../ui/dialog/dialog';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
+import {SearchUIService} from '../search-ui.service';
 
 @Component({
   selector: 'hellena-search-desktop',
@@ -54,6 +55,7 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
               private shoppingListService: ShoppingListService,
               private dialogService: DialogService,
               private spinnerService: SpinnerServiceService,
+              private searchUI: SearchUIService
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +73,9 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
       } as SearchItem;
     }
     this.doSearch(this.search, false);
+
+    const uiSearch = this.searchUI.onSearch().subscribe(search => this.doSearch(search, true))
+    this.subs.push(uiSearch);
   }
 
   ngOnDestroy(): void {

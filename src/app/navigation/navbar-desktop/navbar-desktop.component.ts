@@ -4,6 +4,9 @@ import {ShoppingListComponent} from '../../shopping-list/shopping-list/shopping-
 import {Router} from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import {FormControl} from '@angular/forms';
+import {defaultPage, SearchItem} from '../../search-page/search-item';
+import {SearchUIService} from '../../search-page/search-ui.service';
 
 @Component({
   selector: 'hellena-navbar-desktop',
@@ -19,7 +22,9 @@ export class NavbarDesktopComponent implements OnInit {
   isOpened = false;
   dialogRef = {} as MatDialogRef<ShoppingListComponent>;
 
-  constructor(private router: Router, private dialog: MatDialog, private deviceService: DeviceDetectorService) { }
+  search = new FormControl('');
+
+  constructor(private router: Router, private dialog: MatDialog, private deviceService: DeviceDetectorService, private searchUI: SearchUIService) { }
 
   ngOnInit(): void {
   }
@@ -52,7 +57,24 @@ export class NavbarDesktopComponent implements OnInit {
       this.dialogRef.close();
       this.isOpened = false;
     }
-    this.router.navigateByUrl('/search');
+
+    const search = {
+      priceMIn: 0,
+      priceMax: 10_000,
+      name: this.search.value, // todo autocomplete
+      categoryIds: [],
+      storeIds: [],
+      cityIds: [],
+      page: defaultPage(),
+    } as SearchItem
+
+    if (this.router.url.includes('/search')) {
+      this.searchUI.nextSeach(search)
+    } else {
+      this.router.navigateByUrl('/search', {
+        state: search,
+      });
+    }
   }
 
   handleNavigationClickAboutUs(): void {
