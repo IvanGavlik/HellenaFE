@@ -11,12 +11,16 @@ import {MatButtonModule} from '@angular/material/button';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MobAppPromotionDialogComponent } from './mob-app-promotion-dialog/mob-app-promotion-dialog.component';
+import { FrontPageDesktopComponent } from './front-page-desktop/front-page-desktop.component';
+import { FrontPageMobileComponent } from './front-page-mobile/front-page-mobile.component';
 
 
 @NgModule({
   declarations: [
     FrontPageComponent,
     MobAppPromotionDialogComponent,
+    FrontPageDesktopComponent,
+    FrontPageMobileComponent,
   ],
     imports: [
         CommonModule,
