@@ -142,3 +142,7 @@
     font-weight: bold;
     margin-top: 0.5rem;
 }
+
+.favorableItem .favorableHeading .bottomColor {
+    position: relative;
+}

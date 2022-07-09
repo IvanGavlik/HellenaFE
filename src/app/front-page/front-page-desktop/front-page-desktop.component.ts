@@ -12,6 +12,7 @@ import {MobAppPromotionDialogComponent} from '../mob-app-promotion-dialog/mob-ap
 export class FrontPageDesktopComponent implements OnInit {
 
   private key = 'isSeen';
+  msg: string = '';
 
   constructor(private dialog: MatDialog, private service: LocalStorageService, private deviceService: DeviceDetectorService) { }
 
@@ -20,5 +21,9 @@ export class FrontPageDesktopComponent implements OnInit {
     if (this.deviceService.isDesktop() && (value === undefined || value == null || value !== 'Y')) {
       this.dialog.open(MobAppPromotionDialogComponent, {disableClose: true});
     }
+  }
+
+  onSubmit() {
+    
   }
 }

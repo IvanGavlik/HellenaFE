@@ -1,3 +1,7 @@
+h1 h2 h3 h4 h5 h6 p {
+    font-family: Roboto;
+}
+
 .detailHeading h1 {
     position: relative;
     text-align: center;
@@ -282,4 +286,62 @@
     }
 }
 
+/**
+new
+ */
 
+.card {
+    max-width: 966px;
+}
+/** from daily deal - start */
+
+.text {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 24px;
+    text-align: left;
+    color: #000000de;
+}
+
+.endAlign {
+    text-align: right;
+}
+
+.link {
+    text-decoration: none;
+    background: #550ACD;
+    box-shadow: 0 3px 4px #550acd7a;
+    border-radius: 25px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 19px;
+    color: #fff;
+    padding: 6px 40px;
+}
+
+.inputForm textarea {
+    width: 100%;
+    height: 250px;
+    background: rgba(196, 196, 196, 0.19);
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.inputForm textarea::placeholder {
+    color: white;
+}
+
+.inputForm button {
+    padding: 15px 50px;
+    background-color: #fff;
+    font-size: 26px;
+    line-height: 26px;
+    text-align: left;
+    color: #000000;
+}
