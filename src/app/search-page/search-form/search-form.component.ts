@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ItemFeature, SearchItem} from '../search-item';
 import {Subscription} from 'rxjs';
-import {InitDataHelper, Pair} from '../pair';
+import {InitDataHelper} from '../pair';
 import {SearchItemService} from '../search-item.service';
 import {CheckboxConfig, CheckboxItem} from '../../ui/checkbox/checkbox-config';
 
@@ -12,8 +12,21 @@ import {CheckboxConfig, CheckboxItem} from '../../ui/checkbox/checkbox-config';
 })
 export class SearchFormComponent implements OnInit, OnDestroy {
 
-    @Input()
-    searchItem: SearchItem = {} as SearchItem;
+    private _searchItem: SearchItem = {} as SearchItem;
+    public get searchItem(): SearchItem {
+        return this._searchItem;
+    }
+    @Input() public set searchItem(searchItem: SearchItem) {
+        this._searchItem = searchItem;
+        if (searchItem.feature != undefined) {
+            this.featuresConfig.list.forEach(el => {
+                el.checked = false;
+                if (el.id === this.searchItem.feature) {
+                    el.checked = true;
+                }
+            });
+        }
+    }
 
     @Output()
     searchEvent = new EventEmitter<SearchItem>();
