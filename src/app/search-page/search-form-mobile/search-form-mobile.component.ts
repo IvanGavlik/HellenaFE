@@ -96,9 +96,7 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy   {
     if (value.name) {
       search.name = value.name;
     }
-    if (value.featureControl && value.featureControl.length > 0 && value.featureControl !== ItemFeature.ALL) {
-      search.feature = value.featureControl;
-    }
+    if (value.featureControl && value.featureControl.length > 0 && value.featureControl !== ItemFeature.ALL) {}
 
     this.searchEvent.emit( search );
   }

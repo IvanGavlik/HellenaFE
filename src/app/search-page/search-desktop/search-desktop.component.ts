@@ -68,7 +68,6 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
         categoryIds: initSearch?.categoryIds ? initSearch?.categoryIds : [],
         storeIds: initSearch?.storeIds ? initSearch?.storeIds : [],
         cityIds: initSearch?.cityIds ? initSearch?.cityIds : [],
-        feature: initSearch?.feature,
         page: defaultPage(),
       } as SearchItem;
     }

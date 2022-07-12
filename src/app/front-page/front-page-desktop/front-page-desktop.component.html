@@ -15,14 +15,18 @@
             <mat-card>
                 <img mat-card-image src="../../../assets/image/catalogs.jpg" alt="Photo of a Shiba Inu">
                 <mat-card-content>
-                    <h1> Svi proizvodi iz kataloga na jednom mjestu</h1>
+                    <h1> Svi proizvodi iz svih kataloga na jednom mjestu</h1>
                     <p style="text" >
                       Hellena prikuplja sve podatke iz aktualnih katalog iz različitih trgovina i omogućuje ti uvid u cijene proizvoda, ali i ostale važne informacija.
                       Također ti omogućuju da jednostavnim klikom na proizvod kreiraš popis za kupovinu.
                     </p>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button class="link" mat-button (click)="handleALl()" >Istraži</button>
+                    <div class="viewBtn">
+                        <button class="addCart" mat-button (click)="handleALl()">
+                            Istraži
+                        </button>
+                    </div>
                 </mat-card-actions>
             </mat-card>
         </div>

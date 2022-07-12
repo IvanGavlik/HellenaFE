@@ -10,8 +10,6 @@ import {Subscription} from 'rxjs';
 import {AboutUsService} from '../../about-us-page/about-us.service';
 import {AboutUsConfiguration} from '../../about-us-page/about-us-configuration';
 import {Message} from '../../about-us-page/about-us/about-us.component';
-import {Entity} from '../../crud/entity';
-import {CloudinaryImage} from '@cloudinary/url-gen';
 
 @Component({
   selector: 'hellena-front-page-desktop',
@@ -146,7 +144,7 @@ export class FrontPageDesktopComponent implements OnInit, OnDestroy {
       storeIds: [],
       cityIds: [],
       page: defaultPage(),
-    } as SearchItem
+    } as SearchItem;
 
     this.router.navigateByUrl('/search', {
       state: search,

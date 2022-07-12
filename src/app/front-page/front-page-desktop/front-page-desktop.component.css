@@ -345,3 +345,26 @@ new
     text-align: left;
     color: #000000;
 }
+
+button.addCart {
+    background-color: #550ACD;
+    padding: 10px 17px;
+    border: none;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    margin-right: 7px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    text-transform: capitalize;
+    color: #FFFFFF;
+}
+
+.viewBtn {
+    text-align: end;
+}

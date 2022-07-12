@@ -12,21 +12,7 @@ import {CheckboxConfig, CheckboxItem} from '../../ui/checkbox/checkbox-config';
 })
 export class SearchFormComponent implements OnInit, OnDestroy {
 
-    private _searchItem: SearchItem = {} as SearchItem;
-    public get searchItem(): SearchItem {
-        return this._searchItem;
-    }
-    @Input() public set searchItem(searchItem: SearchItem) {
-        this._searchItem = searchItem;
-        if (searchItem.feature != undefined) {
-            this.featuresConfig.list.forEach(el => {
-                el.checked = false;
-                if (el.id === this.searchItem.feature) {
-                    el.checked = true;
-                }
-            });
-        }
-    }
+    @Input() searchItem: SearchItem = {} as SearchItem;
 
     @Output()
     searchEvent = new EventEmitter<SearchItem>();
@@ -41,6 +27,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         list: []
     } as CheckboxConfig;
 
+    // TODO
     featuresConfig = {
         title: 'Prikaži',
         list: [
@@ -70,6 +57,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.subs.forEach(el => el?.unsubscribe());
     }
 
+/** TODO
     handleFeatureChange($event: CheckboxItem) {
         if ($event.checked) {
             this.searchItem.feature = $event.id;
@@ -78,12 +66,14 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         }
         this.searchEvent.emit(this.searchItem);
     }
+    */
 
-    handleCategoryChange($event: CheckboxItem) {
+
+    handleCategoryChange($event: CheckboxItem): void {
         if ($event.checked) {
             this.searchItem.categoryIds.push($event.id);
         } else {
-            const index = this.searchItem.categoryIds.indexOf($event.id)
+            const index = this.searchItem.categoryIds.indexOf($event.id);
             if(index > -1) {
                 this.searchItem.categoryIds.splice(index, 1);
             }
@@ -91,7 +81,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         this.searchEvent.emit(this.searchItem);
     }
 
-    handleStoreChange($event: CheckboxItem) {
+    handleStoreChange($event: CheckboxItem): void {
         if ($event.checked) {
             this.searchItem.storeIds.push($event.id);
         } else {
