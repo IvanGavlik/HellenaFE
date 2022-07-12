@@ -20,29 +20,27 @@ import {Cloudinary, CloudinaryImage} from '@cloudinary/url-gen';
 export class DailyDealContainerComponent implements OnInit {
 
   carouselOptions: any = {
+    nav: true,
+    navText: ['Prethodni', 'Sljedeći'],
     loop: true,
-    mouseDrag: false,
-    touchDrag: false,
+    mouseDrag: true,
+    touchDrag: true,
     pullDrag: false,
     dots: false,
-    autoplay: true,
+    autoplay: false,
     margin: 5,
     responsive: {
       0: {
         items: 1,
-        dots: false,
-        stagePadding: 30
       },
       400: {
         items: 2,
-        dots: false,
-        stagePadding: 50
       },
       740: {
-        items: 4
+        items: 2
       },
       940: {
-        items: 4
+        items: 2
       }
     }
   };

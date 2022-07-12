@@ -10,6 +10,8 @@ import {Subscription} from 'rxjs';
 import {AboutUsService} from '../../about-us-page/about-us.service';
 import {AboutUsConfiguration} from '../../about-us-page/about-us-configuration';
 import {Message} from '../../about-us-page/about-us/about-us.component';
+import {Entity} from '../../crud/entity';
+import {CloudinaryImage} from '@cloudinary/url-gen';
 
 @Component({
   selector: 'hellena-front-page-desktop',
@@ -20,6 +22,34 @@ import {Message} from '../../about-us-page/about-us/about-us.component';
   ]
 })
 export class FrontPageDesktopComponent implements OnInit, OnDestroy {
+
+  carouselOptions: any = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    autoplay: true,
+    margin: 5,
+    responsive: {
+      0: {
+        items: 1,
+        dots: false,
+        stagePadding: 30
+      },
+      400: {
+        items: 2,
+        dots: false,
+        stagePadding: 50
+      },
+      740: {
+        items: 4
+      },
+      940: {
+        items: 4
+      }
+    }
+  };
 
   private key = 'isSeen';
   msg: string = '';
@@ -121,5 +151,12 @@ export class FrontPageDesktopComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/search', {
       state: search,
     });
+  }
+
+  iscldImg(store: string): boolean {
+    if (store === 'LIDL' || store ===  'INTERSPAR') {
+      return true;
+    }
+    return false;
   }
 }
