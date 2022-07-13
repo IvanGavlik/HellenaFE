@@ -128,7 +128,7 @@ export class FrontPageDesktopComponent implements OnInit, OnDestroy {
       cityIds: [],
       page: defaultPage(),
       feature: ItemFeature.CHEAPEST_TODAY,
-    } as SearchItem
+    } as SearchItem;
 
     this.router.navigateByUrl('/search', {
       state: search,
@@ -158,7 +158,7 @@ export class FrontPageDesktopComponent implements OnInit, OnDestroy {
     return false;
   }
 
-    handleCategory(category: string): void {
+  handleCategory(category: string): void {
       let categoryIds = 0;
       if (category === 'Meso i riba') {
         categoryIds = 5;

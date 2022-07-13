@@ -8,6 +8,7 @@ import {Entity} from '../../crud/entity';
 import { DomSanitizer } from '@angular/platform-browser';
 import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 import {Cloudinary, CloudinaryImage} from '@cloudinary/url-gen';
+import {SearchUIService} from '../../search-page/search-ui.service';
 
 @Component({
   selector: 'hellena-daily-deal-container',
@@ -61,7 +62,8 @@ export class DailyDealContainerComponent implements OnInit {
       }
   });
 
-  constructor(private service: DailyDealService, private router: Router, public sanitizer: DomSanitizer) { }
+  constructor(private service: DailyDealService, private router: Router, public sanitizer: DomSanitizer,
+              private searchUI: SearchUIService) { }
 
   ngOnInit(): void {
     this.loaded = false;
@@ -111,6 +113,7 @@ export class DailyDealContainerComponent implements OnInit {
         feature: ItemFeature.CHEAPEST_TODAY,
         page: defaultPage()
       } as SearchItem });
+    this.searchUI.nextNameSearch($event.name);
   }
 
     iscldImg(store: string): boolean {
