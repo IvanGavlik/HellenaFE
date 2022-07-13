@@ -120,3 +120,24 @@
 #store .material-icons {
     font-size: 17px;
 }
+
+#nav .mat-form-field-underline {
+    display: none;
+}
+
+#nav .mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 4px 4px 4px 4px;
+    padding: 0;
+}
+
+#nav .mat-form-field-wrapper {
+    padding: 0!important;
+}
+
+#nav-button .mat-stroked-button {
+    background: rgba(176,176,176,.61);
+    padding: 8px 12px;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    font: 500 20px/32px Roboto,Helvetica Neue,sans-serif;
+}

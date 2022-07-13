@@ -31,6 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * Responsive ccs classes must go into src/styles.css (use mobile fist look)
 * Bootstrap md size is breakpoint between mobile and web look
 * icon list: https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/
+* image editor: https://www.fotor.com/
 
 ## TODO
 * docker best practice and docker ignore

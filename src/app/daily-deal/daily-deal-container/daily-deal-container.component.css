@@ -2,7 +2,7 @@
     padding: 50px 0px;
 }
 
-.favorableItem .card {
+.card {
     background: #FFFFFF !important;
     box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.15) !important;
     border-radius: 25px !important;
@@ -12,8 +12,8 @@
     -o-border-radius: 25px !important;
 }
 
-.favorableItem .card-body {
-    padding: 20px !important;
+.card-body {
+    padding-bottom: 10px !important;
 }
 
 .favorableItem .favorableHeading h1 {
@@ -141,4 +141,27 @@
     font-family: Roboto;
     font-weight: bold;
     margin-top: 0.5rem;
+}
+
+.favorableItem .favorableHeading .bottomColor {
+    position: relative;
+}
+
+button.addCart {
+    background-color: #550ACD;
+    padding: 10px 17px;
+    border: none;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    margin-right: 7px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    text-transform: capitalize;
+    color: #FFFFFF;
 }

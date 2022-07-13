@@ -1,0 +1,378 @@
+h1 h2 h3 h4 h5 h6 p {
+    font-family: Roboto;
+}
+
+.detailHeading h1 {
+    position: relative;
+    text-align: center;
+    padding: 40px 0px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 54px;
+    color: #272727;
+}
+
+.detailHeading .bottomColor {
+    position: relative;
+}
+
+.detailHeading .bottomColor:after {
+    content: '';
+    height: 3px;
+    width: 100%;
+    background: #550ACD;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+}
+
+.mainImage img {
+    width: 100%;
+}
+
+.mainContent {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 5%;
+}
+
+.mainContent .topImage img {
+    width: 88px;
+    height: 88px;
+    margin-bottom: 25px;
+}
+
+.mainContent h1 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: #272727;
+    padding: 20px 0px;
+}
+
+.mainContent p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 29px;
+    text-align: left;
+    color: #000000;
+}
+
+.gapSet {
+    margin: 120px 0px;
+}
+
+
+/* faq section */
+
+.faqSection {
+    padding: 100px 0px;
+    position: relative;
+}
+
+.faqCurve {
+    background: linear-gradient(180deg, #8001D9 -0.55%, #550ACD 99.44%);
+    -webkit-transform: skew(0deg, -6deg);
+    transform: skew(0deg, -6deg);
+    padding: 110px 0;
+}
+
+.faqContent {
+    width: 100%;
+    -webkit-transform: skew(0deg, 6deg);
+    transform: skew(0deg, 6deg);
+}
+
+.faqSection .accordion-button {
+    background-color: transparent !important;
+}
+
+.faqSection .accordion-item {
+    border: none !important;
+    background-color: transparent !important;
+}
+
+.accordion-button:before {
+    background-image: url("../../../assets/image/plus.png");
+    position: absolute;
+    bottom: -11px;
+    left: -1px;
+    border-bottom: 12px solid transparent;
+    border-right: 12px solid #3DC9B3;
+}
+
+.accordion-button:not(.collapsed):before {
+    display: none;
+    background-image: url("../../../assets/image/minus.png");
+}
+
+.accordion-button:after {
+    background-image: url("../../../assets/image/plus.png");
+    transform: scale(0.75) !important;
+    width: 50px;
+    height: 50px;
+    background-size: 48px;
+    order: -1;
+    margin-left: 0;
+    margin-right: 0.5em;
+}
+
+.accordion-button:not(.collapsed):after {
+    background-image: url("../../../assets/image/minus.png");
+}
+
+.accordion h2 a {
+    text-decoration: none;
+}
+
+.accordion h2 span {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 26px;
+    /* identical to box height */
+    color: #FFFFFF;
+}
+
+.accordion .accordion-collapse .card-body {
+    padding: 5px 70px !important;
+}
+
+.accordion .accordion-collapse .card-body p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 23px;
+    color: #C4C4C4;
+}
+
+.accordion-button:not(.collapsed) {
+    box-shadow: none !important;
+}
+
+.faqHeading h1 {
+    text-align: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 52px;
+    line-height: 58px;
+    color: #FFFFFF;
+}
+
+.faqSet {
+    position: relative;
+}
+
+.faqImage {
+    position: absolute;
+}
+
+.faqImage img {
+    /* position: relative; */
+    width: auto;
+    height: 380px;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+}
+
+
+.faqHeading input {
+    width: 100%;
+    background: rgba(176, 176, 176, 0.61);
+    border: 1px solid #E5E5E5;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    color: #fff !important;
+}
+
+.sideImage {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sideImage img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*
+    margin-top: 50%;
+    transform: translate(0,-50%);
+    -webkit-transform: translate(0,-50%);
+    -moz-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    -o-transform: translate(0,-50%); */
+}
+
+.contentSide {
+    padding-left: 15px;
+}
+
+.contentSide img.topImage {
+    width: auto;
+    height: auto;
+
+}
+
+.contentSide h1 {
+    /* font-family: Roboto; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 33px;
+    line-height: 41px;
+    color: #272727;
+    padding: 15px 0;
+}
+
+.contentDetails img {
+    position: absolute;
+    width: 10%;
+    margin-top: -2%;
+}
+
+.contentDetails p {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 34px;
+    text-align: left;
+    color: #000000;
+}
+
+@media(max-width:776px) {
+    .faqImage img {
+        /*position: relative;
+        */
+        width: 100%;
+        height: 380px;
+        margin-left: 0%;
+        transform: translate(-0%, 0);
+        -webkit-transform: translate(-0%, 0);
+        -moz-transform: translate(-0%, 0);
+        -ms-transform: translate(-0%, 0);
+        -o-transform: translate(-0%, 0);
+    }
+}
+
+/**
+new
+ */
+
+.card {
+    max-width: 966px;
+}
+/** from daily deal - start */
+
+.text {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 24px;
+    text-align: left;
+    color: #000000de;
+}
+
+.endAlign {
+    text-align: right;
+}
+
+.link {
+    text-decoration: none;
+    background: #550ACD;
+    box-shadow: 0 3px 4px #550acd7a;
+    border-radius: 25px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 19px;
+    color: #fff;
+    padding: 6px 40px;
+}
+
+.inputForm textarea {
+    width: 100%;
+    height: 250px;
+    background: rgba(196, 196, 196, 0.19);
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.inputForm textarea::placeholder {
+    color: white;
+}
+
+.inputForm button {
+    padding: 15px 50px;
+    background-color: #fff;
+    font-size: 26px;
+    line-height: 26px;
+    text-align: left;
+    color: #000000;
+}
+
+button.addCart {
+    background-color: #550ACD;
+    padding: 10px 17px;
+    border: none;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    margin-right: 7px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.viewBtn {
+    text-align: end;
+}
+
+.box {
+    filter: grayscale(70%);
+    transition: all 0.4s ease-in-out;
+}
+
+.box:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    filter: none;
+}

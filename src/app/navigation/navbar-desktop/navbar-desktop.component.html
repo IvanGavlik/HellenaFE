@@ -1,0 +1,22 @@
+<section class="navigationSection">
+    <nav class="navbar navbar-expand-lg navbar-light"  >
+        <div class="container">
+            <mat-toolbar>
+                <a class="navbar-brand" class="title" href="#">Hellena</a>
+                <span class="example-spacer"></span>
+                <button mat-button class="white-icon" (click)="handleNavigationClickAboutUs()"  >
+                    <mat-icon>business</mat-icon>
+                </button>
+                <input type="text" data-hj-allow  (keyup.enter)="handleNavigationClickSearch()" placeholder="npr. Kruh" [formControl]="search" >
+                <button id="nav-button" style="background: transparent; height: 50px; margin-left: -65px;; border: none!important;"  mat-stroked-button
+                        (click)="handleNavigationClickSearch()" >
+                    <mat-icon class="white-icon">search</mat-icon>
+                </button>
+                <button mat-button  (click)="handleNavigationClickShoppingCart()" >
+                    <mat-icon class="white-icon" >list</mat-icon>
+                </button>
+            </mat-toolbar>
+        </div>
+    </nav>
+
+</section>

@@ -1,0 +1,132 @@
+<!-- inspiration
+ https://www.w3schools.com/w3css/tryw3css_templates_blog.htm
+ https://www.w3schools.com/w3css/tryw3css_templates_startup.htm
+ https://www.w3schools.com/w3css/tryw3css_templates_social.htm
+ https://www.w3schools.com/w3css/tryw3css_templates_analytics.htm
+
+ -->
+<!-- Header-->
+<div class="container" style="margin-top: 1rem"   >
+    <div class="row" >
+        <div class="col-8" >
+            <hellena-daily-deal-container></hellena-daily-deal-container>
+        </div>
+        <div class="col-4" >
+            <mat-card>
+                <img mat-card-image src="../../../assets/image/catalogs.jpg" alt="Photo of a Shiba Inu">
+                <mat-card-content>
+                    <h1> Svi proizvodi iz svih kataloga na jednom mjestu</h1>
+                    <p style="text" >
+                      Hellena prikuplja sve podatke iz aktualnih katalog iz različitih trgovina i omogućuje ti uvid u cijene proizvoda, ali i ostale važne informacija.
+                      Također ti omogućuju da jednostavnim klikom na proizvod kreiraš popis za kupovinu.
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <div class="viewBtn">
+                        <button class="addCart" mat-button (click)="handleALl()">
+                            Istraži
+                        </button>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 3.5rem !important;" >
+        <div class="col-12">
+            <div class="detailHeading">
+                <h1><span class="bottomColor">AKCIJE</span> IZ SVIH KATALOGA
+                    NA JEDNOM MJESTU</h1>
+            </div>
+        </div>
+        <div class="col-4" >
+            <mat-card style="box-shadow: 0 0 0 0 !important;" >
+                <mat-card-header>
+                    <div mat-card-avatar style="background-size: cover; background-image: url('../../../assets/image/Group 16.png')" > </div>
+                    <mat-card-title> Brzo pronađi ono što trebš </mat-card-title>
+                </mat-card-header>
+                <img mat-card-image style="width: 320px;" src="../../../assets/image/Eco shopping-amico 1.png">
+            </mat-card>
+        </div>
+        <div class="col-4" >
+            <mat-card style="box-shadow: 0 0 0 0 !important;">
+                <mat-card-header>
+                    <div mat-card-avatar style="background-size: cover; background-image: url('../../../assets/image/Group 16.png')" > </div>
+                    <mat-card-title>Usporedi cijene</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image style="width: 320px;" src="../../../assets/image/bro.png">
+            </mat-card>
+        </div>
+        <div class="col-4" >
+            <mat-card style="box-shadow: 0 0 0 0 !important;">
+                <mat-card-header>
+                    <div mat-card-avatar style="background-size: cover; background-image: url('../../../assets/image/Group 16.png')" > </div>
+                    <mat-card-title>Napravi popis za kupovinu</mat-card-title>
+                </mat-card-header>
+                <br>
+                <img mat-card-image style="width: 320px;" src="../../../assets/image/amico.png">
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 3.5rem !important;" >
+        <div class="col-12">
+            <div class="detailHeading">
+                <h1><span class="bottomColor">Istraži</span> kategorije</h1>
+            </div>
+        </div>
+        <div class="col-4" >
+            <mat-card style="box-shadow: 0 0 0 0 !important;" class="box" (click)="handleCategory('Meso i riba')" >
+                <img mat-card-image style="width: 220px;" src="../../../assets/image/category (4).png">
+                <mat-card-header>
+                    <mat-card-title>Meso i riba</mat-card-title>
+                </mat-card-header>
+            </mat-card>
+        </div>
+        <div class="col-4" >
+            <mat-card style="box-shadow: 0 0 0 0 !important;"  class="box" (click)="handleCategory('Voće i povrće')"  >
+                <img mat-card-image style="width: 220px;" src="../../../assets/image/category (2).png">
+                <mat-card-header>
+                    <mat-card-title>Voće i povrće</mat-card-title>
+                </mat-card-header>
+
+            </mat-card>
+        </div>
+        <div class="col-4" >
+            <mat-card style="box-shadow: 0 0 0 0 !important;"  class="box" (click)="handleCategory('Piće')" >
+                <img mat-card-image style="width: 220px;" src="../../../assets/image/category (1).png">
+                <mat-card-header>
+                    <mat-card-title>Piće</mat-card-title>
+                </mat-card-header>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<section class="faqSection">
+        <div class="faqCurve">
+            <div class="faqContent">
+                <div class="container">
+                    <div class="row" style="margin-bottom: 1.5rem" >
+                        <div class="col-md-12">
+                            <div class="faqHeading">
+                                <h1>Kako ti možemo pomoći ?</h1>
+                                <p style="color: white" > Tim mladih ljubitelja kupovine i online pretaživanja proizvoda svakodnevno prikuplja ponudu iz aktualnih katalog
+                                    kako bih pronalazak željenog proizvoda učinili što lakšlim i jednostavnijim.
+                                    Naporno radimo da nevedeno ostvarimo te ovim putem te molim da nam kažeš kako ti možemo pomoći olakšati potragu
+                                    za popustima.
+                                    Radujemo se zajedničkoj suradnji te žeimo ti dobar ulov.
+                                </p>
+                                <form class="inputForm" (ngSubmit)="onSubmit()">
+                                    <textarea [(ngModel)]="msg" placeholder=" Opiši šta bi htio vidjeti na stranici"> </textarea>
+                                    <div class="endAlign">
+                                        <button type="submit" class="btn">Pošalji</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

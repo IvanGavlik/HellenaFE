@@ -1,46 +1,51 @@
 <hellena-card-container>
     <section class="favorableItem">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="favorableHeading">
-                        <h1><span class="bottomColor">Najpo</span>voljnije Danas</h1>
-                    </div>
-                </div>
-            </div>
             <div class="row" *ngIf="!loaded" >
                 <div>
                     <hellena-spinner [spinner]="spinner" ></hellena-spinner>
                 </div>
             </div>
             <div class="row" *ngIf="loaded" >
+                <h1>Najpovoljnije danas</h1>
                 <owl-carousel-o [options]="carouselOptions">
                     <ng-template ngFor let-item [ngForOf]="cards" let-i="index">
                         <ng-template carouselSlide>
-                            <div class="card" style="width: 97%;">
-                                <div class="card-body">
-                                    <h5 class="price"> {{ item.actionPrice }} kn<span> {{ item.orginalPrice }} kn</span></h5>
+                            <div class="card" style="width: 97%; margin-bottom: 1rem">
+                                <div class="card-body" >
+                                    <!-- todo original price -->
                                     <advanced-image *ngIf="iscldImg(item.storeName)"[cldImg]="item.img" ></advanced-image>
                                     <img *ngIf="!iscldImg(item.storeName)" [src]="item.imgItem"  style="width: 150px; height: 150px"  >
-                                    <p class="card-text"> {{ item.name }}
-                                        <span style="font-family:Roboto; font-weight: lighter; font-size: 0.9rem; text-align: right" > <br> od {{ item?.activeFrom | date:"dd.MM."  }} do {{ item?.activeTo | date:"dd.MM." }} </span>
-                                        <span style="font-family:Roboto; font-weight: lighter; font-size: 1rem; text-align: right" > <br> {{ item.storeName }} </span>
-                                    </p>
+                                    <div style="min-height: 56px; margin-top: 1rem;" >
+                                        <h1 style="font-size: 16px; line-height: 24px; color:  #0F1111" > {{ item.name }} </h1>
+                                    </div>
+                                    <span style="font-size: 20px; color: #550acd;
+                         line-height: normal; box-sizing: border-box" >
+
+                     <span *ngIf="item.orginalPrice" style="color: #C4C4C4; text-decoration-line: line-through; " > {{ item.orginalPrice }}</span>
+                    <span *ngIf="item.orginalPrice" style="color: #C4C4C4; box-sizing: border-box; font-size: 13px; position: relative"> kn </span>
+
+
+                <span style="box-sizing: border-box; font-size: 25px;; line-height: normal" >
+                        {{ item.actionPrice }}
+                </span>
+                <span style="box-sizing: border-box; font-size: 13px; position: relative"> kn </span>
+
+            </span>
+
+                                    <span style="color: #565959; font-size: 14px; font-family:Roboto; font-weight: lighter; font-size: 0.9rem; text-align: right" > <br> od {{ item?.activeFrom | date:"dd.MM."  }} do {{ item?.activeTo | date:"dd.MM." }} </span>
+                                    <span style="color: #565959; font-size: 14px; font-family:Roboto; font-weight: lighter; font-size: 1rem; text-align: right" > <br> {{ item.storeName }} </span>
+
                                     <div class="viewBtn">
-                                        <span class="link" (click)="handleFooterActionCard(item)" >Pogledaj</span>
+                                        <button class="addCart" mat-button (click)="handleFooterActionCard(item)">
+                                        Pogledaj
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </ng-template>
                     </ng-template>
                 </owl-carousel-o>
-            </div>
-            <div class="row" *ngIf="loaded" >
-                <div class="col-md-12">
-                    <div class="seeMoreBtn">
-                        <span class="link" (click)="handleFooterActionContainer()">Istraži</span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

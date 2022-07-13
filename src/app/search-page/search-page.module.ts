@@ -25,6 +25,9 @@ import { CategoryComponent } from './search-form-mobile/category/category.compon
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
 import { StoreComponent } from './search-form-mobile/store/store.component';
+import { SearchDesktopComponent } from './search-desktop/search-desktop.component';
+import { SearchMobileComponent } from './search-mobile/search-mobile.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { StoreComponent } from './search-form-mobile/store/store.component';
     SearchFormMobileComponent,
     CategoryComponent,
     StoreComponent,
+    SearchDesktopComponent,
+    SearchMobileComponent,
+
   ],
   imports: [
     CommonModule,
@@ -55,7 +61,8 @@ import { StoreComponent } from './search-form-mobile/store/store.component';
     MatPaginatorModule,
     CloudinaryModule,
     MatListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   exports: [
     SearchComponent

@@ -7,10 +7,17 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ShoppingListModule} from '../shopping-list/shopping-list.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { NavbarDesktopComponent } from './navbar-desktop/navbar-desktop.component';
+import { NavbarMobileComponent } from './navbar-mobile/navbar-mobile.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     NavbarComponent,
+    NavbarDesktopComponent,
+    NavbarMobileComponent,
   ],
     imports: [
         CommonModule,
@@ -19,7 +26,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
         MatIconModule,
         MatDialogModule,
         ShoppingListModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatInputModule,
+        MatFormFieldModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
   exports: [
     NavbarComponent

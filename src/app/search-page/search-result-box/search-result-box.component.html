@@ -1,12 +1,12 @@
 <div class="container" style="padding: 0 !important;" >
     <div class="row" *ngIf="!this.deviceService.isMobile()" >
-        <div class="col-md-3"  *ngFor="let item of data;" >
+        <div class="col-md-4"  *ngFor="let item of data;" >
             <div class="card" style="width: 97%; margin-bottom: 1rem">
                 <div class="card-body" >
                     <!-- todo original price -->
                     <advanced-image *ngIf="iscldImg(item.store)"[cldImg]="item.img" ></advanced-image>
                     <img *ngIf="!iscldImg(item.store)" [src]="item.imgItem"  style="width: 150px; height: 150px"  >
-                    <div style="min-height: 56px;" >
+                    <div style="min-height: 56px; margin-top: 0.5rem;" >
                         <h1 style="font-size: 16px; line-height: 24px; color:  #0F1111" > {{ item.name }} </h1>
                     </div>
                     <span style="font-size: 20px; color: #550acd;

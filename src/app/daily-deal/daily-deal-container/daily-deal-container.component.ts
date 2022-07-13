@@ -20,9 +20,11 @@ import {Cloudinary, CloudinaryImage} from '@cloudinary/url-gen';
 export class DailyDealContainerComponent implements OnInit {
 
   carouselOptions: any = {
+    nav: true,
+    navText: ['Prethodni', 'Sljedeći'],
     loop: true,
-    mouseDrag: false,
-    touchDrag: false,
+    mouseDrag: true,
+    touchDrag: true,
     pullDrag: false,
     dots: false,
     autoplay: true,
@@ -30,19 +32,15 @@ export class DailyDealContainerComponent implements OnInit {
     responsive: {
       0: {
         items: 1,
-        dots: false,
-        stagePadding: 30
       },
       400: {
         items: 2,
-        dots: false,
-        stagePadding: 50
       },
       740: {
-        items: 4
+        items: 2
       },
       940: {
-        items: 4
+        items: 2
       }
     }
   };
@@ -67,7 +65,10 @@ export class DailyDealContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaded = false;
-    this.service.search({ cityIds: [],
+    this.service.search({
+        priceMIn: 0,
+        priceMax: 10_000,
+        cityIds: [],
       storeIds: [],
       categoryIds: [],
       feature: ItemFeature.CHEAPEST_TODAY,
@@ -89,6 +90,8 @@ export class DailyDealContainerComponent implements OnInit {
 
   handleFooterActionContainer(): void {
     this.router.navigateByUrl('/search', { state: {
+            priceMIn: 0,
+            priceMax: 10_000,
         cityIds: [],
         storeIds: [],
         categoryIds: [],
@@ -99,6 +102,8 @@ export class DailyDealContainerComponent implements OnInit {
 
   handleFooterActionCard($event: ItemSearchEntity): void {
     this.router.navigateByUrl('/search', { state: {
+            priceMIn: 0,
+            priceMax: 10_000,
         name : $event.name,
         cityIds: [],
         storeIds: [],

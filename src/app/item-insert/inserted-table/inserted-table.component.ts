@@ -47,6 +47,8 @@ export class InsertedTableComponent implements OnInit, AfterViewInit, OnDestroy 
   public fetchData(): void {
     this.delayIt();
     const search = {
+      priceMIn: 0,
+      priceMax: 10_000,
       categoryIds: [],
       storeIds: [],
       cityIds: [],
