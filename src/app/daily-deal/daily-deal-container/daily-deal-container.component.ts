@@ -27,7 +27,7 @@ export class DailyDealContainerComponent implements OnInit {
     touchDrag: true,
     pullDrag: false,
     dots: false,
-    autoplay: false,
+    autoplay: true,
     margin: 5,
     responsive: {
       0: {

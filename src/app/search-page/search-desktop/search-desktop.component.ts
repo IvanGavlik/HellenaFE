@@ -73,7 +73,7 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
     }
     this.doSearch(this.search, false);
 
-    const uiSearch = this.searchUI.onSearch().subscribe(search => this.doSearch(search, true))
+    const uiSearch = this.searchUI.onSearch().subscribe(search => this.doSearch(search, true));
     this.subs.push(uiSearch);
   }
 

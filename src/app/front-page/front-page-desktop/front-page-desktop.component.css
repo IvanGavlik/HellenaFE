@@ -11,7 +11,6 @@ h1 h2 h3 h4 h5 h6 p {
     font-weight: 700;
     font-size: 36px;
     line-height: 54px;
-    text-transform: capitalize;
     color: #272727;
 }
 
@@ -71,7 +70,6 @@ h1 h2 h3 h4 h5 h6 p {
     font-size: 23px;
     line-height: 29px;
     text-align: left;
-    text-transform: capitalize;
     color: #000000;
 }
 
@@ -361,10 +359,20 @@ button.addCart {
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
-    text-transform: capitalize;
     color: #FFFFFF;
 }
 
 .viewBtn {
     text-align: end;
+}
+
+.box {
+    filter: grayscale(70%);
+    transition: all 0.4s ease-in-out;
+}
+
+.box:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    filter: none;
 }

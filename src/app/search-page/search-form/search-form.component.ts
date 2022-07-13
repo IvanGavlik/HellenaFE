@@ -46,10 +46,19 @@ export class SearchFormComponent implements OnInit, OnDestroy {
         const initData = new InitDataHelper(this.service);
         const subCategory = initData.allCategory.subscribe(categories => {
             this.categoryConfig.list = categories;
+            if (this.searchItem?.categoryIds !== undefined && this.searchItem?.categoryIds != null ) {
+                this.searchItem?.categoryIds?.forEach(el => {
+                    const find = this.categoryConfig.list.find(item => el.toString() === item.id.toString());
+                    if (find) {
+                        find.checked = true;
+                    }
+                });
+            }
         });
         const subStore = initData.allStore.subscribe(stores => {
             this.storeConfig.list = stores;
         });
+
         this.subs.push(subCategory, subStore);
     }
 
