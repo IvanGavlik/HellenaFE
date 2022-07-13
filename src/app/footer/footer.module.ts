@@ -4,8 +4,9 @@ import { FooterComponent } from './footer/footer.component';
 import {RouterModule} from '@angular/router';
 import { FooterDesktopComponent } from './footer-desktop/footer-desktop.component';
 import { FooterMobileComponent } from './footer-mobile/footer-mobile.component';
-
-
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,10 @@ import { FooterMobileComponent } from './footer-mobile/footer-mobile.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [
     FooterComponent
