@@ -11,14 +11,16 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-4" >
-                    <button mat-icon-button color="primary" style="width: 100%">
-                        <mat-icon>settings</mat-icon>
-                    </button>
-                </div>
-                <div class="col-4" >
                     <button mat-icon-button color="primary" style="width: 100%" >
                         <mat-icon>search</mat-icon>
                     </button>
+                </div>
+                <div class="col-4" >
+                    <mat-paginator [pageSizeOptions]="[12, 24]"
+                                   [length]="tableSize"
+                                   (page)="handlePage($event)"
+                                   aria-label="Select page of periodic elements">
+                    </mat-paginator>
                 </div>
                 <div class="col-4" >
                     <button mat-icon-button color="primary" style="width: 100%">

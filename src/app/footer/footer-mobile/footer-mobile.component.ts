@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'hellena-footer-mobile',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer-mobile.component.css']
 })
 export class FooterMobileComponent implements OnInit {
+  tableSize = 100;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  handlePage($event: PageEvent): void {
+
+  }
 }
