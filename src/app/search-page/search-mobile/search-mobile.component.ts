@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {defaultMobilePage, defaultPage, SearchItem} from '../search-item';
+import {defaultPage, SearchItem} from '../search-item';
 import {Table, TableItem} from '../../ui/table/table';
 import {Dialog} from '../../ui/dialog/dialog';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
@@ -13,7 +13,8 @@ import {map, tap} from 'rxjs/operators';
 import {ItemSearchEntity} from '../item-search-entity';
 import {thumbnail} from '@cloudinary/url-gen/actions/resize';
 import {Cloudinary} from '@cloudinary/url-gen';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {PageEvent} from '@angular/material/paginator';
+import {FooterUiService} from '../../footer/footer-ui.service';
 
 @Component({
   selector: 'hellena-search-mobile',
@@ -34,7 +35,7 @@ export class SearchMobileComponent implements OnInit {
     cityIds: [],
     categoryIds: [],
     storeIds: [],
-    page: defaultMobilePage()
+    page: defaultPage()
   } as SearchItem;
 
   cld = new Cloudinary({
@@ -42,8 +43,6 @@ export class SearchMobileComponent implements OnInit {
       cloudName: 'hellena'
     }
   });
-
-  @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
 
   @ViewChild('focus') focus = {} as ElementRef;
 
@@ -53,7 +52,8 @@ export class SearchMobileComponent implements OnInit {
               private shoppingListService: ShoppingListService,
               private dialogService: DialogService,
               private spinnerService: SpinnerServiceService,
-              private searchUI: SearchUIService) { }
+              private searchUI: SearchUIService,
+              private footerUI: FooterUiService) { }
 
   ngOnInit(): void {
     const initSearch = history.state;
@@ -64,21 +64,21 @@ export class SearchMobileComponent implements OnInit {
         categoryIds: initSearch?.categoryIds ? initSearch?.categoryIds : [],
         storeIds: initSearch?.storeIds ? initSearch?.storeIds : [],
         cityIds: initSearch?.cityIds ? initSearch?.cityIds : [],
-        page: defaultMobilePage(),
+        page: defaultPage(),
       } as SearchItem;
     }
-    this.doSearch(this.search, false);
+    this.doSearch(this.search);
 
-    const uiSearch = this.searchUI.onSearch().subscribe(search => this.doSearch(search, true));
+    const uiSearch = this.searchUI.onSearch().subscribe(search => this.doSearch(search));
     this.subs.push(uiSearch);
+
+    const uiPage = this.footerUI.onPage().subscribe(page => {
+      this.handlePage(page);
+    });
+    this.subs.push(uiPage);
   }
 
-  doSearch(search: SearchItem, fistPage: boolean): void {
-    if (fistPage) {
-      search.page = defaultMobilePage();
-      this.paginator.pageIndex = 0;
-    }
-    console.log(JSON.stringify(search))
+  doSearch(search: SearchItem): void {
     this.search = search;
     const dialog = this.spinnerService.openSpinnerDialog();
 //    dialog.afterClosed().subscribe(el => window.scroll({top: 0, left: 0, behavior: 'smooth'}) );
@@ -87,6 +87,7 @@ export class SearchMobileComponent implements OnInit {
         .pipe(
             tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['name', 'actions'] } as Table;  }),
             tap(response => this.table.totalCount = response.size), // here set total count
+            tap(response => this.footerUI.nextResponseSize(response.size)), // here set total count
             map(response => response.page.map(el => this.toTableItem(el as ItemSearchEntity)))
         )
         .subscribe(
@@ -151,7 +152,7 @@ export class SearchMobileComponent implements OnInit {
     if (this.search.page.index !== 0) {
       this.search.page.index = this.search.page.index * this.search.page.size;
     }
-    this.doSearch(this.search, false);
+    this.doSearch(this.search);
   }
 
 }

@@ -27,7 +27,7 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
 
   private subs: Subscription[] = [];
 
-  constructor(private router: Router, private dialog: MatDialog, private deviceService: DeviceDetectorService, private searchUI: SearchUIService) { }
+  constructor(private router: Router, private dialog: MatDialog, private searchUI: SearchUIService) { }
 
   ngOnInit(): void {
     const nameChange  = this.searchUI.onNameSearch().subscribe(name => this.search.patchValue(name));
@@ -45,20 +45,17 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
       return;
     }
     const config = {} as MatDialogConfig;
-    if (this.deviceService.isDesktop()) {
-      config.width = '30%';
-    } else {
-      config.width = '100%';
-    }
+    config.width = '30%';
     config.height = '100%';
     this.dialogRef = this.dialog.open(ShoppingListComponent, config);
     this.dialogRef.updatePosition({ top: '100px', right: '0px' }  );
     this.isOpened = true;
 
-    this.dialogRef.afterClosed().subscribe(result => {
+    const list = this.dialogRef.afterClosed().subscribe(result => {
       this.isOpened = false;
     });
 
+    this.subs.push(list);
   }
 
   handleNavigationClickSearch(): void {
