@@ -1,0 +1,51 @@
+.navigationSection nav{
+    background: linear-gradient(92.02deg, #550ACD 26.67%, #8001D9 73.9%);
+}
+.ml-auto{
+    margin-left: auto;
+}
+.navItem a.navbar-brand{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 17px;
+    color: #FFFFFF;
+}
+.navItem .nav-item a{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 11px;
+    color: #FFFFFF;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 17px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nav-text {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 450;
+    font-size: 15px;
+    line-height: 9px;
+    color: #fff;
+    text-decoration: none;
+}
