@@ -20,27 +20,23 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { SearchResultBoxComponent } from './search-result-box/search-result-box.component';
 import {CloudinaryModule} from '@cloudinary/ng';
-import { SearchFormMobileComponent } from './search-form-mobile/search-form-mobile.component';
-import { CategoryComponent } from './search-form-mobile/category/category.component';
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
-import { StoreComponent } from './search-form-mobile/store/store.component';
 import { SearchDesktopComponent } from './search-desktop/search-desktop.component';
 import { SearchMobileComponent } from './search-mobile/search-mobile.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { SearchResultMobileComponent } from './search-mobile/search-result-mobile/search-result-mobile.component';
+import { SearchFormMobileComponent } from './search-mobile/search-form-mobile/search-form-mobile.component';
 
 @NgModule({
   declarations: [
     SearchComponent,
     SearchFormComponent,
     SearchResultBoxComponent,
-    SearchFormMobileComponent,
-    CategoryComponent,
-    StoreComponent,
     SearchDesktopComponent,
     SearchMobileComponent,
     SearchResultMobileComponent,
+    SearchFormMobileComponent,
 
   ],
   imports: [
