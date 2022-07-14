@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {defaultPage, SearchItem} from '../search-item';
+import {defaultMobilePage, defaultPage, SearchItem} from '../search-item';
 import {Table, TableItem} from '../../ui/table/table';
 import {Dialog} from '../../ui/dialog/dialog';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
@@ -34,7 +34,7 @@ export class SearchMobileComponent implements OnInit {
     cityIds: [],
     categoryIds: [],
     storeIds: [],
-    page: defaultPage()
+    page: defaultMobilePage()
   } as SearchItem;
 
   cld = new Cloudinary({
@@ -64,7 +64,7 @@ export class SearchMobileComponent implements OnInit {
         categoryIds: initSearch?.categoryIds ? initSearch?.categoryIds : [],
         storeIds: initSearch?.storeIds ? initSearch?.storeIds : [],
         cityIds: initSearch?.cityIds ? initSearch?.cityIds : [],
-        page: defaultPage(),
+        page: defaultMobilePage(),
       } as SearchItem;
     }
     this.doSearch(this.search, false);
@@ -75,7 +75,7 @@ export class SearchMobileComponent implements OnInit {
 
   doSearch(search: SearchItem, fistPage: boolean): void {
     if (fistPage) {
-      search.page = defaultPage();
+      search.page = defaultMobilePage();
       this.paginator.pageIndex = 0;
     }
     console.log(JSON.stringify(search))

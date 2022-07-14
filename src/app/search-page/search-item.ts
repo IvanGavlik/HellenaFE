@@ -20,6 +20,15 @@ export function defaultPage(size?: number, index?: number): Page {
     return page;
 }
 
+export function defaultMobilePage(size?: number, index?: number): Page {
+    const page = {
+        sort: [],
+        size: size !== null && size !== undefined ? size : 6,
+        index: index !== null && index !== undefined ? index : 0,
+    } as Page;
+    return page;
+}
+
 export enum ItemFeature {
     ALL= 'ALL',
     CHEAPEST_TODAY = 'CHEAPEST_TODAY',

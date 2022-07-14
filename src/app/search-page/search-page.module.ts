@@ -28,6 +28,7 @@ import { StoreComponent } from './search-form-mobile/store/store.component';
 import { SearchDesktopComponent } from './search-desktop/search-desktop.component';
 import { SearchMobileComponent } from './search-mobile/search-mobile.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SearchResultMobileComponent } from './search-mobile/search-result-mobile/search-result-mobile.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     StoreComponent,
     SearchDesktopComponent,
     SearchMobileComponent,
+    SearchResultMobileComponent,
 
   ],
   imports: [

@@ -35,47 +35,4 @@
             </div>
         </div>
     </div>
-    <div class="row" *ngIf="this.deviceService.isMobile()" style="padding-left: 0!important; padding-right: 0!important;" >
-        <div class="col-12" style="padding-left: 0!important; padding-right: 0!important;"  *ngFor="let item of data;" >
-            <div class="card" style="width: 97%; margin-bottom: 1rem">
-                <div class="card-body" >
-                    <div style="float: left; width: 50%; max-width: 185px;"  >
-                        <advanced-image  style="max-width: 185px;" *ngIf="iscldImg(item.store)"[cldImg]="item.img" ></advanced-image>
-                        <img *ngIf="!iscldImg(item.store)" [src]="item.imgItem"  style="width: 150px; height: 150px"  >
-                    </div>
-
-                    <div style="float: right; width: 50%;">
-                    <!-- todo original price -->
-
-                        <h1 style="font-size: 16px; line-height: 24px; color:  #0F1111" > {{ item.name }} </h1>
-                        <span style="font-size: 20px; color: #550acd;
-                             line-height: normal; box-sizing: border-box" >
-
-                     <span *ngIf="item.originalPrice" style="color: #C4C4C4; text-decoration-line: line-through; " > {{ item.originalPrice }}</span>
-                    <span *ngIf="item.originalPrice" style="color: #C4C4C4; box-sizing: border-box; font-size: 13px; position: relative"> kn </span>
-
-
-                <span style="box-sizing: border-box; font-size: 25px;; line-height: normal" >
-                        {{ item.actionPrice }}
-                </span>
-                <span style="box-sizing: border-box; font-size: 13px; position: relative"> kn </span>
-
-            </span>
-
-                        <span style="color: #565959; font-size: 14px; font-family:Roboto; font-weight: lighter; font-size: 0.9rem; text-align: right" > <br> od {{ item?.activeFrom | date:"dd.MM."  }} do {{ item?.activeTo | date:"dd.MM." }} </span>
-                        <span style="color: #565959; font-size: 14px; font-family:Roboto; font-weight: lighter; font-size: 1rem; text-align: right" > <br> {{ item.store }} </span>
-
-                        <div class="viewBtn">
-                        <button class="addCart" mat-button (click)="handleFooterActionCard(item)">
-                            <mat-icon>favorite</mat-icon>
-                        </button>
-                    </div>
-                    </div>
-
-                    <div style="clear: both" >
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
