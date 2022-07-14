@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs';
 import {InitDataHelper} from '../pair';
 import {SearchItemService} from '../search-item.service';
 import {CheckboxConfig, CheckboxItem} from '../../ui/checkbox/checkbox-config';
+import {MatSliderChange} from '@angular/material/slider';
 
 @Component({
     selector: 'hellena-search-form',
@@ -12,7 +13,7 @@ import {CheckboxConfig, CheckboxItem} from '../../ui/checkbox/checkbox-config';
 })
 export class SearchFormComponent implements OnInit, OnDestroy {
 
-    @Input() searchItem: SearchItem = {} as SearchItem;
+    @Input() searchItem: SearchItem = { priceMIn: 0, priceMax: 10_000 } as SearchItem;
 
     @Output()
     searchEvent = new EventEmitter<SearchItem>();
@@ -98,6 +99,15 @@ export class SearchFormComponent implements OnInit, OnDestroy {
             if(index > -1) {
                 this.searchItem.storeIds.splice(index, 1);
             }
+        }
+        this.searchEvent.emit(this.searchItem);
+    }
+
+    handlePriceChange($event: MatSliderChange): void  {
+        if ($event.value) {
+            this.searchItem.priceMax = $event.value;
+        } else {
+            this.searchItem.priceMax = 10_000;
         }
         this.searchEvent.emit(this.searchItem);
     }

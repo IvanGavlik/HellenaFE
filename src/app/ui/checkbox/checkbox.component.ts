@@ -16,7 +16,7 @@ export class CheckboxComponent {
 
   constructor() { }
 
-  handleSelect($event: any, element: CheckboxItem) {
+  handleSelect($event: any, element: CheckboxItem): void {
     element.checked = !element.checked;
     this.onChange.emit(element);
   }

@@ -10,35 +10,37 @@
                                   (onChange)="handleStoreChange($event)" >
                 </hellena-checkbox>
             </div>
-            <div class="col-12" style="margin-top: 1rem" >
-                <h4 style="line-height: 0!important;"> Cijena </h4>
-                <mat-slider
-                        formControlName="priceMax"
-                        style="vertical-align: bottom !important;
-                            height: auto;
-                            width: 100%;
-                            padding: 6px;"
-                        thumbLabel
-                        tickInterval="1"
-                        step="25"
-                        min="0"
-                        max="999"
-                        aria-label="kn"></mat-slider>
-                <mat-label style="display: block;
-                                margin-top: -16px;
-                                margin-left: 20px;
-                                color: #0009;
-                                font-family: Roboto;
-                                font-size: 16px;">
-                    <div style="display: inline"
-                         *ngIf="searchItem.priceMax > 0 && searchItem.priceMax < 999; else inf">
-                        <span>od 0 do {{ searchItem.priceMax }} kn </span>
-                    </div>
-                    <ng-template #inf><span> &#8734; kn </span></ng-template>
-                </mat-label>
-            </div>
-<!-- TODO            <div class="col-12" style="margin-top: 2rem" >
+                     <div class="col-12" style="margin-top: 1rem" >
+                          <h4 style="line-height: 0!important;"> Cijena </h4>
+                          <mat-slider
+                                  style="vertical-align: bottom !important;
+                                      height: auto;
+                                      width: 100%;
+                                      padding: 6px;"
+                                  thumbLabel
+                                  tickInterval="1"
+                                  step="25"
+                                  min="0"
+                                  max="999"
+                                  aria-label="kn"
+                                  (change)="handlePriceChange($event)"
+                          ></mat-slider>
+                          <mat-label style="display: block;
+                                          margin-top: -16px;
+                                          margin-left: 20px;
+                                          color: #0009;
+                                          font-family: Roboto;
+                                          font-size: 16px;">
+                              <div style="display: inline"
+                                   *ngIf="searchItem.priceMax > 0 && searchItem.priceMax < 999; else inf">
+                                  <span>od 0 do {{ searchItem.priceMax }} kn </span>
+                              </div>
+                              <ng-template #inf><span> &#8734; kn </span></ng-template>
+                          </mat-label>
+                      </div>
+ <!--TODO            <div class="col-12" style="margin-top: 2rem" >
                 <hellena-checkbox [config]="featuresConfig" (onChange)="handleFeatureChange($event)" ></hellena-checkbox>
             </div> -->
+
         </div>
 </div>
