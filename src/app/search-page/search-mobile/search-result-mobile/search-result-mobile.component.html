@@ -1,5 +1,9 @@
 <div class="container">
     <div class="row" >
+        <div class="col-12 medium-grey-center" *ngIf="data.length <= 0" >
+            <span >Nema podataka. <br>
+                Pokušajte prilagoditi filter.</span>
+        </div>
         <div class="col-12" style="padding-left: 0!important; padding-right: 0!important;"  *ngFor="let item of data;" >
             <div class="card" style="width: 97%; margin-bottom: 1rem">
                 <div class="card-body" >
