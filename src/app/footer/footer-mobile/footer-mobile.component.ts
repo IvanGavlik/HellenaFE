@@ -65,6 +65,7 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     const config = {} as MatDialogConfig;
     config.width = '95%';
     config.height = '100%';
+    config.disableClose = true;
     this.dialogShoppingRef = this.dialog.open(ShoppingListComponent, config);
     this.dialogShoppingRef.updatePosition({ top: '100px', right: '0px' }  );
     this.isOpenedShopping = true;
@@ -85,6 +86,7 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     const config = {} as MatDialogConfig;
     config.width = '95%';
     config.height = '100%';
+    config.disableClose = true;
     config.data = this.item;
     this.dialogFilterRef = this.dialog.open(SearchFormMobileComponent, config);
     this.dialogFilterRef.updatePosition({ top: '100px', right: '0px' }  );

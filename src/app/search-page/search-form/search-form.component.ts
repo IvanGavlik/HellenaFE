@@ -5,6 +5,7 @@ import {InitDataHelper} from '../pair';
 import {SearchItemService} from '../search-item.service';
 import {CheckboxConfig, CheckboxItem} from '../../ui/checkbox/checkbox-config';
 import {MatSliderChange} from '@angular/material/slider';
+import {LocalStorageService} from '../../local-storage/local-storage.service';
 
 @Component({
     selector: 'hellena-search-form',
@@ -41,10 +42,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     subs: Subscription[] = [];
 
 
-    constructor(private service: SearchItemService) {}
+    constructor(private service: SearchItemService, private local: LocalStorageService) {}
 
     ngOnInit(): void {
-        const initData = new InitDataHelper(this.service);
+        const initData = new InitDataHelper(this.service, this.local);
         const subCategory = initData.allCategory.subscribe(categories => {
             this.categoryConfig.list = categories;
             if (this.searchItem?.categoryIds !== undefined && this.searchItem?.categoryIds != null ) {

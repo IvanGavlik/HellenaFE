@@ -8,6 +8,7 @@ import {MatSliderChange} from '@angular/material/slider';
 import { MatDialogRef} from '@angular/material/dialog';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormControl} from '@angular/forms';
+import {LocalStorageService} from '../../../local-storage/local-storage.service';
 
 @Component({
   selector: 'hellena-search-form-mobile',
@@ -30,10 +31,13 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy {
 
   subs: Subscription[] = [];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: SearchItem, public dialogRef: MatDialogRef<SearchFormMobileComponent>, private service: SearchItemService) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: SearchItem, public dialogRef: MatDialogRef<SearchFormMobileComponent>,
+              private service: SearchItemService,
+              private local: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
-    const initData = new InitDataHelper(this.service);
+    const initData = new InitDataHelper(this.service, this.local);
     const subCategory = initData.allCategory.subscribe(categories => {
       this.categoryConfig.list = categories;
       if (this.data?.categoryIds !== undefined && this.data?.categoryIds != null ) {
