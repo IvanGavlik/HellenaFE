@@ -7,6 +7,7 @@ import {Subscription} from 'rxjs';
 import {FooterUiService} from '../footer-ui.service';
 import {SearchFormMobileComponent} from '../../search-page/search-mobile/search-form-mobile/search-form-mobile.component';
 import {SearchUIService} from '../../search-page/search-ui.service';
+import {defaultPage, SearchItem} from '../../search-page/search-item';
 
 @Component({
   selector: 'hellena-footer-mobile',
@@ -16,6 +17,14 @@ import {SearchUIService} from '../../search-page/search-ui.service';
 export class FooterMobileComponent implements OnInit, OnDestroy {
 
   tableSize = 100;
+  item: SearchItem = {
+    priceMIn: 0,
+    priceMax: 10_000,
+    categoryIds: [],
+    cityIds: [],
+    storeIds: [],
+    page: defaultPage(),
+  } as SearchItem;
 
   isOpenedShopping = false;
   dialogShoppingRef = {} as MatDialogRef<ShoppingListComponent>;
@@ -32,6 +41,11 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
       this.tableSize = el;
     });
     this.subs.push(size);
+
+    const onSearch = this.uiFooter.onSearchItem().subscribe(el => {
+      this.item = el;
+    });
+    this.subs.push(onSearch);
   }
 
   ngOnDestroy(): void {
@@ -71,13 +85,15 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     const config = {} as MatDialogConfig;
     config.width = '95%';
     config.height = '100%';
+    config.data = this.item;
     this.dialogFilterRef = this.dialog.open(SearchFormMobileComponent, config);
     this.dialogFilterRef.updatePosition({ top: '100px', right: '0px' }  );
     this.isOpenedFilter = true;
 
     const list = this.dialogFilterRef.afterClosed().subscribe(result => {
       this.isOpenedFilter = false;
-      this.searchUI.nextSeach(result);
+      console.log('search: ', result);
+      this.searchUI.nextSearch(result);
     });
 
     this.subs.push(list);

@@ -75,7 +75,7 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
     } as SearchItem
 
     if (this.router.url.includes('/search')) {
-      this.searchUI.nextSeach(search)
+      this.searchUI.nextSearch(search);
     } else {
       this.router.navigateByUrl('/search', {
         state: search,

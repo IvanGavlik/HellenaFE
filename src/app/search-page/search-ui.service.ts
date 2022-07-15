@@ -15,8 +15,12 @@ export class SearchUIService implements OnDestroy {
 
   constructor() { }
 
-  public nextSeach(item: SearchItem): void {
+  public nextSearch(item: SearchItem): void {
     this.searchSubject.next(item);
+  }
+
+  public onSearch(): Observable<SearchItem> {
+    return this.searchObservable;
   }
 
   public onNameSearch(): Observable<string> {
@@ -25,10 +29,6 @@ export class SearchUIService implements OnDestroy {
 
   public nextNameSearch(name: string): void {
     this.searchNameSubject.next(name);
-  }
-
-  public onSearch(): Observable<SearchItem> {
-    return this.searchObservable;
   }
 
   ngOnDestroy(): void {

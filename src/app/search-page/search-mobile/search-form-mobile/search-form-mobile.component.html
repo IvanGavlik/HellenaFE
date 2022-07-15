@@ -2,13 +2,63 @@
     <h1 mat-dialog-title class="pink-text mat-elevation-z1" style="padding: 0.2rem; margin-bottom: 0px;" >Pretraga</h1>
 
     <mat-dialog-content class="mat-typography" style="overflow-y: scroll; overflow-x: hidden; padding-bottom: 0" >
-        <p> Uskoro dostupno </p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12" style="margin-top: 2rem; font-size: 13px !important; " >
+                    <mat-form-field style="width: 100%" appearance="outline">
+                        <mat-label>Ime proizvoda</mat-label>
+                        <input matInput type="text" placeholder="npr. Kruh"  [formControl]="name" >
+                    </mat-form-field>
+                </div>
+                <div class="col-12" style="margin-top: 2rem" >
+                    <hellena-checkbox [config]="categoryConfig"
+                                      (onChange)="handleCategoryChange($event)" >
+                    </hellena-checkbox>
+                </div>
+                <div class="col-12">
+                    <hellena-checkbox [config]="storeConfig"
+                                      (onChange)="handleStoreChange($event)" >
+                    </hellena-checkbox>
+                </div>
+                <div class="col-12" style="margin-top: 1rem" >
+                    <h4 style="line-height: 0!important;"> Cijena </h4>
+                    <mat-slider
+                            style="vertical-align: bottom !important;
+                                      height: auto;
+                                      width: 100%;
+                                      padding: 6px;"
+                            thumbLabel
+                            tickInterval="1"
+                            step="25"
+                            min="0"
+                            max="999"
+                            aria-label="kn"
+                            (change)="handlePriceChange($event)"
+                    ></mat-slider>
+                    <mat-label style="display: block;
+                                          margin-top: -16px;
+                                          margin-left: 20px;
+                                          color: #0009;
+                                          font-family: Roboto;
+                                          font-size: 16px;">
+                        <div style="display: inline"
+                             *ngIf="data.priceMax > 0 && data.priceMax < 999; else inf">
+                            <span>od 0 do {{ data.priceMax }} kn </span>
+                        </div>
+                        <ng-template #inf><span> &#8734; kn </span></ng-template>
+                    </mat-label>
+                </div>
+                <!--TODO            <div class="col-12" style="margin-top: 2rem" >
+                               <hellena-checkbox [config]="featuresConfig" (onChange)="handleFeatureChange($event)" ></hellena-checkbox>
+                           </div> -->
+
+            </div>
+        </div>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
         <div>
-            <button class="mat-elevation-z1" mat-button mat-dialog-close>Zatvori</button>
+            <button class="mat-elevation-z1" mat-button (click)="closeDialog()">Primjeni</button>
         </div>
     </mat-dialog-actions>
-
 </div>

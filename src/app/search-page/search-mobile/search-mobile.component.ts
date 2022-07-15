@@ -88,6 +88,7 @@ export class SearchMobileComponent implements OnInit {
             tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['name', 'actions'] } as Table;  }),
             tap(response => this.table.totalCount = response.size), // here set total count
             tap(response => this.footerUI.nextResponseSize(response.size)), // here set total count
+            tap(response => this.footerUI.nextSearchItem(this.search)), // here set search item in footer
             map(response => response.page.map(el => this.toTableItem(el as ItemSearchEntity)))
         )
         .subscribe(
