@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PageEvent} from '@angular/material/paginator';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatDialogRef} from '@angular/material/dialog/dialog-ref';
 import {ShoppingListComponent} from '../../shopping-list/shopping-list/shopping-list.component';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
@@ -31,6 +31,8 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
 
   isOpenedFilter = false;
   dialogFilterRef = {} as MatDialogRef<SearchFormMobileComponent>;
+
+  @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
 
   private subs: Subscription[] = [];
 
@@ -94,7 +96,8 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
 
     const list = this.dialogFilterRef.afterClosed().subscribe(result => {
       this.isOpenedFilter = false;
-      console.log('search: ', result);
+      this.paginator.pageIndex = 0;
+      result.page = defaultPage();
       this.searchUI.nextSearch(result);
     });
 

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Optional, Output} from '@angular/core';
-import {SearchItem} from '../../search-item';
+import {defaultPage, SearchItem} from '../../search-item';
 import {CheckboxConfig, CheckboxItem} from '../../../ui/checkbox/checkbox-config';
 import {Subscription} from 'rxjs';
 import {SearchItemService} from '../../search-item.service';
@@ -56,6 +56,12 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy {
     this.subs.push(subCategory, subStore);
 
     this.name.setValue(this.data.name);
+
+    // https://developpaper.com/how-to-prevent-the-virtual-keyboard-from-popping-up-on-the-html-5-page/
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+      document.activeElement.focus();
+    }
   }
 
   ngOnDestroy(): void {
