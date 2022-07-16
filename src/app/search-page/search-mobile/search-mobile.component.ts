@@ -95,7 +95,8 @@ export class SearchMobileComponent implements OnInit {
             items => {
               this.table.data = items; // here set data
               this.spinnerService.closeSpinnerDialog(dialog);
-            }
+            },
+            error => this.spinnerService.closeSpinnerDialog(dialog),
         );
     // TODO SHOULD TOTOAL COUNT AND DATA BE SET AT SAME PLACE
   }
