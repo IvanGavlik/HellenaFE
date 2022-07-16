@@ -1,4 +1,16 @@
-import {AfterViewInit, Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Optional, Output} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {defaultPage, SearchItem} from '../../search-item';
 import {CheckboxConfig, CheckboxItem} from '../../../ui/checkbox/checkbox-config';
 import {Subscription} from 'rxjs';
@@ -29,6 +41,8 @@ export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestr
     list: []
   } as CheckboxConfig;
 
+  @ViewChild('focus') focus = {} as ElementRef;
+
   subs: Subscription[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: SearchItem, public dialogRef: MatDialogRef<SearchFormMobileComponent>,
@@ -57,17 +71,11 @@ export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestr
 
     this.name.setValue(this.data.name);
 
-    // https://developpaper.com/how-to-prevent-the-virtual-keyboard-from-popping-up-on-the-html-5-page/
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
+    this.focus.nativeElement.focus();
   }
 
   ngAfterViewInit(): void {
-    // https://developpaper.com/how-to-prevent-the-virtual-keyboard-from-popping-up-on-the-html-5-page/
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
+    this.focus.nativeElement.focus();
   }
 
   ngOnDestroy(): void {
