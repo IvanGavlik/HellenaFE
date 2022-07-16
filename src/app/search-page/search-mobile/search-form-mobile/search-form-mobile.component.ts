@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Optional, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Optional, Output} from '@angular/core';
 import {defaultPage, SearchItem} from '../../search-item';
 import {CheckboxConfig, CheckboxItem} from '../../../ui/checkbox/checkbox-config';
 import {Subscription} from 'rxjs';
@@ -15,7 +15,7 @@ import {LocalStorageService} from '../../../local-storage/local-storage.service'
   templateUrl: './search-form-mobile.component.html',
   styleUrls: ['./search-form-mobile.component.css']
 })
-export class SearchFormMobileComponent implements OnInit, OnDestroy {
+export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestroy {
 
   name = new FormControl('');
 
@@ -60,7 +60,13 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy {
     // https://developpaper.com/how-to-prevent-the-virtual-keyboard-from-popping-up-on-the-html-5-page/
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
-      document.activeElement.focus();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    // https://developpaper.com/how-to-prevent-the-virtual-keyboard-from-popping-up-on-the-html-5-page/
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
     }
   }
 
