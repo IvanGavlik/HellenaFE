@@ -43,6 +43,9 @@ export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestr
 
   @ViewChild('focus') focus = {} as ElementRef;
 
+  @ViewChild('focus2') focus2 = {} as ElementRef;
+
+
   subs: Subscription[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: SearchItem, public dialogRef: MatDialogRef<SearchFormMobileComponent>,
@@ -72,10 +75,13 @@ export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestr
     this.name.setValue(this.data.name);
 
     this.focus.nativeElement.focus();
+    this.focus2.nativeElement.blur();
   }
 
   ngAfterViewInit(): void {
     this.focus.nativeElement.focus();
+    this.focus2.nativeElement.blur();
+
   }
 
   ngOnDestroy(): void {
