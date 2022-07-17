@@ -41,6 +41,8 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy {
     list: []
   } as CheckboxConfig;
 
+  loaded: boolean = false;
+
 
   subs: Subscription[] = [];
 
@@ -111,4 +113,13 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy {
     this.dialogRef.close(this.data);
   }
 
+  handleFocus($event: FocusEvent): void {
+    if (this.loaded) {
+      return;
+    } else {
+      $event.stopPropagation();
+      $event.preventDefault();
+      this.loaded = true;
+    }
+  }
 }
