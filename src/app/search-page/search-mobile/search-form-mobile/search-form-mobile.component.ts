@@ -41,9 +41,7 @@ export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestr
     list: []
   } as CheckboxConfig;
 
-  @ViewChild('focus') focus = {} as ElementRef;
-
-  @ViewChild('focus2') focus2 = {} as ElementRef;
+  @ViewChild('input') input = {} as ElementRef;
 
 
   subs: Subscription[] = [];
@@ -74,14 +72,11 @@ export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestr
 
     this.name.setValue(this.data.name);
 
-    this.focus.nativeElement.focus();
-    this.focus2.nativeElement.blur();
+    this.input.nativeElement.blur();
   }
 
   ngAfterViewInit(): void {
-    this.focus.nativeElement.focus();
-    this.focus2.nativeElement.blur();
-
+    this.input.nativeElement.blur();
   }
 
   ngOnDestroy(): void {
@@ -122,4 +117,15 @@ export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestr
     this.data.name = this.name.value;
     this.dialogRef.close(this.data);
   }
+
+  handleKeyPress($event: KeyboardEvent): void {
+    if ($event.key === 'Enter') {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+      $event.preventDefault();
+      $event.stopPropagation();
+    }
+  }
+
 }
