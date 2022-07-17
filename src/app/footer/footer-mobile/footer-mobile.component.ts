@@ -16,6 +16,8 @@ import {defaultPage, SearchItem} from '../../search-page/search-item';
 })
 export class FooterMobileComponent implements OnInit, OnDestroy {
 
+  constructor(private dialog: MatDialog, private uiFooter: FooterUiService, private searchUI: SearchUIService) { }
+
   tableSize = 100;
   item: SearchItem = {
     priceMIn: 0,
@@ -35,8 +37,6 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
 
   private subs: Subscription[] = [];
-
-  constructor(private dialog: MatDialog, private uiFooter: FooterUiService, private searchUI: SearchUIService) { }
 
   ngOnInit(): void {
     const size = this.uiFooter.onResponseSize().subscribe(el => {
@@ -79,7 +79,7 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     this.subs.push(list);
   }
 
-  handleFilter(): void {
+  handleFilter($event: MouseEvent): void {
     if (this.isOpenedFilter) {
       this.dialogFilterRef.close();
       this.isOpenedFilter = false;
@@ -102,6 +102,11 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     });
 
     this.subs.push(list);
+    $event.preventDefault();
+  }
+
+  handleKey($event: KeyboardEvent): void {
+    $event.preventDefault();
   }
 
 }
