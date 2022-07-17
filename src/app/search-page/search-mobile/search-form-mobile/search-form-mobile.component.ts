@@ -27,7 +27,7 @@ import {LocalStorageService} from '../../../local-storage/local-storage.service'
   templateUrl: './search-form-mobile.component.html',
   styleUrls: ['./search-form-mobile.component.css']
 })
-export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestroy {
+export class SearchFormMobileComponent implements OnInit, OnDestroy {
 
   name = new FormControl('');
 
@@ -40,8 +40,6 @@ export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestr
     title: 'Kategorija',
     list: []
   } as CheckboxConfig;
-
-  @ViewChild('input') input = {} as ElementRef;
 
 
   subs: Subscription[] = [];
@@ -72,11 +70,6 @@ export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestr
 
     this.name.setValue(this.data.name);
 
-    this.input.nativeElement.blur();
-  }
-
-  ngAfterViewInit(): void {
-    this.input.nativeElement.blur();
   }
 
   ngOnDestroy(): void {
@@ -116,16 +109,6 @@ export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestr
   closeDialog(): void {
     this.data.name = this.name.value;
     this.dialogRef.close(this.data);
-  }
-
-  handleKeyPress($event: KeyboardEvent): void {
-    if ($event.key === 'Enter') {
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur();
-      }
-      $event.preventDefault();
-      $event.stopPropagation();
-    }
   }
 
 }
