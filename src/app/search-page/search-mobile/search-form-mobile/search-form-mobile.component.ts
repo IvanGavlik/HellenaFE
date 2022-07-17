@@ -41,8 +41,9 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy {
     list: []
   } as CheckboxConfig;
 
-  loaded: boolean = false;
+  loaded = false;
 
+  @ViewChild('input') input = {} as ElementRef;
 
   subs: Subscription[] = [];
 
@@ -117,6 +118,7 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy {
     if (this.loaded) {
       return;
     } else {
+      this.input.nativeElement.blur();
       $event.stopPropagation();
       $event.preventDefault();
       this.loaded = true;

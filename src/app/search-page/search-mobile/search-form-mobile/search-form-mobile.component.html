@@ -7,7 +7,7 @@
                 <div class="col-12" style="margin-top: 2rem; font-size: 13px !important; " >
                     <mat-form-field style="width: 100%" appearance="outline">
                         <mat-label>Ime proizvoda</mat-label>
-                        <input matInput type="text" (focus)="handleFocus($event)" placeholder="npr. Kruh"  [formControl]="name" >
+                        <input matInput type="text" #input (focus)="handleFocus($event)" placeholder="npr. Kruh"  [formControl]="name" >
                     </mat-form-field>
                 </div>
                 <div class="col-12" style="margin-top: 2rem" >
