@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12" style="margin-top: 2rem; font-size: 13px !important; " >
-                    <input #input (keypress)="handleKeyPress($event)" type="text" placeholder="npr. Kruh"  [formControl]="name" >
+                    <input #input (keypress)="handleKeyPress($event)" onfocus="blur()" type="text" placeholder="npr. Kruh"  [formControl]="name" >
                 </div>
                 <div class="col-12" style="margin-top: 2rem" >
                     <hellena-checkbox [config]="categoryConfig"
