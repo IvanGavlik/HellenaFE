@@ -5,10 +5,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12" style="margin-top: 2rem; font-size: 13px !important; " >
-                    <mat-form-field style="width: 100%" appearance="outline">
-                        <mat-label>Ime proizvoda</mat-label>
-                        <input matInput  #focus2 type="text" placeholder="npr. Kruh"  [formControl]="name" >
-                    </mat-form-field>
+                    <input #input (load)="input.blur()" type="text" placeholder="npr. Kruh"  [formControl]="name" >
                 </div>
                 <div class="col-12" style="margin-top: 2rem" >
                     <hellena-checkbox [config]="categoryConfig"
