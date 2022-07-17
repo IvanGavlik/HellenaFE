@@ -77,6 +77,16 @@ export class SearchFormMobileComponent implements OnInit, AfterViewInit ,OnDestr
 
   ngAfterViewInit(): void {
     this.input.nativeElement.blur();
+
+    const field = document.createElement('input');
+    field.setAttribute('type', 'text');
+    document.body.appendChild(field);
+    setTimeout(() =>  {
+      field.focus();
+      setTimeout(() =>  {
+        field.setAttribute('style', 'display:none;');
+      }, 50);
+    }, 50);
   }
 
   ngOnDestroy(): void {
