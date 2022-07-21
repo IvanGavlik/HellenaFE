@@ -25,7 +25,7 @@ export class SearchResultBoxComponent implements OnInit {
   }
 
   iscldImg(store: string): boolean {
-    if (store === 'LIDL' || store ===  'INTERSPAR') {
+    if (store ===  'INTERSPAR') {
       return true;
     }
     return false;
