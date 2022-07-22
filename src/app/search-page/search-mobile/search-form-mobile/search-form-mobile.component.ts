@@ -67,6 +67,14 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy {
     });
     const subStore = initData.allStore.subscribe(stores => {
       this.storeConfig.list = stores;
+      if (this.data?.storeIds !== undefined && this.data?.storeIds != null ) {
+        this.data?.storeIds?.forEach(el => {
+          const find = this.storeConfig.list.find(item => el.toString() === item.id.toString());
+          if (find) {
+            find.checked = true;
+          }
+        });
+      }
     });
 
     this.subs.push(subCategory, subStore);
