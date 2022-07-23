@@ -39,13 +39,9 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
   ngOnInit(): void {
-    const size = this.uiFooter.onResponseSize().subscribe(el => {
-      this.tableSize = el;
-    });
-    this.subs.push(size);
-
-    const onSearch = this.searchUI.onSearchStart().subscribe(el => {
+    const onSearch = this.searchUI.onSearchStop().subscribe(el => {
       this.item = el.item;
+      this.tableSize = el.page.size;
     });
     this.subs.push(onSearch);
   }
