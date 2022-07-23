@@ -7,7 +7,8 @@ import {DeviceDetectorService} from 'ngx-device-detector';
 import {FormControl} from '@angular/forms';
 import {defaultPage, SearchItem} from '../../search-page/search-item';
 import {SearchUIService} from '../../search-page/search-ui.service';
-import {Subscription} from 'rxjs';
+import {debounceTime, Subscription} from 'rxjs';
+import {validate} from 'codelyzer/walkerFactory/walkerFn';
 
 @Component({
   selector: 'hellena-navbar-desktop',
@@ -16,7 +17,6 @@ import {Subscription} from 'rxjs';
 })
 export class NavbarDesktopComponent implements OnInit, OnDestroy {
 
-
   @Input()
   title = '';
 
@@ -24,14 +24,23 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
   dialogRef = {} as MatDialogRef<ShoppingListComponent>;
 
   search = new FormControl('');
+  searchItem: SearchItem = {} as SearchItem;
 
   private subs: Subscription[] = [];
 
   constructor(private router: Router, private dialog: MatDialog, private searchUI: SearchUIService) { }
 
   ngOnInit(): void {
-    const nameChange  = this.searchUI.onNameSearch().subscribe(name => this.search.patchValue(name));
-    this.subs.push(nameChange);
+
+    const change = this.searchUI.onSearchStop().subscribe(stop => {
+      if (stop.item?.name) {
+        this.search.patchValue(stop.item.name);
+      } else {
+        this.search.patchValue(null);
+      }
+      this.searchItem = stop.item;
+    });
+    this.subs.push(change);
   }
 
   ngOnDestroy(): void {
@@ -59,26 +68,25 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
   }
 
   handleNavigationClickSearch(): void {
+    this.handleNavigationClickSearchUtil(this.search.value);
+  }
+
+  handleNavigationClickSearchUtil(value: string | null): void {
     if (this.isOpened) {
       this.dialogRef.close();
       this.isOpened = false;
     }
 
-    const search = {
-      priceMIn: 0,
-      priceMax: 10_000,
-      name: this.search.value, // todo autocomplete
-      categoryIds: [],
-      storeIds: [],
-      cityIds: [],
-      page: defaultPage(),
-    } as SearchItem
-
+    if (value == null) {
+      this.searchItem.name = undefined;
+    } else {
+      this.searchItem.name = value;
+    }
     if (this.router.url.includes('/search')) {
-      this.searchUI.nextSearch(search);
+      this.searchUI.nextSearch(this.searchItem);
     } else {
       this.router.navigateByUrl('/search', {
-        state: search,
+        state: this.searchItem,
       });
     }
   }
@@ -89,14 +97,6 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
       this.isOpened = false;
     }
     this.router.navigateByUrl('/about-us');
-  }
-
-  handleNavigationClickHome(): void {
-    if (this.isOpened) {
-      this.dialogRef.close();
-      this.isOpened = false;
-    }
-    this.router.navigateByUrl('/index');
   }
 
 }

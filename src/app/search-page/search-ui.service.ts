@@ -17,9 +17,6 @@ export class SearchUIService implements OnDestroy {
   private searchSubject = new Subject<SearchItem>();
   private searchObservable: Observable<SearchItem> = this.searchSubject.asObservable();
 
-  private searchNameSubject = new Subject<string>();
-  private searchNameObservable: Observable<string> = this.searchNameSubject.asObservable();
-
   constructor() { }
 
   public searchStart(item: SearchStart): void {
@@ -46,19 +43,10 @@ export class SearchUIService implements OnDestroy {
     return this.searchObservable;
   }
 
-  public onNameSearch(): Observable<string> {
-    return this.searchNameObservable;
-  }
-
-  public nextNameSearch(name: string): void {
-    this.searchNameSubject.next(name);
-  }
-
   ngOnDestroy(): void {
     this.searchStartSubject.unsubscribe();
     this.searchEndSubject.unsubscribe();
     this.searchSubject.unsubscribe();
-    this.searchNameSubject.unsubscribe();
   }
 }
 

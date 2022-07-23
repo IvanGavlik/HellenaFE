@@ -1,8 +1,6 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {DailyDealConfiguration} from '../daily-deal-configuration';
 import {Router} from '@angular/router';
 import {defaultPage, ItemFeature, SearchItem} from '../../search-page/search-item';
-import {DailyDealService} from '../daily-deal.service';
 import {map} from 'rxjs/operators';
 import {Entity} from '../../crud/entity';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -14,9 +12,6 @@ import {SearchUIService} from '../../search-page/search-ui.service';
   selector: 'hellena-daily-deal-container',
   templateUrl: './daily-deal-container.component.html',
   styleUrls: ['./daily-deal-container.component.css'],
-  providers: [
-    {provide: 'configuration', useClass: DailyDealConfiguration }
-  ]
 })
 export class DailyDealContainerComponent implements OnInit {
 
@@ -62,27 +57,33 @@ export class DailyDealContainerComponent implements OnInit {
       }
   });
 
-  constructor(private service: DailyDealService, private router: Router, public sanitizer: DomSanitizer,
+  constructor(private router: Router, public sanitizer: DomSanitizer,
               private searchUI: SearchUIService) { }
 
   ngOnInit(): void {
     this.loaded = false;
-    this.service.search({
+
+    this.searchUI.onSearchStop()
+        .pipe(
+            map(response => response.page.page as ItemSearchEntity[]),
+            )
+        .subscribe(entities => {
+            this.cards = entities;
+            this.cards.forEach(card => this.setImage(card));
+            this.loaded = true;
+        });
+
+    const itemSearch = {
         priceMIn: 0,
         priceMax: 10_000,
         cityIds: [],
-      storeIds: [],
-      categoryIds: [],
-      feature: ItemFeature.CHEAPEST_TODAY,
-      page: defaultPage(8)
-    } as SearchItem)
-        .pipe(
-            map(response => response.page as ItemSearchEntity[]),
-        ).subscribe(entities => {
-         this.cards = entities;
-         this.cards.forEach(card => {this.setImage(card)});
-         this.loaded = true;
-        });
+        storeIds: [],
+        categoryIds: [],
+        feature: ItemFeature.CHEAPEST_TODAY,
+        page: defaultPage(8)
+    } as SearchItem;
+    this.searchUI.searchStart({ item : itemSearch, firstPage: true } );
+
   }
 
   setImage(card: ItemSearchEntity): void {
@@ -113,7 +114,6 @@ export class DailyDealContainerComponent implements OnInit {
         feature: ItemFeature.CHEAPEST_TODAY,
         page: defaultPage()
       } as SearchItem });
-    this.searchUI.nextNameSearch($event.name);
   }
 
     iscldImg(store: string): boolean {
