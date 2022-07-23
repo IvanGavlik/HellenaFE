@@ -11,9 +11,6 @@ export class FooterUiService implements OnDestroy {
   private pageSubject = new Subject<PageEvent>();
   private pageObservable: Observable<PageEvent> = this.pageSubject.asObservable();
 
-  private responseSizeSubject = new Subject<number>();
-  private responseSizeObservable: Observable<number> = this.responseSizeSubject.asObservable();
-
   constructor() { }
 
   public nextPage(page: PageEvent): void {
@@ -27,6 +24,5 @@ export class FooterUiService implements OnDestroy {
 
   ngOnDestroy(): void {
     this.pageSubject.unsubscribe();
-    this.responseSizeSubject.unsubscribe();
   }
 }
