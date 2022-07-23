@@ -75,6 +75,8 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
 
     const uiSearch = this.searchUI.onSearch().subscribe(search => this.doSearch(search, true));
     this.subs.push(uiSearch);
+
+    this.subs.push(this.searchUI.onSearchStop().subscribe(el => console.log('sub serach stop')));
   }
 
   ngOnDestroy(): void {
@@ -86,6 +88,7 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
   }
 
   doSearch(search: SearchItem, fistPage: boolean): void {
+    this.searchUI.searchStart(search);
     if (fistPage) {
       search.page = defaultPage();
       this.paginator.pageIndex = 0;
