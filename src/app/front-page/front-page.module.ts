@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FrontPageComponent } from './front-page/front-page.component';
 import {ItemModule} from '../item/item.module';
 import {UiModule} from '../ui/ui.module';
-import {HeaderModule} from '../header/header.module';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
@@ -32,7 +31,6 @@ import {CloudinaryModule} from '@cloudinary/ng';
         ItemModule,
         CarouselModule,
         UiModule,
-        HeaderModule,
         MatCardModule,
         MatDialogModule,
         MatButtonModule,
