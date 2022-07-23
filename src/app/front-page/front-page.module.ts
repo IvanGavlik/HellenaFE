@@ -4,7 +4,6 @@ import { FrontPageComponent } from './front-page/front-page.component';
 import {ItemModule} from '../item/item.module';
 import {UiModule} from '../ui/ui.module';
 import {HeaderModule} from '../header/header.module';
-import {DailyDealModule} from '../daily-deal/daily-deal.module';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
@@ -16,6 +15,8 @@ import { MobAppPromotionDialogComponent } from './mob-app-promotion-dialog/mob-a
 import { FrontPageDesktopComponent } from './front-page-desktop/front-page-desktop.component';
 import { FrontPageMobileComponent } from './front-page-mobile/front-page-mobile.component';
 import { HeaderDesktopComponent } from './front-page-desktop/header-desktop/header-desktop.component';
+import { DailyDealComponent } from './front-page-desktop/daily-deal/daily-deal.component';
+import {CloudinaryModule} from '@cloudinary/ng';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { HeaderDesktopComponent } from './front-page-desktop/header-desktop/head
     FrontPageDesktopComponent,
     FrontPageMobileComponent,
     HeaderDesktopComponent,
+    DailyDealComponent,
   ],
     imports: [
         CommonModule,
@@ -31,11 +33,12 @@ import { HeaderDesktopComponent } from './front-page-desktop/header-desktop/head
         CarouselModule,
         UiModule,
         HeaderModule,
-        DailyDealModule,
         MatCardModule,
         MatDialogModule,
         MatButtonModule,
-        FormsModule
+        FormsModule,
+        CloudinaryModule,
+        UiModule,
     ],
   exports: [
     FrontPageComponent

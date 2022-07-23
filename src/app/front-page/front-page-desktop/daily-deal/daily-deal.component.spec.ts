@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DailyDealContainerComponent } from './daily-deal-container.component';
+import { DailyDealComponent } from './daily-deal.component';
 
-describe('DailyDealContainerComponent', () => {
-  let component: DailyDealContainerComponent;
-  let fixture: ComponentFixture<DailyDealContainerComponent>;
+describe('DailyDealComponent', () => {
+  let component: DailyDealComponent;
+  let fixture: ComponentFixture<DailyDealComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DailyDealContainerComponent ]
+      declarations: [ DailyDealComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DailyDealContainerComponent);
+    fixture = TestBed.createComponent(DailyDealComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
