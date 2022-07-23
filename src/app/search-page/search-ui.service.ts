@@ -1,17 +1,18 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {SearchItem} from './search-item';
+import {SearchItem } from './search-item';
+import {Entity, Paginator} from '../crud/entity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchUIService implements OnDestroy {
 
-  private searchStartSubject = new Subject<SearchItem>();
-  private searchStartObservable: Observable<SearchItem> = this.searchStartSubject.asObservable();
+  private searchStartSubject = new Subject<SearchStart>();
+  private searchStartObservable: Observable<SearchStart> = this.searchStartSubject.asObservable();
 
-  private searchEndSubject = new Subject<SearchItem>();
-  private searchEndObservable: Observable<SearchItem> = this.searchEndSubject.asObservable();
+  private searchEndSubject = new Subject<SearchStop>();
+  private searchEndObservable: Observable<SearchStop> = this.searchEndSubject.asObservable();
 
   private searchSubject = new Subject<SearchItem>();
   private searchObservable: Observable<SearchItem> = this.searchSubject.asObservable();
@@ -21,21 +22,19 @@ export class SearchUIService implements OnDestroy {
 
   constructor() { }
 
-  public searchStart(item: SearchItem): void {
-    console.log('searchStart');
+  public searchStart(item: SearchStart): void {
     this.searchStartSubject.next(item);
   }
 
-  public onSearchStart(): Observable<SearchItem> {
+  public onSearchStart(): Observable<SearchStart> {
     return this.searchStartObservable;
   }
 
-  public searchStop(item: SearchItem): void {
-    console.log('searchStop');
+  public searchStop(item: SearchStop): void {
     this.searchEndSubject.next(item);
   }
 
-  public onSearchStop(): Observable<SearchItem> {
+  public onSearchStop(): Observable<SearchStop> {
     return this.searchEndObservable;
   }
 
@@ -61,4 +60,15 @@ export class SearchUIService implements OnDestroy {
     this.searchSubject.unsubscribe();
     this.searchNameSubject.unsubscribe();
   }
+}
+
+export interface SearchStart {
+  item: SearchItem;
+  firstPage: boolean;
+}
+
+export interface SearchStop {
+  item: SearchItem;
+  page: Paginator<Entity>;
+  firstPage: boolean;
 }

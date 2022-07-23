@@ -14,6 +14,7 @@ import {thumbnail} from '@cloudinary/url-gen/actions/resize';
 import {Dialog} from '../../ui/dialog/dialog';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
 import {SearchUIService} from '../search-ui.service';
+import {MatDialogRef} from '@angular/material/dialog/dialog-ref';
 
 @Component({
   selector: 'hellena-search-desktop',
@@ -21,8 +22,6 @@ import {SearchUIService} from '../search-ui.service';
   styleUrls: ['./search-desktop.component.css']
 })
 export class SearchDesktopComponent implements OnInit, OnDestroy {
-
-  showFiller = false;
 
   table = {
     columnNames: ['name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
@@ -49,10 +48,12 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
 
   @ViewChild('focus') focus = {} as ElementRef;
 
+  private searchDialog: MatDialogRef<any, any> | null = null;
+
   private subs: Subscription[] = [];
 
-  constructor(private searchItemService: SearchItemService,
-              private shoppingListService: ShoppingListService,
+
+  constructor(private shoppingListService: ShoppingListService,
               private dialogService: DialogService,
               private spinnerService: SpinnerServiceService,
               private searchUI: SearchUIService
@@ -76,7 +77,21 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
     const uiSearch = this.searchUI.onSearch().subscribe(search => this.doSearch(search, true));
     this.subs.push(uiSearch);
 
-    this.subs.push(this.searchUI.onSearchStop().subscribe(el => console.log('sub serach stop')));
+    const searchStop = this.searchUI.onSearchStop()
+        .pipe(
+            tap(response => {  if (response.firstPage) { this.paginator.pageIndex = 0; } }),
+            tap(response => {  this.search = response.item; }),
+            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['name', 'actions'] } as Table;  }),
+            tap(response => this.table.totalCount = response.page.size), // here set total count
+            map(response => response.page.page.map(el => this.toTableItem(el as ItemSearchEntity)))
+        )
+        .subscribe(items => {
+          this.table.data = items; // here set data
+          if (this.searchDialog) {
+            this.spinnerService.closeSpinnerDialog(this.searchDialog);
+          }
+        });
+    this.subs.push(searchStop);
   }
 
   ngOnDestroy(): void {
@@ -88,29 +103,9 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
   }
 
   doSearch(search: SearchItem, fistPage: boolean): void {
-    this.searchUI.searchStart(search);
-    if (fistPage) {
-      search.page = defaultPage();
-      this.paginator.pageIndex = 0;
-    }
-    console.log(JSON.stringify(search))
-    this.search = search;
-    const dialog = this.spinnerService.openSpinnerDialog();
-//    dialog.afterClosed().subscribe(el => window.scroll({top: 0, left: 0, behavior: 'smooth'}) );
-    dialog.afterClosed().subscribe(el => this.focus.nativeElement.scrollIntoView({block: 'end', inline: 'end', behavior: 'smooth'}) );
-    this.searchItemService.search(search)
-        .pipe(
-            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['name', 'actions'] } as Table;  }),
-            tap(response => this.table.totalCount = response.size), // here set total count
-            map(response => response.page.map(el => this.toTableItem(el as ItemSearchEntity)))
-        )
-        .subscribe(
-            items => {
-              this.table.data = items; // here set data
-              this.spinnerService.closeSpinnerDialog(dialog);
-            }
-        );
-    // TODO SHOULD TOTOAL COUNT AND DATA BE SET AT SAME PLACE
+    this.searchDialog = this.spinnerService.openSpinnerDialog();
+    this.searchDialog.afterClosed().subscribe(el => this.focus.nativeElement.scrollIntoView({block: 'end', inline: 'end', behavior: 'smooth'}) );
+    this.searchUI.searchStart({item: search, firstPage: fistPage});
   }
 
   toTableItem(el: ItemSearchEntity): TableItem {
@@ -127,9 +122,6 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
     } as TableItem;
   }
 
-  haveData(input: any): boolean {
-    return input !== undefined && input != null;
-  }
 
   handleAddTableItemToShoppingList($event: TableItem | null): void {
     if ($event == null) {
