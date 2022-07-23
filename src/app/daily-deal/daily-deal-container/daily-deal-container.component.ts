@@ -57,8 +57,7 @@ export class DailyDealContainerComponent implements OnInit {
       }
   });
 
-  constructor(private router: Router, public sanitizer: DomSanitizer,
-              private searchUI: SearchUIService) { }
+  constructor(private router: Router, private searchUI: SearchUIService) { }
 
   ngOnInit(): void {
     this.loaded = false;

@@ -8,9 +8,6 @@ import {SearchItem} from '../search-page/search-item';
 })
 export class FooterUiService implements OnDestroy {
 
-  private settingsSubject = new Subject<void>();
-  private settingsObservable: Observable<void> = this.settingsSubject.asObservable();
-
   private pageSubject = new Subject<PageEvent>();
   private pageObservable: Observable<PageEvent> = this.pageSubject.asObservable();
 
@@ -21,14 +18,6 @@ export class FooterUiService implements OnDestroy {
   private searchItemObservable: Observable<SearchItem> = this.searchItemSubject.asObservable();
 
   constructor() { }
-
-  public nextSettings(): void {
-    this.settingsSubject.next();
-  }
-
-  public onSettings(): Observable<void> {
-    return this.settingsObservable;
-  }
 
   public nextPage(page: PageEvent): void {
     this.pageSubject.next(page);
@@ -55,7 +44,6 @@ export class FooterUiService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.settingsSubject.unsubscribe();
     this.pageSubject.unsubscribe();
     this.responseSizeSubject.unsubscribe();
     this.searchItemSubject.unsubscribe();

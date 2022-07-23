@@ -74,9 +74,6 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
     }
     this.doSearch(this.search, false);
 
-    const uiSearch = this.searchUI.onSearch().subscribe(search => this.doSearch(search, true));
-    this.subs.push(uiSearch);
-
     const searchStop = this.searchUI.onSearchStop()
         .pipe(
             tap(response => {  if (response.firstPage) { this.paginator.pageIndex = 0; } }),
