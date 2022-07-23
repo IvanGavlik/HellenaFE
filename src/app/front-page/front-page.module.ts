@@ -13,7 +13,6 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MobAppPromotionDialogComponent } from './mob-app-promotion-dialog/mob-app-promotion-dialog.component';
 import { FrontPageDesktopComponent } from './front-page-desktop/front-page-desktop.component';
 import { FrontPageMobileComponent } from './front-page-mobile/front-page-mobile.component';
-import { HeaderDesktopComponent } from './front-page-desktop/header-desktop/header-desktop.component';
 import { DailyDealComponent } from './front-page-desktop/daily-deal/daily-deal.component';
 import {CloudinaryModule} from '@cloudinary/ng';
 
@@ -23,7 +22,6 @@ import {CloudinaryModule} from '@cloudinary/ng';
     MobAppPromotionDialogComponent,
     FrontPageDesktopComponent,
     FrontPageMobileComponent,
-    HeaderDesktopComponent,
     DailyDealComponent,
   ],
     imports: [
