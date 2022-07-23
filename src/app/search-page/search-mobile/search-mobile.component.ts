@@ -15,6 +15,7 @@ import {thumbnail} from '@cloudinary/url-gen/actions/resize';
 import {Cloudinary} from '@cloudinary/url-gen';
 import {PageEvent} from '@angular/material/paginator';
 import {FooterUiService} from '../../footer/footer-ui.service';
+import {MatDialogRef} from '@angular/material/dialog/dialog-ref';
 
 @Component({
   selector: 'hellena-search-mobile',
@@ -46,6 +47,8 @@ export class SearchMobileComponent implements OnInit {
 
   @ViewChild('focus') focus = {} as ElementRef;
 
+  private searchDialog: MatDialogRef<any, any> | null = null;
+
   private subs: Subscription[] = [];
 
   constructor(private searchItemService: SearchItemService,
@@ -67,10 +70,22 @@ export class SearchMobileComponent implements OnInit {
         page: defaultPage(),
       } as SearchItem;
     }
-    this.doSearch(this.search);
+    this.doSearch(this.search, true);
 
-    const uiSearch = this.searchUI.onSearch().subscribe(search => this.doSearch(search));
-    this.subs.push(uiSearch);
+    const searchStop = this.searchUI.onSearchStop()
+        .pipe(
+            tap(response => {  this.search = response.item; }),
+            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['name', 'actions'] } as Table;  }),
+            tap(response => this.table.totalCount = response.page.size), // here set total count
+            map(response => response.page.page.map(el => this.toTableItem(el as ItemSearchEntity)))
+        )
+        .subscribe(items => {
+          this.table.data = items; // here set data
+          if (this.searchDialog) {
+            this.spinnerService.closeSpinnerDialog(this.searchDialog);
+          }
+        });
+    this.subs.push(searchStop);
 
     const uiPage = this.footerUI.onPage().subscribe(page => {
       this.handlePage(page);
@@ -78,27 +93,11 @@ export class SearchMobileComponent implements OnInit {
     this.subs.push(uiPage);
   }
 
-  doSearch(search: SearchItem): void {
-    this.search = search;
-    const dialog = this.spinnerService.openSpinnerDialog();
-    dialog.afterClosed().subscribe(el => window.scroll({top: 0, left: 0, behavior: 'smooth'}) );
-    dialog.afterClosed().subscribe(el => this.focus.nativeElement.scrollIntoView({block: 'end', inline: 'end', behavior: 'smooth'}) );
-    this.searchItemService.search(search)
-        .pipe(
-            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['name', 'actions'] } as Table;  }),
-            tap(response => this.table.totalCount = response.size), // here set total count
-            tap(response => this.footerUI.nextResponseSize(response.size)), // here set total count
-            tap(response => this.footerUI.nextSearchItem(this.search)), // here set search item in footer
-            map(response => response.page.map(el => this.toTableItem(el as ItemSearchEntity)))
-        )
-        .subscribe(
-            items => {
-              this.table.data = items; // here set data
-              this.spinnerService.closeSpinnerDialog(dialog);
-            },
-            error => this.spinnerService.closeSpinnerDialog(dialog),
-        );
-    // TODO SHOULD TOTOAL COUNT AND DATA BE SET AT SAME PLACE
+  doSearch(search: SearchItem, fistPage: boolean): void {
+    this.searchDialog = this.spinnerService.openSpinnerDialog();
+    this.searchDialog.afterClosed().subscribe(el => window.scroll({top: 0, left: 0, behavior: 'smooth'}) );
+    this.searchDialog.afterClosed().subscribe(el => this.focus.nativeElement.scrollIntoView({block: 'end', inline: 'end', behavior: 'smooth'}) );
+    this.searchUI.searchStart({item: search, firstPage: fistPage});
   }
 
   toTableItem(el: ItemSearchEntity): TableItem {
@@ -154,7 +153,7 @@ export class SearchMobileComponent implements OnInit {
     if (this.search.page.index !== 0) {
       this.search.page.index = this.search.page.index * this.search.page.size;
     }
-    this.doSearch(this.search);
+    this.doSearch(this.search, false);
   }
 
 }

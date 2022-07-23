@@ -44,8 +44,8 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     });
     this.subs.push(size);
 
-    const onSearch = this.uiFooter.onSearchItem().subscribe(el => {
-      this.item = el;
+    const onSearch = this.searchUI.onSearchStart().subscribe(el => {
+      this.item = el.item;
     });
     this.subs.push(onSearch);
   }
@@ -98,7 +98,7 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
       this.isOpenedFilter = false;
       this.paginator.pageIndex = 0;
       result.page = defaultPage();
-      this.searchUI.nextSearch(result);
+      this.searchUI.searchStart({item: result, firstPage: true});
     });
 
     this.subs.push(list);
