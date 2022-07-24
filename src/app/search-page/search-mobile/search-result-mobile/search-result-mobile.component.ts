@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TableItem} from '../../../ui/table/table';
-import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'hellena-search-result-mobile',
@@ -14,7 +13,7 @@ export class SearchResultMobileComponent implements OnInit {
   @Output()
   addToShoppingChart: EventEmitter<TableItem> = new EventEmitter<TableItem>();
 
-  constructor(public sanitizer: DomSanitizer) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

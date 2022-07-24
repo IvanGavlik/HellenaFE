@@ -84,6 +84,8 @@ export class SearchMobileComponent implements OnInit {
           if (this.searchDialog) {
             this.spinnerService.closeSpinnerDialog(this.searchDialog);
           }
+          window.scroll({top: 0, left: 0, behavior: 'smooth'});
+          this.focus.nativeElement.scrollIntoView({block: 'end', inline: 'end', behavior: 'smooth'});
         });
     this.subs.push(searchStop);
 
@@ -95,8 +97,6 @@ export class SearchMobileComponent implements OnInit {
 
   doSearch(search: SearchItem, fistPage: boolean): void {
     this.searchDialog = this.spinnerService.openSpinnerDialog();
-    this.searchDialog.afterClosed().subscribe(el => window.scroll({top: 0, left: 0, behavior: 'smooth'}) );
-    this.searchDialog.afterClosed().subscribe(el => this.focus.nativeElement.scrollIntoView({block: 'end', inline: 'end', behavior: 'smooth'}) );
     this.searchUI.searchStart({item: search, firstPage: fistPage});
   }
 
