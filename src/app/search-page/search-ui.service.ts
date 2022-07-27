@@ -14,8 +14,11 @@ export class SearchUIService implements OnDestroy {
   private searchEndSubject = new Subject<SearchStop>();
   private searchEndObservable: Observable<SearchStop> = this.searchEndSubject.asObservable();
 
-  private searchSubject = new Subject<SearchItem>();
-  private searchObservable: Observable<SearchItem> = this.searchSubject.asObservable();
+  private autocompleteNameStartSubject = new Subject<string>();
+  private autocompleteNameStartObservable: Observable<string> = this.autocompleteNameStartSubject.asObservable();
+
+  private autocompleteNameEndSubject = new Subject<string[]>();
+  private autocompleteNameEndObservable: Observable<string[]> = this.autocompleteNameEndSubject.asObservable();
 
   constructor() { }
 
@@ -35,18 +38,27 @@ export class SearchUIService implements OnDestroy {
     return this.searchEndObservable;
   }
 
-  public nextSearch(item: SearchItem): void {
-    this.searchSubject.next(item);
+  public autocompleteNameStart(name: string): void {
+    this.autocompleteNameStartSubject.next(name);
   }
 
-  public onSearch(): Observable<SearchItem> {
-    return this.searchObservable;
+  public onAutocompleteNameStart(): Observable<string> {
+    return this.autocompleteNameStartObservable;
+  }
+
+  public autocompleteNameEnd(names: string[]): void {
+    this.autocompleteNameEndSubject.next(names);
+  }
+
+  public onAutocompleteNameEnd(): Observable<string[]> {
+    return this.autocompleteNameEndObservable;
   }
 
   ngOnDestroy(): void {
     this.searchStartSubject.unsubscribe();
     this.searchEndSubject.unsubscribe();
-    this.searchSubject.unsubscribe();
+    this.autocompleteNameStartSubject.unsubscribe();
+    this.autocompleteNameEndSubject.unsubscribe();
   }
 }
 

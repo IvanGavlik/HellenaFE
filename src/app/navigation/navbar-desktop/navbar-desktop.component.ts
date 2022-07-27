@@ -3,12 +3,10 @@ import {MatDialogRef} from '@angular/material/dialog/dialog-ref';
 import {ShoppingListComponent} from '../../shopping-list/shopping-list/shopping-list.component';
 import {Router} from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {DeviceDetectorService} from 'ngx-device-detector';
 import {FormControl} from '@angular/forms';
-import {defaultPage, SearchItem} from '../../search-page/search-item';
+import {SearchItem} from '../../search-page/search-item';
 import {SearchUIService} from '../../search-page/search-ui.service';
-import {debounceTime, Subscription} from 'rxjs';
-import {validate} from 'codelyzer/walkerFactory/walkerFn';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'hellena-navbar-desktop',
@@ -28,11 +26,15 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
 
   private subs: Subscription[] = [];
 
-  constructor(private router: Router, private dialog: MatDialog, private searchUI: SearchUIService) { }
+  constructor(public searchUI: SearchUIService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
-    const change = this.searchUI.onSearchStop().subscribe(stop => {
+    const autocompleteStart = this.search.valueChanges
+        .subscribe(value => this.searchUI.autocompleteNameStart(value));
+    this.subs.push(autocompleteStart);
+
+    const inputSearch = this.searchUI.onSearchStop().subscribe(stop => {
       if (stop.item?.name) {
         this.search.patchValue(stop.item.name);
       } else {
@@ -40,7 +42,7 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
       }
       this.searchItem = stop.item;
     });
-    this.subs.push(change);
+    this.subs.push(inputSearch);
   }
 
   ngOnDestroy(): void {
