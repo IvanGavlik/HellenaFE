@@ -14,8 +14,7 @@
                             <div class="card" style="width: 97%; margin-bottom: 1rem">
                                 <div class="card-body" >
                                     <!-- todo original price -->
-                                    <advanced-image *ngIf="iscldImg(item.storeName)"[cldImg]="item.img" ></advanced-image>
-                                    <img *ngIf="!iscldImg(item.storeName)" [src]="item.imgItem"  style="width: 150px; height: 150px"  >
+                                    <img [src]="item.imgItem"  style="width: 150px; height: 150px"  >
                                     <div style="min-height: 56px; margin-top: 1rem;" >
                                         <h1 style="font-size: 16px; line-height: 24px; color:  #0F1111" > {{ item.name }} </h1>
                                     </div>

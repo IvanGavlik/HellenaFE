@@ -1,6 +1,8 @@
-<h4>{{config.title}}</h4>
+<h4 [id]="'hellena-checkbox-title-' + config.title">{{config.title}}</h4>
 <section appearance="outline" style="width: 100%" >
-    <p> <mat-checkbox color="primary" style="width: 100%"
-                      (change)="handleSelect($event, el)"
-                      [checked]="el.checked" *ngFor="let el of config.list" > {{ el.value }} </mat-checkbox> </p>
+    <p><mat-checkbox
+            [id]="'hellena-checkbox-element-'+ config.title + '-' + el.id"
+            color="primary" style="width: 100%"
+            (change)="handleSelect($event, el)"
+            [checked]="el.checked" *ngFor="let el of config.list">{{el.value}}</mat-checkbox></p>
 </section>
