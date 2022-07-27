@@ -11,8 +11,6 @@ import {SearchUIService} from '../search-ui.service';
 import {Subscription} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import {ItemSearchEntity} from '../item-search-entity';
-import {thumbnail} from '@cloudinary/url-gen/actions/resize';
-import {Cloudinary} from '@cloudinary/url-gen';
 import {PageEvent} from '@angular/material/paginator';
 import {FooterUiService} from '../../footer/footer-ui.service';
 import {MatDialogRef} from '@angular/material/dialog/dialog-ref';
@@ -38,12 +36,6 @@ export class SearchMobileComponent implements OnInit {
     storeIds: [],
     page: defaultPage()
   } as SearchItem;
-
-  cld = new Cloudinary({
-    cloud: {
-      cloudName: 'hellena'
-    }
-  });
 
   @ViewChild('focus') focus = {} as ElementRef;
 
@@ -109,7 +101,6 @@ export class SearchMobileComponent implements OnInit {
       store: el.storeName,
       activeFrom: el.activeFrom,
       activeTo: el.activeTo,
-      img: this.cld.image(el.imageName).resize(thumbnail().width(150)),
       imgItem: el.imageName,
     } as TableItem;
   }

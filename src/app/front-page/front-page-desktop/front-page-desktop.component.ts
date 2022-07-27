@@ -21,34 +21,6 @@ import {Message} from '../../about-us-page/about-us/about-us.component';
 })
 export class FrontPageDesktopComponent implements OnInit, OnDestroy {
 
-  carouselOptions: any = {
-    loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
-    autoplay: true,
-    margin: 5,
-    responsive: {
-      0: {
-        items: 1,
-        dots: false,
-        stagePadding: 30
-      },
-      400: {
-        items: 2,
-        dots: false,
-        stagePadding: 50
-      },
-      740: {
-        items: 4
-      },
-      940: {
-        items: 4
-      }
-    }
-  };
-
   private key = 'isSeen';
   msg: string = '';
   private subs: Subscription[] = [];
@@ -151,12 +123,6 @@ export class FrontPageDesktopComponent implements OnInit, OnDestroy {
     });
   }
 
-  iscldImg(store: string): boolean {
-    if (store ===  'INTERSPAR') {
-      return true;
-    }
-    return false;
-  }
 
   handleCategory(category: string): void {
       let categoryIds = 0;

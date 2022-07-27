@@ -8,8 +8,7 @@
             <div class="card" style="width: 97%; margin-bottom: 1rem">
                 <div class="card-body" >
                     <div style="float: left; width: 50%; max-width: 185px;"  >
-                        <advanced-image  style="max-width: 185px;" *ngIf="iscldImg(item.store)"[cldImg]="item.img" ></advanced-image>
-                        <img *ngIf="!iscldImg(item.store)" [src]="item.imgItem"  style="width: 150px; height: 150px"  >
+                        <img [src]="item.imgItem"  style="width: 150px; height: 150px"  >
                     </div>
 
                     <div style="float: right; width: 50%;">

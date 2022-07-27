@@ -46,18 +46,18 @@ describe('CheckboxComponent config', () => {
     });
 
     it('display title', () => {
-        const title = debugElement.query(By.css('#hellena-checkbox-title'));
+        const title = debugElement.query(By.css('#hellena-checkbox-title-' + componentTitle));
         expect(title.nativeElement.textContent).toBe(componentTitle);
     });
 
     it('display checked element', () => {
-        const el = debugElement.query(By.css('#hellena-checkbox-element-1'));
+        const el = debugElement.query(By.css('#hellena-checkbox-element-' + componentTitle + '-1'));
         expect(el.nativeElement.innerText).toBe(checked.value);
         expect(debugElement.query(By.css('[aria-checked="true"]'))).toBeTruthy();
     });
 
     it('display not checked element', () => {
-        const el = debugElement.query(By.css('#hellena-checkbox-element-2'));
+        const el = debugElement.query(By.css('#hellena-checkbox-element-' + componentTitle + '-2'));
         expect(el.nativeElement.innerText).toBe(notChecked.value);
         expect(debugElement.query(By.css('[aria-checked="false"]'))).toBeTruthy();
     });

@@ -1,16 +1,13 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Table, TableItem} from '../../ui/table/table';
 import {defaultPage, SearchItem} from '../search-item';
-import {Cloudinary} from '@cloudinary/url-gen';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {Subscription} from 'rxjs';
-import {SearchItemService} from '../search-item.service';
 import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import {DialogService} from '../../ui/dialog/dialog.service';
 import {SpinnerServiceService} from '../../ui/spinner/spinner-service.service';
 import {map, tap} from 'rxjs/operators';
 import {ItemSearchEntity} from '../item-search-entity';
-import {thumbnail} from '@cloudinary/url-gen/actions/resize';
 import {Dialog} from '../../ui/dialog/dialog';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
 import {SearchUIService} from '../search-ui.service';
@@ -37,12 +34,6 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
     storeIds: [],
     page: defaultPage()
   } as SearchItem;
-
-  cld = new Cloudinary({
-    cloud: {
-      cloudName: 'hellena'
-    }
-  });
 
   @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
 
@@ -114,7 +105,6 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
       store: el.storeName,
       activeFrom: el.activeFrom,
       activeTo: el.activeTo,
-      img: this.cld.image(el.imageName).resize(thumbnail().width(150)),
       imgItem: el.imageName,
     } as TableItem;
   }

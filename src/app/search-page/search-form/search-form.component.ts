@@ -89,6 +89,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 this.searchItem.categoryIds.splice(index, 1);
             }
         }
+        console.log('handleCategoryChange ', this.searchItem);
         this.searchEvent.emit(this.searchItem);
     }
 
@@ -101,6 +102,7 @@ export class SearchFormComponent implements OnInit, OnDestroy {
                 this.searchItem.storeIds.splice(index, 1);
             }
         }
+        console.log('handleStoreChange ', this.searchItem);
         this.searchEvent.emit(this.searchItem);
     }
 

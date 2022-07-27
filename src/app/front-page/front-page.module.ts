@@ -11,7 +11,6 @@ import { MobAppPromotionDialogComponent } from './mob-app-promotion-dialog/mob-a
 import { FrontPageDesktopComponent } from './front-page-desktop/front-page-desktop.component';
 import { FrontPageMobileComponent } from './front-page-mobile/front-page-mobile.component';
 import { DailyDealComponent } from './front-page-desktop/daily-deal/daily-deal.component';
-import {CloudinaryModule} from '@cloudinary/ng';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -31,7 +30,6 @@ import {HttpClientModule} from '@angular/common/http';
         MatDialogModule,
         MatButtonModule,
         FormsModule,
-        CloudinaryModule,
         UiModule,
     ],
   exports: [

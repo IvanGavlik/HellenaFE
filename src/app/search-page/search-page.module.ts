@@ -19,7 +19,6 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { SearchResultBoxComponent } from './search-result-box/search-result-box.component';
-import {CloudinaryModule} from '@cloudinary/ng';
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
 import { SearchDesktopComponent } from './search-desktop/search-desktop.component';
@@ -57,7 +56,6 @@ import { SearchFormMobileComponent } from './search-mobile/search-form-mobile/se
     MatDividerModule,
     MatSidenavModule,
     MatPaginatorModule,
-    CloudinaryModule,
     MatListModule,
     MatDialogModule,
     MatCheckboxModule

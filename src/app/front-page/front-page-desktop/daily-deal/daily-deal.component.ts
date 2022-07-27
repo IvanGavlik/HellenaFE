@@ -1,5 +1,4 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {Cloudinary, CloudinaryImage} from '@cloudinary/url-gen';
 import {Entity} from '../../../crud/entity';
 import {SpinnerConfig} from '../../../ui/spinner/spinner-config';
 import {Router} from '@angular/router';
@@ -50,12 +49,6 @@ export class DailyDealComponent implements OnInit {
     showProgress: new EventEmitter<boolean>()
   } as SpinnerConfig;
 
-  cld = new Cloudinary({
-    cloud: {
-      cloudName: 'hellena'
-    }
-  });
-
   constructor(private router: Router, private searchUI: SearchUIService) { }
 
   ngOnInit(): void {
@@ -85,7 +78,6 @@ export class DailyDealComponent implements OnInit {
   }
 
   setImage(card: ItemSearchEntity): void {
-    card.img = this.cld.image(card.imageName);
     card.imgItem = card.imageName;
   }
 
@@ -130,7 +122,6 @@ interface ItemSearchEntity extends Entity {
   imageName: string;
   activeFrom: Date;
   activeTo: Date;
-  img: CloudinaryImage;
   imgItem: string;
   storeLogo: string;
 }
