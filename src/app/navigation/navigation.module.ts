@@ -13,6 +13,7 @@ import { NavbarDesktopComponent } from './navbar-desktop/navbar-desktop.componen
 import { NavbarMobileComponent } from './navbar-mobile/navbar-mobile.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {FeedbackPageModule} from '../feedback-page/feedback-page.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
         MatFormFieldModule,
         FormsModule,
         ReactiveFormsModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        FeedbackPageModule,
     ],
   exports: [
     NavbarComponent

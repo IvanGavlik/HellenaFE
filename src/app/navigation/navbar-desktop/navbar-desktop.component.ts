@@ -7,6 +7,7 @@ import {FormControl} from '@angular/forms';
 import {SearchItem} from '../../search-page/search-item';
 import {SearchUIService} from '../../search-page/search-ui.service';
 import {Subscription} from 'rxjs';
+import {FeedbackDialogComponent} from '../../feedback-page/feedback-dialog/feedback-dialog.component';
 
 @Component({
   selector: 'hellena-navbar-desktop',
@@ -19,7 +20,8 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
   title = '';
 
   isOpened = false;
-  dialogRef = {} as MatDialogRef<ShoppingListComponent>;
+  dialogRefShopp = {} as MatDialogRef<ShoppingListComponent>;
+  dialogRefFeedback = {} as MatDialogRef<FeedbackDialogComponent>;
 
   search = new FormControl('');
   searchItem: SearchItem = {} as SearchItem;
@@ -51,18 +53,17 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
 
   handleNavigationClickShoppingCart(): void {
     if (this.isOpened) {
-      this.dialogRef.close();
-      this.isOpened = false;
+      this.closeDialogRef();
       return;
     }
     const config = {} as MatDialogConfig;
     config.width = '30%';
     config.height = '100%';
-    this.dialogRef = this.dialog.open(ShoppingListComponent, config);
-    this.dialogRef.updatePosition({ top: '100px', right: '0px' }  );
+    this.dialogRefShopp = this.dialog.open(ShoppingListComponent, config);
+    this.dialogRefShopp.updatePosition({ top: '100px', right: '0px' }  );
     this.isOpened = true;
 
-    const list = this.dialogRef.afterClosed().subscribe(result => {
+    const list = this.dialogRefShopp.afterClosed().subscribe(result => {
       this.isOpened = false;
     });
 
@@ -75,8 +76,7 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
 
   handleNavigationClickSearchUtil(value: string | null): void {
     if (this.isOpened) {
-      this.dialogRef.close();
-      this.isOpened = false;
+     this.closeDialogRef();
     }
 
     if (value == null) {
@@ -95,10 +95,34 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
 
   handleNavigationClickAboutUs(): void {
     if (this.isOpened) {
-      this.dialogRef.close();
-      this.isOpened = false;
+      this.closeDialogRef();
+
     }
     this.router.navigateByUrl('/about-us');
   }
 
+  handleNavigationClickFeedback(): void {
+    if (this.isOpened) {
+      this.closeDialogRef();
+    }
+
+    const config = {} as MatDialogConfig;
+    config.width = '30%';
+    config.height = '100%';
+    this.dialogRefFeedback = this.dialog.open(FeedbackDialogComponent, config);
+    this.dialogRefFeedback.updatePosition({ top: '100px', right: '0px' }  );
+    this.isOpened = true;
+
+    const list = this.dialogRefFeedback.afterClosed().subscribe(result => {
+      this.isOpened = false;
+    });
+
+    this.subs.push(list);
+  }
+
+  private closeDialogRef(): void {
+    this.dialogRefShopp.close();
+    this.dialogRefFeedback.close();
+    this.isOpened = false;
+  }
 }
