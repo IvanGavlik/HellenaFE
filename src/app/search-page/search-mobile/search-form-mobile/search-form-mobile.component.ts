@@ -1,14 +1,9 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
   Inject,
-  Input,
   OnDestroy,
   OnInit,
-  Optional,
-  Output,
   ViewChild
 } from '@angular/core';
 import {defaultPage, SearchItem} from '../../search-item';
@@ -21,6 +16,7 @@ import { MatDialogRef} from '@angular/material/dialog';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormControl} from '@angular/forms';
 import {LocalStorageService} from '../../../local-storage/local-storage.service';
+import {SearchUIService} from '../../search-ui.service';
 
 @Component({
   selector: 'hellena-search-form-mobile',
@@ -48,6 +44,7 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy {
   subs: Subscription[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: SearchItem, public dialogRef: MatDialogRef<SearchFormMobileComponent>,
+              public searchUI: SearchUIService,
               private service: SearchItemService,
               private local: LocalStorageService
   ) {}
@@ -81,6 +78,9 @@ export class SearchFormMobileComponent implements OnInit, OnDestroy {
 
     this.name.setValue(this.data.name);
 
+    const autocompleteName = this.name.valueChanges
+        .subscribe(value => this.searchUI.autocompleteNameStart(value));
+    this.subs.push(autocompleteName);
   }
 
   ngOnDestroy(): void {

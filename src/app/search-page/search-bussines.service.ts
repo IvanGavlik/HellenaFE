@@ -1,9 +1,9 @@
-import {Injectable, OnDestroy, OnInit} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {SearchStart, SearchStop, SearchUIService} from './search-ui.service';
 import {SearchService} from '../search/search-service';
 import {concatAll, debounceTime, flatMap, Observable, of, Subscription} from 'rxjs';
 import {defaultPage, SearchItem} from './search-item';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Entity, Paginator} from '../crud/entity';
 import {SearchItemService} from './search-item.service';
 
@@ -33,7 +33,7 @@ export class SearchBussinesService implements OnDestroy {
 
     const autocompleteName = this.searchUi.onAutocompleteNameStart()
         .pipe(
-            debounceTime(300),
+            debounceTime(100),
             map( value => this.filterName(value)),
             concatAll()
         )
