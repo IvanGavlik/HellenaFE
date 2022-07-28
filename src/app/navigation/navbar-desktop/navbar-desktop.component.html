@@ -27,7 +27,7 @@
                 </button>
                 <button mat-button (click)="handleNavigationClickFeedback()" >
                     <mat-icon class="white-icon"> notifications </mat-icon>
-                    <span style="padding-bottom: 10px" >+1</span>
+                    <span *ngIf="notSee()" style="padding-bottom: 10px" >+1</span>
                 </button>
             </mat-toolbar>
         </div>

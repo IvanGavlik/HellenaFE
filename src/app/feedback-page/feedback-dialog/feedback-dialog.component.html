@@ -1,34 +1,39 @@
-<mat-card style="width: 100%">
+<mat-card style="width: 100%" xmlns="http://www.w3.org/1999/html">
     <mat-card-header>
         <mat-card-title>Ocijeni nas</mat-card-title>
         <mat-card-subtitle>Radi poboljšanja usluge molimo te nas ocijenis. </mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image src="../../../assets/image/feedback.png" alt="Feedback title">
     <mat-card-content>
+        <form>
         <div class="container" >
             <div class="row" >
                 <div class="col-12" >
-                    <p  style="font-weight: bold">
-                        Koliko ste općenito zadovoljni aplikacijom i uslugom koju pruža ?
-                    </p>
-                    <p> 1 - nisam zadovoljan, 5 - jako sam zadovoljan </p>
-                    <mat-slider style="width: 100%" [min]="1" [max]="5" [step]="1" [thumbLabel]="true"
-                                aria-label="grade"></mat-slider>
-                </div>
-                <div class="col-12">
-                    <p style="font-weight: bold" >
-                        Opiši šta bi htio vidjeti na stranici i kako možemo postati bolji.
-                    </p>
-                    <mat-form-field appearance="outline" style="width: 100%;" >
-                        <textarea style="width: 100%; height: 100px;"   matInput></textarea>
-                    </mat-form-field>
+                        <p  style="font-weight: bold">
+                            Koliko ste općenito zadovoljni aplikacijom i uslugom koju pruža ?
+                        </p>
+                        <p> 1 - nisam zadovoljan, 5 - jako sam zadovoljan </p>
+                        <mat-slider style="width: 100%" [min]="1" [max]="5" [step]="1" [thumbLabel]="true"
+                                    [(ngModel)]="grade"
+                                    aria-label="grade"></mat-slider>
+                    </div>
+                    <div class="col-12">
+                        <p style="font-weight: bold" >
+                            Opiši šta bi htio vidjeti na stranici i kako možemo postati bolji.
+                        </p>
+                        <mat-form-field appearance="outline" style="width: 100%;" >
+                            <textarea style="width: 100%; height: 100px;"  matInput
+                                      [(ngModel)]="feedback"
+                            ></textarea>
+                        </mat-form-field>
                 </div>
             </div>
         </div>
+        </form>
     </mat-card-content>
     <mat-card-actions align="end" >
-        <button mat-button>ODUSTANI</button>
-        <button mat-button>POŠALJI</button>
+        <button mat-button (click)="clear()" >ODUSTANI</button>
+        <button mat-button (click)="onSubmit()" >POŠALJI</button>
     </mat-card-actions>
 </mat-card>
 

@@ -8,6 +8,8 @@ import {SearchItem} from '../../search-page/search-item';
 import {SearchUIService} from '../../search-page/search-ui.service';
 import {Subscription} from 'rxjs';
 import {FeedbackDialogComponent} from '../../feedback-page/feedback-dialog/feedback-dialog.component';
+import {LocalStorageService} from '../../local-storage/local-storage.service';
+import {MobAppPromotionDialogComponent} from '../../front-page/mob-app-promotion-dialog/mob-app-promotion-dialog.component';
 
 @Component({
   selector: 'hellena-navbar-desktop',
@@ -28,7 +30,8 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
 
   private subs: Subscription[] = [];
 
-  constructor(public searchUI: SearchUIService, private router: Router, private dialog: MatDialog) { }
+  constructor(public searchUI: SearchUIService, private router: Router, private dialog: MatDialog,
+              private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
 
@@ -124,5 +127,13 @@ export class NavbarDesktopComponent implements OnInit, OnDestroy {
     this.dialogRefShopp.close();
     this.dialogRefFeedback.close();
     this.isOpened = false;
+  }
+
+  notSee(): boolean {
+    const value = this.localStorageService.getItem('ocijeni_nas_feedback');
+    if (value === undefined || value == null || value !== 'Y') {
+     return true;
+    }
+    return false;
   }
 }

@@ -6,6 +6,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,8 +17,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatSliderModule,
     MatInputModule,
     MatCardModule,
-      MatButtonModule,
-      MatFormFieldModule
+    MatButtonModule,
+    MatFormFieldModule,
+    FormsModule
   ]
 })
 export class FeedbackPageModule { }
