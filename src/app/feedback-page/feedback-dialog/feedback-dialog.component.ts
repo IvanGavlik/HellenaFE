@@ -6,6 +6,7 @@ import {DialogService} from '../../ui/dialog/dialog.service';
 import {Subscription} from 'rxjs';
 import { MatDialogRef} from '@angular/material/dialog';
 import {LocalStorageService} from '../../local-storage/local-storage.service';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'hellena-feedback-dialog',
@@ -22,6 +23,7 @@ export class FeedbackDialogComponent implements OnInit, OnDestroy {
   constructor(public dialogRef: MatDialogRef<FeedbackDialogComponent>,
               private service: AboutUsService,
               private dialogService: DialogService,
+              public deviceService: DeviceDetectorService,
               private localService: LocalStorageService) { }
 
   ngOnInit(): void {

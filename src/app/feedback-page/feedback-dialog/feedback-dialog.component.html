@@ -1,9 +1,10 @@
-<mat-card style="width: 100%" xmlns="http://www.w3.org/1999/html">
+<mat-card style="width: 100%;"
+          [ngStyle]="this.deviceService.isMobile() ? {'margin-top': '45px'} : {' margin-top': 'inherit'}">
     <mat-card-header>
         <mat-card-title>Ocijeni nas</mat-card-title>
         <mat-card-subtitle>Radi poboljšanja usluge molimo te nas ocijenis. </mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="../../../assets/image/feedback.png" alt="Feedback title">
+    <img  *ngIf="!this.deviceService.isMobile()" mat-card-image src="../../../assets/image/feedback.png" alt="Feedback title">
     <mat-card-content>
         <form>
         <div class="container" >
