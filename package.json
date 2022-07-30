@@ -1,6 +1,6 @@
 {
   "name": "hellena",
-  "version": "1.0.4",
+  "version": "3.0.1",
   "engines": {
     "node": "14.18.2",
     "npm": "8.3.0"
