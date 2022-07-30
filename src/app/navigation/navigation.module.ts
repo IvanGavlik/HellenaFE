@@ -14,6 +14,7 @@ import { NavbarMobileComponent } from './navbar-mobile/navbar-mobile.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {FeedbackPageModule} from '../feedback-page/feedback-page.module';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {FeedbackPageModule} from '../feedback-page/feedback-page.module';
         ReactiveFormsModule,
         MatAutocompleteModule,
         FeedbackPageModule,
+        MatBadgeModule,
     ],
   exports: [
     NavbarComponent

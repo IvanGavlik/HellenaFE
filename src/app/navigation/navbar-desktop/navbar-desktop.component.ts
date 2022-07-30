@@ -9,7 +9,6 @@ import {SearchUIService} from '../../search-page/search-ui.service';
 import {Subscription} from 'rxjs';
 import {FeedbackDialogComponent} from '../../feedback-page/feedback-dialog/feedback-dialog.component';
 import {LocalStorageService} from '../../local-storage/local-storage.service';
-import {MobAppPromotionDialogComponent} from '../../front-page/mob-app-promotion-dialog/mob-app-promotion-dialog.component';
 
 @Component({
   selector: 'hellena-navbar-desktop',

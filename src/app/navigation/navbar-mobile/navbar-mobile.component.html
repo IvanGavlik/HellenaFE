@@ -5,8 +5,8 @@
                 <a class="navbar-brand" class="title" href="#">Hellena</a>
                 <span class="example-spacer"></span>
                 <button mat-button (click)="handleNavigationClickFeedback()" >
-                    <mat-icon class="white-icon"> notifications </mat-icon>
-                    <span *ngIf="notSee()" style="padding-bottom: 10px" >+1</span>
+                    <mat-icon matBadge="+1" matBadgeSize="small" matBadgeColor="accent" matBadgePosition="above after" [matBadgeHidden]="!notSee()"
+                              class="white-icon"> notifications </mat-icon>
                 </button>
             </mat-toolbar>
         </div>
