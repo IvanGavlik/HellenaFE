@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TableItem} from '../../../ui/table/table';
+import {IInfiniteScrollEvent} from 'ngx-infinite-scroll/models';
 
 @Component({
   selector: 'hellena-search-result-mobile',
@@ -13,11 +14,19 @@ export class SearchResultMobileComponent implements OnInit {
   @Output()
   addToShoppingChart: EventEmitter<TableItem> = new EventEmitter<TableItem>();
 
+  @Output()
+  loadMore: EventEmitter<void> = new EventEmitter<void>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
   handleFooterActionCard(item: TableItem): void {
     this.addToShoppingChart.emit(item);
+  }
+
+  handleScroll($event: IInfiniteScrollEvent): void {
+    console.log('handleScroll :) ');
+    this.loadMore.emit();
   }
 }

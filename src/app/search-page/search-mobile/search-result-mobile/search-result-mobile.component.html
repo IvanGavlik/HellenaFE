@@ -1,5 +1,7 @@
 <div class="container">
-    <div class="row" >
+    <div class="row" infinite-scroll [scrollWindow]="true"
+         (scrolled)="handleScroll($event)"
+    >
         <div class="col-12 medium-grey-center" *ngIf="data.length <= 0" >
             <span >Nema podataka. <br>
                 Pokušajte prilagoditi filter.</span>

@@ -36,6 +36,7 @@
     "material-design-icons": "^3.0.1",
     "ng2-file-upload": "^1.4.0",
     "ngx-device-detector": "^3.0.0",
+    "ngx-infinite-scroll": "^13.0.0",
     "ngx-owl-carousel-o": "^7.0.2",
     "rxjs": "^7.5.1",
     "swiper": "^8.0.7",

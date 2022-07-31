@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {defaultPage, SearchItem} from '../search-item';
 import {Table, TableItem} from '../../ui/table/table';
 import {Dialog} from '../../ui/dialog/dialog';
@@ -8,19 +8,17 @@ import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import {DialogService} from '../../ui/dialog/dialog.service';
 import {SpinnerServiceService} from '../../ui/spinner/spinner-service.service';
 import {SearchUIService} from '../search-ui.service';
-import {Subscription} from 'rxjs';
+import {of, Subject, Subscription} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import {ItemSearchEntity} from '../item-search-entity';
-import {PageEvent} from '@angular/material/paginator';
-import {FooterUiService} from '../../footer/footer-ui.service';
-import {MatDialogRef} from '@angular/material/dialog/dialog-ref';
+import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 
 @Component({
   selector: 'hellena-search-mobile',
   templateUrl: './search-mobile.component.html',
   styleUrls: ['./search-mobile.component.css']
 })
-export class SearchMobileComponent implements OnInit {
+export class SearchMobileComponent implements OnInit, OnDestroy {
 
   table = {
     columnNames: ['name', 'actions'], // TODO USED IN TWO PLACES, CREATE CONST OR REFACTOR, ALSO SEE OTHER TABLE
@@ -39,7 +37,13 @@ export class SearchMobileComponent implements OnInit {
 
   @ViewChild('focus') focus = {} as ElementRef;
 
-  private searchDialog: MatDialogRef<any, any> | null = null;
+  spinnerShowProgress = new Subject<boolean>();
+  spinner = {
+    color : 'primary',
+    mode : 'indeterminate',
+    value: 50,
+    showProgress: this.spinnerShowProgress.asObservable(),
+  } as SpinnerConfig;
 
   private subs: Subscription[] = [];
 
@@ -47,8 +51,7 @@ export class SearchMobileComponent implements OnInit {
               private shoppingListService: ShoppingListService,
               private dialogService: DialogService,
               private spinnerService: SpinnerServiceService,
-              private searchUI: SearchUIService,
-              private footerUI: FooterUiService) { }
+              private searchUI: SearchUIService) { }
 
   ngOnInit(): void {
     const initSearch = history.state;
@@ -67,28 +70,35 @@ export class SearchMobileComponent implements OnInit {
     const searchStop = this.searchUI.onSearchStop()
         .pipe(
             tap(response => {  this.search = response.item; }),
-            tap(response => {  this.table = { data: [], totalCount: 0, columnNames: ['name', 'actions'] } as Table;  }),
+            tap(response => { if (response.firstPage) {
+              this.table.data = [];
+              const scrollToTop = window.setInterval(() => {
+                const pos = window.pageYOffset;
+                if (pos > 0) {
+                  window.scrollTo(0, 0); // how far to scroll on each step
+                } else {
+                  window.clearInterval(scrollToTop);
+                }
+              }, 1);
+            } }), // here set total count
             tap(response => this.table.totalCount = response.page.size), // here set total count
             map(response => response.page.page.map(el => this.toTableItem(el as ItemSearchEntity)))
         )
         .subscribe(items => {
-          this.table.data = items; // here set data
-          if (this.searchDialog) {
-            this.spinnerService.closeSpinnerDialog(this.searchDialog);
-          }
-          window.scroll({top: 0, left: 0, behavior: 'smooth'});
-          this.focus.nativeElement.scrollIntoView({block: 'end', inline: 'end', behavior: 'smooth'});
+          items.forEach(el => this.table.data.push(el));
+          this.spinnerShowProgress.next(false);
         });
     this.subs.push(searchStop);
 
-    const uiPage = this.footerUI.onPage().subscribe(page => {
-      this.handlePage(page);
-    });
-    this.subs.push(uiPage);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(el => el.unsubscribe());
+    this.spinnerShowProgress.unsubscribe();
   }
 
   doSearch(search: SearchItem, fistPage: boolean): void {
-    this.searchDialog = this.spinnerService.openSpinnerDialog();
+    this.spinnerShowProgress.next(true);
     this.searchUI.searchStart({item: search, firstPage: fistPage});
   }
 
@@ -138,13 +148,8 @@ export class SearchMobileComponent implements OnInit {
 
   }
 
-  handlePage($event: PageEvent): void {
-    this.search.page.index = $event.pageIndex;
-    this.search.page.size = $event.pageSize;
-    if (this.search.page.index !== 0) {
-      this.search.page.index = this.search.page.index * this.search.page.size;
-    }
+  handleLoadMore(): void {
+    this.search.page.index = (this.search.page.index) + this.search.page.size;
     this.doSearch(this.search, false);
   }
-
 }

@@ -26,6 +26,7 @@ import { SearchMobileComponent } from './search-mobile/search-mobile.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { SearchResultMobileComponent } from './search-mobile/search-result-mobile/search-result-mobile.component';
 import { SearchFormMobileComponent } from './search-mobile/search-form-mobile/search-form-mobile.component';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { SearchFormMobileComponent } from './search-mobile/search-form-mobile/se
     MatPaginatorModule,
     MatListModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    InfiniteScrollModule,
   ],
   exports: [
     SearchComponent

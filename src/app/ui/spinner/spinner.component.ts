@@ -2,7 +2,6 @@ import {Component, Inject, Input, OnDestroy, OnInit, Optional} from '@angular/co
 import {SpinnerConfig} from './spinner-config';
 import {of, Subscription} from 'rxjs';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Dialog} from '../dialog/dialog';
 
 @Component({
   selector: 'hellena-spinner',
@@ -18,6 +17,7 @@ export class SpinnerComponent implements OnInit, OnDestroy {
     value: 50,
     showProgress: of(true)
   } as SpinnerConfig;
+
 
   showMatProgress = true;
   sub: Subscription = new Subscription();

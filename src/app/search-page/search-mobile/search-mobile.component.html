@@ -6,8 +6,10 @@
                 <hellena-search-result-mobile
                     [data]="table.data"
                     (addToShoppingChart)="handleAddTableItemToShoppingList($event)"
+                    (loadMore)="handleLoadMore()"
                 >
                 </hellena-search-result-mobile>
+               <hellena-spinner [spinner]="spinner" ></hellena-spinner>
             </div>
         </div>
     </div>
