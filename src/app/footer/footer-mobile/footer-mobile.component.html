@@ -6,6 +6,7 @@
 
                 <div class="col-3" >
                     <button mat-button color="primary" style="width: 100%"
+                            [ngStyle]="{'border-top':router.url.includes('index')  ? '1px solid' : 'none'}"
                             (click)="handleNavigationClickHome()"
                     >
                         <mat-icon>home</mat-icon>
@@ -14,7 +15,8 @@
 
                 <div class="col-3" >
                     <button mat-button color="primary" style="width: 100%"
-                     (click)="handleNavigationClickAboutUs()"
+                            [ngStyle]="{'border-top':router.url.includes('about-us')  ? '1px solid' : 'none'}"
+                            (click)="handleNavigationClickAboutUs()"
                     >
                         <mat-icon>business</mat-icon>
                     </button>

@@ -35,7 +35,7 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
 
 
   constructor(private dialog: MatDialog, private searchUI: SearchUIService, private localStorageService: LocalStorageService,
-              private router: Router) { }
+              public router: Router) { }
 
   ngOnInit(): void {
     const onSearch = this.searchUI.onSearchStop().subscribe(el => {
