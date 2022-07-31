@@ -8,6 +8,7 @@ import {SearchFormMobileComponent} from '../../search-page/search-mobile/search-
 import {SearchUIService} from '../../search-page/search-ui.service';
 import {defaultPage, SearchItem} from '../../search-page/search-item';
 import {LocalStorageService} from '../../local-storage/local-storage.service';
+import {FeedbackDialogComponent} from '../../feedback-page/feedback-dialog/feedback-dialog.component';
 
 @Component({
   selector: 'hellena-footer-mobile',
@@ -30,6 +31,9 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
 
   isOpenedFilter = false;
   dialogFilterRef = {} as MatDialogRef<SearchFormMobileComponent>;
+
+  isOpenedFeedback = false;
+  dialogRefFeedback = {} as MatDialogRef<FeedbackDialogComponent>;
 
   private subs: Subscription[] = [];
 
@@ -95,6 +99,26 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
 
   handleKey($event: KeyboardEvent): void {
     $event.preventDefault();
+  }
+
+  handleNavigationClickFeedback(): void {
+    if (this.isOpenedFeedback) {
+      this.dialogRefFeedback.close();
+      this.isOpenedFeedback = false;
+    }
+
+    const config = {} as MatDialogConfig;
+    config.width = '90%';
+    config.height = '100%';
+    this.dialogRefFeedback = this.dialog.open(FeedbackDialogComponent, config);
+    this.dialogRefFeedback.updatePosition({ top: '100px', right: '0px' }  );
+    this.isOpenedFeedback = true;
+
+    const list = this.dialogRefFeedback.afterClosed().subscribe(result => {
+      this.isOpenedFeedback = false;
+    });
+
+    this.subs.push(list);
   }
 
   notSee(): boolean {
