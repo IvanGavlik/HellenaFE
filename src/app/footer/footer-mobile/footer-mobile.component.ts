@@ -4,10 +4,10 @@ import {MatDialogRef} from '@angular/material/dialog/dialog-ref';
 import {ShoppingListComponent} from '../../shopping-list/shopping-list/shopping-list.component';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Subscription} from 'rxjs';
-import {FooterUiService} from '../footer-ui.service';
 import {SearchFormMobileComponent} from '../../search-page/search-mobile/search-form-mobile/search-form-mobile.component';
 import {SearchUIService} from '../../search-page/search-ui.service';
 import {defaultPage, SearchItem} from '../../search-page/search-item';
+import {LocalStorageService} from '../../local-storage/local-storage.service';
 
 @Component({
   selector: 'hellena-footer-mobile',
@@ -16,9 +16,6 @@ import {defaultPage, SearchItem} from '../../search-page/search-item';
 })
 export class FooterMobileComponent implements OnInit, OnDestroy {
 
-  constructor(private dialog: MatDialog, private uiFooter: FooterUiService, private searchUI: SearchUIService) { }
-
-  tableSize = 100;
   item: SearchItem = {
     priceMIn: 0,
     priceMax: 10_000,
@@ -34,24 +31,20 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
   isOpenedFilter = false;
   dialogFilterRef = {} as MatDialogRef<SearchFormMobileComponent>;
 
-  @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
-
   private subs: Subscription[] = [];
+
+
+  constructor(private dialog: MatDialog, private searchUI: SearchUIService, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
     const onSearch = this.searchUI.onSearchStop().subscribe(el => {
       this.item = el.item;
-      this.tableSize = el.page.size;
     });
     this.subs.push(onSearch);
   }
 
   ngOnDestroy(): void {
     this.subs.forEach(el => el.unsubscribe());
-  }
-
-  handlePage($event: PageEvent): void {
-    this.uiFooter.nextPage($event);
   }
 
   handleShoppingList(): void {
@@ -92,7 +85,6 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
 
     const list = this.dialogFilterRef.afterClosed().subscribe(result => {
       this.isOpenedFilter = false;
-      this.paginator.pageIndex = 0;
       result.page = defaultPage();
       this.searchUI.searchStart({item: result, firstPage: true});
     });
@@ -103,6 +95,14 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
 
   handleKey($event: KeyboardEvent): void {
     $event.preventDefault();
+  }
+
+  notSee(): boolean {
+    const value = this.localStorageService.getItem('ocijeni_nas_feedback');
+    if (value === undefined || value == null || value !== 'Y') {
+      return true;
+    }
+    return false;
   }
 
 }

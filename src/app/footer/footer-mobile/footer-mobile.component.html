@@ -1,30 +1,31 @@
-<!-- header - app name icon about us, home page
-    ljubicasto bijela pozadina
- -->
 <div class="footer">
-    <!--
-        View settings | Filters | Shoping List
-    bijela pozadina ljubicaste ikone
-    -->
     <mat-divider></mat-divider>
     <section>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-4" >
-                    <button (click)="handleFilter($event)" (keydown)="handleKey($event)"   mat-icon-button color="primary" style="width: 100%" >
-                        <mat-icon>search</mat-icon>
+            <div class="row" style="margin-top: 6px;">
+
+                <div class="col-3" >
+                    <button mat-button color="primary" style="width: 100%" >
+                        <mat-icon>home</mat-icon>
                     </button>
                 </div>
-                <div class="col-4" >
-                    <mat-paginator [pageSizeOptions]="[12, 24]"
-                                   [length]="tableSize"
-                                   (page)="handlePage($event)"
-                                   aria-label="Select page of periodic elements">
-                    </mat-paginator>
+
+                <div class="col-3" >
+                    <button mat-button color="primary" style="width: 100%" >
+                        <mat-icon>business</mat-icon>
+                    </button>
                 </div>
-                <div class="col-4" >
+
+                <div class="col-3" >
                     <button (click)="handleShoppingList()" mat-icon-button color="primary" style="width: 100%">
                         <mat-icon>list</mat-icon>
+                    </button>
+                </div>
+
+                <div class="col-3" >
+                    <button mat-button color="primary" style="width: 100%" > <!-- (click)="handleNavigationClickFeedback()" -->
+                        <mat-icon matBadge="+1" matBadgeSize="small" matBadgeColor="accent"  matBadgePosition="above after" [matBadgeHidden]="!notSee()">
+                            notifications </mat-icon>
                     </button>
                 </div>
             </div>

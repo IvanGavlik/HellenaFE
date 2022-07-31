@@ -7,7 +7,7 @@ import { FooterMobileComponent } from './footer-mobile/footer-mobile.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatDividerModule,
     MatButtonModule,
     MatIconModule,
-    MatPaginatorModule
+    MatBadgeModule
   ],
   exports: [
     FooterComponent
