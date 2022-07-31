@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatDialogRef} from '@angular/material/dialog/dialog-ref';
 import {ShoppingListComponent} from '../../shopping-list/shopping-list/shopping-list.component';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
@@ -9,6 +8,7 @@ import {SearchUIService} from '../../search-page/search-ui.service';
 import {defaultPage, SearchItem} from '../../search-page/search-item';
 import {LocalStorageService} from '../../local-storage/local-storage.service';
 import {FeedbackDialogComponent} from '../../feedback-page/feedback-dialog/feedback-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'hellena-footer-mobile',
@@ -26,19 +26,16 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     page: defaultPage(),
   } as SearchItem;
 
-  isOpenedShopping = false;
+  isOpenedDialog = false;
   dialogShoppingRef = {} as MatDialogRef<ShoppingListComponent>;
-
-  isOpenedFilter = false;
   dialogFilterRef = {} as MatDialogRef<SearchFormMobileComponent>;
-
-  isOpenedFeedback = false;
   dialogRefFeedback = {} as MatDialogRef<FeedbackDialogComponent>;
 
   private subs: Subscription[] = [];
 
 
-  constructor(private dialog: MatDialog, private searchUI: SearchUIService, private localStorageService: LocalStorageService) { }
+  constructor(private dialog: MatDialog, private searchUI: SearchUIService, private localStorageService: LocalStorageService,
+              private router: Router) { }
 
   ngOnInit(): void {
     const onSearch = this.searchUI.onSearchStop().subscribe(el => {
@@ -52,9 +49,8 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
   }
 
   handleShoppingList(): void {
-    if (this.isOpenedShopping) {
-      this.dialogShoppingRef.close();
-      this.isOpenedShopping = false;
+    if (this.isOpenedDialog) {
+      this.closeDialogs();
       return;
     }
     const config = {} as MatDialogConfig;
@@ -63,19 +59,18 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     config.disableClose = true;
     this.dialogShoppingRef = this.dialog.open(ShoppingListComponent, config);
     this.dialogShoppingRef.updatePosition({ top: '100px', right: '0px' }  );
-    this.isOpenedShopping = true;
+    this.isOpenedDialog = true;
 
     const list = this.dialogShoppingRef.afterClosed().subscribe(result => {
-      this.isOpenedShopping = false;
+      this.isOpenedDialog = false;
     });
 
     this.subs.push(list);
   }
 
   handleFilter($event: MouseEvent): void {
-    if (this.isOpenedFilter) {
-      this.dialogFilterRef.close();
-      this.isOpenedFilter = false;
+    if (this.isOpenedDialog) {
+      this.closeDialogs();
       return;
     }
     const config = {} as MatDialogConfig;
@@ -85,10 +80,10 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     config.data = this.item;
     this.dialogFilterRef = this.dialog.open(SearchFormMobileComponent, config);
     this.dialogFilterRef.updatePosition({ top: '100px', right: '0px' }  );
-    this.isOpenedFilter = true;
+    this.isOpenedDialog = true;
 
     const list = this.dialogFilterRef.afterClosed().subscribe(result => {
-      this.isOpenedFilter = false;
+      this.isOpenedDialog = false;
       result.page = defaultPage();
       this.searchUI.searchStart({item: result, firstPage: true});
     });
@@ -102,9 +97,8 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
   }
 
   handleNavigationClickFeedback(): void {
-    if (this.isOpenedFeedback) {
-      this.dialogRefFeedback.close();
-      this.isOpenedFeedback = false;
+    if (this.isOpenedDialog) {
+      this.closeDialogs();
     }
 
     const config = {} as MatDialogConfig;
@@ -112,10 +106,10 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     config.height = '100%';
     this.dialogRefFeedback = this.dialog.open(FeedbackDialogComponent, config);
     this.dialogRefFeedback.updatePosition({ top: '100px', right: '0px' }  );
-    this.isOpenedFeedback = true;
+    this.isOpenedDialog = true;
 
     const list = this.dialogRefFeedback.afterClosed().subscribe(result => {
-      this.isOpenedFeedback = false;
+      this.isOpenedDialog = false;
     });
 
     this.subs.push(list);
@@ -127,6 +121,23 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
       return true;
     }
     return false;
+  }
+
+  handleNavigationClickAboutUs(): void {
+    if (this.isOpenedDialog) {
+      this.dialogShoppingRef.close();
+      this.dialogFilterRef.close();
+      this.dialogRefFeedback.close();
+      this.isOpenedDialog = false;
+    }
+    this.router.navigateByUrl('/about-us');
+  }
+
+  private closeDialogs(): void {
+    this.dialogShoppingRef.close();
+    this.dialogFilterRef.close();
+    this.dialogRefFeedback.close();
+    this.isOpenedDialog = false;
   }
 
 }
