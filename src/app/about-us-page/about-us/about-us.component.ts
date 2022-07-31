@@ -23,7 +23,9 @@ export class AboutUsComponent implements OnInit, OnDestroy {
   constructor(protected service: AboutUsService,
               private dialogService: DialogService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    window.scroll(0, 0);
+  }
 
   ngOnDestroy(): void {
     this.subs.forEach(el => {
