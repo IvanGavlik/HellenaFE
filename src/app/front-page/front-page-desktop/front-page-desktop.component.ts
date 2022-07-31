@@ -123,7 +123,6 @@ export class FrontPageDesktopComponent implements OnInit, OnDestroy {
     });
   }
 
-
   handleCategory(category: string): void {
       let categoryIds = 0;
       if (category === 'Meso i riba') {

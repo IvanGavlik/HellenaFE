@@ -140,4 +140,13 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     this.isOpenedDialog = false;
   }
 
+  handleNavigationClickHome(): void {
+    if (this.isOpenedDialog) {
+      this.dialogShoppingRef.close();
+      this.dialogFilterRef.close();
+      this.dialogRefFeedback.close();
+      this.isOpenedDialog = false;
+    }
+    this.router.navigateByUrl('/index');
+  }
 }
