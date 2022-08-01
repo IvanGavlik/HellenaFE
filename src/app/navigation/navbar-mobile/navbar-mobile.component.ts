@@ -5,9 +5,10 @@ import {LocalStorageService} from '../../local-storage/local-storage.service';
 import {MatDialogRef} from '@angular/material/dialog/dialog-ref';
 import {Subscription} from 'rxjs';
 import {FormControl} from '@angular/forms';
-import {SearchItem} from '../../search-page/search-item';
+import {defaultPage, SearchItem} from '../../search-page/search-item';
 import {SearchUIService} from '../../search-page/search-ui.service';
 import {Router} from '@angular/router';
+import {SearchFormMobileComponent} from '../../search-page/search-mobile/search-form-mobile/search-form-mobile.component';
 
 
 @Component({
@@ -15,11 +16,34 @@ import {Router} from '@angular/router';
   templateUrl: './navbar-mobile.component.html',
   styleUrls: ['./navbar-mobile.component.css']
 })
-export class NavbarMobileComponent  {
+export class NavbarMobileComponent implements OnInit, OnDestroy {
   search = new FormControl('');
-  searchItem: SearchItem = {} as SearchItem;
+  searchItem: SearchItem = {
+    priceMIn: 0,
+    priceMax: 10_000,
+    categoryIds: [],
+    cityIds: [],
+    storeIds: [],
+    page: defaultPage(),
+  } as SearchItem;
 
-  constructor(public searchUI: SearchUIService, private router: Router) {}
+  isOpenedDialog = false;
+  dialogFilterRef = {} as MatDialogRef<SearchFormMobileComponent>;
+
+  private subs: Subscription[] = [];
+
+  constructor(private dialog: MatDialog, public searchUI: SearchUIService, public router: Router) {}
+
+  ngOnInit(): void {
+    const onSearch = this.searchUI.onSearchStop().subscribe(el => {
+      this.searchItem = el.item;
+    });
+    this.subs.push(onSearch);
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(el => el.unsubscribe());
+  }
 
   handleNavigationClickSearch(): void {
     this.handleNavigationClickSearchUtil(this.search.value);
@@ -38,6 +62,35 @@ export class NavbarMobileComponent  {
         state: this.searchItem,
       });
     }
+  }
+
+  handleFilter($event: MouseEvent): void {
+    if (this.isOpenedDialog) {
+      this.dialogFilterRef.close();
+      this.isOpenedDialog = false;
+      return;
+    }
+    const config = {} as MatDialogConfig;
+    config.width = '95%';
+    config.height = '100%';
+    config.disableClose = true;
+    config.data = this.searchItem;
+    this.dialogFilterRef = this.dialog.open(SearchFormMobileComponent, config);
+    this.dialogFilterRef.updatePosition({ top: '100px', right: '0px' }  );
+    this.isOpenedDialog = true;
+
+    const list = this.dialogFilterRef.afterClosed().subscribe(result => {
+      this.isOpenedDialog = false;
+      result.page = defaultPage();
+      this.searchUI.searchStart({ item: this.searchItem, firstPage: true });
+    });
+
+    this.subs.push(list);
+    $event.preventDefault();
+  }
+
+  handleKey($event: KeyboardEvent): void {
+    $event.preventDefault();
   }
 }
 
