@@ -40,6 +40,8 @@
     padding-bottom: 0;
 }
 
+
+
 .nav-text {
     font-family: Roboto;
     font-style: normal;
@@ -48,4 +50,84 @@
     line-height: 9px;
     color: #fff;
     text-decoration: none;
+}
+
+
+
+.navigationSection nav{
+    background: linear-gradient(92.02deg, #550ACD 26.67%, #8001D9 73.9%);
+}
+.ml-auto{
+    margin-left: auto;
+}
+.navItem a.navbar-brand{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 37px;
+
+    color: #FFFFFF;
+
+
+}
+.navItem .nav-item a{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 21px;
+
+    color: #FFFFFF;
+}
+
+.viewBtn {
+    text-align: end;
+}
+
+.addCart {
+    text-decoration: none;
+    background: #550ACD;
+    box-shadow: 0 5px 8px 3px #550acd7a;
+    border-radius: 12px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 25px;
+    color: #fff;
+    padding: 16px 37px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+input {
+    width: 90%;
+    background: rgba(176, 176, 176, 0.61);
+    padding: 4px 6px;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+}
+
+input::placeholder {
+    font-weight: normal;
+    color: white;
+    opacity: 1; /* Firefox */
+}
+
+.title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 37px;
+    color: #fff;
+    text-decoration: none;
+    margin-right: 10px;
 }
