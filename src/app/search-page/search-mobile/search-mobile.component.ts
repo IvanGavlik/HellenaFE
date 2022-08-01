@@ -46,7 +46,7 @@ export class SearchMobileComponent implements OnInit, OnDestroy {
   } as SpinnerConfig;
 
   private subs: Subscription[] = [];
-  displyTable: boolean = false;
+  displyTable = false;
 
   constructor(private searchItemService: SearchItemService,
               private shoppingListService: ShoppingListService,
@@ -95,7 +95,7 @@ export class SearchMobileComponent implements OnInit, OnDestroy {
         });
     this.subs.push(searchStop);
 
-    this.subs.push(this.searchUI.onSearchStart().subscribe(el => this.displyTable = false));
+    this.subs.push(this.searchUI.onSearchStart().subscribe(el => { if (el.firstPage) { this.displyTable = false; } } ));
   }
 
   ngOnDestroy(): void {
