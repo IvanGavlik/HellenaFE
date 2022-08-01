@@ -95,6 +95,7 @@ export class SearchMobileComponent implements OnInit, OnDestroy {
         });
     this.subs.push(searchStop);
 
+    this.subs.push(this.searchUI.onSearchStart().subscribe(el => this.displyTable = false));
   }
 
   ngOnDestroy(): void {
