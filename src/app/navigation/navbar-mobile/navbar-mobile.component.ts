@@ -37,6 +37,11 @@ export class NavbarMobileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const onSearch = this.searchUI.onSearchStop().subscribe(el => {
       this.searchItem = el.item;
+      if (el.item?.name) {
+        this.search.setValue(el.item.name);
+      } else {
+        this.search.setValue(undefined);
+      }
     });
     this.subs.push(onSearch);
   }
