@@ -4,6 +4,7 @@
         <div class="row">
             <div class="col-12" style="padding-bottom: 40px; padding-top: 101px;" >
                 <hellena-search-result-mobile
+                        [displayTable]="displyTable"
                     [data]="table.data"
                     (addToShoppingChart)="handleAddTableItemToShoppingList($event)"
                     (loadMore)="handleLoadMore()"

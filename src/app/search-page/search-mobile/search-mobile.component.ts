@@ -46,6 +46,7 @@ export class SearchMobileComponent implements OnInit, OnDestroy {
   } as SpinnerConfig;
 
   private subs: Subscription[] = [];
+  displyTable: boolean = false;
 
   constructor(private searchItemService: SearchItemService,
               private shoppingListService: ShoppingListService,
@@ -71,6 +72,7 @@ export class SearchMobileComponent implements OnInit, OnDestroy {
         .pipe(
             tap(response => {  this.search = response.item; }),
             tap(response => { if (response.firstPage) {
+              this.displyTable = false;
               this.table.data = [];
               setTimeout(() => {}, 500);
               const scrollToTop = window.setInterval(() => {
@@ -87,6 +89,7 @@ export class SearchMobileComponent implements OnInit, OnDestroy {
             map(response => response.page.page.map(el => this.toTableItem(el as ItemSearchEntity)))
         )
         .subscribe(items => {
+          this.displyTable = true;
           items.forEach(el => this.table.data.push(el));
           this.spinnerShowProgress.next(false);
         });

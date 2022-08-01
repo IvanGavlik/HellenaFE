@@ -17,6 +17,9 @@ export class SearchResultMobileComponent implements OnInit {
   @Output()
   loadMore: EventEmitter<void> = new EventEmitter<void>();
 
+  @Input()
+  displayTable: any;
+
   constructor() { }
 
   ngOnInit(): void {
