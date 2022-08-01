@@ -8,7 +8,7 @@ import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import {DialogService} from '../../ui/dialog/dialog.service';
 import {SpinnerServiceService} from '../../ui/spinner/spinner-service.service';
 import {SearchUIService} from '../search-ui.service';
-import {of, Subject, Subscription} from 'rxjs';
+import {of, Subject, Subscription, timeout} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import {ItemSearchEntity} from '../item-search-entity';
 import {SpinnerConfig} from '../../ui/spinner/spinner-config';
@@ -72,6 +72,7 @@ export class SearchMobileComponent implements OnInit, OnDestroy {
             tap(response => {  this.search = response.item; }),
             tap(response => { if (response.firstPage) {
               this.table.data = [];
+              setTimeout(() => {}, 500);
               const scrollToTop = window.setInterval(() => {
                 const pos = window.pageYOffset;
                 if (pos > 0) {
@@ -80,6 +81,7 @@ export class SearchMobileComponent implements OnInit, OnDestroy {
                   window.clearInterval(scrollToTop);
                 }
               }, 1);
+              setTimeout(() => {}, 500);
             } }), // here set total count
             tap(response => this.table.totalCount = response.page.size), // here set total count
             map(response => response.page.page.map(el => this.toTableItem(el as ItemSearchEntity)))

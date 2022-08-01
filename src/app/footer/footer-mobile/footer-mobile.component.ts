@@ -17,15 +17,6 @@ import {Router} from '@angular/router';
 })
 export class FooterMobileComponent implements OnInit, OnDestroy {
 
-  item: SearchItem = {
-    priceMIn: 0,
-    priceMax: 10_000,
-    categoryIds: [],
-    cityIds: [],
-    storeIds: [],
-    page: defaultPage(),
-  } as SearchItem;
-
   isOpenedDialog = false;
   dialogShoppingRef = {} as MatDialogRef<ShoppingListComponent>;
   dialogFilterRef = {} as MatDialogRef<SearchFormMobileComponent>;
@@ -38,10 +29,6 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
               public router: Router) { }
 
   ngOnInit(): void {
-    const onSearch = this.searchUI.onSearchStop().subscribe(el => {
-      this.item = el.item;
-    });
-    this.subs.push(onSearch);
   }
 
   ngOnDestroy(): void {
@@ -66,34 +53,6 @@ export class FooterMobileComponent implements OnInit, OnDestroy {
     });
 
     this.subs.push(list);
-  }
-
-  handleFilter($event: MouseEvent): void {
-    if (this.isOpenedDialog) {
-      this.closeDialogs();
-      return;
-    }
-    const config = {} as MatDialogConfig;
-    config.width = '95%';
-    config.height = '100%';
-    config.disableClose = true;
-    config.data = this.item;
-    this.dialogFilterRef = this.dialog.open(SearchFormMobileComponent, config);
-    this.dialogFilterRef.updatePosition({ top: '100px', right: '0px' }  );
-    this.isOpenedDialog = true;
-
-    const list = this.dialogFilterRef.afterClosed().subscribe(result => {
-      this.isOpenedDialog = false;
-      result.page = defaultPage();
-      this.searchUI.searchStart({item: result, firstPage: true});
-    });
-
-    this.subs.push(list);
-    $event.preventDefault();
-  }
-
-  handleKey($event: KeyboardEvent): void {
-    $event.preventDefault();
   }
 
   handleNavigationClickFeedback(): void {
