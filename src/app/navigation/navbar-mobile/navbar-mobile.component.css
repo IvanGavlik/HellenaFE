@@ -131,3 +131,20 @@ input::placeholder {
     text-decoration: none;
     margin-right: 10px;
 }
+
+.mat-icon-button {
+    width: auto;
+}
+
+.overflowContainer {
+    position: absolute;
+    width: calc(100% - 98px);
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.overflowItem {
+    height: 35px;
+    flex: 0 0 auto;
+}

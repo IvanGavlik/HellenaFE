@@ -25,13 +25,25 @@
     </nav>
 </section>
 <section *ngIf="this.router.url.includes('search') && !this.isOpenedDialog"  >
-    <nav style="position: fixed; top: 56px; right: 0; left: 0; z-index: 1029; border-bottom: 1px solid  #8001D9; background: #f2f2f2" >
-        <button mat-button color="primary" style="border-left: 1px solid #8001D9; float: right "
+    <nav style="position: fixed; top: 56px; right: 0; left: 0; z-index: 1029; border-bottom: 1px solid  #8001D9; background: #f2f2f2;" >
+        <div style="float: left; " >
+            <div>
+                <div class="overflowContainer">
+                    <div *ngFor="let af of activeFilters" class='overflowItem'  >
+                        <button mat-button color="primary" style="border-left: 1px solid #8001D9; margin-left: 1px;" >
+                            <span style="display: inline" >{{af.value}}</span>
+                            <mat-icon size="small" (click)="handleFilterInfoClose(af)">close</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button mat-button color="primary" style="border-left: 1px solid #8001D9; float:right; "
                 (click)="handleFilter($event)" (keydown)="handleKey($event)"
         >
             <h6 style="display: inline" > Filter </h6>
             <mat-icon >expand_more</mat-icon>
         </button>
-        <div style="clear: both" ></div>
+        <div style="clear:both;" >  </div>
     </nav>
 </section>
