@@ -6,8 +6,6 @@ import {FrontPageModule} from './front-page/front-page.module';
 import {AboutUsPageModule} from './about-us-page/about-us-page.module';
 import {SearchPageModule} from './search-page/search-page.module';
 import {SearchComponent} from './search-page/search/search.component';
-import {ItemInsertModule} from './item-insert/item-insert.module';
-import {ItemInsertPageComponent} from './item-insert/item-insert-page/item-insert-page.component';
 import {ChangelogPageModule} from './changelog-page/changelog-page.module';
 import {ChangelogComponent} from './changelog-page/changelog/changelog.component';
 
@@ -16,7 +14,6 @@ const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'search', component: SearchComponent },
   { path: 'changelog', component: ChangelogComponent },
-  { path: 'admin/item-insert', component: ItemInsertPageComponent },
   { path: '', redirectTo: '/index',  pathMatch: 'full' }
 ];
 
@@ -26,7 +23,6 @@ const routes: Routes = [
     FrontPageModule,
     AboutUsPageModule,
     SearchPageModule,
-    ItemInsertModule,
     ChangelogPageModule,
   ],
   exports: [RouterModule]

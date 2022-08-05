@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {SearchService} from '../search/search-service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {SearchItemConfiguration} from './search-item-configuration';
 import {Observable} from 'rxjs';
-import {Entity} from '../crud/entity';
+import {Entity, Paginator} from '../crud/entity';
 import {environment} from '../../environments/environment';
 
 @Injectable({
@@ -42,5 +42,18 @@ export class SearchItemService extends SearchService {
   findAllItemNames(name: string): Observable<string[]> {
     const endpoint = environment.host + this.searchItemConfiguration.searchNamesEndpoint;
     return this.http.post<string[]>(endpoint, name, { responseType: 'json'});
+  }
+
+  searchQuery(paramsEndpoint: HttpParams): Observable<Paginator<Entity>> {
+    const endpoint = environment.host + this.searchConfiguration.searchEndpoint;
+
+    const h1 = new HttpHeaders({
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Credentials' : 'true',
+      'Access-Control-Allow-Method': 'OPTIONS, GET, POST',
+      'Access-Control-Allow-Headers' : 'Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control',
+    });
+
+    return this.http.get<Paginator<Entity>>(endpoint, {headers: h1, responseType: 'json', params: paramsEndpoint  });
   }
 }
