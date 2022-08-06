@@ -2,7 +2,7 @@ import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core
 import {Table, TableItem} from '../../ui/table/table';
 import {defaultPage, SearchItem} from '../search-item';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {ShoppingListService} from '../../shopping-list/shopping-list.service';
 import {DialogService} from '../../ui/dialog/dialog.service';
 import {SpinnerServiceService} from '../../ui/spinner/spinner-service.service';
@@ -12,6 +12,7 @@ import {Dialog} from '../../ui/dialog/dialog';
 import {ShoppingListItem} from '../../shopping-list/shopping-list';
 import {SearchUIService} from '../search-ui.service';
 import {MatDialogRef} from '@angular/material/dialog/dialog-ref';
+import {SpinnerConfig} from '../../ui/spinner/spinner-config';
 
 @Component({
   selector: 'hellena-search-desktop',
@@ -35,6 +36,14 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
     page: defaultPage()
   } as SearchItem;
 
+  spinnerShowProgress = new Subject<boolean>();
+  spinner = {
+    color : 'primary',
+    mode : 'indeterminate',
+    value: 50,
+    showProgress: this.spinnerShowProgress.asObservable(),
+  } as SpinnerConfig;
+
   @ViewChild(MatPaginator, { static: true } ) paginator: MatPaginator = {} as MatPaginator;
 
   @ViewChild('focus') focus = {} as ElementRef;
@@ -46,7 +55,6 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
 
   constructor(private shoppingListService: ShoppingListService,
               private dialogService: DialogService,
-              private spinnerService: SpinnerServiceService,
               private searchUI: SearchUIService
   ) {}
 
@@ -75,11 +83,10 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
         )
         .subscribe(items => {
           this.table.data = items; // here set data
-          if (this.searchDialog) {
-            this.spinnerService.closeSpinnerDialog(this.searchDialog);
-          }
+          this.spinnerShowProgress.next(false);
         });
     this.subs.push(searchStop);
+
   }
 
   ngOnDestroy(): void {
@@ -88,11 +95,11 @@ export class SearchDesktopComponent implements OnInit, OnDestroy {
         el.unsubscribe();
       }
     });
+    this.spinnerShowProgress.unsubscribe();
   }
 
   doSearch(search: SearchItem, fistPage: boolean): void {
-    this.searchDialog = this.spinnerService.openSpinnerDialog();
-    this.searchDialog.afterClosed().subscribe(el => this.focus.nativeElement.scrollIntoView({block: 'end', inline: 'end', behavior: 'smooth'}) );
+    this.spinnerShowProgress.next(true);
     this.searchUI.searchStart({item: search, firstPage: fistPage});
   }
 
