@@ -9,32 +9,14 @@
                 >
                 </hellena-search-form>
             </div>
-            <div class="col-9">
-                <mat-tab-group mat-align-tabs="center" mat-stretch-tabs animationDuration="1500ms" >
-                    <mat-tab>
-                        <ng-template mat-tab-label>
-                            <mat-icon style="color: #550ACD" >dashboard</mat-icon>
-                        </ng-template>
-                        <hellena-search-result-box
-                                [data]="table.data"
-                                (addToShoppingChart)="handleAddTableItemToShoppingList($event)"
-                        ></hellena-search-result-box>
-                    </mat-tab>
-                    <mat-tab>
-                        <ng-template mat-tab-label>
-                            <mat-icon style="color: #550ACD" >line_weight</mat-icon>
-                        </ng-template>
-                        <div class="col-12" >
-                            <hellena-table
-                                    [table]="table"
-                                    (addTableItemToShoppingList)="handleAddTableItemToShoppingList($event)"
-                                    (compareTableItem)="handleCompareTableItem($event)"
-                                    style="word-break: break-all;">
-                            </hellena-table>
-                        </div>
-                    </mat-tab>
-                </mat-tab-group>
-                <hellena-spinner [spinner]="spinner" ></hellena-spinner>
+            <div class="col-9" style="margin-top: 3rem"  >
+                <div style="margin-bottom: 0.5rem" >
+                    <hellena-spinner [spinner]="spinner" ></hellena-spinner>
+                </div>
+                 <hellena-search-result-box
+                         [data]="table.data"
+                         (addToShoppingChart)="handleAddTableItemToShoppingList($event)"
+                 ></hellena-search-result-box>
             </div>
             <!-- TODO save search -->
             <!-- sortiranje u tablici -->
